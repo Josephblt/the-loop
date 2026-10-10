@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://brybj5ephcerf"]
+
+[ext_resource type="Texture2D" uid="uid://1a6hjxalulh1" path="res://assets/textures/walls/wall_normal_md.png" id="1_45enr"]
+
+[resource]
+resource_name = "WallNormalMD_1_Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_45enr")
+texture_filter = 2

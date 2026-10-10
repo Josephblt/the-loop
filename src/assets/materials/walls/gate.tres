@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bkoj8m61hbv4u"]
+
+[ext_resource type="Texture2D" uid="uid://dtddo5tomk0t8" path="res://assets/textures/walls/gate.png" id="1_oprdg"]
+
+[resource]
+resource_name = "Gate_1_Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_oprdg")
+texture_filter = 2

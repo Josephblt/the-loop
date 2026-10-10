@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dp3x2uh8nvh4j"]
+
+[ext_resource type="Texture2D" uid="uid://bptlx3dr2ip64" path="res://assets/textures/blocks/block_cracked_lg.png" id="1_78h5j"]
+
+[resource]
+resource_name = "BlockCrackXL_1_Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_78h5j")
+texture_filter = 2

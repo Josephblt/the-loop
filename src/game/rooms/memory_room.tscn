@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cvvhff7lf1cka"]
+
+[ext_resource type="Script" uid="uid://cvmb0s8xio81g" path="res://scripts/game/rooms/memory_room.gd" id="1_sc13g"]
+
+[node name="MemoryRoom" type="Node3D" unique_id=752731590]
+script = ExtResource("1_sc13g")
+
+[node name="Floor" type="Node3D" parent="." unique_id=479788147]
+unique_name_in_owner = true
+
+[node name="Walls" type="Node3D" parent="." unique_id=309422465]
+unique_name_in_owner = true
+
+[node name="Memory" type="Node3D" parent="." unique_id=954110669]
+unique_name_in_owner = true

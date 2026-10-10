@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dr273ka7s5f3r"]
+
+[ext_resource type="Texture2D" uid="uid://bin2gxhatwvu2" path="res://assets/textures/props/chest_base.png" id="1_2dnrq"]
+
+[resource]
+resource_name = "ChestBaseGold_2_Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_2dnrq")
+metallic = 0.5
+roughness = 0.05
+texture_filter = 2

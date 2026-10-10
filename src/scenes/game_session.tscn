@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://d2o25336ip02q"]
+
+[ext_resource type="Script" uid="uid://bujsmgagvi6u1" path="res://scripts/scenes/game_session.gd" id="1_d8o6b"]
+[ext_resource type="PackedScene" uid="uid://c2phhjbqduxar" path="res://game/rooms/maze_room.tscn" id="2_6q2ta"]
+[ext_resource type="PackedScene" uid="uid://i64r11soytmg" path="res://game/rooms/spawn_room.tscn" id="2_d8o6b"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6q2ta"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_wsani"]
+sky_material = SubResource("ProceduralSkyMaterial_6q2ta")
+
+[sub_resource type="Environment" id="Environment_wvuqc"]
+background_mode = 2
+sky = SubResource("Sky_wsani")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="GameSession" type="Node3D" unique_id=202320514]
+script = ExtResource("1_d8o6b")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1641011424]
+environment = SubResource("Environment_wvuqc")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=543576935]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MazeRoom" parent="." unique_id=1249526342 node_paths=PackedStringArray("gameSession") instance=ExtResource("2_6q2ta")]
+gameSession = NodePath("..")
+
+[node name="SpawnRoom" parent="." unique_id=496749782 instance=ExtResource("2_d8o6b")]

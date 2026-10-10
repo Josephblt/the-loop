@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d1rhd1ruwx4eh"]
+
+[resource]
+resource_name = "GroundMossXL_5_Material"
+cull_mode = 2
+roughness = 0.35
+texture_filter = 2

@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://7rnvw11x6edm"]
+
+[ext_resource type="Texture2D" uid="uid://085kv7q84mgo" path="res://assets/textures/walls/wall_broken_sm.png" id="1_kvgh5"]
+
+[resource]
+resource_name = "WallBrokenXS_1_Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_kvgh5")
+texture_filter = 2

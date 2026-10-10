@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c2phhjbqduxar"]
+
+[ext_resource type="Script" uid="uid://dskav8buyif66" path="res://scripts/game/rooms/maze_room.gd" id="1_u4bl4"]
+
+[node name="MazeRoom" type="Node3D" unique_id=1249526342]
+script = ExtResource("1_u4bl4")
+
+[node name="Blocks" type="Node3D" parent="." unique_id=1578498354]
+unique_name_in_owner = true
+
+[node name="Gates" type="Node3D" parent="." unique_id=1689582583]
+unique_name_in_owner = true
+
+[node name="Walls" type="Node3D" parent="." unique_id=565548222]
+unique_name_in_owner = true

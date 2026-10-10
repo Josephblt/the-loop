@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://fj5dm21ia3f0"]
+
+[ext_resource type="Texture2D" uid="uid://c7gw7hukw4lb7" path="res://assets/textures/pillars/pillar_round.png" id="1_enes2"]
+
+[resource]
+resource_name = "PillarRound_4_Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_enes2")
+texture_filter = 2

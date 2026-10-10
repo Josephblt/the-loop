@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cvgtxh4lyvnwx"]
+
+[resource]
+resource_name = "PillarRoundCut_3_Material"
+cull_mode = 2
+texture_filter = 2

@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://brbie0v6kadur"]
+
+[resource]
+resource_name = "PillarSquare_2_Material"
+cull_mode = 2
+texture_filter = 2

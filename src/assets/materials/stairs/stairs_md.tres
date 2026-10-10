@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dnk2fwarta8v1"]
+
+[ext_resource type="Texture2D" uid="uid://daad56u403yhb" path="res://assets/textures/stairs/stairs_md.png" id="1_idw4m"]
+
+[resource]
+resource_name = "StairsMD_1_Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_idw4m")
+texture_filter = 2

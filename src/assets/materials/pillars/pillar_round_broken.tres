@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://1u7swbdtvboe"]
+
+[ext_resource type="Texture2D" uid="uid://blcwxsucwpc6i" path="res://assets/textures/pillars/pillar_round_broken.png" id="1_f2dga"]
+
+[resource]
+resource_name = "PillarRoundCut_3_Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_f2dga")
+texture_filter = 2

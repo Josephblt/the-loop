@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bi6v6yuayoa8j"]
+
+[ext_resource type="Shader" uid="uid://b7eb8518wbk3l" path="res://shaders/moss_ground.gdshader" id="1_qqrwf"]
+[ext_resource type="Texture2D" uid="uid://bhk4s6l5p6j7s" path="res://assets/textures/moss/moss_ground_sm.png" id="1_u0h3q"]
+
+[resource]
+resource_name = "moss_ground_sm"
+render_priority = 0
+shader = ExtResource("1_qqrwf")
+shader_parameter/sway_amplitude = 0.1
+shader_parameter/sway_speed = 2.0
+shader_parameter/texture = ExtResource("1_u0h3q")
+shader_parameter/tex_size = Vector2(21, 21)

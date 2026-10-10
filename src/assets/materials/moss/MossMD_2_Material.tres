@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://drddv6ylxyac6"]
+
+[resource]
+resource_name = "MossMD_2_Material"
+cull_mode = 2
+roughness = 0.35
+texture_filter = 2

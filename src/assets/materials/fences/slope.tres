@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bgavfny76dgfn"]
+
+[ext_resource type="Texture2D" uid="uid://dkbhsava2qo5t" path="res://assets/textures/fences/slope.png" id="1_qmbuj"]
+
+[resource]
+resource_name = "slope"
+cull_mode = 2
+albedo_texture = ExtResource("1_qmbuj")
+texture_filter = 2

@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cn5808p6djv1b"]
+
+[ext_resource type="Texture2D" uid="uid://w6e8kmxl35py" path="res://assets/textures/stairs/stair_bridge.png" id="1_td4lo"]
+
+[resource]
+resource_name = "StairBridge_3_Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_td4lo")
+texture_filter = 2

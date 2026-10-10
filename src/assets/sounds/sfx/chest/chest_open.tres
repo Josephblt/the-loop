@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://df1ghudtvy2jb"]
+
+[ext_resource type="AudioStream" uid="uid://dafeckuex4f2u" path="res://assets/sounds/sfx/chest/chest_open_1.wav" id="1_88e1v"]
+[ext_resource type="AudioStream" uid="uid://dclbmxengff0p" path="res://assets/sounds/sfx/chest/chest_open_2.wav" id="2_nh45p"]
+
+[resource]
+random_pitch = 1.3348398
+random_volume_offset_db = 5.0
+streams_count = 2
+stream_0/stream = ExtResource("1_88e1v")
+stream_1/stream = ExtResource("2_nh45p")

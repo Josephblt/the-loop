@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dl0oj44tb8gi2"]
+
+[ext_resource type="Texture2D" uid="uid://oi08xcar37im" path="res://assets/textures/fences/line.png" id="1_0nf5v"]
+
+[resource]
+resource_name = "Line_Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_0nf5v")

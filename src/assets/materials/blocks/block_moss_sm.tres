@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cbng6n575g1wm"]
+
+[ext_resource type="Texture2D" uid="uid://c3m51krtwqoho" path="res://assets/textures/blocks/block_moss_sm.png" id="1_3208b"]
+
+[resource]
+resource_name = "BlockMossXS_Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_3208b")
+texture_filter = 2

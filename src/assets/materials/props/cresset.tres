@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dtf5ga5d2o3gb"]
+
+[ext_resource type="Texture2D" uid="uid://cs3ys44ittqo7" path="res://assets/textures/props/cresset.png" id="1_6rt16"]
+
+[resource]
+resource_name = "WallLight_1_Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_6rt16")
+texture_filter = 2

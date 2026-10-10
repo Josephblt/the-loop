@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cxft6bsy5m1f6"]
+
+[ext_resource type="Texture2D" uid="uid://bn1t3mbw3ekxo" path="res://assets/textures/walls/wall_broken_md.png" id="1_vpxon"]
+
+[resource]
+resource_name = "WallBrokenMD_1_Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_vpxon")
+texture_filter = 2

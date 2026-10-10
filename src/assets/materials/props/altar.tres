@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://0sp8exud2fvb"]
+
+[ext_resource type="Texture2D" uid="uid://cji3ms8u3icwx" path="res://assets/textures/props/altar.png" id="1_g8f73"]
+
+[resource]
+resource_name = "Altar_6_Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_g8f73")
+texture_filter = 2

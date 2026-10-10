@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bqlylyqnch0d3"]
+
+[ext_resource type="Texture2D" uid="uid://cpq5uqjvhc7k1" path="res://assets/textures/walls/entry_left.png" id="1_wuftg"]
+
+[resource]
+resource_name = "WallEnd_1_Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_wuftg")
+texture_filter = 2

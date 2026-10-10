@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bt7f2r1rt00wb"]
+
+[ext_resource type="Texture2D" uid="uid://cdte5m84d47bu" path="res://assets/textures/blocks/block_normal_lg.png" id="1_xr32c"]
+
+[resource]
+resource_name = "BlockNormalXL_7_Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_xr32c")
+texture_filter = 2
