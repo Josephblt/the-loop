@@ -31,7 +31,7 @@ const ACCEPTANCE_MEMORIES: Array[String] = [
 	"Acceptance Memories 3"
 ]
 
-var _memories_stack: Array[String]
+var _memories_stack: Array[Memory]
 var _randomizer: RandomNumberGenerator
 
 
@@ -40,34 +40,53 @@ func _init(session_seed: int) -> void:
 	_randomizer.seed = session_seed
 
 
-func pop() -> String:
-	return _memories_stack.pop_front()
+func fetch_memory(chest_id: int) -> Memory:
+	if chest_id < 0 or chest_id >= _memories_stack.size():
+		return null
+
+	return _memories_stack[chest_id].reveal()
 
 
 func serialize() -> Dictionary:
+	var serialized_memories_stack: Array[Dictionary] = []
+	for memory in _memories_stack:
+		serialized_memories_stack.append(memory.serialize())
+
 	return {
 		"memories_stack": {
-			"_memories_stack": _memories_stack,
+			"_memories_stack": serialized_memories_stack,
 		}
 	}
 
 
 func deserialize(data: Dictionary) -> void:
 	var memories_stack_data = data.get("memories_stack", {})
-	_memories_stack = memories_stack_data.get("_memories_stack", [])
+	var serialized_memories_stack: Array = memories_stack_data.get("_memories_stack", [])
+
+	_memories_stack = []
+	for memory_data in serialized_memories_stack:
+		var memory: Memory = Memory.new()
+		memory.deserialize(memory_data)
+		_memories_stack.append(memory)
 
 
 func load_grief_stack(grief_stage: GriefStagesStack.GriefStages) -> void:
+	var memory_descriptions: Array[String] = []
+
 	match grief_stage:
 		GriefStagesStack.GriefStages.DENIAL:
-			_memories_stack = DENIAL_MEMORIES.duplicate()
+			memory_descriptions = DENIAL_MEMORIES.duplicate()
 		GriefStagesStack.GriefStages.ANGER:
-			_memories_stack = ANGER_MEMORIES.duplicate()
+			memory_descriptions = ANGER_MEMORIES.duplicate()
 		GriefStagesStack.GriefStages.BARGAINING:
-			_memories_stack = BARGAINING_MEMORIES.duplicate()
+			memory_descriptions = BARGAINING_MEMORIES.duplicate()
 		GriefStagesStack.GriefStages.DEPRESSION:
-			_memories_stack = DEPRESSION_MEMORIES.duplicate()
+			memory_descriptions = DEPRESSION_MEMORIES.duplicate()
 		GriefStagesStack.GriefStages.ACCEPTANCE:
-			_memories_stack = ACCEPTANCE_MEMORIES.duplicate()
+			memory_descriptions = ACCEPTANCE_MEMORIES.duplicate()
 	
+	_memories_stack = []
+	for memory_description in memory_descriptions:
+		_memories_stack.append(Memory.new(memory_description))
+
 	ArrayRandomizer.shuffle(_memories_stack, _randomizer)
