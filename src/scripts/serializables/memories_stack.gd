@@ -41,10 +41,9 @@ func _init(session_seed: int) -> void:
 
 
 func fetch_memory(chest_id: int) -> Memory:
-	if chest_id < 0 or chest_id >= _memories_stack.size():
-		return null
-
-	return _memories_stack[chest_id].reveal()
+	var memory: Memory = _memories_stack[chest_id]
+	memory.reveal()
+	return memory
 
 
 func serialize() -> Dictionary:
@@ -87,6 +86,7 @@ func load_grief_stack(grief_stage: GriefStagesStack.GriefStages) -> void:
 	
 	_memories_stack = []
 	for memory_description in memory_descriptions:
-		_memories_stack.append(Memory.new(memory_description))
+		var memory: Memory = Memory.new(memory_description)
+		_memories_stack.append(memory)
 
 	ArrayRandomizer.shuffle(_memories_stack, _randomizer)

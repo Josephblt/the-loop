@@ -14,7 +14,6 @@ var _memories_stack: MemoriesStack
 var _loop_count: int = -1
 
 
-
 func _init() -> void:
 	self.session_seed = randi()
 	_grief_stages_stack = GriefStagesStack.new(session_seed)

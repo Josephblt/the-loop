@@ -9,9 +9,8 @@ func _init(memory_description: String = "") -> void:
 	description = memory_description
 
 
-func reveal() -> Memory:
+func reveal() -> void:
 	revealed = true
-	return self
 
 
 func serialize() -> Dictionary:
