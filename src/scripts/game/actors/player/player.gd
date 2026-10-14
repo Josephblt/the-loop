@@ -26,10 +26,6 @@ func _physics_process(_delta: float) -> void:
 	_handle_gravity(_delta)
 
 	move_and_slide()
-	
-	if position.y < 0:
-		position.y = 0
-	
 
 func _input(event):
 	if event is InputEventMouseMotion:
