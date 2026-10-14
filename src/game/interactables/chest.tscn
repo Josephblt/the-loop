@@ -149,8 +149,9 @@ _data = {
 &"open": SubResource("Animation_1u115")
 }
 
-[node name="Chest" type="Area3D" unique_id=469060 groups=["Interactables"]]
+[node name="Chest" type="StaticBody3D" unique_id=469060 groups=["Interactables"]]
 script = ExtResource("1_68fva")
+outline_meshes = Array[NodePath]([NodePath("MeshInstance3DCover"), NodePath("MeshInstance3DBase")])
 
 [node name="MeshInstance3DCover" type="MeshInstance3D" parent="." unique_id=2107123533]
 unique_name_in_owner = true

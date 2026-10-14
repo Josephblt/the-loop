@@ -1,5 +1,6 @@
+@abstract
 class_name Interactable
-extends Node3D
+extends StaticBody3D
 
 
 signal interaction_enabled()
@@ -9,7 +10,7 @@ signal interaction_triggered()
 
 const OUTLINE_LAYER: int = 2
 
-@export var chest_cover: Array[MeshInstance3D]
+@export var outline_meshes: Array[MeshInstance3D] = []
 
 var _is_interactable: bool = true
 
@@ -18,13 +19,13 @@ func _ready() -> void:
 	_update_outline(false)
 
 
-func _interact() -> void:
-	pass
+@abstract
+func _interact() -> void
 
 
 func _update_outline(enabled: bool) -> void:
-	for cover in chest_cover:
-		cover.set_layer_mask_value(OUTLINE_LAYER, enabled)
+	for mesh in outline_meshes:
+		mesh.set_layer_mask_value(OUTLINE_LAYER, enabled)
 
 
 func enable_interaction() -> void:
