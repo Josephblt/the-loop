@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://ci5ayfo0lm6xc"]
 
+[ext_resource type="Script" path="res://scripts/game/level/props/fire.gd" id="1_fire"]
 [ext_resource type="AudioStream" uid="uid://npr8ff18gytw" path="res://assets/sounds/sfx/flame.mp3" id="2_6jy2i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya6m2"]
@@ -23,6 +24,7 @@ metadata/_snap_enabled = true
 
 [node name="Fire" type="Node3D" unique_id=1932394890]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+script = ExtResource("1_fire")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=476398159]
 layers = 2
