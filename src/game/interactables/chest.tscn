@@ -149,7 +149,7 @@ _data = {
 &"open": SubResource("Animation_1u115")
 }
 
-[node name="Chest" type="Area3D" unique_id=469060 groups=["Chest"]]
+[node name="Chest" type="Area3D" unique_id=469060 groups=["Interactables"]]
 script = ExtResource("1_68fva")
 
 [node name="MeshInstance3DCover" type="MeshInstance3D" parent="." unique_id=2107123533]

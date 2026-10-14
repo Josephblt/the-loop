@@ -13,7 +13,7 @@ const JUMP_VELOCITY: float = 10.0
 var look_x: float = 0.0 
 var look_y: float = 0.0 
 var speed: float = RUN_SPEED
-var target_chest: Chest
+var active_interactable: Interactable
 
 
 func _ready() -> void:
@@ -76,17 +76,17 @@ func _handle_look(motion: Vector2):
 func _handle_interactables():
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
-		if collider.is_in_group("Chest"):
-			if collider != target_chest:
-				if target_chest:
-					target_chest.disable_interaction()
-				target_chest = collider as Chest
-				target_chest.enable_interaction()
+		if collider.is_in_group("Interactables"):
+			if collider != active_interactable:
+				if active_interactable:
+					active_interactable.disable_interaction()
+				active_interactable = collider as Interactable
+				active_interactable.enable_interaction()
 			
 	else:
-		if target_chest:
-			target_chest.disable_interaction()
-			target_chest = null
+		if active_interactable:
+			active_interactable.disable_interaction()
+			active_interactable = null
 
-	if Input.is_action_just_pressed("Interact") and target_chest:
-		target_chest.trigger_interaction()
+	if Input.is_action_just_pressed("Interact") and active_interactable:
+		active_interactable.trigger_interaction()

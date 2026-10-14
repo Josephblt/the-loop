@@ -4,7 +4,7 @@ extends Node3D
 
 signal interaction_enabled()
 signal interaction_disabled()
-signal interaction_triggered()
+signal interaction_triggered()exit
 
 
 const OUTLINE_LAYER: int = 3

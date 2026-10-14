@@ -181,9 +181,9 @@ Interact={
 
 [layer_names]
 
-3d_render/layer_1="Everything"
-3d_render/layer_2="Fire"
-3d_render/layer_3="Chests"
+3d_render/layer_1="Principal"
+3d_render/layer_2="Interactables"
+3d_render/layer_3="Fire"
 
 [rendering]
 

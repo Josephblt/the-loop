@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://rdh1pb10cdnw" path="res://game/level/fences/slope_corner.tscn" id="8_6h58r"]
 [ext_resource type="PackedScene" uid="uid://dk3ahea1354r8" path="res://game/interactables/chest.tscn" id="9_2ejra"]
 [ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="10_mptsv"]
-[ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/level/props/altar.tscn" id="10_w2vgl"]
+[ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/interactables/altar.tscn" id="10_w2vgl"]
 [ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/ui/fonts/IbarraRealNova-BoldItalic.ttf" id="12_n6nv3"]
 [ext_resource type="PackedScene" uid="uid://b0lvfjr4ff8hl" path="res://game/actors/player.tscn" id="13_n4fvx"]
 
