@@ -1,5 +1,6 @@
 @tool
-extends Node
+class_name MazeRoom
+extends Node3D
 
 const BLOCK_SCENES: Array[PackedScene] = [
 	preload("res://game/level/blocks/block_cracked_sm.tscn"),
@@ -58,14 +59,14 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		_clear()
 	else:
-		_gameSession = GameManager.current_game_session
+		_gameSession = null
 		if _gameSession:
 			_randomizer.seed = _gameSession.session_seed
 			_maze = Maze.new(
-				_gameSession._current_grief_stage, 
+				_gameSession.current_grief_stage, 
 				_gameSession.session_seed, 
-				_gameSession.grid_size, 
-				_gameSession.spawn_size
+				_gameSession.MAZE_ROOM_SIZE, 
+				_gameSession.STAGE_ROOM_SIZE
 			)
 		else:
 			_randomizer.seed = editor_seed
@@ -192,8 +193,8 @@ func _spawn_wall(cell: Cell, x: int, y: int, wall_direction: Wall.WallDirection)
 	match wall.type:
 		Wall.WallType.BORDER_WALL:
 			_spawn_border_wall(x, y, wall.direction)
-		Wall.WallType.GATE_WALL:
-			_spawn_gate_wall(x, y, wall.direction)
+		# Wall.WallType.GATE_WALL:
+		# 	_spawn_gate_wall(x, y, wall.direction)
 		Wall.WallType.MAZE_WALL:
 			_spawn_maze_wall(x, y, wall.direction)
 		_:
@@ -205,7 +206,7 @@ func _spawn() -> void:
 		for y in _maze.grid_size:
 			var cell: Cell = _maze.grid[x][y]
 			if cell:
-				if cell.cell_type != Cell.CellType.MEMORY:
+				if cell.cell_type != Cell.CellType.GATE:
 					_spawn_block(x, y)
 				_spawn_walls(cell, x, y)
 		

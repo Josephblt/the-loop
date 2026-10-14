@@ -15,13 +15,9 @@ run/main_scene="uid://cfd01q26as6sx"
 config/features=PackedStringArray("4.8", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[autoload]
+[audio]
 
-GameManager="*uid://wqrejjvqunoc"
-
-[debug]
-
-settings/stdout/print_fps=true
+buses/default_bus_layout="uid://yk746h5cwkoq"
 
 [display]
 
@@ -182,6 +178,12 @@ Interact={
 "script": null
 )]
 }
+
+[layer_names]
+
+3d_render/layer_1="Everything"
+3d_render/layer_2="Fire"
+3d_render/layer_3="Chests"
 
 [rendering]
 

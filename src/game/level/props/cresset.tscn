@@ -43,19 +43,18 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_lvnm2")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_767qq"]
-size = Vector3(1.07922, 0.826141, 0.889648)
+[sub_resource type="BoxShape3D" id="BoxShape3D_6tkkm"]
+size = Vector3(0.5, 1.5, 0.5)
 
-[node name="Cresset" type="StaticBody3D" unique_id=1714621095]
-collision_mask = 3
+[node name="Cresset" type="StaticBody3D" unique_id=865238]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=871847328]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, -0.05)
 mesh = SubResource("ArrayMesh_04snb")
-skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1592108503]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0396118, 0.422745, 0.0551758)
-shape = SubResource("BoxShape3D_767qq")
+[node name="Fire" parent="MeshInstance3D" unique_id=1932394890 instance=ExtResource("2_tgbp8")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.15, 0.9499999, 0.05)
 
-[node name="Fire" parent="." unique_id=1422201184 instance=ExtResource("2_tgbp8")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.175, 0.857784, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=689895597]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_6tkkm")

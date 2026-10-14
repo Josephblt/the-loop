@@ -60,6 +60,6 @@ void fragment() {
 
   vec4 orig = texture(TEXTURE, uv);
   if (orig.a <= 0.0) {
-    discard;
+	discard;
   }
 }

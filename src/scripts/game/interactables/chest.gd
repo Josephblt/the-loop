@@ -1,63 +1,55 @@
 class_name Chest
 extends Node3D
 
-const CHEST_SCENE_PATH = "res://game/interactables/chest.tscn"
 
-@onready var chest_animations = %ChestAnimations
-@onready var interaction_animations = %InteractionAnimations
-@onready var memory_animations = %MemoryAnimations
+signal interaction_enabled()
+signal interaction_disabled()
+signal interaction_triggered()
 
-@onready var interaction_label = %LabelInteraction
-@onready var memory_label = %LabelMemory
 
-var memories_stack: MemoriesStack
+const OUTLINE_LAYER: int = 3
 
-var is_interactable: bool = true
-var is_interaction_visible: bool = false
+@onready var chest_animations: AnimationPlayer = %AnimationPlayer
+@onready var chest_cover: MeshInstance3D = %MeshInstance3DCover
+@onready var chest_base: MeshInstance3D = %MeshInstance3DBase
+
+var _is_interactable: bool = true
+
 
 func _ready() -> void:
-	memories_stack = MemoriesStack.new(GameManager.current_game_session.session_seed)
-	memories_stack.load_grief_stack(GriefStagesStack.GriefStages.values().pick_random())
+	_update_outline(false)
+
+
+func _open_chest() -> void:
+	chest_animations.play("open")
+
+
+func _update_outline(enabled: bool) -> void:
+	chest_cover.set_layer_mask_value(OUTLINE_LAYER, enabled)
+	chest_base.set_layer_mask_value(OUTLINE_LAYER, enabled)
+
+
+func enable_interaction() -> void:
+	if !_is_interactable:
+		return
+		
+	_update_outline(true)
+	interaction_enabled.emit()
+
+
+func disable_interaction() -> void:
+	if !_is_interactable:
+		return
 	
-
-func _open_chest():
-	chest_animations.play("open_chest")	
-	
-
-func _show_interaction():
-	if is_interaction_visible:
-		return
-	interaction_animations.play("show_interaction")
-	is_interaction_visible = true
+	_update_outline(false)
+	interaction_disabled.emit()
 
 
-func _hide_interaction():
-	if not is_interaction_visible:
-		return
-	interaction_animations.play("hide_interaction")
-	is_interaction_visible = false
-
-
-func _show_memory():
-	memory_label.text = memories_stack.pop()
-	memory_animations.play("show_memory")
-
-
-func _hide_memory():
-	memory_animations.play("hide_memory")
-
-
-func interact():
-	if not is_interactable:
+func trigger_interaction() -> void:
+	if !_is_interactable:
 		return
 
-	is_interactable = false
-	_hide_interaction()
+	disable_interaction()
+	_is_interactable = false
+	interaction_triggered.emit()
 	_open_chest()
-	_show_memory()
-
-
-static func create(game_session: GameSession) -> Chest:
-	var chest: Chest = preload(CHEST_SCENE_PATH).instantiate()
-	chest.memories_stack = game_session._memories_stack
-	return chest

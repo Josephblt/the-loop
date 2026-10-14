@@ -17,6 +17,7 @@ nodes/root_type=""
 nodes/root_name=""
 nodes/root_script=null
 mesh_library/use_node_names_as_mesh_names=false
+mesh_library/create_categories_from_hierarchy=false
 array_mesh/deduplicate_surfaces=true
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -36,10 +37,18 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-materials/extract=1
+materials/extract=0
 materials/extract_format=0
 materials/extract_path="res://assets/materials/moss"
-_subresources={}
+_subresources={
+"materials": {
+"MossXL_1_Material": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials/moss/moss_wall_lg.tres",
+"use_external/path": "uid://b1cmb67ygjcyk"
+}
+}
+}
 gltf/naming_version=2
 gltf/embedded_image_handling=0
 gltf/texture_map_mode=0

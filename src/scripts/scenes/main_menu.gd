@@ -10,12 +10,25 @@ func _ready() -> void:
 
 
 func _update_continue_button() -> void:
-	continue_button.disabled = not GameManager._has_saved_game_session()
+	continue_button.disabled = not FileAccess.file_exists(GameSession.SAVE_FILE_PATH)
+
+
+func continue_game():
+	GameSession.deserialize()
+
+
+func new_game():
+	GameSession.create(
+		randi(),
+		GriefStagesStack.new(randi()),
+		MemoriesStack.new(randi()),
+		0
+	)	
 
 
 func _on_continue_pressed() -> void:
-	GameManager.load_game()
+	continue_game()
 
 
 func _on_new_game_pressed() -> void:
-	GameManager.start_game()
+	new_game()

@@ -25,6 +25,10 @@ func _init(session_seed: int) -> void:
 	_available_grief_stage_stack = stages
 
 
+func peek():
+	return _available_grief_stage_stack.front()
+
+
 func pop():
 	return _available_grief_stage_stack.pop_front()
 		
@@ -40,20 +44,3 @@ func serialize() -> Dictionary:
 func deserialize(data: Dictionary) -> void:
 	var grief_stages_stack_data = data.get("grief_stages_stack", {})
 	_available_grief_stage_stack = grief_stages_stack_data.get("available_grief_stage_stack", [])
-
-
-static func get_grief_stage_name(grief_stage: GriefStages) -> String:
-	match grief_stage:
-		GriefStages.DENIAL:
-			return "Denial"
-		GriefStages.ANGER:
-			return "Anger"
-		GriefStages.BARGAINING:
-			return "Bargaining"
-		GriefStages.DEPRESSION:
-			return "Depression"
-		GriefStages.ACCEPTANCE:
-			return "Acceptance"	
-		_:
-			return "None"
-	

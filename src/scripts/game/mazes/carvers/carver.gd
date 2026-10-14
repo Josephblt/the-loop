@@ -29,7 +29,7 @@ func _carve_inner_gates(maze: Maze) -> void:
 	cell_left_gate.cell_type = Cell.CellType.GATE
 	var wall_left_gate: Wall = cell_left_gate.walls[Wall.WallDirection.EAST]
 	wall_left_gate.type = Wall.WallType.GATE_WALL
-
+	
 	var cell_right_gate: Cell = maze.grid[maze.spawn_end + 1][maze.center]
 	cell_right_gate.cell_type = Cell.CellType.GATE
 	var wall_right_gate: Wall = cell_right_gate.walls[Wall.WallDirection.WEST]
@@ -37,25 +37,32 @@ func _carve_inner_gates(maze: Maze) -> void:
 
 
 func _carve_outer_gates(maze: Maze) -> void:
-	var cell_top_gate: Cell = maze.grid[maze.center][0]
-	cell_top_gate.cell_type = Cell.CellType.GATE
-	var wall_top_gate: Wall = cell_top_gate.walls[Wall.WallDirection.NORTH]
-	wall_top_gate.type = Wall.WallType.GATE_WALL
+	var half: int = (int)(GameSession.STAGE_ROOM_SIZE / 2.0)
+	var start: int = - half
+	var end: int = + half + 1
 
-	var cell_bottom_gate: Cell = maze.grid[maze.center][maze.grid_size - 1]
-	cell_bottom_gate.cell_type = Cell.CellType.GATE
-	var wall_bottom_gate: Wall = cell_bottom_gate.walls[Wall.WallDirection.SOUTH]
-	wall_bottom_gate.type = Wall.WallType.GATE_WALL
+	for i in range(start, end):
+		var cell_top_gate: Cell = maze.grid[maze.center + i][0]
+		var wall_top_gate: Wall = cell_top_gate.walls[Wall.WallDirection.NORTH]
+		wall_top_gate.type = Wall.WallType.GATE_WALL
 
-	var cell_left_gate: Cell = maze.grid[0][maze.center]
-	cell_left_gate.cell_type = Cell.CellType.GATE
-	var wall_left_gate: Wall = cell_left_gate.walls[Wall.WallDirection.WEST]
-	wall_left_gate.type = Wall.WallType.GATE_WALL
+		var cell_bottom_gate: Cell = maze.grid[maze.center + i][maze.grid_size - 1]
+		var wall_bottom_gate: Wall = cell_bottom_gate.walls[Wall.WallDirection.SOUTH]
+		wall_bottom_gate.type = Wall.WallType.GATE_WALL
 
-	var cell_right_gate: Cell = maze.grid[maze.grid_size - 1][maze.center]
-	cell_right_gate.cell_type = Cell.CellType.GATE
-	var wall_right_gate: Wall = cell_right_gate.walls[Wall.WallDirection.EAST]
-	wall_right_gate.type = Wall.WallType.GATE_WALL
+		var cell_left_gate: Cell = maze.grid[0][maze.center + i]
+		var wall_left_gate: Wall = cell_left_gate.walls[Wall.WallDirection.WEST]
+		wall_left_gate.type = Wall.WallType.GATE_WALL
+
+		var cell_right_gate: Cell = maze.grid[maze.grid_size - 1][maze.center + i]
+		var wall_right_gate: Wall = cell_right_gate.walls[Wall.WallDirection.EAST]
+		wall_right_gate.type = Wall.WallType.GATE_WALL
+
+		if (i == 0):
+			cell_top_gate.cell_type = Cell.CellType.GATE
+			cell_bottom_gate.cell_type = Cell.CellType.GATE
+			cell_left_gate.cell_type = Cell.CellType.GATE
+			cell_right_gate.cell_type = Cell.CellType.GATE
 
 
 func _carve_memories(maze: Maze) -> void:

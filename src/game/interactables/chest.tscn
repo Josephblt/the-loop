@@ -1,12 +1,10 @@
 [gd_scene format=4 uid="uid://dk3ahea1354r8"]
 
-[ext_resource type="Script" uid="uid://bxw8n4e25palv" path="res://scripts/chest.gd" id="1_68fva"]
+[ext_resource type="Script" uid="uid://bxw8n4e25palv" path="res://scripts/game/interactables/chest.gd" id="1_68fva"]
 [ext_resource type="Texture2D" uid="uid://b170hc6sp5x33" path="res://assets/textures/props/chest_cover.png" id="1_c1jlw"]
 [ext_resource type="Texture2D" uid="uid://bin2gxhatwvu2" path="res://assets/textures/props/chest_base.png" id="2_ca5m2"]
 [ext_resource type="AudioStream" uid="uid://df1ghudtvy2jb" path="res://assets/sounds/sfx/chest/chest_open.tres" id="3_ca5m2"]
-[ext_resource type="AudioStream" uid="uid://ddii3pka6jm4" path="res://assets/sounds/sfx/chest/chest_close.tres" id="4_1u115"]
-[ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/ui/fonts/IbarraRealNova-BoldItalic.ttf" id="4_8tdhl"]
-[ext_resource type="Shader" uid="uid://bb07jeqfndxll" path="res://game/elements/props/chest.gdshader" id="4_42xya"]
+[ext_resource type="Material" uid="uid://dr273ka7s5f3r" path="res://assets/materials/props/chest_base.tres" id="4_bk6g0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nro11"]
 resource_name = "ChestCover_1_Material"
@@ -89,68 +87,6 @@ shadow_mesh = SubResource("ArrayMesh_nbvbk")
 [sub_resource type="BoxShape3D" id="BoxShape3D_yoo41"]
 size = Vector3(1.8000001, 2.1000001, 2.4)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4iafc"]
-shader = ExtResource("4_42xya")
-shader_parameter/offset = 0.0
-
-[sub_resource type="Animation" id="Animation_s5tll"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/LabelInteraction:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_42xya"]
-resource_name = "hide_interaction"
-length = 0.25
-step = 0.01
-capture_included = true
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/LabelInteraction:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.25),
-"transitions": PackedFloat32Array(1),
-"update": 2,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_4iafc"]
-resource_name = "show_interaction"
-length = 0.25
-step = 0.01
-capture_included = true
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("%LabelInteraction:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.25),
-"transitions": PackedFloat32Array(1),
-"update": 2,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_s5tll"]
-_data = {
-&"RESET": SubResource("Animation_s5tll"),
-&"hide_interaction": SubResource("Animation_42xya"),
-&"show_interaction": SubResource("Animation_4iafc")
-}
-
 [sub_resource type="Animation" id="Animation_68fva"]
 length = 0.001
 tracks/0/type = "value"
@@ -163,52 +99,23 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0, -1.5707964, 0)]
 }
-
-[sub_resource type="Animation" id="Animation_8tdhl"]
-resource_name = "close_chest"
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3DCover:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 1.3089969), Vector3(0, 0, 0)]
-}
-tracks/1/type = "audio"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer3D")
+tracks/1/path = NodePath("AudioStreamPlayer3D:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("4_1u115")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/1/use_blend = true
-tracks/2/type = "animation"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CanvasLayerUI/AnimationPlayerUI")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"clips": PackedStringArray("hide_interaction"),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_1u115"]
-resource_name = "open_chest"
+resource_name = "open"
 length = 1.5
 step = 0.01
 tracks/0/type = "value"
@@ -218,92 +125,51 @@ tracks/0/path = NodePath("MeshInstance3DCover:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.01, 0.1, 0.2, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 1.3089969)]
+"values": [Vector3(0, -1.5707964, 0), Vector3(0, -1.5707964, -0.017453292), Vector3(0, -1.5707964, 0.017453292), Vector3(0, -1.5707964, 0), Vector3(0, -1.5707964, 1.3089969)]
 }
-tracks/1/type = "audio"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer3D")
+tracks/1/path = NodePath("AudioStreamPlayer3D:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("3_ca5m2")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/1/use_blend = true
-tracks/2/type = "animation"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CanvasLayerUI/AnimationPlayerUI")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"clips": PackedStringArray("hide_interaction"),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8tdhl"]
 _data = {
 &"RESET": SubResource("Animation_68fva"),
-&"close_chest": SubResource("Animation_8tdhl"),
-&"open_chest": SubResource("Animation_1u115")
+&"open": SubResource("Animation_1u115")
 }
 
-[node name="Chest" type="Area3D" unique_id=469060 groups=["chest"]]
+[node name="Chest" type="Area3D" unique_id=469060 groups=["Chest"]]
 script = ExtResource("1_68fva")
 
 [node name="MeshInstance3DCover" type="MeshInstance3D" parent="." unique_id=2107123533]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 1.2, 0)
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 1.2, -0.70000005)
 mesh = SubResource("ArrayMesh_qrs7o")
-skeleton = NodePath("")
 
 [node name="MeshInstance3DBase" type="MeshInstance3D" parent="." unique_id=1062975193]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0)
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, -0.1)
 mesh = SubResource("ArrayMesh_miaoe")
-skeleton = NodePath("")
+surface_material_override/0 = ExtResource("4_bk6g0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=825680539]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7055225e-08, 1.0500001, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 1.0500001, 0)
 shape = SubResource("BoxShape3D_yoo41")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=495398265]
+stream = ExtResource("3_ca5m2")
 bus = &"SFX"
-
-[node name="CanvasLayerUI" type="CanvasLayer" parent="." unique_id=2135195026]
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayerUI" unique_id=531383633]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 150
-theme_override_constants/margin_top = 150
-theme_override_constants/margin_right = 150
-theme_override_constants/margin_bottom = 150
-
-[node name="LabelInteraction" type="Label" parent="CanvasLayerUI/MarginContainer" unique_id=96614315]
-unique_name_in_owner = true
-self_modulate = Color(1, 1, 1, 0)
-material = SubResource("ShaderMaterial_4iafc")
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("4_8tdhl")
-theme_override_font_sizes/font_size = 60
-text = "Open Chest"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="AnimationPlayerUI" type="AnimationPlayer" parent="CanvasLayerUI" unique_id=1312416955]
-unique_name_in_owner = true
-libraries/ = SubResource("AnimationLibrary_s5tll")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1505478726]
 unique_name_in_owner = true

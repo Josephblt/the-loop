@@ -47,8 +47,8 @@ script = ExtResource("2_bt85i")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=837994193]
 unique_name_in_owner = true
+transform = Transform3D(1, -2.4381969e-11, 0, 2.4381969e-11, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_mit2r")
-skeleton = NodePath("")
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="MeshInstance3D" unique_id=284903183]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)

@@ -1,6 +1,133 @@
 [gd_scene format=3 uid="uid://cvvhff7lf1cka"]
 
 [ext_resource type="Script" uid="uid://cvmb0s8xio81g" path="res://scripts/game/rooms/memory_room.gd" id="1_sc13g"]
+[ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="2_5p4x3"]
+[ext_resource type="PackedScene" uid="uid://coql64ga8pi0u" path="res://game/level/blocks/block_cracked_md.tscn" id="3_mptsv"]
+[ext_resource type="PackedScene" uid="uid://bvvd4ra5va18f" path="res://game/level/fences/corner.tscn" id="4_w2vgl"]
+[ext_resource type="PackedScene" uid="uid://ktrvq6qgill5" path="res://game/level/fences/slope_middle.tscn" id="5_n6nv3"]
+[ext_resource type="PackedScene" uid="uid://dsodgs8nmbiir" path="res://game/level/fences/fence_middle_1.tscn" id="6_n4fvx"]
+[ext_resource type="PackedScene" uid="uid://vsm7olv05rj1" path="res://game/level/fences/fence_middle_2.tscn" id="7_d3u6q"]
+[ext_resource type="PackedScene" uid="uid://rdh1pb10cdnw" path="res://game/level/fences/slope_corner.tscn" id="8_6h58r"]
+[ext_resource type="PackedScene" uid="uid://dk3ahea1354r8" path="res://game/interactables/chest.tscn" id="9_2ejra"]
+[ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="10_mptsv"]
+[ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/level/props/altar.tscn" id="10_w2vgl"]
+[ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/ui/fonts/IbarraRealNova-BoldItalic.ttf" id="12_n6nv3"]
+[ext_resource type="PackedScene" uid="uid://b0lvfjr4ff8hl" path="res://game/actors/player.tscn" id="13_n4fvx"]
+
+[sub_resource type="Animation" id="Animation_s5tll"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/LabelInteraction:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_42xya"]
+resource_name = "hide_interaction"
+length = 0.25
+step = 0.01
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/LabelInteraction:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 2,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4iafc"]
+resource_name = "show_interaction"
+length = 0.25
+step = 0.01
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/LabelInteraction:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 2,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6h58r"]
+_data = {
+&"RESET": SubResource("Animation_s5tll"),
+&"hide_interaction": SubResource("Animation_42xya"),
+&"show_interaction": SubResource("Animation_4iafc")
+}
+
+[sub_resource type="Animation" id="Animation_3hjkb"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/LabelMemory:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_all7c"]
+resource_name = "hide_memory"
+length = 0.25
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/LabelMemory:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 2,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bk6g0"]
+resource_name = "show_memory"
+length = 0.25
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/LabelMemory:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 2,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ejra"]
+_data = {
+&"RESET": SubResource("Animation_3hjkb"),
+&"hide_memory": SubResource("Animation_all7c"),
+&"show_memory": SubResource("Animation_bk6g0")
+}
 
 [node name="MemoryRoom" type="Node3D" unique_id=752731590]
 script = ExtResource("1_sc13g")
@@ -8,8 +135,121 @@ script = ExtResource("1_sc13g")
 [node name="Floor" type="Node3D" parent="." unique_id=479788147]
 unique_name_in_owner = true
 
-[node name="Walls" type="Node3D" parent="." unique_id=309422465]
+[node name="BlockCrackedSM" parent="Floor" unique_id=1701017205 instance=ExtResource("2_5p4x3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 0, -5.6)
+
+[node name="BlockCrackedSM2" parent="Floor" unique_id=2086898528 instance=ExtResource("2_5p4x3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.6)
+
+[node name="BlockCrackedSM3" parent="Floor" unique_id=1720761354 instance=ExtResource("2_5p4x3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 0, -5.6)
+
+[node name="BlockCrackedSM4" parent="Floor" unique_id=1801736170 instance=ExtResource("2_5p4x3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 0, 0)
+
+[node name="BlockCrackedSM5" parent="Floor" unique_id=1703922784 instance=ExtResource("2_5p4x3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 0, 0)
+
+[node name="BlockCrackedSM6" parent="Floor" unique_id=293983815 instance=ExtResource("2_5p4x3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 0, 5.6)
+
+[node name="BlockCrackedSM7" parent="Floor" unique_id=920419280 instance=ExtResource("2_5p4x3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.6)
+
+[node name="BlockCrackedSM8" parent="Floor" unique_id=392046512 instance=ExtResource("2_5p4x3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 0, 5.6)
+
+[node name="BlockCrackedMD" parent="Floor" unique_id=938443766 instance=ExtResource("3_mptsv")]
+
+[node name="StairsMD" parent="Floor" unique_id=244599151 instance=ExtResource("10_mptsv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.6)
+
+[node name="Fences" type="Node3D" parent="." unique_id=309422465]
 unique_name_in_owner = true
+
+[node name="CornerRight" parent="Fences" unique_id=2103190392 instance=ExtResource("4_w2vgl")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 1.6, 0)
+
+[node name="CornerLeft" parent="Fences" unique_id=574638870 instance=ExtResource("4_w2vgl")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.6, 0)
+
+[node name="SlopeMiddle" parent="Fences" unique_id=941980674 instance=ExtResource("5_n6nv3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.6, 0)
+
+[node name="FenceMiddleRight" parent="Fences" unique_id=693002096 instance=ExtResource("7_d3u6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="FenceMiddleLeft" parent="Fences" unique_id=49550962 instance=ExtResource("6_n4fvx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.6, 0)
+
+[node name="SlopeCornerRight" parent="Fences" unique_id=15865666 instance=ExtResource("8_6h58r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="SlopeCornerLeft" parent="Fences" unique_id=127332804 instance=ExtResource("8_6h58r")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.6, 0)
 
 [node name="Memory" type="Node3D" parent="." unique_id=954110669]
 unique_name_in_owner = true
+
+[node name="AltarLeft" parent="Memory" unique_id=1654990680 instance=ExtResource("10_w2vgl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, 4.2)
+
+[node name="AltarRight" parent="Memory" unique_id=1470566160 instance=ExtResource("10_w2vgl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 4.2)
+
+[node name="Chest" parent="Memory" unique_id=469060 instance=ExtResource("9_2ejra")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.7)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1002134483]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1181707657]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.9988355)
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 150
+
+[node name="LabelMemory" type="Label" parent="CanvasLayer/MarginContainer" unique_id=271864732]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("12_n6nv3")
+theme_override_font_sizes/font_size = 60
+text = "Unknown Memory..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelInteraction" type="Label" parent="CanvasLayer/MarginContainer" unique_id=976035113]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("12_n6nv3")
+theme_override_font_sizes/font_size = 60
+text = "Open Chest"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Animations" type="Node" parent="." unique_id=1164870971]
+
+[node name="InteractionAnimations" type="AnimationPlayer" parent="Animations" unique_id=1500740446]
+unique_name_in_owner = true
+root_node = NodePath("../../CanvasLayer")
+libraries/ = SubResource("AnimationLibrary_6h58r")
+
+[node name="MemoryAnimations" type="AnimationPlayer" parent="Animations" unique_id=1534813416]
+unique_name_in_owner = true
+root_node = NodePath("../../CanvasLayer")
+libraries/ = SubResource("AnimationLibrary_2ejra")
+
+[node name="Player" parent="." unique_id=282310942 instance=ExtResource("13_n4fvx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 0, 3.75)

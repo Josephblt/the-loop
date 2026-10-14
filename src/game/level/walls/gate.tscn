@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bxheuwo2hw4an" path="res://scripts/game/level/gate_randomizer.gd" id="1_86s5o"]
 [ext_resource type="Material" uid="uid://bkoj8m61hbv4u" path="res://assets/materials/walls/gate.tres" id="1_njgmt"]
-[ext_resource type="ArrayOccluder3D" uid="uid://c7fctevyqxd3l" path="res://assets/occluders/walls/gate.occ" id="3_ys7bn"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_b0de2"]
 _surfaces = [{
@@ -36,21 +35,22 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_b0de2")
 
+[sub_resource type="PolygonOccluder3D" id="PolygonOccluder3D_ei8on"]
+polygon = PackedVector2Array(-3.1000001, 0.1, -3.1000001, 6.3, 3.1000001, 6.3, 3.1000001, 0.1, 2.5, 0.1, 2.9, 4, 0.90000004, 6, -0.8, 6, -2.5, 4.5, -2.6000001, 2.9, -2.3500001, 2.45, -2.5, 0.1)
+
 [node name="Gate" type="StaticBody3D" unique_id=1011791674]
-collision_mask = 3
 script = ExtResource("1_86s5o")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=320320536]
 unique_name_in_owner = true
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, -3.1)
+transform = Transform3D(4.871289e-05, -1.1877162e-15, 1, 2.4381969e-11, 1, 0, -1, 2.4381969e-11, 4.871289e-05, 0, -0.4, -3.1)
 mesh = SubResource("ArrayMesh_nsrxx")
-skeleton = NodePath("")
 
-[node name="OccluderInstance3D" type="OccluderInstance3D" parent="MeshInstance3D" unique_id=831252193]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3.1, 0, -1.355053e-07)
-occluder = ExtResource("3_ys7bn")
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="MeshInstance3D" unique_id=1121876501]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.3, 0, 0)
+occluder = SubResource("PolygonOccluder3D_ei8on")
 
 [node name="CollisionShape3D" type="CollisionPolygon3D" parent="." unique_id=1100250817]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.8)
-polygon = PackedVector2Array(-3.1999998, 0, -3.1999998, 6.3999996, 3.1999998, 6.3999996, 3.1999998, 0, 1.6, 0, 1.6, 0.8, 1.9, 4.5, 0.79999995, 5.9, -0.79999995, 5.9, -1.9, 4.5, -1.9, 2, -1.5, 0.8, -1.5, 0)
+transform = Transform3D(-1, 0, -3.9331087e-05, 0, 1, 0, 3.9331087e-05, 0, -1, 0, -0.4, -2.8)
+polygon = PackedVector2Array(-3.1999998, 0, -3.1999998, 6.3999996, 3.2, 6.4, 3.2, 0, 1.5, 0, 1.5, 0.8, 1.9, 2, 1.9, 4.5, 0.8, 5.9, -0.8, 5.9, -1.9, 4.5, -1.9, 2, -1.5, 0.8, -1.5, 0)
