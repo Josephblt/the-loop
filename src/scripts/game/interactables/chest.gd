@@ -1,6 +1,7 @@
 class_name Chest
 extends Interactable
 
+
 @onready var chest_animations: AnimationPlayer = %AnimationPlayer
 
 

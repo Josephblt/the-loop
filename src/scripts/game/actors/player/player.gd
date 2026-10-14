@@ -27,6 +27,7 @@ func _physics_process(_delta: float) -> void:
 
 	move_and_slide()
 
+
 func _input(event):
 	if event is InputEventMouseMotion:
 		_handle_look(event.relative)
@@ -75,6 +76,7 @@ func _handle_look(motion: Vector2):
 
 func _handle_interactables():
 	if raycast.is_colliding():
+		print("Raycast is colliding with: ", raycast.get_collider())
 		var collider = raycast.get_collider()
 		if collider.is_in_group("Interactables"):
 			if collider != active_interactable:

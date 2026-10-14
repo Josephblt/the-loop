@@ -44,12 +44,13 @@ shape = SubResource("CapsuleShape3D_vapkq")
 [node name="Camera3D" type="Camera3D" parent="." unique_id=559748373]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
-cull_mask = 1048571
+cull_mask = 1048573
 script = ExtResource("2_fyoa2")
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1660884452]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -5)
+collision_mask = 2
 hit_back_faces = false
 collide_with_areas = true
 collide_with_bodies = false
@@ -64,7 +65,7 @@ render_target_update_mode = 4
 [node name="OutlineCamera3D" type="Camera3D" parent="Camera3D/OutlineViewport" unique_id=1359828356]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
-cull_mask = 1047556
+cull_mask = 1047554
 current = true
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1212907311]
