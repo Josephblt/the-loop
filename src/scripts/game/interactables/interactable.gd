@@ -10,7 +10,8 @@ signal interaction_triggered()
 
 const OUTLINE_LAYER: int = 2
 
-@export var outline_meshes: Array[MeshInstance3D] = []
+@export var outline_meshes: Array[VisualInstance3D] = []
+@export var one_shot: bool = false
 
 @onready var interaction_animations: AnimationPlayer = %InteractionAnimations
 
@@ -52,7 +53,9 @@ func trigger_interaction() -> void:
 	if !_is_interactable:
 		return
 
-	disable_interaction()
-	# _is_interactable = false
+	if one_shot:
+		disable_interaction()
+		_is_interactable = false
+
 	interaction_triggered.emit()
 	_interact()

@@ -1,14 +1,17 @@
 class_name Fire
-extends Node3D
+extends CPUParticles3D
 
 
-@onready var particles: CPUParticles3D = $CPUParticles3D
 @onready var fire_light: OmniLight3D = $Light
 @onready var fire_audio: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
 
+func is_lit() -> bool:
+	return emitting
+
+
 func ignite() -> void:
-	particles.emitting = true
+	emitting = true
 	fire_light.visible = true
 
 	if not fire_audio.playing:
@@ -16,6 +19,6 @@ func ignite() -> void:
 
 
 func extinguish() -> void:
-	particles.emitting = false
+	emitting = false
 	fire_light.visible = false
 	fire_audio.stop()

@@ -87,7 +87,6 @@ func _handle_interactables():
 			active_interactable.enable_interaction()
 	else:
 		if active_interactable:
-			print("Raycast exited: ", active_interactable)
 			active_interactable.disable_interaction()
 			active_interactable = null
 

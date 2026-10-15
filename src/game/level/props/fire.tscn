@@ -22,11 +22,8 @@ offsets = PackedFloat32Array(0, 0.8, 0.9, 1)
 colors = PackedColorArray(1, 0.843137, 0, 1, 1, 0, 0.125544, 1, 0.5, 0, 0.062772, 1, 0, 0, 0, 1)
 metadata/_snap_enabled = true
 
-[node name="Fire" type="Node3D" unique_id=1932394890]
+[node name="Fire" type="CPUParticles3D" unique_id=476398159]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-script = ExtResource("1_fire")
-
-[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=476398159]
 layers = 4
 material_override = SubResource("StandardMaterial3D_ya6m2")
 amount = 1000
@@ -54,6 +51,7 @@ angle_max = 15.0
 scale_amount_min = 0.1
 scale_amount_curve = SubResource("Curve_7qf2r")
 color_ramp = SubResource("Gradient_g2hq4")
+script = ExtResource("1_fire")
 
 [node name="Light" type="OmniLight3D" parent="." unique_id=1664883696]
 layers = 1023

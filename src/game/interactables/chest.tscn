@@ -214,11 +214,12 @@ _data = {
 &"open": SubResource("Animation_1u115")
 }
 
-[node name="Chest" type="StaticBody3D" unique_id=469060 node_paths=PackedStringArray("outline_meshes") groups=["Interactables"]]
+[node name="Chest" type="StaticBody3D" unique_id=469060 node_paths=PackedStringArray("outline_meshes")]
 collision_layer = 5
 collision_mask = 2
 script = ExtResource("1_68fva")
 outline_meshes = [NodePath("MeshInstance3DCover"), NodePath("MeshInstance3DBase")]
+one_shot = true
 
 [node name="MeshInstance3DCover" type="MeshInstance3D" parent="." unique_id=2107123533]
 unique_name_in_owner = true
