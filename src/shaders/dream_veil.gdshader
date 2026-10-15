@@ -20,6 +20,7 @@ uniform float center_calm : hint_range(0.0, 1.0) = 1.0;
 group_uniforms Grade;
 uniform float dim : hint_range(0.0, 1.0) = 0.0;
 uniform float desaturation : hint_range(0.0, 1.0) = 0.2;
+uniform vec4 vignette_color : source_color = vec4(0.663, 0.545, 1.0, 1.0);
 uniform float vignette_strength : hint_range(0.0, 1.0) = 0.25;
 
 
@@ -118,7 +119,7 @@ void fragment() {
 		local_blur
 	);
 
-	float luminance = dot(screen.rgb, vec3(0.299, 0.587, 0.114));
+	float luminance = dot(screen.rgb, vec3(1.0));
 	screen.rgb = mix(
 		screen.rgb,
 		vec3(luminance),
@@ -128,10 +129,7 @@ void fragment() {
 	screen.rgb *= 1.0 - dim * intensity;
 
 	float vignette = smoothstep(0.1, 1.25, distance_from_center);
-	screen.rgb *= 1.0
-		- vignette
-		* vignette_strength
-		* intensity;
+	screen.rgb = mix(screen.rgb, vignette_color.rgb, vignette * vignette_strength * intensity);
 
 	COLOR = screen;
 }

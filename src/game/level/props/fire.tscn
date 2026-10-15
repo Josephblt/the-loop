@@ -4,13 +4,13 @@
 [ext_resource type="AudioStream" uid="uid://ckh45fqhwxb8s" path="res://assets/sounds/sfx/flame/flame.tres" id="2_83v8r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya6m2"]
+shading_mode = 0
 vertex_color_use_as_albedo = true
-metallic = 1.0
-metallic_specular = 1.0
 grow_amount = 1.488
 proximity_fade_distance = 0.01
 
 [sub_resource type="BoxMesh" id="BoxMesh_imi2h"]
+material = SubResource("StandardMaterial3D_ya6m2")
 size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="Curve" id="Curve_7qf2r"]
@@ -25,7 +25,6 @@ metadata/_snap_enabled = true
 [node name="Fire" type="CPUParticles3D" unique_id=476398159]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 layers = 4
-material_override = SubResource("StandardMaterial3D_ya6m2")
 amount = 1000
 lifetime = 0.25
 preprocess = 1.0
@@ -58,9 +57,11 @@ layers = 1023
 light_color = Color(0.7882353, 0.40392157, 0.14117648, 1)
 light_energy = 2.0
 light_specular = 5.0
+light_cull_mask = 4294967291
 shadow_enabled = true
 shadow_opacity = 0.35
 shadow_blur = 5.0
+shadow_caster_mask = 4294967291
 omni_range = 15.0
 omni_attenuation = 2.0
 
