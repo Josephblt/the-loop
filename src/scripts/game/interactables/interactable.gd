@@ -13,7 +13,7 @@ const OUTLINE_LAYER: int = 2
 @export var outline_meshes: Array[VisualInstance3D] = []
 @export var one_shot: bool = false
 
-@onready var interaction_animations: AnimationPlayer = %InteractionAnimations
+@onready var interaction_animation_player: AnimationPlayer = %InteractionAnimationPlayer
 
 var _is_interactable: bool = true
 
@@ -36,7 +36,7 @@ func enable_interaction() -> void:
 		return
 		
 	_update_outline(true)
-	interaction_animations.play("enable_interaction")
+	interaction_animation_player.play("enable_interaction")
 	interaction_enabled.emit()
 
 
@@ -45,7 +45,7 @@ func disable_interaction() -> void:
 		return
 	
 	_update_outline(false)
-	interaction_animations.play("disable_interaction")
+	interaction_animation_player.play("disable_interaction")
 	interaction_disabled.emit()
 
 

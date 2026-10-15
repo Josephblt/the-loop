@@ -147,7 +147,7 @@ vertical_alignment = 1
 
 [node name="Animations" type="Node" parent="." unique_id=1316571038]
 
-[node name="InteractionAnimations" type="AnimationPlayer" parent="Animations" unique_id=512808538]
+[node name="InteractionAnimationPlayer" type="AnimationPlayer" parent="Animations" unique_id=512808538]
 unique_name_in_owner = true
 root_node = NodePath("../../CanvasLayer")
 libraries/ = SubResource("AnimationLibrary_rsld6")

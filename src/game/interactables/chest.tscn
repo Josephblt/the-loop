@@ -278,12 +278,12 @@ vertical_alignment = 1
 
 [node name="Animations" type="Node" parent="." unique_id=461717727]
 
-[node name="InteractionAnimations" type="AnimationPlayer" parent="Animations" unique_id=743616824]
+[node name="InteractionAnimationPlayer" type="AnimationPlayer" parent="Animations" unique_id=743616824]
 unique_name_in_owner = true
 root_node = NodePath("../../CanvasLayer")
 libraries/ = SubResource("AnimationLibrary_3hjkb")
 
-[node name="ChestAnimations" type="AnimationPlayer" parent="Animations" unique_id=1505478726]
+[node name="ChestAnimationPlayer" type="AnimationPlayer" parent="Animations" unique_id=1505478726]
 unique_name_in_owner = true
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_8tdhl")

@@ -5,18 +5,14 @@ extends CanvasLayer
 signal dismissed()
 
 
-const SHOW_ANIMATION: StringName = &"show"
-const HIDE_ANIMATION: StringName = &"hide"
-
 @export var dismiss_action: StringName = &"Interact"
 
 @onready var memory_label: Label = %MemoryLabel
-@onready var animations: AnimationPlayer = %Animations
+@onready var animations: AnimationPlayer = %AnimationPlayer
 
 
 func _ready() -> void:
 	set_process_unhandled_input(false)
-	hide()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -29,21 +25,21 @@ func reveal(memory_text: String) -> void:
 	set_process_unhandled_input(false)
 	memory_label.text = memory_text
 	show()
-	animations.play(SHOW_ANIMATION)
+	animations.play("show")
 
 
 func dismiss() -> void:
-	if not visible or animations.current_animation == HIDE_ANIMATION:
+	if not visible or animations.current_animation == "hide":
 		return
 
 	set_process_unhandled_input(false)
-	animations.play(HIDE_ANIMATION)
+	animations.play("hide")
 
 
 func _on_animations_animation_finished(animation_name: StringName) -> void:
 	match animation_name:
-		SHOW_ANIMATION:
+		"show":
 			set_process_unhandled_input(true)
-		HIDE_ANIMATION:
+		"hide":
 			hide()
 			dismissed.emit()

@@ -14,8 +14,32 @@
 [ext_resource type="PackedScene" uid="uid://b0lvfjr4ff8hl" path="res://game/actors/player.tscn" id="13_n4fvx"]
 [ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/memory_reveal.tscn" id="14_memory_reveal"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n4fvx"]
+sky_top_color = Color(0.02745098, 0.09411765, 0.14117648, 1)
+sky_horizon_color = Color(0.18445611, 0.17857376, 0.17955416, 1)
+ground_bottom_color = Color(0.15686275, 0.06666667, 0.023529412, 1)
+ground_horizon_color = Color(0.18445611, 0.17857376, 0.17955416, 1)
+energy_multiplier = 0.5
+
+[sub_resource type="Sky" id="Sky_d3u6q"]
+sky_material = SubResource("ProceduralSkyMaterial_n4fvx")
+
+[sub_resource type="Environment" id="Environment_6h58r"]
+background_mode = 2
+sky = SubResource("Sky_d3u6q")
+
 [node name="MemoryRoom" type="Node3D" unique_id=752731590]
 script = ExtResource("1_sc13g")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1308557487]
+environment = SubResource("Environment_6h58r")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=389522376]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_color = Color(0.22352941, 0.49411765, 0.6784314, 1)
+light_energy = 0.5
+shadow_enabled = true
+shadow_caster_mask = 4294967291
 
 [node name="Floor" type="Node3D" parent="." unique_id=479788147]
 unique_name_in_owner = true
