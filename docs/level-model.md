@@ -57,19 +57,21 @@ Acceptance is structurally different from the four cardinal grief rooms. It is r
 
 All active threat, chase, and battle pressure happens inside the maze section. The smoke belongs to the maze as the primary hostile force.
 
-The authored rooms are not combat arenas. They are closure spaces reached after the player gathers the required memories for the active stage in the current loop. Their job is to present the collected maze memories back to the player in an intentional order, then give the player one loop-specific room closing memory that lets the emotional shape of those memories land.
+The authored rooms are not combat arenas. They are closure spaces reached after the player gathers the required memories for the active stage in the current loop. Maze memories remain in the maze; the grief room itself contains only one loop-specific final memory that lets the emotional shape of the stage land.
+
+The active grief room entrance becomes available only after the player collects all required maze memories for that stage. Once the player enters, the room locks behind them. The player cannot return to the maze from inside the grief room; the only available action is to view the room's final memory. After that memory is viewed, the stage ends and the next transition begins.
 
 The closing memory should give meaning to the stage without giving it away entirely. It should feel like another piece of the person's lived experience, not a summary or authorial explanation. The rooms must not reveal the loop premise, name the stage of grief, or give concrete interpretation. The game should express itself through the feelings of the person living the premise.
 
 Room flow:
 
 1. The player gathers memories in the maze.
-2. The player reaches the active grief room.
-3. The room quiets the threat pressure.
-4. The collected memories are shown together.
-5. The memories are arranged into a felt sequence.
-6. A loop-specific room closing memory ties the sequence together emotionally while preserving ambiguity.
-7. The next stage or transition opens.
+2. The active grief room entrance unlocks.
+3. The player enters the grief room and the room locks behind them.
+4. The room quiets the threat pressure.
+5. The only available action is to view the loop-specific final room memory.
+6. The final memory ties the collected maze memories together emotionally while preserving ambiguity.
+7. Viewing the final memory ends the stage and starts the next transition.
 
 ## Generation Principle
 
