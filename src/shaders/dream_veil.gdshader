@@ -7,18 +7,18 @@ uniform sampler2D screen_texture :
 	repeat_disable,
 	filter_linear_mipmap;
 
-uniform float intensity : hint_range(0.0, 1.0) = 0.0;
+uniform float intensity : hint_range(0.0, 1.0) = 1.0;
 
 group_uniforms Dream;
-uniform float pattern_scale : hint_range(0.5, 8.0) = 2.4;
-uniform float flow_speed : hint_range(0.0, 2.0) = 0.12;
-uniform float morph_speed : hint_range(0.0, 2.0) = 0.16;
-uniform float distortion_pixels : hint_range(0.0, 16.0) = 3.0;
-uniform float blur_lod : hint_range(0.0, 5.0) = 2.6;
-uniform float center_calm : hint_range(0.0, 1.0) = 0.45;
+uniform float pattern_scale : hint_range(0.1, 10.0) = 8.0;
+uniform float flow_speed : hint_range(0.0, 2.0) = 2.0;
+uniform float morph_speed : hint_range(0.0, 2.0) = 2.0;
+uniform float distortion_pixels : hint_range(0.0, 16.0) = 16.0;
+uniform float blur_lod : hint_range(0.0, 5.0) = 5.0;
+uniform float center_calm : hint_range(0.0, 1.0) = 1.0;
 
 group_uniforms Grade;
-uniform float dim : hint_range(0.0, 1.0) = 0.4;
+uniform float dim : hint_range(0.0, 1.0) = 0.0;
 uniform float desaturation : hint_range(0.0, 1.0) = 0.2;
 uniform float vignette_strength : hint_range(0.0, 1.0) = 0.25;
 
@@ -127,7 +127,7 @@ void fragment() {
 
 	screen.rgb *= 1.0 - dim * intensity;
 
-	float vignette = smoothstep(0.35, 1.25, distance_from_center);
+	float vignette = smoothstep(0.1, 1.25, distance_from_center);
 	screen.rgb *= 1.0
 		- vignette
 		* vignette_strength

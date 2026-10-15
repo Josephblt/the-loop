@@ -2,19 +2,20 @@
 class_name MemoryRoom
 extends Node3D
 
+
 @export var editor_seed: int = 0
 @export_tool_button("Preview", "RandomNumberGenerator") var preview_action = _preview
 @export_tool_button("Reset", "Clear") var clear_action = _reset
+
+@onready var chest: Chest = %Chest
+@onready var memory_presentation: MemoryPresentation = %MemoryPresentation
 
 var _memory: Memory
 var _randomizer: RandomNumberGenerator
 var _session_seed: int
 
-@onready var chest: Chest = %Chest
-@onready var memory_presentation: MemoryPresentation = %MemoryPresentation
 
-
-func _init(random_seed: int = editor_seed, memory: Memory = null) -> void:
+func _init(random_seed: int = editor_seed, memory: Memory = Memory.new("Unknown Memory...")) -> void:
 	_memory = memory
 	_session_seed = random_seed
 
@@ -23,7 +24,6 @@ func _ready() -> void:
 	if not Engine.is_editor_hint():
 		_reset(_session_seed)
 		_randomize()
-		_connect_memory_interaction()
 	else:
 		_reset(editor_seed)
 	
@@ -49,13 +49,9 @@ func _reset(random_seed: int = editor_seed) -> void:
 		return
 
 
-func _connect_memory_interaction() -> void:
-	chest.interaction_triggered.connect(_present_memory)
-
-
 func _present_memory() -> void:
-	var memory_text: String = "Unknown Memory..."
-	if _memory:
-		memory_text = _memory.description
+	memory_presentation.present(_memory._description)
 
-	memory_presentation.present(memory_text)
+
+func _on_chest_interaction_triggered() -> void:
+	_present_memory()

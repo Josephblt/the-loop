@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="10_mptsv"]
 [ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/interactables/altar.tscn" id="10_w2vgl"]
 [ext_resource type="PackedScene" uid="uid://b0lvfjr4ff8hl" path="res://game/actors/player.tscn" id="13_n4fvx"]
-[ext_resource type="PackedScene" path="res://game/ui/memory_presentation.tscn" id="14_memory_presentation"]
+[ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/memory_presentation.tscn" id="14_memory_presentation"]
 
 [node name="MemoryRoom" type="Node3D" unique_id=752731590]
 script = ExtResource("1_sc13g")
@@ -89,5 +89,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.7)
 [node name="Player" parent="." unique_id=282310942 instance=ExtResource("13_n4fvx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 0, 3.8)
 
-[node name="MemoryPresentation" parent="." instance=ExtResource("14_memory_presentation")]
+[node name="MemoryPresentation" parent="." unique_id=1492686143 instance=ExtResource("14_memory_presentation")]
 unique_name_in_owner = true
+
+[connection signal="interaction_triggered" from="Memory/Chest" to="." method="_on_chest_interaction_triggered"]

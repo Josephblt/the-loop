@@ -7,3 +7,4 @@ extends Interactable
 
 func _interact() -> void:
 	chest_animations.play("open")
+	
