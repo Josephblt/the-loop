@@ -8,7 +8,7 @@ extends Node3D
 @export_tool_button("Reset", "Clear") var clear_action = _reset
 
 @onready var chest: Chest = %Chest
-@onready var memory_presentation: MemoryPresentation = %MemoryPresentation
+@onready var memory_reveal: MemoryReveal = %MemoryReveal
 
 var _memory: Memory
 var _randomizer: RandomNumberGenerator
@@ -50,7 +50,7 @@ func _reset(random_seed: int = editor_seed) -> void:
 
 
 func _present_memory() -> void:
-	memory_presentation.present(_memory._description)
+	memory_reveal.reveal(_memory._description)
 
 
 func _on_chest_interaction_triggered() -> void:

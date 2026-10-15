@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://cot8vcnllarr3"]
+
+[ext_resource type="Script" uid="uid://d4bwbfhahuvvm" path="res://scripts/game/ui/memory_reveal.gd" id="1_script"]
+[ext_resource type="Material" uid="uid://bjrhramjnbda0" path="res://assets/materials/ui/dream_veil_material.tres" id="2_woq7j"]
+[ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="3_font"]
+[ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_material.tres" id="4_dissolve"]
+
+[sub_resource type="Animation" id="Animation_reset"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DreamVeil:material:shader_parameter/intensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/MemoryLabel:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_show"]
+resource_name = "show"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DreamVeil:material:shader_parameter/intensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/MemoryLabel:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_hide"]
+resource_name = "hide"
+length = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DreamVeil:material:shader_parameter/intensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/MemoryLabel:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_memory_reveal"]
+_data = {
+&"RESET": SubResource("Animation_reset"),
+&"hide": SubResource("Animation_hide"),
+&"show": SubResource("Animation_show")
+}
+
+[node name="MemoryReveal" type="CanvasLayer" unique_id=1991501411]
+layer = 10
+script = ExtResource("1_script")
+
+[node name="DreamVeil" type="ColorRect" parent="." unique_id=1346875019]
+unique_name_in_owner = true
+material = ExtResource("2_woq7j")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1915900496]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 150
+
+[node name="MemoryLabel" type="Label" parent="MarginContainer" unique_id=452753634]
+unique_name_in_owner = true
+material = ExtResource("4_dissolve")
+custom_minimum_size = Vector2(852, 348)
+custom_maximum_size = Vector2(852, 348)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 60
+text = "Unknown Memory..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Animations" type="AnimationPlayer" parent="." unique_id=605660109]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_memory_reveal")
+
+[connection signal="animation_finished" from="Animations" to="." method="_on_animations_animation_finished"]
