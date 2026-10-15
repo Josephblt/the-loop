@@ -12,6 +12,8 @@ const OUTLINE_LAYER: int = 2
 
 @export var outline_meshes: Array[MeshInstance3D] = []
 
+@onready var interaction_animations: AnimationPlayer = %InteractionAnimations
+
 var _is_interactable: bool = true
 
 
@@ -33,6 +35,7 @@ func enable_interaction() -> void:
 		return
 		
 	_update_outline(true)
+	interaction_animations.play("enable_interaction")
 	interaction_enabled.emit()
 
 
@@ -41,6 +44,7 @@ func disable_interaction() -> void:
 		return
 	
 	_update_outline(false)
+	interaction_animations.play("disable_interaction")
 	interaction_disabled.emit()
 
 
@@ -49,6 +53,6 @@ func trigger_interaction() -> void:
 		return
 
 	disable_interaction()
-	_is_interactable = false
+	# _is_interactable = false
 	interaction_triggered.emit()
 	_interact()

@@ -75,18 +75,19 @@ func _handle_look(motion: Vector2):
 
 
 func _handle_interactables():
+	var collider = null
 	if raycast.is_colliding():
-		print("Raycast is colliding with: ", raycast.get_collider())
-		var collider = raycast.get_collider()
-		if collider.is_in_group("Interactables"):
-			if collider != active_interactable:
-				if active_interactable:
-					active_interactable.disable_interaction()
-				active_interactable = collider as Interactable
-				active_interactable.enable_interaction()
-			
+		collider = raycast.get_collider()		
+	
+	if collider is Interactable:
+		if collider != active_interactable:
+			if active_interactable:
+				active_interactable.disable_interaction()
+			active_interactable = collider as Interactable
+			active_interactable.enable_interaction()
 	else:
 		if active_interactable:
+			print("Raycast exited: ", active_interactable)
 			active_interactable.disable_interaction()
 			active_interactable = null
 

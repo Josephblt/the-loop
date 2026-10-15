@@ -42,7 +42,7 @@ size = Vector3(6.2, 1.3, 0.6)
 size = Vector3(1, 1.5, 6.4)
 
 [node name="WallNormalSM" type="StaticBody3D" unique_id=1250948428]
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("2_88ti8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=96945213]

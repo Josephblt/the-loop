@@ -42,14 +42,13 @@ size = Vector3(6.2, 6.2, 1)
 size = Vector3(1, 6.4, 6.4)
 
 [node name="WallNormalLG" type="StaticBody3D" unique_id=847289766]
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("2_ocxmx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1563595202]
 unique_name_in_owner = true
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, -3.1)
 mesh = SubResource("ArrayMesh_kuelc")
-skeleton = NodePath("")
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="MeshInstance3D" unique_id=1349840919]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.29999995, 3.2, -1.31134215e-08)

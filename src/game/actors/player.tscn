@@ -50,10 +50,8 @@ script = ExtResource("2_fyoa2")
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1660884452]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -5)
-collision_mask = 2
+collision_mask = 4
 hit_back_faces = false
-collide_with_areas = true
-collide_with_bodies = false
 debug_shape_custom_color = Color(1, 0, 0, 0.5019608)
 debug_shape_thickness = 1
 

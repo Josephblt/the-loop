@@ -39,7 +39,7 @@ shadow_mesh = SubResource("ArrayMesh_li42t")
 polygon = PackedVector2Array(-1.6, 1.65, -2.3, 1.65, -2.3, 1.45, -2.65, 1.0500001, -3.1000001, 1.0500001, -3.1000001, -1.65, 3.1000001, -1.65, 3.1000001, 1.65, 2.5, 1.65, 1.9, 0.55, 1.5500001, 0.55, 1.25, 0.05, -0.6, 0.05, -0.7, 0.55, -0.95, 0.55, -1.2, 0.85, -1.2, 1.0500001, -1.6, 1.3000001)
 
 [node name="WallBrokenMD" type="StaticBody3D" unique_id=357967388]
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("2_tkbwl")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1545819577]
