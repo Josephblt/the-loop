@@ -44,4 +44,6 @@ The player is trapped in a maze built around the five stages of grief. The exper
 - Engine and implementation stack.
 - Visual style, camera perspective, and control scheme.
 
-See [Level Model](docs/level-model.md), [Smoke Behavior](docs/smoke-behavior.md), and [Project Decisions](docs/project-decisions.md).
+See [Level Model](docs/level-model.md), [Smoke Behavior](docs/smoke-behavior.md),
+[Color Palette](docs/color-palette.md), and
+[Project Decisions](docs/project-decisions.md).
