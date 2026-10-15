@@ -94,7 +94,6 @@ _data = {
 }
 
 [node name="MemoryReveal" type="CanvasLayer" unique_id=1991501411]
-layer = 10
 script = ExtResource("1_script")
 
 [node name="DreamVeil" type="ColorRect" parent="." unique_id=1346875019]
