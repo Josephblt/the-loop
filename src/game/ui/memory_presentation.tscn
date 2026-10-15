@@ -1,31 +1,17 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cot8vcnllarr3"]
 
-[ext_resource type="Script" path="res://scripts/game/ui/memory_presentation.gd" id="1_script"]
-[ext_resource type="Shader" path="res://shaders/dream_veil.gdshader" id="2_shader"]
+[ext_resource type="Script" uid="uid://d4bwbfhahuvvm" path="res://scripts/game/ui/memory_presentation.gd" id="1_script"]
+[ext_resource type="Material" uid="uid://bjrhramjnbda0" path="res://assets/materials/ui/dream_veil_material.tres" id="2_woq7j"]
 [ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="3_font"]
 [ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_material.tres" id="4_dissolve"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dream_veil"]
-resource_local_to_scene = true
-shader = ExtResource("2_shader")
-shader_parameter/intensity = 0.0
-shader_parameter/pattern_scale = 2.4
-shader_parameter/flow_speed = 0.12
-shader_parameter/morph_speed = 0.16
-shader_parameter/distortion_pixels = 3.0
-shader_parameter/blur_lod = 2.6
-shader_parameter/center_calm = 0.45
-shader_parameter/dim = 0.4
-shader_parameter/desaturation = 0.2
-shader_parameter/vignette_strength = 0.25
-
-[node name="MemoryPresentation" type="CanvasLayer"]
+[node name="MemoryPresentation" type="CanvasLayer" unique_id=1991501411]
 layer = 10
 script = ExtResource("1_script")
 
-[node name="DreamVeil" type="ColorRect" parent="."]
+[node name="DreamVeil" type="ColorRect" parent="." unique_id=1346875019]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_dream_veil")
+material = ExtResource("2_woq7j")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -33,7 +19,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1915900496]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -45,16 +31,15 @@ theme_override_constants/margin_top = 150
 theme_override_constants/margin_right = 150
 theme_override_constants/margin_bottom = 150
 
-[node name="MemoryLabel" type="Label" parent="MarginContainer"]
+[node name="MemoryLabel" type="Label" parent="MarginContainer" unique_id=452753634]
 unique_name_in_owner = true
 material = ExtResource("4_dissolve")
+custom_minimum_size = Vector2(852, 348)
+custom_maximum_size = Vector2(852, 348)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-mouse_filter = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("3_font")
 theme_override_font_sizes/font_size = 60
 text = "Unknown Memory..."

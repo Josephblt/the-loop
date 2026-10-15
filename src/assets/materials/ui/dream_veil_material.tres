@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bjrhramjnbda0"]
+
+[ext_resource type="Shader" uid="uid://d0pidojf7n4ah" path="res://shaders/dream_veil.gdshader" id="1_jxl8w"]
+
+[resource]
+shader = ExtResource("1_jxl8w")
+shader_parameter/intensity = 0.0
+shader_parameter/pattern_scale = 2.4
+shader_parameter/flow_speed = 0.12
+shader_parameter/morph_speed = 0.16
+shader_parameter/distortion_pixels = 3.0
+shader_parameter/blur_lod = 2.6
+shader_parameter/center_calm = 0.45
+shader_parameter/dim = 0.4
+shader_parameter/desaturation = 0.2
+shader_parameter/vignette_strength = 0.25
