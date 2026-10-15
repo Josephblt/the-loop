@@ -5,6 +5,6 @@ extends Interactable
 @onready var chest_animations: AnimationPlayer = %ChestAnimations
 
 
-func _interact() -> Variant:
+func _interact() -> void:
 	chest_animations.play("open")
-	return chest_animations.animation_finished
+	await chest_animations.animation_finished

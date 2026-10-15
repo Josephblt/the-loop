@@ -10,12 +10,10 @@ const EXTINGUISH_TEXT: String = "Extinguish"
 @onready var label_interaction: Label = %LabelInteraction
 
 
-func _interact() -> Variant:
+func _interact() -> void:
 	if !fire.is_lit():
 		fire.ignite()
 		label_interaction.text = EXTINGUISH_TEXT
 	else:
 		fire.extinguish()
 		label_interaction.text = IGNITE_TEXT
-
-	return null

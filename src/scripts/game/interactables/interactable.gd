@@ -23,7 +23,7 @@ func _ready() -> void:
 
 
 @abstract
-func _interact() -> Variant
+func _interact() -> void
 
 
 func _update_outline(enabled: bool) -> void:
@@ -57,8 +57,5 @@ func trigger_interaction() -> void:
 		disable_interaction()
 		_is_interactable = false
 
-	var interaction_completion: Variant = _interact()
-	if interaction_completion is Signal:
-		await interaction_completion
-
+	_interact()
 	interaction_triggered.emit()
