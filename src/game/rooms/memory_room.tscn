@@ -86,10 +86,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 4.2)
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.7)
 
-[node name="Player" parent="." unique_id=282310942 instance=ExtResource("13_n4fvx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 0, 3.8)
-
 [node name="MemoryPresentation" parent="." unique_id=1492686143 instance=ExtResource("14_memory_presentation")]
 unique_name_in_owner = true
+
+[node name="Player" parent="." unique_id=282310942 instance=ExtResource("13_n4fvx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 0, 3.8)
 
 [connection signal="interaction_triggered" from="Memory/Chest" to="." method="_on_chest_interaction_triggered"]
