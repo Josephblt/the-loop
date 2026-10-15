@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
-uniform vec4 outline_color : source_color = vec4(1.0, 0.8, 0.2, 1.0);
-uniform float outline_width : hint_range(1.0, 10.0) = 3.0;
+uniform vec4 outline_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform float outline_width : hint_range(1.0, 10.0) = 1.0;
 
 void fragment() {
 	float center = texture(TEXTURE, UV).a;

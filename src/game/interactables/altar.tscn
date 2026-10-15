@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://bannntmc1y4o4" path="res://scripts/game/interactables/altar.gd" id="1_nuqr6"]
 [ext_resource type="Material" uid="uid://0sp8exud2fvb" path="res://assets/materials/props/altar.tres" id="1_qa4jq"]
 [ext_resource type="PackedScene" uid="uid://ci5ayfo0lm6xc" path="res://game/level/props/fire.tscn" id="2_52cqr"]
-[ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/ui/fonts/IbarraRealNova-BoldItalic.ttf" id="4_nuqr6"]
+[ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="4_nuqr6"]
+[ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_material.tres" id="4_rsld6"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_j5kvm"]
 _surfaces = [{
@@ -133,10 +134,11 @@ theme_override_constants/margin_bottom = 150
 [node name="LabelInteraction" type="Label" parent="CanvasLayer/MarginContainer" unique_id=1160741246]
 unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0)
+material = ExtResource("4_rsld6")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("4_nuqr6")
 theme_override_font_sizes/font_size = 60
 text = "Extinguish"

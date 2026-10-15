@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ci5ayfo0lm6xc"]
 
 [ext_resource type="Script" uid="uid://cur0f16avsiyu" path="res://scripts/game/level/props/fire.gd" id="1_fire"]
-[ext_resource type="AudioStream" uid="uid://npr8ff18gytw" path="res://assets/sounds/sfx/flame.mp3" id="2_6jy2i"]
+[ext_resource type="AudioStream" uid="uid://ckh45fqhwxb8s" path="res://assets/sounds/sfx/flame/flame.tres" id="2_83v8r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya6m2"]
 vertex_color_use_as_albedo = true
@@ -65,8 +65,9 @@ omni_range = 15.0
 omni_attenuation = 2.0
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=502506527]
-stream = ExtResource("2_6jy2i")
-volume_db = 10.0
+stream = ExtResource("2_83v8r")
+pitch_scale = 0.5
 autoplay = true
+stream_paused = true
 max_distance = 15.0
-parameters/looping = true
+bus = &"SFX"

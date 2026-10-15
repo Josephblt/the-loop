@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cdtwaue1fnyls"]
+
+[ext_resource type="Shader" uid="uid://b6mwihiwsy113" path="res://shaders/dissolve.gdshader" id="1_8opu4"]
+
+[resource]
+shader = ExtResource("1_8opu4")
+shader_parameter/font_color = Color(0.129, 0.094, 0.184, 1)
+shader_parameter/font_outline = Color(0.914, 0.871, 1, 1)
+shader_parameter/dissolve_color = Color(0.663, 0.545, 1, 1)
+shader_parameter/dissolve_amount = 0.250000011875
+shader_parameter/dissolve_width = 0.250000011875
+shader_parameter/softness = 0.20000000298023
+shader_parameter/noise_scale = 45.2310019109725
+shader_parameter/lateral_speed = 0.5000002612500003
+shader_parameter/morph_speed = 2.50000011875
+shader_parameter/distortion = 2.50000011875
+shader_parameter/swirl_strength = 2.9630001407425
+shader_parameter/outline_detection_threshold = 0.5

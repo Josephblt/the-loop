@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cyerm0c5sb0ox"
-path="res://.godot/imported/IbarraRealNova-BoldItalic.ttf-4aab3937da8901617a1fa09cb8222bd8.fontdata"
+path="res://.godot/imported/IbarraRealNova-BoldItalic.ttf-1bf8e1e147cb6405aa0820095a3d6264.fontdata"
 
 [deps]
 
-source_file="res://assets/ui/fonts/IbarraRealNova-BoldItalic.ttf"
-dest_files=["res://.godot/imported/IbarraRealNova-BoldItalic.ttf-4aab3937da8901617a1fa09cb8222bd8.fontdata"]
+source_file="res://assets/fonts/IbarraRealNova-BoldItalic.ttf"
+dest_files=["res://.godot/imported/IbarraRealNova-BoldItalic.ttf-1bf8e1e147cb6405aa0820095a3d6264.fontdata"]
 
 [params]
 

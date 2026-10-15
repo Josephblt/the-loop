@@ -1,6 +1,6 @@
 @tool
 class_name LevelRandomizer
-extends Node3D
+extends StaticBody3D
 
 @export var editor_seed: int = 0
 @export_tool_button("Preview", "RandomNumberGenerator") var preview_action = _preview
