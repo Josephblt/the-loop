@@ -2,66 +2,52 @@
 class_name LevelRandomizer
 extends StaticBody3D
 
+
+@export_group("Randomization")
+@export var original_position: Vector3 = Vector3.ZERO
+@export var original_rotation: Vector3 = Vector3.ZERO
 @export var editor_seed: int = 0
-@export_tool_button("Preview", "RandomNumberGenerator") var preview_action = _preview
+
+@export var x_position: float = 0.01
+@export var y_position: float = 0.01
+@export var z_position: float = 0.01
+
+@export var x_rotation: float = 0.1
+@export var y_rotation: float = 0.1
+@export var z_rotation: float = 0.1
+
+@export_tool_button("Randomize", "RandomNumberGenerator") var preview_action = _randomize
 @export_tool_button("Reset", "Clear") var clear_action = _reset
 
-
-const X_POSITION: float = 0.01
-const Y_POSITION: float = 0.01
-const Z_POSITION: float = 0.01
-
-const X_ROTATION: float = 0.1
-const Y_ROTATION: float = 0.1
-const Z_ROTATION: float = 0.1
-
-var _inverted: bool
-var _mesh_random_position: Vector3
-var _mesh_random_rotation: Vector3
 var _randomizer: RandomNumberGenerator
-var _session_seed: int
-
-
-func _init(random_seed: int = editor_seed) -> void:
-	_session_seed = random_seed
-	_mesh_random_position = Vector3.ZERO
-	_mesh_random_rotation = Vector3.ZERO
-	_inverted = false
 
 
 func _ready() -> void:
-	if not Engine.is_editor_hint():
-		_reset(_session_seed)
-		_randomize()
+	if Engine.is_editor_hint():
+		_reset()
 	else:
-		_reset(editor_seed)
+		_randomize()
 		
 
 func _randomize_position() -> void:
-	_mesh_random_position = Vector3(
-		_randomizer.randf_range(-X_POSITION, X_POSITION),
-		_randomizer.randf_range(-Y_POSITION, Y_POSITION),
-		_randomizer.randf_range(-Z_POSITION, Z_POSITION)
-	)
-	%MeshInstance3D.position += _mesh_random_position
+	var x = _randomizer.randf_range(-x_position, x_position)
+	var y = _randomizer.randf_range(-y_position, y_position)
+	var z = _randomizer.randf_range(-z_position, z_position)
+	
+	%MeshInstance3D.position += Vector3(x, y, z)
 
 
 func _randomize_rotation() -> void:
-	_mesh_random_rotation = Vector3(
-		_randomizer.randf_range(-X_ROTATION, X_ROTATION),
-		_randomizer.randf_range(-Y_ROTATION, Y_ROTATION),
-		_randomizer.randf_range(-Z_ROTATION, Z_ROTATION)
-	)
-	
-	%MeshInstance3D.rotation_degrees.x += _mesh_random_rotation.x
-	%MeshInstance3D.rotation_degrees.y += _mesh_random_rotation.y
-	%MeshInstance3D.rotation_degrees.z += _mesh_random_rotation.z
+	var x = _randomizer.randf_range(-x_rotation, x_rotation)
+	var y = _randomizer.randf_range(-y_rotation, y_rotation)
+	var z = _randomizer.randf_range(-z_rotation, z_rotation)
+
+	%MeshInstance3D.rotation_degrees += Vector3(x, y, z)
 
 
 func _randomize_inversion() -> void:
-	_inverted = _randomizer.randi_range(0, 1) == 1
-	
-	if _inverted:
+	var invert = _randomizer.randi_range(0, 1) == 1
+	if invert:
 		%MeshInstance3D.rotation_degrees.y += 180
 
 
@@ -71,29 +57,6 @@ func _randomize():
 	_randomize_inversion()
 
 
-func _reset(random_seed: int = editor_seed) -> void:
-	%MeshInstance3D.position -= _mesh_random_position
-	%MeshInstance3D.rotation_degrees -= _mesh_random_rotation
-	if _inverted:
-		%MeshInstance3D.rotation_degrees.y -= 180
-
-	_mesh_random_position = Vector3.ZERO
-	_mesh_random_rotation = Vector3.ZERO
-	_inverted = false
-
-	_randomizer = RandomNumberGenerator.new()
-	_randomizer.seed = random_seed
-
-	if not Engine.is_editor_hint():
-		return
-
-	ClearHelper.pressClearButton()
-
-
-func _preview():
-	if not Engine.is_editor_hint():
-		return
-
-	_reset(editor_seed)
-	_randomize()
-	ClearHelper.pressClearButton()
+func _reset() -> void:
+	%MeshInstance3D.position = original_position
+	%MeshInstance3D.rotation_degrees = original_rotation

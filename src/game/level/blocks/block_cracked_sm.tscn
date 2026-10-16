@@ -1,6 +1,5 @@
 [gd_scene format=4 uid="uid://dxu0clh036kem"]
 
-[ext_resource type="Script" uid="uid://bhfdxjwhk18ej" path="res://scripts/game/level/block_randomizer.gd" id="2_1ulip"]
 [ext_resource type="Material" uid="uid://dsxkj0621j4gb" path="res://assets/materials/blocks/block_cracked_sm.tres" id="2_mvxyj"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_b170a"]
@@ -39,7 +38,6 @@ shadow_mesh = SubResource("ArrayMesh_b170a")
 size = Vector3(6.4, 0.4, 6.4)
 
 [node name="BlockCrackedSM" type="StaticBody3D" unique_id=1772022278]
-script = ExtResource("2_1ulip")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1974141914]
 unique_name_in_owner = true
