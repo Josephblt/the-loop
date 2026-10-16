@@ -24,6 +24,10 @@ buses/default_bus_layout="uid://yk746h5cwkoq"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/level_randomization/plugin.cfg")
+
 [input]
 
 asd={
