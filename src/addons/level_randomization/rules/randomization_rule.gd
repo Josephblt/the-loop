@@ -61,7 +61,7 @@ func generate_state(
 		))
 	)
 
-	if randomizer.randi_range(0, 1) == 1:
+	if _can_invert() and randomizer.randi_range(0, 1) == 1:
 		position_offset += _get_inversion_position_offset()
 		rotation_offset.y += PI
 
@@ -99,3 +99,7 @@ func get_original_state(
 
 func _get_inversion_position_offset() -> Vector3:
 	return Vector3.ZERO
+
+
+func _can_invert() -> bool:
+	return true

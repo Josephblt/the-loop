@@ -13,6 +13,7 @@ func _init(undo_redo: EditorUndoRedoManager) -> void:
 	_undo_redo = undo_redo
 	_rules.append(BlockRandomizationRule.new())
 	_rules.append(GateRandomizationRule.new())
+	_rules.append(StairRandomizationRule.new())
 
 
 func randomize_scene(
