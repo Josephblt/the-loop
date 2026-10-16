@@ -7,12 +7,10 @@ signal randomize_scene_requested
 signal reset_scene_requested
 signal settings_changed
 
-const AXIS_LABELS: Array[String] = ["X", "Y", "Z"]
-
-var _position_inputs: Array[SpinBox] = []
-var _rotation_inputs: Array[SpinBox] = []
-var _seed_randomizer: RandomNumberGenerator = RandomNumberGenerator.new()
+var _randomize_button: Button
+var _reset_button: Button
 var _seed_input: SpinBox
+var _seed_randomizer: RandomNumberGenerator = RandomNumberGenerator.new()
 var _settings: LevelRandomizationSettings
 var _status_label: Label
 
@@ -27,11 +25,16 @@ func _init(settings: LevelRandomizationSettings) -> void:
 func refresh() -> void:
 	_seed_input.value = _settings.seed
 
-	for axis: int in range(3):
-		_position_inputs[axis].value = _settings.position_variation[axis]
-		_rotation_inputs[axis].value = (
-			_settings.rotation_variation_degrees[axis]
-		)
+
+func set_available_target_count(target_count: int) -> void:
+	var has_targets: bool = target_count > 0
+	_randomize_button.disabled = not has_targets
+	_reset_button.disabled = not has_targets
+
+	if has_targets:
+		_status_label.text = "%d configured object(s) found." % target_count
+	else:
+		_status_label.text = "No configured objects in this scene."
 
 
 func set_status(message: String) -> void:
@@ -43,8 +46,6 @@ func _build_interface() -> void:
 	var seed_row: HBoxContainer = HBoxContainer.new()
 	var seed_label: Label = Label.new()
 	var random_seed_button: Button = Button.new()
-	var randomize_button: Button = Button.new()
-	var reset_button: Button = Button.new()
 
 	add_theme_constant_override(&"separation", 8)
 
@@ -68,73 +69,30 @@ func _build_interface() -> void:
 	random_seed_button.pressed.connect(_on_random_seed_pressed)
 	add_child(random_seed_button)
 
-	_add_vector_editor(
-		"Position Variation",
-		_settings.position_variation,
-		_position_inputs,
-		Callable(self, &"_on_position_variation_changed"),
-		0.001,
-		" m"
-	)
-	_add_vector_editor(
-		"Rotation Variation",
-		_settings.rotation_variation_degrees,
-		_rotation_inputs,
-		Callable(self, &"_on_rotation_variation_changed"),
-		0.1,
-		"°"
-	)
-
-	randomize_button.text = "Randomize Scene"
-	randomize_button.icon = EditorInterface.get_editor_theme().get_icon(
+	_randomize_button = Button.new()
+	_randomize_button.text = "Randomize Scene"
+	_randomize_button.icon = EditorInterface.get_editor_theme().get_icon(
 		&"RandomNumberGenerator",
 		&"EditorIcons"
 	)
-	randomize_button.pressed.connect(_on_randomize_scene_pressed)
-	add_child(randomize_button)
+	_randomize_button.pressed.connect(_on_randomize_scene_pressed)
+	add_child(_randomize_button)
 
-	reset_button.text = "Reset Scene"
-	reset_button.icon = EditorInterface.get_editor_theme().get_icon(
+	_reset_button = Button.new()
+	_reset_button.text = "Reset Scene"
+	_reset_button.icon = EditorInterface.get_editor_theme().get_icon(
 		&"Clear",
 		&"EditorIcons"
 	)
-	reset_button.pressed.connect(_on_reset_scene_pressed)
-	add_child(reset_button)
+	_reset_button.pressed.connect(_on_reset_scene_pressed)
+	add_child(_reset_button)
 
 	_status_label = Label.new()
 	_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	add_child(_status_label)
 
 	refresh()
-
-
-func _add_vector_editor(
-	label_text: String,
-	value: Vector3,
-	inputs: Array[SpinBox],
-	change_handler: Callable,
-	step: float,
-	suffix: String
-) -> void:
-	var label: Label = Label.new()
-	var row: HBoxContainer = HBoxContainer.new()
-
-	label.text = label_text
-	add_child(label)
-
-	for axis: int in range(3):
-		var axis_label: Label = Label.new()
-		var input: SpinBox = _create_spin_box(0.0, 360.0, step)
-
-		axis_label.text = AXIS_LABELS[axis]
-		input.value = value[axis]
-		input.suffix = suffix
-		input.value_changed.connect(change_handler.bind(axis))
-		inputs.append(input)
-		row.add_child(axis_label)
-		row.add_child(input)
-
-	add_child(row)
+	set_available_target_count(0)
 
 
 func _create_spin_box(
@@ -162,16 +120,6 @@ func _on_random_seed_pressed() -> void:
 		-2147483648,
 		2147483647
 	)
-
-
-func _on_position_variation_changed(value: float, axis: int) -> void:
-	_settings.position_variation[axis] = value
-	settings_changed.emit()
-
-
-func _on_rotation_variation_changed(value: float, axis: int) -> void:
-	_settings.rotation_variation_degrees[axis] = value
-	settings_changed.emit()
 
 
 func _on_randomize_scene_pressed() -> void:

@@ -4,12 +4,12 @@ extends RefCounted
 
 
 var node: Node3D
-var rule: LevelRandomizationRule
+var binding: LevelSceneRandomizationBinding
 
 
 func _init(
 	randomizable_node: Node3D,
-	randomization_rule: LevelRandomizationRule
+	randomization_binding: LevelSceneRandomizationBinding
 ) -> void:
 	node = randomizable_node
-	rule = randomization_rule
+	binding = randomization_binding

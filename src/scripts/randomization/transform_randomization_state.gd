@@ -1,5 +1,4 @@
-@tool
-class_name LevelRandomizationState
+class_name TransformRandomizationState
 extends RefCounted
 
 

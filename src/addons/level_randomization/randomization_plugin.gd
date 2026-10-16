@@ -3,32 +3,58 @@ extends EditorPlugin
 
 
 const RandomizationDock: Script = preload("randomization_dock.gd")
+const CATALOG_PATH: String = (
+	"res://addons/level_randomization/config/randomization_catalog.tres"
+)
 const LAYOUT_SECTION: String = "level_randomization"
 
 var _actions: LevelRandomizationActions
+var _catalog: LevelRandomizationCatalog
 var _dock: LevelRandomizationDock
+var _editor_selection: EditorSelection
 var _settings: LevelRandomizationSettings
 
 
 func _enter_tree() -> void:
+	_catalog = load(CATALOG_PATH) as LevelRandomizationCatalog
+	if _catalog == null:
+		push_error("Unable to load level randomization catalog.")
+		return
+
 	_settings = LevelRandomizationSettings.new()
-	_actions = LevelRandomizationActions.new(get_undo_redo())
+	_actions = LevelRandomizationActions.new(get_undo_redo(), _catalog)
 	_dock = RandomizationDock.new(_settings)
 
 	_dock.randomize_scene_requested.connect(_randomize_scene)
 	_dock.reset_scene_requested.connect(_reset_scene)
 	_dock.settings_changed.connect(queue_save_layout)
+	_editor_selection = EditorInterface.get_selection()
+	_editor_selection.selection_changed.connect(_refresh_availability)
+	scene_changed.connect(_on_scene_changed)
 
 	add_control_to_dock(EditorPlugin.DOCK_SLOT_RIGHT_BL, _dock)
+	call_deferred(&"_refresh_availability")
 
 
 func _exit_tree() -> void:
+	if scene_changed.is_connected(_on_scene_changed):
+		scene_changed.disconnect(_on_scene_changed)
+	if (
+		_editor_selection != null
+		and _editor_selection.selection_changed.is_connected(
+			_refresh_availability
+		)
+	):
+		_editor_selection.selection_changed.disconnect(_refresh_availability)
+
 	if _dock != null:
 		remove_control_from_docks(_dock)
 		_dock.queue_free()
 		_dock = null
 
 	_actions = null
+	_catalog = null
+	_editor_selection = null
 	_settings = null
 
 
@@ -37,16 +63,6 @@ func _get_window_layout(configuration: ConfigFile) -> void:
 		return
 
 	configuration.set_value(LAYOUT_SECTION, "seed", _settings.seed)
-	configuration.set_value(
-		LAYOUT_SECTION,
-		"position_variation",
-		_settings.position_variation
-	)
-	configuration.set_value(
-		LAYOUT_SECTION,
-		"rotation_variation_degrees",
-		_settings.rotation_variation_degrees
-	)
 
 
 func _set_window_layout(configuration: ConfigFile) -> void:
@@ -58,16 +74,6 @@ func _set_window_layout(configuration: ConfigFile) -> void:
 		"seed",
 		_settings.seed
 	))
-	_settings.position_variation = configuration.get_value(
-		LAYOUT_SECTION,
-		"position_variation",
-		_settings.position_variation
-	) as Vector3
-	_settings.rotation_variation_degrees = configuration.get_value(
-		LAYOUT_SECTION,
-		"rotation_variation_degrees",
-		_settings.rotation_variation_degrees
-	) as Vector3
 
 	if _dock != null:
 		_dock.refresh()
@@ -94,3 +100,19 @@ func _reset_scene() -> void:
 
 	var reset_count: int = _actions.reset_scene(scene_root)
 	_dock.set_status("Reset %d object(s)." % reset_count)
+
+
+func _on_scene_changed(_scene_root: Node) -> void:
+	_refresh_availability()
+
+
+func _refresh_availability() -> void:
+	if _dock == null or _actions == null:
+		return
+
+	var scene_root: Node = EditorInterface.get_edited_scene_root()
+	var target_count: int = 0
+	if scene_root != null:
+		target_count = _actions.count_randomizable_nodes(scene_root)
+
+	_dock.set_available_target_count(target_count)

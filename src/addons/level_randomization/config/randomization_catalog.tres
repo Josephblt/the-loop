@@ -1,0 +1,69 @@
+[gd_resource type="Resource" script_class="LevelRandomizationCatalog" load_steps=19 format=3]
+
+[ext_resource type="Script" path="res://scripts/randomization/transform_randomization_profile.gd" id="1_profile"]
+[ext_resource type="Script" path="res://addons/level_randomization/scene_randomization_binding.gd" id="2_binding"]
+[ext_resource type="Script" path="res://addons/level_randomization/randomization_catalog.gd" id="3_catalog"]
+[ext_resource type="PackedScene" uid="uid://pndqjwooagyb" path="res://game/level/blocks/block_cracked_lg.tscn" id="4_block_lg"]
+[ext_resource type="PackedScene" uid="uid://coql64ga8pi0u" path="res://game/level/blocks/block_cracked_md.tscn" id="5_block_md"]
+[ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="6_block_sm"]
+[ext_resource type="PackedScene" uid="uid://clp0iyaq2rd17" path="res://game/level/stairs/stairs_lg.tscn" id="7_stairs_lg"]
+[ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="8_stairs_md"]
+[ext_resource type="PackedScene" uid="uid://v8j2a1egqxgo" path="res://game/level/walls/gate.tscn" id="9_gate"]
+
+[sub_resource type="Resource" id="Profile_blocks"]
+script = ExtResource("1_profile")
+randomize_position = true
+position_variation = Vector3(0.01, 0.01, 0.01)
+randomize_rotation = true
+rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
+randomize_inversion = true
+
+[sub_resource type="Resource" id="Profile_stairs"]
+script = ExtResource("1_profile")
+randomize_position = true
+position_variation = Vector3(0.01, 0.01, 0.01)
+randomize_rotation = true
+rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="Resource" id="Profile_gate"]
+script = ExtResource("1_profile")
+randomize_position = true
+position_variation = Vector3(0.01, 0.01, 0.01)
+randomize_rotation = true
+rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
+randomize_inversion = true
+inversion_pivot = Vector3(-0.3, 0, 0)
+
+[sub_resource type="Resource" id="Binding_block_lg"]
+script = ExtResource("2_binding")
+source_scene = ExtResource("4_block_lg")
+profile = SubResource("Profile_blocks")
+
+[sub_resource type="Resource" id="Binding_block_md"]
+script = ExtResource("2_binding")
+source_scene = ExtResource("5_block_md")
+profile = SubResource("Profile_blocks")
+
+[sub_resource type="Resource" id="Binding_block_sm"]
+script = ExtResource("2_binding")
+source_scene = ExtResource("6_block_sm")
+profile = SubResource("Profile_blocks")
+
+[sub_resource type="Resource" id="Binding_stairs_lg"]
+script = ExtResource("2_binding")
+source_scene = ExtResource("7_stairs_lg")
+profile = SubResource("Profile_stairs")
+
+[sub_resource type="Resource" id="Binding_stairs_md"]
+script = ExtResource("2_binding")
+source_scene = ExtResource("8_stairs_md")
+profile = SubResource("Profile_stairs")
+
+[sub_resource type="Resource" id="Binding_gate"]
+script = ExtResource("2_binding")
+source_scene = ExtResource("9_gate")
+profile = SubResource("Profile_gate")
+
+[resource]
+script = ExtResource("3_catalog")
+bindings = Array[ExtResource("2_binding")]([SubResource("Binding_block_lg"), SubResource("Binding_block_md"), SubResource("Binding_block_sm"), SubResource("Binding_stairs_lg"), SubResource("Binding_stairs_md"), SubResource("Binding_gate")])
