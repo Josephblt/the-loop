@@ -26,7 +26,7 @@ func _init(random_seed: int = editor_seed, player: Player = null, memory: Memory
 func _ready() -> void:
 	if _debug:
 		_player = DebugHelper.instantiate_player(self, Vector3(0.0, 0.0, 7.4))
-		DebugHelper.instantiate_lights(self)
+		# DebugHelper.instantiate_lights(self)
 	
 	_reset()
 	
