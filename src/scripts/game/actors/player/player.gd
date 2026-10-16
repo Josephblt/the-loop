@@ -64,7 +64,7 @@ func _handle_movement():
 	if is_on_floor() or !is_on_floor():
 		var input_dir: Vector2 = Input.get_vector("Left", "Right", "Forward", "Back")
 	
-		var direction: Vector3 = (transform.basis * Vector3(-input_dir.y, 0, input_dir.x)).normalized()
+		var direction: Vector3 = (global_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		if direction:
 			velocity.x = direction.x * _speed
 			velocity.z = direction.z * _speed

@@ -187,6 +187,7 @@ Interact={
 3d_physics/layer_1="Level"
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Interactables"
+3d_physics/layer_4="Activators"
 
 [rendering]
 

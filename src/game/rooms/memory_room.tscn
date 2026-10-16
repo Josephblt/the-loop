@@ -11,40 +11,21 @@
 [ext_resource type="PackedScene" uid="uid://dk3ahea1354r8" path="res://game/interactables/chest.tscn" id="9_2ejra"]
 [ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="10_mptsv"]
 [ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/interactables/altar.tscn" id="10_w2vgl"]
-[ext_resource type="PackedScene" uid="uid://b0lvfjr4ff8hl" path="res://game/actors/player.tscn" id="13_n4fvx"]
 [ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/memory_reveal.tscn" id="14_memory_reveal"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n4fvx"]
-sky_top_color = Color(0.02745098, 0.09411765, 0.14117648, 1)
-sky_horizon_color = Color(0.18445611, 0.17857376, 0.17955416, 1)
-ground_bottom_color = Color(0.15686275, 0.06666667, 0.023529412, 1)
-ground_horizon_color = Color(0.18445611, 0.17857376, 0.17955416, 1)
-energy_multiplier = 0.5
+[sub_resource type="BoxShape3D" id="BoxShape3D_jxl8w"]
+size = Vector3(17.8, 5, 17.8)
 
-[sub_resource type="Sky" id="Sky_d3u6q"]
-sky_material = SubResource("ProceduralSkyMaterial_n4fvx")
-
-[sub_resource type="Environment" id="Environment_6h58r"]
-background_mode = 2
-sky = SubResource("Sky_d3u6q")
-
-[node name="MemoryRoom" type="Node3D" unique_id=752731590]
+[node name="MemoryRoom" type="Area3D" unique_id=452683808]
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("1_sc13g")
-editor_player = ExtResource("13_n4fvx")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1308557487]
-environment = SubResource("Environment_6h58r")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1593920821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+shape = SubResource("BoxShape3D_jxl8w")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=389522376]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-layers = 1023
-light_color = Color(0.22352941, 0.49411765, 0.6784314, 1)
-light_energy = 0.5
-light_cull_mask = 4294967291
-shadow_enabled = true
-shadow_caster_mask = 4294967291
-
-[node name="Floor" type="Node3D" parent="." unique_id=479788147]
+[node name="Floor" type="Node" parent="." unique_id=1354259400]
 unique_name_in_owner = true
 
 [node name="BlockCrackedSM" parent="Floor" unique_id=1701017205 instance=ExtResource("2_5p4x3")]
@@ -76,7 +57,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 0, 5.6)
 [node name="StairsMD" parent="Floor" unique_id=244599151 instance=ExtResource("10_mptsv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.6)
 
-[node name="Fences" type="Node3D" parent="." unique_id=309422465]
+[node name="Fences" type="Node" parent="." unique_id=958499669]
 unique_name_in_owner = true
 
 [node name="CornerRight" parent="Fences" unique_id=2103190392 instance=ExtResource("4_w2vgl")]
@@ -100,7 +81,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 [node name="SlopeCornerLeft" parent="Fences" unique_id=127332804 instance=ExtResource("8_6h58r")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.6, 0)
 
-[node name="Memory" type="Node3D" parent="." unique_id=954110669]
+[node name="Memory" type="Node" parent="." unique_id=594985236]
 unique_name_in_owner = true
 
 [node name="AltarLeft" parent="Memory" unique_id=1654990680 instance=ExtResource("10_w2vgl")]
