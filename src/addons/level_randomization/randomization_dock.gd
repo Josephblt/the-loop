@@ -11,6 +11,7 @@ const AXIS_LABELS: Array[String] = ["X", "Y", "Z"]
 
 var _position_inputs: Array[SpinBox] = []
 var _rotation_inputs: Array[SpinBox] = []
+var _seed_randomizer: RandomNumberGenerator = RandomNumberGenerator.new()
 var _seed_input: SpinBox
 var _settings: LevelRandomizationSettings
 var _status_label: Label
@@ -18,6 +19,7 @@ var _status_label: Label
 
 func _init(settings: LevelRandomizationSettings) -> void:
 	_settings = settings
+	_seed_randomizer.randomize()
 	name = "Level Randomization"
 	_build_interface()
 
@@ -40,6 +42,7 @@ func _build_interface() -> void:
 	var title: Label = Label.new()
 	var seed_row: HBoxContainer = HBoxContainer.new()
 	var seed_label: Label = Label.new()
+	var random_seed_button: Button = Button.new()
 	var randomize_button: Button = Button.new()
 	var reset_button: Button = Button.new()
 
@@ -56,6 +59,14 @@ func _build_interface() -> void:
 	seed_row.add_child(seed_label)
 	seed_row.add_child(_seed_input)
 	add_child(seed_row)
+
+	random_seed_button.text = "Random Seed"
+	random_seed_button.icon = EditorInterface.get_editor_theme().get_icon(
+		&"RandomNumberGenerator",
+		&"EditorIcons"
+	)
+	random_seed_button.pressed.connect(_on_random_seed_pressed)
+	add_child(random_seed_button)
 
 	_add_vector_editor(
 		"Position Variation",
@@ -144,6 +155,13 @@ func _create_spin_box(
 func _on_seed_changed(value: float) -> void:
 	_settings.seed = int(value)
 	settings_changed.emit()
+
+
+func _on_random_seed_pressed() -> void:
+	_seed_input.value = _seed_randomizer.randi_range(
+		-2147483648,
+		2147483647
+	)
 
 
 func _on_position_variation_changed(value: float, axis: int) -> void:

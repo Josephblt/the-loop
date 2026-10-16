@@ -3,34 +3,26 @@ extends EditorPlugin
 
 
 const RandomizationDock: Script = preload("randomization_dock.gd")
-const RandomizationInspector: Script = preload("randomization_inspector.gd")
 const LAYOUT_SECTION: String = "level_randomization"
 
 var _actions: LevelRandomizationActions
 var _dock: LevelRandomizationDock
-var _inspector: EditorInspectorPlugin
 var _settings: LevelRandomizationSettings
 
 
 func _enter_tree() -> void:
 	_settings = LevelRandomizationSettings.new()
 	_actions = LevelRandomizationActions.new(get_undo_redo())
-	_inspector = RandomizationInspector.new(_actions, _settings)
 	_dock = RandomizationDock.new(_settings)
 
 	_dock.randomize_scene_requested.connect(_randomize_scene)
 	_dock.reset_scene_requested.connect(_reset_scene)
 	_dock.settings_changed.connect(queue_save_layout)
 
-	add_inspector_plugin(_inspector)
 	add_control_to_dock(EditorPlugin.DOCK_SLOT_RIGHT_BL, _dock)
 
 
 func _exit_tree() -> void:
-	if _inspector != null:
-		remove_inspector_plugin(_inspector)
-		_inspector = null
-
 	if _dock != null:
 		remove_control_from_docks(_dock)
 		_dock.queue_free()
