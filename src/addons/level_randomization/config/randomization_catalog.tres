@@ -35,31 +35,37 @@ randomize_inversion = true
 inversion_pivot = Vector3(-0.3, 0, 0)
 
 [sub_resource type="Resource" id="Binding_block_lg"]
+resource_name = "block_cracked_lg.tscn"
 script = ExtResource("2_binding")
 source_scene = ExtResource("4_block_lg")
 profile = SubResource("Profile_blocks")
 
 [sub_resource type="Resource" id="Binding_block_md"]
+resource_name = "block_cracked_md.tscn"
 script = ExtResource("2_binding")
 source_scene = ExtResource("5_block_md")
 profile = SubResource("Profile_blocks")
 
 [sub_resource type="Resource" id="Binding_block_sm"]
+resource_name = "block_cracked_sm.tscn"
 script = ExtResource("2_binding")
 source_scene = ExtResource("6_block_sm")
 profile = SubResource("Profile_blocks")
 
 [sub_resource type="Resource" id="Binding_stairs_lg"]
+resource_name = "stairs_lg.tscn"
 script = ExtResource("2_binding")
 source_scene = ExtResource("7_stairs_lg")
 profile = SubResource("Profile_stairs")
 
 [sub_resource type="Resource" id="Binding_stairs_md"]
+resource_name = "stairs_md.tscn"
 script = ExtResource("2_binding")
 source_scene = ExtResource("8_stairs_md")
 profile = SubResource("Profile_stairs")
 
 [sub_resource type="Resource" id="Binding_gate"]
+resource_name = "gate.tscn"
 script = ExtResource("2_binding")
 source_scene = ExtResource("9_gate")
 profile = SubResource("Profile_gate")
