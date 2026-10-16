@@ -6,6 +6,7 @@ extends StaticBody3D
 signal interaction_enabled()
 signal interaction_disabled()
 signal interaction_triggered()
+signal _interaction_performed()
 
 
 const OUTLINE_LAYER: int = 2
@@ -58,4 +59,5 @@ func trigger_interaction() -> void:
 		_is_interactable = false
 
 	_interact()
+	await _interaction_performed
 	interaction_triggered.emit()

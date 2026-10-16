@@ -30,6 +30,7 @@ sky = SubResource("Sky_d3u6q")
 
 [node name="MemoryRoom" type="Node3D" unique_id=752731590]
 script = ExtResource("1_sc13g")
+editor_player = ExtResource("13_n4fvx")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1308557487]
 environment = SubResource("Environment_6h58r")
@@ -115,7 +116,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.7)
 [node name="MemoryReveal" parent="." unique_id=1492686143 instance=ExtResource("14_memory_reveal")]
 unique_name_in_owner = true
 
-[node name="Player" parent="." unique_id=282310942 instance=ExtResource("13_n4fvx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 0, 3.8)
-
 [connection signal="interaction_triggered" from="Memory/Chest" to="." method="_on_chest_interaction_triggered"]
+[connection signal="dismissed" from="MemoryReveal" to="." method="_on_memory_reveal_dismissed"]
+[connection signal="revealed" from="MemoryReveal" to="." method="_on_memory_reveal_revealed"]

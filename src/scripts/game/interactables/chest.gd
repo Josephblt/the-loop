@@ -8,3 +8,4 @@ extends Interactable
 func _interact() -> void:
 	chest_animation_player.play("open")
 	await chest_animation_player.animation_finished
+	_interaction_performed.emit()

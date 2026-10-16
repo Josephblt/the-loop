@@ -56,16 +56,19 @@ script = ExtResource("1_fire")
 [node name="Light" type="OmniLight3D" parent="." unique_id=1664883696]
 layers = 1023
 light_color = Color(0.7882353, 0.40392157, 0.14117648, 1)
-light_energy = 2.0
+light_energy = 2.0912075
 light_specular = 5.0
 light_cull_mask = 4294967291
 shadow_enabled = true
 shadow_opacity = 0.35
 shadow_blur = 5.0
 shadow_caster_mask = 4294967291
-omni_range = 15.0
+omni_range = 15.136811
 omni_attenuation = 2.0
 script = ExtResource("3_fire_light")
+energy_variation = 0.5
+range_variation = 0.1
+flicker_speed = 5.0
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=502506527]
 stream = ExtResource("2_83v8r")

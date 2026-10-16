@@ -31,6 +31,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_hide"]
 resource_name = "hide"
@@ -57,6 +69,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_show"]
@@ -85,6 +109,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0, 1.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_memory_reveal"]
 _data = {
@@ -94,6 +130,7 @@ _data = {
 }
 
 [node name="MemoryReveal" type="CanvasLayer" unique_id=1991501411]
+visible = false
 script = ExtResource("1_script")
 
 [node name="DreamVeil" type="ColorRect" parent="." unique_id=1346875019]
@@ -138,5 +175,3 @@ autowrap_mode = 2
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=605660109]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_memory_reveal")
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animations_animation_finished"]
