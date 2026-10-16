@@ -83,7 +83,7 @@ func _randomize_scene() -> void:
 		scene_root,
 		_settings
 	)
-	_dock.set_status("Randomized %d block(s)." % randomized_count)
+	_dock.set_status("Randomized %d object(s)." % randomized_count)
 
 
 func _reset_scene() -> void:
@@ -93,4 +93,4 @@ func _reset_scene() -> void:
 		return
 
 	var reset_count: int = _actions.reset_scene(scene_root)
-	_dock.set_status("Reset %d block(s)." % reset_count)
+	_dock.set_status("Reset %d object(s)." % reset_count)

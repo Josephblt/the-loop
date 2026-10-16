@@ -48,7 +48,7 @@ func _build_interface() -> void:
 
 	add_theme_constant_override(&"separation", 8)
 
-	title.text = "Block Randomization"
+	title.text = "Level Randomization"
 	title.add_theme_font_size_override(&"font_size", 16)
 	add_child(title)
 

@@ -3,89 +3,40 @@ class_name LevelRandomizationActions
 extends RefCounted
 
 
-const BlockRandomization: Script = preload("rules/block_randomization.gd")
 const SEED_METADATA: StringName = &"_randomization_seed"
 
+var _rules: Array[LevelRandomizationRule] = []
 var _undo_redo: EditorUndoRedoManager
 
 
 func _init(undo_redo: EditorUndoRedoManager) -> void:
 	_undo_redo = undo_redo
-
-
-func randomize_block(
-	block: Node3D,
-	settings: LevelRandomizationSettings
-) -> bool:
-	var next_state: LevelRandomizationState = BlockRandomization.generate_state(
-		block,
-		settings
-	)
-	if next_state == null:
-		return false
-
-	var edited_root: Node = EditorInterface.get_edited_scene_root()
-	if edited_root == null:
-		return false
-
-	_undo_redo.create_action("Randomize Block")
-	_add_state_change(
-		edited_root,
-		block,
-		next_state,
-		true,
-		settings.seed
-	)
-	_undo_redo.commit_action()
-	return true
-
-
-func reset_block(block: Node3D) -> bool:
-	var original_state: LevelRandomizationState = (
-		BlockRandomization.get_original_state(block)
-	)
-	if original_state == null:
-		return false
-	if not _is_randomized(block, original_state):
-		return false
-
-	var edited_root: Node = EditorInterface.get_edited_scene_root()
-	if edited_root == null:
-		return false
-
-	_undo_redo.create_action("Reset Block Randomization")
-	_add_state_change(
-		edited_root,
-		block,
-		original_state,
-		false,
-		0
-	)
-	_undo_redo.commit_action()
-	return true
+	_rules.append(BlockRandomizationRule.new())
+	_rules.append(GateRandomizationRule.new())
 
 
 func randomize_scene(
 	scene_root: Node,
 	settings: LevelRandomizationSettings
 ) -> int:
-	var blocks: Array[Node3D] = BlockRandomization.find_blocks(scene_root)
-	if blocks.is_empty():
+	var entries: Array[LevelRandomizationEntry] = _find_entries(scene_root)
+	if entries.is_empty():
 		return 0
 
-	_undo_redo.create_action("Randomize Scene Blocks")
+	_undo_redo.create_action("Randomize Scene")
 
 	var randomized_count: int = 0
-	for block: Node3D in blocks:
-		var next_state: LevelRandomizationState = (
-			BlockRandomization.generate_state(block, settings)
+	for entry: LevelRandomizationEntry in entries:
+		var next_state: LevelRandomizationState = entry.rule.generate_state(
+			entry.node,
+			settings
 		)
 		if next_state == null:
 			continue
 
 		_add_state_change(
 			scene_root,
-			block,
+			entry,
 			next_state,
 			true,
 			settings.seed
@@ -101,25 +52,25 @@ func randomize_scene(
 
 
 func reset_scene(scene_root: Node) -> int:
-	var blocks: Array[Node3D] = BlockRandomization.find_blocks(scene_root)
-	if blocks.is_empty():
+	var entries: Array[LevelRandomizationEntry] = _find_entries(scene_root)
+	if entries.is_empty():
 		return 0
 
-	_undo_redo.create_action("Reset Scene Blocks")
+	_undo_redo.create_action("Reset Scene Randomization")
 
 	var reset_count: int = 0
-	for block: Node3D in blocks:
+	for entry: LevelRandomizationEntry in entries:
 		var original_state: LevelRandomizationState = (
-			BlockRandomization.get_original_state(block)
+			entry.rule.get_original_state(entry.node)
 		)
 		if original_state == null:
 			continue
-		if not _is_randomized(block, original_state):
+		if not _is_randomized(entry, original_state):
 			continue
 
 		_add_state_change(
 			scene_root,
-			block,
+			entry,
 			original_state,
 			false,
 			0
@@ -134,14 +85,40 @@ func reset_scene(scene_root: Node) -> int:
 	return reset_count
 
 
+func _find_entries(scene_root: Node) -> Array[LevelRandomizationEntry]:
+	var entries: Array[LevelRandomizationEntry] = []
+
+	for child: Node in scene_root.get_children():
+		_find_entries_recursive(child, entries)
+
+	return entries
+
+
+func _find_entries_recursive(
+	node: Node,
+	entries: Array[LevelRandomizationEntry]
+) -> void:
+	if node is Node3D:
+		for rule: LevelRandomizationRule in _rules:
+			if rule.can_handle(node):
+				entries.append(LevelRandomizationEntry.new(
+					node as Node3D,
+					rule
+				))
+				break
+
+	for child: Node in node.get_children():
+		_find_entries_recursive(child, entries)
+
+
 func _is_randomized(
-	block: Node3D,
+	entry: LevelRandomizationEntry,
 	original_state: LevelRandomizationState
 ) -> bool:
-	if block.has_meta(SEED_METADATA):
+	if entry.node.has_meta(SEED_METADATA):
 		return true
 
-	var target: Node3D = BlockRandomization.get_target(block)
+	var target: Node3D = entry.rule.get_target(entry.node)
 	if target == null:
 		return false
 
@@ -153,35 +130,35 @@ func _is_randomized(
 
 func _add_state_change(
 	edited_root: Node,
-	block: Node3D,
+	entry: LevelRandomizationEntry,
 	next_state: LevelRandomizationState,
 	keep_seed: bool,
 	seed: int
 ) -> void:
-	var target: Node3D = BlockRandomization.get_target(block)
+	var target: Node3D = entry.rule.get_target(entry.node)
 	if target == null:
 		return
 
 	var previous_position: Vector3 = target.position
 	var previous_rotation: Vector3 = target.rotation
-	var had_seed: bool = block.has_meta(SEED_METADATA)
-	var previous_seed: int = int(block.get_meta(SEED_METADATA, 0))
-	var is_scene_root: bool = block == edited_root
+	var had_seed: bool = entry.node.has_meta(SEED_METADATA)
+	var previous_seed: int = int(entry.node.get_meta(SEED_METADATA, 0))
+	var is_scene_root: bool = entry.node == edited_root
 	var was_editable: bool = (
-		is_scene_root or edited_root.is_editable_instance(block)
+		is_scene_root or edited_root.is_editable_instance(entry.node)
 	)
 
 	if not was_editable:
 		_undo_redo.add_do_method(
 			edited_root,
 			&"set_editable_instance",
-			block,
+			entry.node,
 			true
 		)
 		_undo_redo.add_undo_method(
 			edited_root,
 			&"set_editable_instance",
-			block,
+			entry.node,
 			false
 		)
 
@@ -191,16 +168,29 @@ func _add_state_change(
 	_undo_redo.add_undo_property(target, &"rotation", previous_rotation)
 
 	if keep_seed:
-		_undo_redo.add_do_method(block, &"set_meta", SEED_METADATA, seed)
+		_undo_redo.add_do_method(
+			entry.node,
+			&"set_meta",
+			SEED_METADATA,
+			seed
+		)
 	else:
-		_undo_redo.add_do_method(block, &"remove_meta", SEED_METADATA)
+		_undo_redo.add_do_method(
+			entry.node,
+			&"remove_meta",
+			SEED_METADATA
+		)
 
 	if had_seed:
 		_undo_redo.add_undo_method(
-			block,
+			entry.node,
 			&"set_meta",
 			SEED_METADATA,
 			previous_seed
 		)
 	else:
-		_undo_redo.add_undo_method(block, &"remove_meta", SEED_METADATA)
+		_undo_redo.add_undo_method(
+			entry.node,
+			&"remove_meta",
+			SEED_METADATA
+		)
