@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://beyhhkd3rli1s"]
 
 [ext_resource type="Material" uid="uid://brybj5ephcerf" path="res://assets/materials/walls/wall_normal_md.tres" id="1_llsi1"]
-[ext_resource type="Script" uid="uid://d3pq7dud0apwf" path="res://scripts/game/level/wall_randomizer.gd" id="2_w1vgg"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_turlq"]
 _surfaces = [{
@@ -43,7 +42,6 @@ size = Vector3(1, 3.5, 6.4)
 
 [node name="WallNormalMD" type="StaticBody3D" unique_id=2093626552]
 collision_mask = 2
-script = ExtResource("2_w1vgg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1717043039]
 unique_name_in_owner = true

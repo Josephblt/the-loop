@@ -157,7 +157,7 @@ func _spawn_maze_wall(x: int, y: int, wall_direction: Wall.WallDirection) -> voi
 	var offset: float = ((_maze.grid_size / 2.0) * CELL_SIZE) - (CELL_SIZE / 2.0)
 
 	var wall_scene: PackedScene = MAZE_WALL_SCENES[_randomizer.randi_range(0, MAZE_WALL_SCENES.size() - 1)]
-	var wall_instance: WallRandomizer = wall_scene.instantiate()
+	var wall_instance: StaticBody3D = wall_scene.instantiate() as StaticBody3D
 	wall_instance.position += Vector3((x * CELL_SIZE) - offset, 0, (y * CELL_SIZE) - offset)
 	wall_instance.name = "MazeWall"
 

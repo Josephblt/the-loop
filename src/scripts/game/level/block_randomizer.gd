@@ -1,3 +1,0 @@
-@tool
-class_name BlockRandomizer
-extends LevelRandomizer

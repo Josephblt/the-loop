@@ -50,7 +50,7 @@ static func generate(
 
 	if (
 		profile.randomize_inversion
-		and randomizer.randf() < profile.inversion_probability
+		and randomizer.randi_range(0, 1) == 1
 	):
 		var rotation_before_inversion: Vector3 = rotation
 		rotation += Vector3(

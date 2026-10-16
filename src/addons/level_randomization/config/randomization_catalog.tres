@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="LevelRandomizationCatalog" load_steps=19 format=3]
 
-[ext_resource type="Script" path="res://scripts/randomization/transform_randomization_profile.gd" id="1_profile"]
+[ext_resource type="Script" uid="uid://lovaxrlm1xea" path="res://addons/level_randomization/library/transform_randomization_profile.gd" id="1_profile"]
 [ext_resource type="Script" path="res://addons/level_randomization/scene_randomization_binding.gd" id="2_binding"]
 [ext_resource type="Script" path="res://addons/level_randomization/randomization_catalog.gd" id="3_catalog"]
 [ext_resource type="PackedScene" uid="uid://pndqjwooagyb" path="res://game/level/blocks/block_cracked_lg.tscn" id="4_block_lg"]

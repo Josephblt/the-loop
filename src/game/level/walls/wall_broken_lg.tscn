@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://g3wkgliai3vy"]
 
 [ext_resource type="Material" uid="uid://c2wjxgtakqg74" path="res://assets/materials/walls/wall_broken_lg.tres" id="1_ggy0b"]
-[ext_resource type="Script" uid="uid://d3pq7dud0apwf" path="res://scripts/game/level/wall_randomizer.gd" id="2_01yna"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_w6ll4"]
 _surfaces = [{
@@ -40,7 +39,6 @@ polygon = PackedVector2Array(3.1000001, 0.1, 3.1000001, 6.3, 1.5, 6.3, 1.5, 6.1,
 
 [node name="WallBrokenLG" type="StaticBody3D" unique_id=101229289]
 collision_mask = 2
-script = ExtResource("2_01yna")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=955023844]
 unique_name_in_owner = true
