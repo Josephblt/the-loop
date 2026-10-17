@@ -9,7 +9,79 @@
 [ext_resource type="PackedScene" uid="uid://clp0iyaq2rd17" path="res://game/level/stairs/stairs_lg.tscn" id="7_aplif"]
 [ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="8_kjinm"]
 [ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/interactables/altar.tscn" id="9_aplif"]
+[ext_resource type="PackedScene" uid="uid://dk3ahea1354r8" path="res://game/interactables/chest.tscn" id="10_kjinm"]
 [ext_resource type="Script" uid="uid://2nfpsw4nlq34" path="res://addons/level_randomization/target_randomization_binding.gd" id="10_target"]
+[ext_resource type="PackedScene" uid="uid://c52ht1hba0la" path="res://game/interactables/cresset.tscn" id="11_8rg4g"]
+[ext_resource type="PackedScene" uid="uid://1e84bakpvbwk" path="res://game/level/fences/parts/fence.tscn" id="12_cy3lc"]
+[ext_resource type="PackedScene" uid="uid://bx0ey0omu3158" path="res://game/level/fences/parts/post.tscn" id="13_bch3r"]
+
+[sub_resource type="Resource" id="Resource_dwnuq"]
+script = ExtResource("4_yxs3g")
+randomize_position = true
+position_variation = Vector3(0.05, 0.01, 0.05)
+randomize_rotation = true
+rotation_variation_degrees = Vector3(0.1, 15, 0)
+randomize_rotation_in_steps = true
+rotation_step_degrees = Vector3(0, 90, 0)
+metadata/_custom_type_script = "uid://lovaxrlm1xea"
+
+[sub_resource type="Resource" id="Resource_ofa07"]
+resource_name = "Altar"
+script = ExtResource("10_target")
+target_path = NodePath(".")
+profile = SubResource("Resource_dwnuq")
+metadata/_custom_type_script = "uid://2nfpsw4nlq34"
+
+[sub_resource type="Resource" id="Resource_injm3"]
+resource_name = "altar.tscn"
+script = ExtResource("2_binding")
+source_scene = ExtResource("9_aplif")
+targets = Array[ExtResource("10_target")]([SubResource("Resource_ofa07")])
+metadata/_custom_type_script = "uid://ctpnaaog7r632"
+
+[sub_resource type="Resource" id="Resource_t25e1"]
+script = ExtResource("4_yxs3g")
+randomize_position = true
+position_variation = Vector3(0.5, 0.01, 0.5)
+randomize_rotation = true
+rotation_variation_degrees = Vector3(0.1, 10, 0.1)
+metadata/_custom_type_script = "uid://lovaxrlm1xea"
+
+[sub_resource type="Resource" id="Resource_57g57"]
+resource_name = "Chest"
+script = ExtResource("10_target")
+target_path = NodePath(".")
+profile = SubResource("Resource_t25e1")
+metadata/_custom_type_script = "uid://2nfpsw4nlq34"
+
+[sub_resource type="Resource" id="Resource_dpecs"]
+resource_name = "chest.tscn"
+script = ExtResource("2_binding")
+source_scene = ExtResource("10_kjinm")
+targets = Array[ExtResource("10_target")]([SubResource("Resource_57g57")])
+metadata/_custom_type_script = "uid://ctpnaaog7r632"
+
+[sub_resource type="Resource" id="Resource_so48a"]
+script = ExtResource("4_yxs3g")
+randomize_position = true
+position_variation = Vector3(0.01, 0.01, 0.01)
+randomize_rotation = true
+rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
+metadata/_custom_type_script = "uid://lovaxrlm1xea"
+
+[sub_resource type="Resource" id="Resource_nm8ve"]
+resource_name = "Cresset"
+script = ExtResource("10_target")
+target_path = NodePath(".")
+profile = SubResource("Resource_so48a")
+metadata/_custom_type_script = "uid://2nfpsw4nlq34"
+
+[sub_resource type="Resource" id="Resource_3uinr"]
+resource_name = "cresset.tscn"
+script = ExtResource("2_binding")
+source_scene = ExtResource("11_8rg4g")
+targets = Array[ExtResource("10_target")]([SubResource("Resource_nm8ve")])
+metadata/_custom_type_script = "uid://ctpnaaog7r632"
 
 [sub_resource type="Resource" id="Resource_yjsdp"]
 script = ExtResource("4_yxs3g")
@@ -83,6 +155,54 @@ source_scene = ExtResource("6_eh10b")
 targets = Array[ExtResource("10_target")]([SubResource("Resource_kjinm")])
 metadata/_custom_type_script = "uid://ctpnaaog7r632"
 
+[sub_resource type="Resource" id="Resource_2vt1l"]
+script = ExtResource("4_yxs3g")
+randomize_position = true
+position_variation = Vector3(0.01, 0.01, 0.01)
+randomize_rotation = true
+rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
+randomize_inversion = true
+inversion_rotation_degrees = Vector3(0, 0, 180)
+metadata/_custom_type_script = "uid://lovaxrlm1xea"
+
+[sub_resource type="Resource" id="Resource_5qlpv"]
+resource_name = "Fence"
+script = ExtResource("10_target")
+target_path = NodePath(".")
+profile = SubResource("Resource_2vt1l")
+metadata/_custom_type_script = "uid://2nfpsw4nlq34"
+
+[sub_resource type="Resource" id="Resource_76axb"]
+resource_name = "fence.tscn"
+script = ExtResource("2_binding")
+source_scene = ExtResource("12_cy3lc")
+targets = Array[ExtResource("10_target")]([SubResource("Resource_5qlpv")])
+metadata/_custom_type_script = "uid://ctpnaaog7r632"
+
+[sub_resource type="Resource" id="Resource_kjtgv"]
+script = ExtResource("4_yxs3g")
+randomize_position = true
+position_variation = Vector3(0.01, 0.01, 0.01)
+randomize_rotation = true
+rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
+randomize_rotation_in_steps = true
+rotation_step_degrees = Vector3(0, 90, 0)
+metadata/_custom_type_script = "uid://lovaxrlm1xea"
+
+[sub_resource type="Resource" id="Resource_qyxw7"]
+resource_name = "Post"
+script = ExtResource("10_target")
+target_path = NodePath(".")
+profile = SubResource("Resource_kjtgv")
+metadata/_custom_type_script = "uid://2nfpsw4nlq34"
+
+[sub_resource type="Resource" id="Resource_atqq1"]
+resource_name = "post.tscn"
+script = ExtResource("2_binding")
+source_scene = ExtResource("13_bch3r")
+targets = Array[ExtResource("10_target")]([SubResource("Resource_qyxw7")])
+metadata/_custom_type_script = "uid://ctpnaaog7r632"
+
 [sub_resource type="Resource" id="Resource_ek3qr"]
 script = ExtResource("4_yxs3g")
 position_variation = Vector3(0.05, 0.05, 0.05)
@@ -126,35 +246,6 @@ source_scene = ExtResource("8_kjinm")
 targets = Array[ExtResource("10_target")]([SubResource("Resource_bch3r")])
 metadata/_custom_type_script = "uid://ctpnaaog7r632"
 
-[sub_resource type="Resource" id="Resource_dwnuq"]
-script = ExtResource("4_yxs3g")
-randomize_position = true
-position_variation = Vector3(0.05, 0.05, 0.05)
-randomize_rotation = true
-rotation_variation_degrees = Vector3(0.1, 15, 0)
-randomize_rotation_in_steps = true
-rotation_step_degrees = Vector3(0, 90, 0)
-metadata/_custom_type_script = "uid://lovaxrlm1xea"
-
-[sub_resource type="Resource" id="Resource_ofa07"]
-resource_name = "Altar"
-script = ExtResource("10_target")
-target_path = NodePath(".")
-profile = SubResource("Resource_dwnuq")
-metadata/_custom_type_script = "uid://2nfpsw4nlq34"
-
-[sub_resource type="Resource" id="Resource_injm3"]
-resource_name = "altar.tscn"
-script = ExtResource("2_binding")
-source_scene = ExtResource("9_aplif")
-targets = Array[ExtResource("10_target")]([SubResource("Resource_ofa07")])
-metadata/_custom_type_script = "uid://ctpnaaog7r632"
-
-[sub_resource type="Resource" id="Resource_dpecs"]
-resource_name = "Scene"
-script = ExtResource("2_binding")
-metadata/_custom_type_script = "uid://ctpnaaog7r632"
-
 [resource]
 script = ExtResource("3_catalog")
-bindings = Array[ExtResource("2_binding")]([SubResource("Resource_11ucq"), SubResource("Resource_yxs3g"), SubResource("Resource_uuuyl"), SubResource("Resource_8rg4g"), SubResource("Resource_cy3lc"), SubResource("Resource_injm3"), SubResource("Resource_dpecs")])
+bindings = Array[ExtResource("2_binding")]([SubResource("Resource_injm3"), SubResource("Resource_dpecs"), SubResource("Resource_3uinr"), SubResource("Resource_11ucq"), SubResource("Resource_yxs3g"), SubResource("Resource_uuuyl"), SubResource("Resource_76axb"), SubResource("Resource_atqq1"), SubResource("Resource_8rg4g"), SubResource("Resource_cy3lc")])

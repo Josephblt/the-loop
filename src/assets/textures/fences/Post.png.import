@@ -2,25 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oi08xcar37im"
-path.s3tc="res://.godot/imported/line.png-6ca387d6c4ae0fd5e48bcece492ff1e8.s3tc.ctex"
+uid="uid://dkbhsava2qo5t"
+path.s3tc="res://.godot/imported/Post.png-32f7dd327ba276ec22cafa80a6ec3c7e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "154d8e215233886ff57c52c498b76c60"
+"md5": "af49fc5201a21c7c7aac3b0b6754a9aa"
 }
 
 [deps]
 
-source_file="res://assets/textures/fences/line.png"
-dest_files=["res://.godot/imported/line.png-6ca387d6c4ae0fd5e48bcece492ff1e8.s3tc.ctex"]
+source_file="res://assets/textures/fences/Post.png"
+dest_files=["res://.godot/imported/Post.png-32f7dd327ba276ec22cafa80a6ec3c7e.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
 compress/high_quality=false
+compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
@@ -29,6 +30,8 @@ compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
+mipmaps/preserve_alpha_test_coverage=false
+mipmaps/alpha_test_threshold=0.5
 roughness/mode=0
 roughness/src_normal=""
 process/channel_remap/red=0

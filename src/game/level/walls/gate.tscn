@@ -43,6 +43,7 @@ collision_mask = 2
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=320320536]
 unique_name_in_owner = true
 transform = Transform3D(4.871289e-05, -1.1877162e-15, 1, 2.4381969e-11, 1, 0, -1, 2.4381969e-11, 4.871289e-05, 0, -0.4, -3.1)
+gi_mode = 2
 mesh = SubResource("ArrayMesh_nsrxx")
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="MeshInstance3D" unique_id=1121876501]

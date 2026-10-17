@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bvvd4ra5va18f"]
+
+[ext_resource type="PackedScene" uid="uid://1e84bakpvbwk" path="res://game/level/fences/parts/fence.tscn" id="1_ah6h4"]
+[ext_resource type="PackedScene" uid="uid://bx0ey0omu3158" path="res://game/level/fences/parts/post.tscn" id="2_nxigo"]
+
+[node name="CornerPostFences" type="Node3D" unique_id=1698196344]
+
+[node name="FenceHorizontal" parent="." unique_id=49550962 instance=ExtResource("1_ah6h4")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -1.3500001, 0, 2.7)
+
+[node name="FenceVertical" parent="." unique_id=1017541467 instance=ExtResource("1_ah6h4")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.7, 0, 1.35)
+
+[node name="Post" parent="." unique_id=941980674 instance=ExtResource("2_nxigo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6999998, 0, 2.7)
