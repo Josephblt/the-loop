@@ -19,21 +19,3 @@ func _init() -> void:
 
 func matches(scene_path: String) -> bool:
 	return source_scene  and source_scene.resource_path == scene_path
-
-
-func get_authored_state(target_binding: LevelTargetRandomizationBinding) -> TransformRandomizationState:
-	if !source_scene:
-		return null
-
-	var source_root: Node3D = source_scene.instantiate() as Node3D
-	if !source_root:
-		return null
-
-	var target: Node3D = target_binding.get_target(source_root)
-	if !target:
-		source_root.free()
-		return null
-
-	var state: TransformRandomizationState = TransformRandomizationState.new(target.position, target.rotation)
-	source_root.free()
-	return state

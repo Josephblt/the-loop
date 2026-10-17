@@ -38,6 +38,13 @@ static func generate(authored_position: Vector3, authored_rotation: Vector3, pro
 	return TransformRandomizationState.new(position, rotation)
 
 
+static func recover_base(randomized_position: Vector3, randomized_rotation: Vector3, profile: TransformRandomizationProfile, seed: int, identity: String) -> TransformRandomizationState:
+	var zero_state: TransformRandomizationState = generate(Vector3.ZERO, Vector3.ZERO, profile, seed, identity)
+	var base_rotation: Vector3 = randomized_rotation - zero_state.rotation
+	var offset_state: TransformRandomizationState = generate(Vector3.ZERO, base_rotation, profile, seed, identity)
+	return TransformRandomizationState.new(randomized_position - offset_state.position, base_rotation)
+
+
 static func _get_random_rotation_step(randomizer: RandomNumberGenerator, step_degrees: float) -> float:
 	var step_magnitude: float = absf(step_degrees)
 	if is_zero_approx(step_magnitude):
