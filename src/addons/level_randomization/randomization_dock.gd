@@ -20,10 +20,7 @@ var _settings: LevelRandomizationSettings
 var _status_label: Label
 
 
-func _init(
-	settings: LevelRandomizationSettings,
-	catalog: LevelRandomizationCatalog
-) -> void:
+func _init(settings: LevelRandomizationSettings, catalog: LevelRandomizationCatalog) -> void:
 	_settings = settings
 	_catalog = catalog
 	_seed_randomizer.randomize()
@@ -37,8 +34,8 @@ func refresh() -> void:
 
 func set_available_target_count(target_count: int) -> void:
 	var has_targets: bool = target_count > 0
-	_randomize_button.disabled = not has_targets
-	_reset_button.disabled = not has_targets
+	_randomize_button.disabled = !has_targets
+	_reset_button.disabled = !has_targets
 
 	if has_targets:
 		_status_label.text = "%d configured target(s) found." % target_count
@@ -58,6 +55,7 @@ func _build_interface() -> void:
 	var seed_row: HBoxContainer = HBoxContainer.new()
 	var seed_label: Label = Label.new()
 	var random_seed_button: Button = Button.new()
+	var theme: Theme = EditorInterface.get_editor_theme()
 
 	add_theme_constant_override(&"separation", 8)
 
@@ -85,29 +83,21 @@ func _build_interface() -> void:
 	seed_row.add_child(_seed_input)
 	randomize_tab.add_child(seed_row)
 
+
 	random_seed_button.text = "Random Seed"
-	random_seed_button.icon = EditorInterface.get_editor_theme().get_icon(
-		&"RandomNumberGenerator",
-		&"EditorIcons"
-	)
+	random_seed_button.icon = theme.get_icon(&"RandomNumberGenerator", &"EditorIcons")
 	random_seed_button.pressed.connect(_on_random_seed_pressed)
 	randomize_tab.add_child(random_seed_button)
 
 	_randomize_button = Button.new()
 	_randomize_button.text = "Randomize Scene"
-	_randomize_button.icon = EditorInterface.get_editor_theme().get_icon(
-		&"RandomNumberGenerator",
-		&"EditorIcons"
-	)
+	_randomize_button.icon = theme.get_icon(&"RandomNumberGenerator", &"EditorIcons")
 	_randomize_button.pressed.connect(_on_randomize_scene_pressed)
 	randomize_tab.add_child(_randomize_button)
 
 	_reset_button = Button.new()
 	_reset_button.text = "Reset Scene"
-	_reset_button.icon = EditorInterface.get_editor_theme().get_icon(
-		&"Clear",
-		&"EditorIcons"
-	)
+	_reset_button.icon = theme.get_icon(&"Clear", &"EditorIcons")
 	_reset_button.pressed.connect(_on_reset_scene_pressed)
 	randomize_tab.add_child(_reset_button)
 
@@ -132,11 +122,7 @@ func _build_interface() -> void:
 	set_available_target_count(0)
 
 
-func _create_spin_box(
-	minimum: float,
-	maximum: float,
-	step: float
-) -> SpinBox:
+func _create_spin_box(minimum: float, maximum: float, step: float ) -> SpinBox:
 	var input: SpinBox = SpinBox.new()
 	input.min_value = minimum
 	input.max_value = maximum
@@ -153,10 +139,7 @@ func _on_seed_changed(value: float) -> void:
 
 
 func _on_random_seed_pressed() -> void:
-	_seed_input.value = _seed_randomizer.randi_range(
-		-2147483648,
-		2147483647
-	)
+	_seed_input.value = _seed_randomizer.randi_range(-2147483648, 2147483647)
 
 
 func _on_randomize_scene_pressed() -> void:
@@ -189,6 +172,4 @@ func _save_catalog() -> void:
 		_catalog_status_label.text = "Catalog saved."
 		return
 
-	_catalog_status_label.text = "Catalog save failed: %s" % error_string(
-		save_error
-	)
+	_catalog_status_label.text = "Catalog save failed: %s" % error_string(save_error)

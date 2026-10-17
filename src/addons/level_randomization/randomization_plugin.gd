@@ -3,9 +3,7 @@ extends EditorPlugin
 
 
 const RandomizationDock: Script = preload("randomization_dock.gd")
-const CATALOG_PATH: String = (
-	"res://addons/level_randomization/config/randomization_catalog.tres"
-)
+const CATALOG_PATH: String = "res://addons/level_randomization/config/randomization_catalog.tres"
 const LAYOUT_SECTION: String = "level_randomization"
 
 var _actions: LevelRandomizationActions
@@ -17,7 +15,7 @@ var _settings: LevelRandomizationSettings
 
 func _enter_tree() -> void:
 	_catalog = load(CATALOG_PATH) as LevelRandomizationCatalog
-	if _catalog == null:
+	if !_catalog:
 		push_error("Unable to load level randomization catalog.")
 		return
 
@@ -40,15 +38,11 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	if scene_changed.is_connected(_on_scene_changed):
 		scene_changed.disconnect(_on_scene_changed)
-	if (
-		_editor_selection != null
-		and _editor_selection.selection_changed.is_connected(
-			_refresh_availability
-		)
-	):
+	
+	if _editor_selection and _editor_selection.selection_changed.is_connected(_refresh_availability):
 		_editor_selection.selection_changed.disconnect(_refresh_availability)
 
-	if _dock != null:
+	if _dock:
 		remove_control_from_docks(_dock)
 		_dock.queue_free()
 		_dock = null
@@ -60,42 +54,36 @@ func _exit_tree() -> void:
 
 
 func _get_window_layout(configuration: ConfigFile) -> void:
-	if _settings == null:
+	if !_settings:
 		return
 
 	configuration.set_value(LAYOUT_SECTION, "seed", _settings.seed)
 
 
 func _set_window_layout(configuration: ConfigFile) -> void:
-	if _settings == null:
+	if !_settings:
 		return
 
-	_settings.seed = int(configuration.get_value(
-		LAYOUT_SECTION,
-		"seed",
-		_settings.seed
-	))
+	var seed_value = configuration.get_value(LAYOUT_SECTION, "seed", _settings.seed)
+	_settings.seed = int(seed_value)
 
-	if _dock != null:
+	if _dock:
 		_dock.refresh()
 
 
 func _randomize_scene() -> void:
 	var scene_root: Node = EditorInterface.get_edited_scene_root()
-	if scene_root == null:
+	if !scene_root:
 		_dock.set_status("Open a scene before randomizing.")
 		return
 
-	var randomized_count: int = _actions.randomize_scene(
-		scene_root,
-		_settings
-	)
+	var randomized_count: int = _actions.randomize_scene(scene_root, _settings)
 	_dock.set_status("Randomized %d target(s)." % randomized_count)
 
 
 func _reset_scene() -> void:
 	var scene_root: Node = EditorInterface.get_edited_scene_root()
-	if scene_root == null:
+	if !scene_root:
 		_dock.set_status("Open a scene before resetting.")
 		return
 
@@ -108,7 +96,7 @@ func _on_scene_changed(_scene_root: Node) -> void:
 
 
 func _refresh_availability() -> void:
-	if _dock == null or _actions == null:
+	if !_dock or !_actions:
 		return
 
 	var scene_root: Node = EditorInterface.get_edited_scene_root()

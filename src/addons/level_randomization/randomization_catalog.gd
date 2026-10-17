@@ -12,7 +12,7 @@ func find_binding(scene_instance: Node3D) -> LevelSceneRandomizationBinding:
 		return null
 
 	for binding: LevelSceneRandomizationBinding in bindings:
-		if binding != null and binding.matches(scene_path):
+		if binding and binding.matches(scene_path):
 			return binding
 
 	return null
