@@ -7,6 +7,8 @@ var revealed: bool = false
 
 func _init(memory_description: String = "") -> void:
 	_description = memory_description
+	if _description.is_empty():
+		_description = "Unknown Memory..."
 
 
 func reveal() -> String:
