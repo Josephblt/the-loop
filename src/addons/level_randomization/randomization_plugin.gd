@@ -3,6 +3,7 @@ extends EditorPlugin
 
 
 const RandomizationDock: Script = preload("randomization_dock.gd")
+const TargetPathInspector: Script = preload("target_path_inspector.gd")
 const CATALOG_PATH: String = "res://addons/level_randomization/config/randomization_catalog.tres"
 const LAYOUT_SECTION: String = "level_randomization"
 
@@ -11,6 +12,7 @@ var _catalog: LevelRandomizationCatalog
 var _dock: LevelRandomizationDock
 var _editor_selection: EditorSelection
 var _settings: LevelRandomizationSettings
+var _target_path_inspector: EditorInspectorPlugin
 
 
 func _enter_tree() -> void:
@@ -21,6 +23,8 @@ func _enter_tree() -> void:
 
 	_settings = LevelRandomizationSettings.new()
 	_actions = LevelRandomizationActions.new(get_undo_redo(), _catalog)
+	_target_path_inspector = TargetPathInspector.new(_catalog)
+	add_inspector_plugin(_target_path_inspector)
 	_dock = RandomizationDock.new(_settings, _catalog)
 
 	_dock.randomize_scene_requested.connect(_randomize_scene)
@@ -36,6 +40,10 @@ func _enter_tree() -> void:
 
 
 func _exit_tree() -> void:
+	if _target_path_inspector:
+		remove_inspector_plugin(_target_path_inspector)
+		_target_path_inspector = null
+
 	if scene_changed.is_connected(_on_scene_changed):
 		scene_changed.disconnect(_on_scene_changed)
 	

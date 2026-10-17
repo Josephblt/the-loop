@@ -16,3 +16,11 @@ func find_binding(scene_instance: Node3D) -> LevelSceneRandomizationBinding:
 			return binding
 
 	return null
+
+
+func find_source_scene(target: LevelTargetRandomizationBinding) -> PackedScene:
+	for binding: LevelSceneRandomizationBinding in bindings:
+		if binding and target in binding.targets:
+			return binding.source_scene
+
+	return null
