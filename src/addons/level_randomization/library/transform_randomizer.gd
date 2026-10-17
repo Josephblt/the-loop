@@ -48,6 +48,22 @@ static func generate(
 			))
 		)
 
+	if profile.randomize_rotation_in_steps:
+		rotation += Vector3(
+			deg_to_rad(_get_random_rotation_step(
+				randomizer,
+				profile.rotation_step_degrees.x
+			)),
+			deg_to_rad(_get_random_rotation_step(
+				randomizer,
+				profile.rotation_step_degrees.y
+			)),
+			deg_to_rad(_get_random_rotation_step(
+				randomizer,
+				profile.rotation_step_degrees.z
+			))
+		)
+
 	if (
 		profile.randomize_inversion
 		and randomizer.randi_range(0, 1) == 1
@@ -65,6 +81,19 @@ static func generate(
 		)
 
 	return TransformRandomizationState.new(position, rotation)
+
+
+static func _get_random_rotation_step(
+	randomizer: RandomNumberGenerator,
+	step_degrees: float
+) -> float:
+	var step_magnitude: float = absf(step_degrees)
+	if is_zero_approx(step_magnitude):
+		return 0.0
+
+	var step_count: int = maxi(1, ceili(360.0 / step_magnitude))
+	var step_index: int = randomizer.randi_range(0, step_count - 1)
+	return step_degrees * float(step_index)
 
 
 static func _get_pivot_correction(
