@@ -4,8 +4,7 @@ extends Resource
 
 
 @export var source_scene: PackedScene
-@export var target_path: NodePath = ^"MeshInstance3D"
-@export var profile: TransformRandomizationProfile
+@export var targets: Array[LevelTargetRandomizationBinding] = []
 
 
 func matches(scene_path: String) -> bool:
@@ -15,11 +14,9 @@ func matches(scene_path: String) -> bool:
 	)
 
 
-func get_target(scene_instance: Node3D) -> Node3D:
-	return scene_instance.get_node_or_null(target_path) as Node3D
-
-
-func get_authored_state() -> TransformRandomizationState:
+func get_authored_state(
+	target_binding: LevelTargetRandomizationBinding
+) -> TransformRandomizationState:
 	if source_scene == null:
 		return null
 
@@ -27,7 +24,7 @@ func get_authored_state() -> TransformRandomizationState:
 	if source_root == null:
 		return null
 
-	var target: Node3D = get_target(source_root)
+	var target: Node3D = target_binding.get_target(source_root)
 	if target == null:
 		source_root.free()
 		return null

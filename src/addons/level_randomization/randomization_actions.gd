@@ -17,7 +17,7 @@ func _init(
 	_catalog = catalog
 
 
-func count_randomizable_nodes(scene_root: Node) -> int:
+func count_randomizable_targets(scene_root: Node) -> int:
 	return _find_entries(scene_root).size()
 
 
@@ -34,20 +34,21 @@ func randomize_scene(
 	var randomized_count: int = 0
 	for entry: LevelRandomizationEntry in entries:
 		var original_state: TransformRandomizationState = (
-			entry.binding.get_authored_state()
+			entry.binding.get_authored_state(entry.target_binding)
 		)
-		if original_state == null or entry.binding.profile == null:
+		if original_state == null or entry.target_binding.profile == null:
 			continue
 
-		var identity: String = "%s:%s" % [
+		var identity: String = "%s:%s:%s" % [
 			entry.binding.source_scene.resource_path,
 			str(entry.node.get_path()),
+			str(entry.target_binding.target_path),
 		]
 		var next_state: TransformRandomizationState = (
 			TransformRandomizer.generate(
 				original_state.position,
 				original_state.rotation,
-				entry.binding.profile,
+				entry.target_binding.profile,
 				settings.seed,
 				identity
 			)
@@ -80,7 +81,7 @@ func reset_scene(scene_root: Node) -> int:
 	var reset_count: int = 0
 	for entry: LevelRandomizationEntry in entries:
 		var original_state: TransformRandomizationState = (
-			entry.binding.get_authored_state()
+			entry.binding.get_authored_state(entry.target_binding)
 		)
 		if original_state == null:
 			continue
@@ -122,15 +123,18 @@ func _find_entries_recursive(
 		var binding: LevelSceneRandomizationBinding = (
 			_catalog.find_binding(scene_instance)
 		)
-		if (
-			binding != null
-			and binding.profile != null
-			and binding.get_target(scene_instance) != null
-		):
-			entries.append(LevelRandomizationEntry.new(
-				scene_instance,
-				binding
-			))
+		if binding != null:
+			for target_binding: LevelTargetRandomizationBinding in binding.targets:
+				if (
+					target_binding != null
+					and target_binding.profile != null
+					and target_binding.get_target(scene_instance) != null
+				):
+					entries.append(LevelRandomizationEntry.new(
+						scene_instance,
+						binding,
+						target_binding
+					))
 
 	for child: Node in node.get_children():
 		_find_entries_recursive(child, entries)
@@ -143,7 +147,7 @@ func _is_randomized(
 	if entry.node.has_meta(SEED_METADATA):
 		return true
 
-	var target: Node3D = entry.binding.get_target(entry.node)
+	var target: Node3D = entry.target_binding.get_target(entry.node)
 	if target == null:
 		return false
 
@@ -160,7 +164,7 @@ func _add_state_change(
 	keep_seed: bool,
 	seed: int
 ) -> void:
-	var target: Node3D = entry.binding.get_target(entry.node)
+	var target: Node3D = entry.target_binding.get_target(entry.node)
 	if target == null:
 		return
 

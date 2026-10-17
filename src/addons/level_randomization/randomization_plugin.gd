@@ -89,7 +89,7 @@ func _randomize_scene() -> void:
 		scene_root,
 		_settings
 	)
-	_dock.set_status("Randomized %d object(s)." % randomized_count)
+	_dock.set_status("Randomized %d target(s)." % randomized_count)
 
 
 func _reset_scene() -> void:
@@ -99,7 +99,7 @@ func _reset_scene() -> void:
 		return
 
 	var reset_count: int = _actions.reset_scene(scene_root)
-	_dock.set_status("Reset %d object(s)." % reset_count)
+	_dock.set_status("Reset %d target(s)." % reset_count)
 
 
 func _on_scene_changed(_scene_root: Node) -> void:
@@ -113,6 +113,6 @@ func _refresh_availability() -> void:
 	var scene_root: Node = EditorInterface.get_edited_scene_root()
 	var target_count: int = 0
 	if scene_root != null:
-		target_count = _actions.count_randomizable_nodes(scene_root)
+		target_count = _actions.count_randomizable_targets(scene_root)
 
 	_dock.set_available_target_count(target_count)

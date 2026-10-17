@@ -32,9 +32,9 @@ func set_available_target_count(target_count: int) -> void:
 	_reset_button.disabled = not has_targets
 
 	if has_targets:
-		_status_label.text = "%d configured object(s) found." % target_count
+		_status_label.text = "%d configured target(s) found." % target_count
 	else:
-		_status_label.text = "No configured objects in this scene."
+		_status_label.text = "No configured targets in this scene."
 
 
 func set_status(message: String) -> void:

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelRandomizationCatalog" load_steps=19 format=3]
+[gd_resource type="Resource" script_class="LevelRandomizationCatalog" load_steps=26 format=3]
 
 [ext_resource type="Script" uid="uid://lovaxrlm1xea" path="res://addons/level_randomization/library/transform_randomization_profile.gd" id="1_profile"]
 [ext_resource type="Script" path="res://addons/level_randomization/scene_randomization_binding.gd" id="2_binding"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://clp0iyaq2rd17" path="res://game/level/stairs/stairs_lg.tscn" id="7_stairs_lg"]
 [ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="8_stairs_md"]
 [ext_resource type="PackedScene" uid="uid://v8j2a1egqxgo" path="res://game/level/walls/gate.tscn" id="9_gate"]
+[ext_resource type="Script" path="res://addons/level_randomization/target_randomization_binding.gd" id="10_target"]
 
 [sub_resource type="Resource" id="Profile_blocks"]
 script = ExtResource("1_profile")
@@ -34,41 +35,71 @@ rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
 randomize_inversion = true
 inversion_pivot = Vector3(-0.3, 0, 0)
 
+[sub_resource type="Resource" id="Target_block_lg"]
+resource_name = "MeshInstance3D"
+script = ExtResource("10_target")
+profile = SubResource("Profile_blocks")
+
+[sub_resource type="Resource" id="Target_block_md"]
+resource_name = "MeshInstance3D"
+script = ExtResource("10_target")
+profile = SubResource("Profile_blocks")
+
+[sub_resource type="Resource" id="Target_block_sm"]
+resource_name = "MeshInstance3D"
+script = ExtResource("10_target")
+profile = SubResource("Profile_blocks")
+
+[sub_resource type="Resource" id="Target_stairs_lg"]
+resource_name = "MeshInstance3D"
+script = ExtResource("10_target")
+profile = SubResource("Profile_stairs")
+
+[sub_resource type="Resource" id="Target_stairs_md"]
+resource_name = "MeshInstance3D"
+script = ExtResource("10_target")
+profile = SubResource("Profile_stairs")
+
+[sub_resource type="Resource" id="Target_gate"]
+resource_name = "MeshInstance3D"
+script = ExtResource("10_target")
+profile = SubResource("Profile_gate")
+
 [sub_resource type="Resource" id="Binding_block_lg"]
 resource_name = "block_cracked_lg.tscn"
 script = ExtResource("2_binding")
 source_scene = ExtResource("4_block_lg")
-profile = SubResource("Profile_blocks")
+targets = Array[ExtResource("10_target")]([SubResource("Target_block_lg")])
 
 [sub_resource type="Resource" id="Binding_block_md"]
 resource_name = "block_cracked_md.tscn"
 script = ExtResource("2_binding")
 source_scene = ExtResource("5_block_md")
-profile = SubResource("Profile_blocks")
+targets = Array[ExtResource("10_target")]([SubResource("Target_block_md")])
 
 [sub_resource type="Resource" id="Binding_block_sm"]
 resource_name = "block_cracked_sm.tscn"
 script = ExtResource("2_binding")
 source_scene = ExtResource("6_block_sm")
-profile = SubResource("Profile_blocks")
+targets = Array[ExtResource("10_target")]([SubResource("Target_block_sm")])
 
 [sub_resource type="Resource" id="Binding_stairs_lg"]
 resource_name = "stairs_lg.tscn"
 script = ExtResource("2_binding")
 source_scene = ExtResource("7_stairs_lg")
-profile = SubResource("Profile_stairs")
+targets = Array[ExtResource("10_target")]([SubResource("Target_stairs_lg")])
 
 [sub_resource type="Resource" id="Binding_stairs_md"]
 resource_name = "stairs_md.tscn"
 script = ExtResource("2_binding")
 source_scene = ExtResource("8_stairs_md")
-profile = SubResource("Profile_stairs")
+targets = Array[ExtResource("10_target")]([SubResource("Target_stairs_md")])
 
 [sub_resource type="Resource" id="Binding_gate"]
 resource_name = "gate.tscn"
 script = ExtResource("2_binding")
 source_scene = ExtResource("9_gate")
-profile = SubResource("Profile_gate")
+targets = Array[ExtResource("10_target")]([SubResource("Target_gate")])
 
 [resource]
 script = ExtResource("3_catalog")
