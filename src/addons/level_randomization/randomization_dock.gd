@@ -3,6 +3,8 @@ class_name LevelRandomizationDock
 extends VBoxContainer
 
 
+const RANDOMIZE_TAB: int = 0
+
 signal randomize_scene_requested
 signal reset_scene_requested
 signal settings_changed
@@ -65,6 +67,7 @@ func _build_interface() -> void:
 
 	tabs.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	tabs.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	tabs.tab_changed.connect(_on_tab_changed)
 	add_child(tabs)
 
 	randomize_tab.name = "Randomize"
@@ -148,6 +151,11 @@ func _on_randomize_scene_pressed() -> void:
 
 func _on_reset_scene_pressed() -> void:
 	reset_scene_requested.emit()
+
+
+func _on_tab_changed(tab: int) -> void:
+	if tab == RANDOMIZE_TAB:
+		catalog_changed.emit()
 
 
 func _on_catalog_property_edited(_property: String) -> void:
