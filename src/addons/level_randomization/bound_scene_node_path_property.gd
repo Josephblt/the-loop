@@ -30,7 +30,7 @@ func _init(catalog: LevelRandomizationCatalog, target: LevelTargetRandomizationB
 
 func _update_property() -> void:
 	var path: NodePath = _target.target_path
-	_path_button.text = "Assign..." if path.is_empty() else str(path)
+	_path_button.text = "Assign..." if path.is_empty() else _target.resource_name
 
 
 func _open_picker() -> void:
@@ -84,8 +84,10 @@ func _select_path() -> void:
 		return
 
 	var path: NodePath = item.get_metadata(0)
+	var display_name: String = item.get_text(0)
 	emit_changed(&"target_path", path)
-	_path_button.text = str(path)
+	_target.resource_name = display_name
+	_path_button.text = display_name
 
 
 func _confirm_dialog() -> void:
@@ -99,4 +101,5 @@ func _confirm_dialog() -> void:
 
 func _clear_path() -> void:
 	emit_changed(&"target_path", NodePath())
+	_target.resource_name = "Target"
 	_path_button.text = "Assign..."
