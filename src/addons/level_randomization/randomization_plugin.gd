@@ -23,11 +23,12 @@ func _enter_tree() -> void:
 
 	_settings = LevelRandomizationSettings.new()
 	_actions = LevelRandomizationActions.new(get_undo_redo(), _catalog)
-	_dock = RandomizationDock.new(_settings)
+	_dock = RandomizationDock.new(_settings, _catalog)
 
 	_dock.randomize_scene_requested.connect(_randomize_scene)
 	_dock.reset_scene_requested.connect(_reset_scene)
 	_dock.settings_changed.connect(queue_save_layout)
+	_dock.catalog_changed.connect(_refresh_availability)
 	_editor_selection = EditorInterface.get_selection()
 	_editor_selection.selection_changed.connect(_refresh_availability)
 	scene_changed.connect(_on_scene_changed)
