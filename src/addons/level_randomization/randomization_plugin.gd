@@ -1,28 +1,26 @@
 @tool
+class_name RandomizationPlugin
 extends EditorPlugin
 
-
-const RandomizationDock: Script = preload("randomization_dock.gd")
-const TargetPathInspector: Script = preload("target_path_inspector.gd")
 const CATALOG_PATH: String = "res://addons/level_randomization/config/randomization_catalog.tres"
 const LAYOUT_SECTION: String = "level_randomization"
 
-var _actions: LevelRandomizationActions
-var _catalog: LevelRandomizationCatalog
-var _dock: LevelRandomizationDock
+var _actions: RandomizationActions
+var _catalog: RandomizationCatalog
+var _dock: RandomizationDock
 var _editor_selection: EditorSelection
-var _settings: LevelRandomizationSettings
+var _settings: RandomizationSettings
 var _target_path_inspector: EditorInspectorPlugin
 
 
 func _enter_tree() -> void:
-	_catalog = load(CATALOG_PATH) as LevelRandomizationCatalog
+	_catalog = load(CATALOG_PATH) as RandomizationCatalog
 	if !_catalog:
 		push_error("Unable to load level randomization catalog.")
 		return
 
-	_settings = LevelRandomizationSettings.new()
-	_actions = LevelRandomizationActions.new(get_undo_redo(), _catalog)
+	_settings = RandomizationSettings.new()
+	_actions = RandomizationActions.new(get_undo_redo(), _catalog)
 	_target_path_inspector = TargetPathInspector.new(_catalog)
 	add_inspector_plugin(_target_path_inspector)
 	_dock = RandomizationDock.new(_settings, _catalog)
@@ -36,7 +34,7 @@ func _enter_tree() -> void:
 	scene_changed.connect(_on_scene_changed)
 
 	add_control_to_dock(EditorPlugin.DOCK_SLOT_RIGHT_BL, _dock)
-	call_deferred(&"_refresh_availability")
+	call_deferred("_refresh_availability")
 
 
 func _exit_tree() -> void:

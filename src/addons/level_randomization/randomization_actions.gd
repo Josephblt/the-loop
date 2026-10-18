@@ -1,34 +1,34 @@
 @tool
-class_name LevelRandomizationActions
+class_name RandomizationActions
 extends RefCounted
 
 
-const SEED_METADATA: StringName = &"_randomization_seed"
+const SEED_METADATA: StringName = "_randomization_seed"
 
-var _catalog: LevelRandomizationCatalog
+var _catalog: RandomizationCatalog
 var _undo_redo: EditorUndoRedoManager
 
 
-func _init(undo_redo: EditorUndoRedoManager, catalog: LevelRandomizationCatalog ) -> void:
+func _init(undo_redo: EditorUndoRedoManager, catalog: RandomizationCatalog ) -> void:
 	_undo_redo = undo_redo
 	_catalog = catalog
 
 
 func count_randomizable_targets(scene_root: Node) -> int:
-	var entries: Array[LevelRandomizationEntry] = _find_entries(scene_root)
+	var entries: Array[RandomizationEntry] = _find_entries(scene_root)
 	return entries.size()
 
 
-func randomize_scene(scene_root: Node, settings: LevelRandomizationSettings ) -> int:
-	var entries: Array[LevelRandomizationEntry] = _find_entries(scene_root)
+func randomize_scene(scene_root: Node, settings: RandomizationSettings ) -> int:
+	var entries: Array[RandomizationEntry] = _find_entries(scene_root)
 	if entries.is_empty():
 		return 0
 
 	_undo_redo.create_action("Randomize Scene")
 
 	var randomized_count: int = 0
-	for entry: LevelRandomizationEntry in entries:
-		var target_binding: LevelTargetRandomizationBinding = entry.target_binding
+	for entry: RandomizationEntry in entries:
+		var target_binding: TargetRandomizationBinding = entry.target_binding
 		if !target_binding.profile:
 			continue
 
@@ -53,14 +53,14 @@ func randomize_scene(scene_root: Node, settings: LevelRandomizationSettings ) ->
 
 
 func reset_scene(scene_root: Node) -> int:
-	var entries: Array[LevelRandomizationEntry] = _find_entries(scene_root)
+	var entries: Array[RandomizationEntry] = _find_entries(scene_root)
 	if entries.is_empty():
 		return 0
 
 	_undo_redo.create_action("Reset Scene Randomization")
 
 	var reset_count: int = 0
-	for entry: LevelRandomizationEntry in entries:
+	for entry: RandomizationEntry in entries:
 		if !entry.node.has_meta(SEED_METADATA):
 			continue
 
@@ -79,8 +79,8 @@ func reset_scene(scene_root: Node) -> int:
 	return reset_count
 
 
-func _find_entries(scene_root: Node) -> Array[LevelRandomizationEntry]:
-	var entries: Array[LevelRandomizationEntry] = []
+func _find_entries(scene_root: Node) -> Array[RandomizationEntry]:
+	var entries: Array[RandomizationEntry] = []
 
 	for child: Node in scene_root.get_children():
 		_find_entries_recursive(child, entries)
@@ -88,12 +88,12 @@ func _find_entries(scene_root: Node) -> Array[LevelRandomizationEntry]:
 	return entries
 
 
-func _find_entries_recursive(node: Node, entries: Array[LevelRandomizationEntry] ) -> void:
+func _find_entries_recursive(node: Node, entries: Array[RandomizationEntry] ) -> void:
 	if node is Node3D:
 		var scene_instance: Node3D = node as Node3D
-		var binding: LevelSceneRandomizationBinding = _catalog.find_binding(scene_instance)
+		var binding: SceneRandomizationBinding = _catalog.find_binding(scene_instance)
 		if binding:
-			for target_binding: LevelTargetRandomizationBinding in binding.targets:
+			for target_binding: TargetRandomizationBinding in binding.targets:
 				if !target_binding:
 					continue
 				if !target_binding.profile:
@@ -101,14 +101,14 @@ func _find_entries_recursive(node: Node, entries: Array[LevelRandomizationEntry]
 				if !target_binding.get_target(scene_instance):
 					continue				
 				
-				var entry: LevelRandomizationEntry = LevelRandomizationEntry.new(scene_instance, binding, target_binding)
+				var entry: RandomizationEntry = RandomizationEntry.new(scene_instance, binding, target_binding)
 				entries.append(entry)
 
 	for child: Node in node.get_children():
 		_find_entries_recursive(child, entries)
 
 
-func _get_base_state(entry: LevelRandomizationEntry, identity: String) -> TransformRandomizationState:
+func _get_base_state(entry: RandomizationEntry, identity: String) -> TransformRandomizationState:
 	var target: Node3D = entry.target_binding.get_target(entry.node)
 	if !target:
 		return null
@@ -122,7 +122,7 @@ func _get_base_state(entry: LevelRandomizationEntry, identity: String) -> Transf
 	return TransformRandomizer.recover_base(current_state.position, current_state.rotation, profile, previous_seed, identity)
 
 
-func _get_identity(entry: LevelRandomizationEntry) -> String:
+func _get_identity(entry: RandomizationEntry) -> String:
 	return "%s:%s:%s" % [
 		entry.binding.source_scene.resource_path,
 		str(entry.node.get_path()),
@@ -130,8 +130,8 @@ func _get_identity(entry: LevelRandomizationEntry) -> String:
 	]
 
 
-func _add_state_change(edited_root: Node, entry: LevelRandomizationEntry, next_state: TransformRandomizationState, keep_seed: bool, seed: int ) -> void:
-	var target_binding: LevelTargetRandomizationBinding = entry.target_binding
+func _add_state_change(edited_root: Node, entry: RandomizationEntry, next_state: TransformRandomizationState, keep_seed: bool, seed: int ) -> void:
+	var target_binding: TargetRandomizationBinding = entry.target_binding
 	var target: Node3D = target_binding.get_target(entry.node)
 	if !target:
 		return

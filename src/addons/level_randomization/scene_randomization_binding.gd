@@ -1,5 +1,5 @@
 @tool
-class_name LevelSceneRandomizationBinding
+class_name SceneRandomizationBinding
 extends Resource
 
 
@@ -10,7 +10,7 @@ extends Resource
 			resource_name = "Scene"
 			return
 		resource_name = value.resource_path.get_file()
-@export var targets: Array[LevelTargetRandomizationBinding] = []
+@export var targets: Array[TargetRandomizationBinding] = []
 
 
 func _init() -> void:

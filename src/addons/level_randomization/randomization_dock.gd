@@ -1,5 +1,5 @@
 @tool
-class_name LevelRandomizationDock
+class_name RandomizationDock
 extends VBoxContainer
 
 
@@ -10,7 +10,7 @@ signal reset_scene_requested
 signal settings_changed
 signal catalog_changed
 
-var _catalog: LevelRandomizationCatalog
+var _catalog: RandomizationCatalog
 var _catalog_inspector: EditorInspector
 var _catalog_save_queued: bool = false
 var _catalog_status_label: Label
@@ -18,11 +18,11 @@ var _randomize_button: Button
 var _reset_button: Button
 var _seed_input: SpinBox
 var _seed_randomizer: RandomNumberGenerator = RandomNumberGenerator.new()
-var _settings: LevelRandomizationSettings
+var _settings: RandomizationSettings
 var _status_label: Label
 
 
-func _init(settings: LevelRandomizationSettings, catalog: LevelRandomizationCatalog) -> void:
+func _init(settings: RandomizationSettings, catalog: RandomizationCatalog) -> void:
 	_settings = settings
 	_catalog = catalog
 	_seed_randomizer.randomize()
@@ -59,11 +59,7 @@ func _build_interface() -> void:
 	var random_seed_button: Button = Button.new()
 	var theme: Theme = EditorInterface.get_editor_theme()
 
-	add_theme_constant_override(&"separation", 8)
-
-	title.text = "Level Randomization"
-	title.add_theme_font_size_override(&"font_size", 16)
-	add_child(title)
+	add_theme_constant_override("separation", 8)
 
 	tabs.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	tabs.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -71,11 +67,11 @@ func _build_interface() -> void:
 	add_child(tabs)
 
 	randomize_tab.name = "Randomize"
-	randomize_tab.add_theme_constant_override(&"separation", 8)
+	randomize_tab.add_theme_constant_override("separation", 8)
 	tabs.add_child(randomize_tab)
 
 	catalog_tab.name = "Catalog"
-	catalog_tab.add_theme_constant_override(&"separation", 8)
+	catalog_tab.add_theme_constant_override("separation", 8)
 	tabs.add_child(catalog_tab)
 
 	seed_label.text = "Seed"
@@ -88,19 +84,19 @@ func _build_interface() -> void:
 
 
 	random_seed_button.text = "Random Seed"
-	random_seed_button.icon = theme.get_icon(&"RandomNumberGenerator", &"EditorIcons")
+	random_seed_button.icon = theme.get_icon("RandomNumberGenerator", "EditorIcons")
 	random_seed_button.pressed.connect(_on_random_seed_pressed)
 	randomize_tab.add_child(random_seed_button)
 
 	_randomize_button = Button.new()
 	_randomize_button.text = "Randomize Scene"
-	_randomize_button.icon = theme.get_icon(&"RandomNumberGenerator", &"EditorIcons")
+	_randomize_button.icon = theme.get_icon("RandomNumberGenerator", "EditorIcons")
 	_randomize_button.pressed.connect(_on_randomize_scene_pressed)
 	randomize_tab.add_child(_randomize_button)
 
 	_reset_button = Button.new()
 	_reset_button.text = "Reset Scene"
-	_reset_button.icon = theme.get_icon(&"Clear", &"EditorIcons")
+	_reset_button.icon = theme.get_icon("Clear", "EditorIcons")
 	_reset_button.pressed.connect(_on_reset_scene_pressed)
 	randomize_tab.add_child(_reset_button)
 
@@ -165,7 +161,7 @@ func _on_catalog_property_edited(_property: String) -> void:
 		return
 
 	_catalog_save_queued = true
-	call_deferred(&"_save_catalog")
+	call_deferred("_save_catalog")
 
 
 func _save_catalog() -> void:

@@ -1,5 +1,5 @@
 @tool
-class_name LevelRandomizationSettings
+class_name RandomizationSettings
 extends RefCounted
 
 

@@ -1,15 +1,20 @@
 @tool
+class_name BoundSceneNodePathProperty
 extends EditorProperty
 
 
-var _catalog: LevelRandomizationCatalog
+const ROOT_PATH: NodePath = NodePath(".")
+const TARGET_PATH_PROPERTY: StringName = "target_path"
+
+
+var _catalog: RandomizationCatalog
 var _dialog: ConfirmationDialog
 var _path_button: Button
-var _target: LevelTargetRandomizationBinding
+var _target: TargetRandomizationBinding
 var _tree: Tree
 
 
-func _init(catalog: LevelRandomizationCatalog, target: LevelTargetRandomizationBinding) -> void:
+func _init(catalog: RandomizationCatalog, target: TargetRandomizationBinding) -> void:
 	_catalog = catalog
 	_target = target
 
@@ -22,7 +27,9 @@ func _init(catalog: LevelRandomizationCatalog, target: LevelTargetRandomizationB
 	row.add_child(_path_button)
 
 	var clear_button: Button = Button.new()
-	clear_button.icon = EditorInterface.get_editor_theme().get_icon(&"Clear", &"EditorIcons")
+	var editor_theme: Theme = EditorInterface.get_editor_theme()
+	var clear_icon: Texture2D = editor_theme.get_icon("Clear", "EditorIcons")
+	clear_button.icon = clear_icon
 	clear_button.tooltip_text = "Clear target path"
 	clear_button.pressed.connect(_clear_path)
 	row.add_child(clear_button)
@@ -30,7 +37,10 @@ func _init(catalog: LevelRandomizationCatalog, target: LevelTargetRandomizationB
 
 func _update_property() -> void:
 	var path: NodePath = _target.target_path
-	_path_button.text = "Assign..." if path.is_empty() else _target.resource_name
+	if path.is_empty():
+		_path_button.text = "Assign..."
+	else:
+		_path_button.text = _target.resource_name
 
 
 func _open_picker() -> void:
@@ -59,7 +69,7 @@ func _build_dialog(source_scene: PackedScene) -> void:
 	_dialog.add_child(_tree)
 
 	var scene_root: Node = source_scene.instantiate()
-	_add_node(scene_root, null, ^".")
+	_add_node(scene_root, null, ROOT_PATH)
 	scene_root.free()
 
 
@@ -73,7 +83,7 @@ func _add_node(node: Node, parent: TreeItem, path: NodePath) -> void:
 
 	for child: Node in node.get_children():
 		var child_path: NodePath = NodePath(str(child.name))
-		if path != ^".":
+		if path != ROOT_PATH:
 			child_path = NodePath(str(path).path_join(str(child.name)))
 		_add_node(child, item, child_path)
 
@@ -85,7 +95,7 @@ func _select_path() -> void:
 
 	var path: NodePath = item.get_metadata(0)
 	var display_name: String = item.get_text(0)
-	emit_changed(&"target_path", path)
+	emit_changed(TARGET_PATH_PROPERTY, path)
 	_target.resource_name = display_name
 	_path_button.text = display_name
 
@@ -100,6 +110,6 @@ func _confirm_dialog() -> void:
 
 
 func _clear_path() -> void:
-	emit_changed(&"target_path", NodePath())
+	emit_changed(TARGET_PATH_PROPERTY, NodePath())
 	_target.resource_name = "Target"
 	_path_button.text = "Assign..."

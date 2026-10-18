@@ -1,9 +1,9 @@
 @tool
-class_name LevelTargetRandomizationBinding
+class_name TargetRandomizationBinding
 extends Resource
 
 
-@export var target_path: NodePath = ^"MeshInstance3D"
+@export var target_path: NodePath
 @export var profile: TransformRandomizationProfile
 
 

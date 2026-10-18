@@ -17,5 +17,5 @@ extends Resource
 
 @export_group("Inversion")
 @export var randomize_inversion: bool = false
-@export var inversion_rotation_degrees: Vector3 = Vector3(0.0, 0.0, 0.0)
+@export var inversion_rotation_degrees: Vector3 = Vector3.ZERO
 @export var inversion_pivot: Vector3 = Vector3.ZERO
