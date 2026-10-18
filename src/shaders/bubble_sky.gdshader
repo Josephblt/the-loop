@@ -1,24 +1,21 @@
-shader_type sky;
-
-
-group_uniforms Background;
-uniform vec3 sky_top_color : source_color = vec3(0.027, 0.094, 0.141);
-uniform vec3 horizon_color : source_color = vec3(0.094, 0.043, 0.161);
-uniform vec3 ground_bottom_color : source_color = vec3(0.157, 0.067, 0.024);
-uniform float horizon_curve : hint_range(0.01, 1.0) = 0.1;
-uniform float energy_multiplier : hint_range(0.0, 2.0) = 0.5;
+shader_type spatial;
+render_mode unshaded, cull_front, depth_draw_never, shadows_disabled;
 
 
 group_uniforms SoapFilm;
 uniform vec3 film_blue : source_color = vec3(0.784, 0.925, 1.0);
 uniform vec3 film_orange : source_color = vec3(1.0, 0.839, 0.639);
 uniform vec3 film_purple : source_color = vec3(0.882, 0.8, 1.0);
-uniform float film_opacity : hint_range(0.0, 1.0) = 0.4;
-uniform float pattern_scale : hint_range(0.1, 10.0) = 1.35;
+uniform float film_opacity : hint_range(0.0, 1.0) = 0.18;
+uniform float pattern_scale : hint_range(0.1, 10.0) = 1.5;
 uniform float flow_speed : hint_range(0.0, 2.0) = 0.12;
 uniform float distortion : hint_range(0.0, 4.0) = 1.1;
 uniform float band_count : hint_range(1.0, 20.0) = 4.0;
-uniform float highlight_strength : hint_range(0.0, 1.0) = 0.24;
+uniform float highlight_strength : hint_range(0.0, 1.0) = 0.2;
+uniform float horizon_clearance : hint_range(0.0, 0.5) = 0.06;
+
+
+varying vec3 sphere_direction;
 
 
 float random(vec3 position) {
@@ -71,15 +68,15 @@ vec3 soap_color(float position) {
 }
 
 
-void sky() {
-	float vertical = EYEDIR.y;
-	float horizon_blend = pow(abs(vertical), horizon_curve);
-	vec3 hemisphere_color = vertical >= 0.0 ? sky_top_color : ground_bottom_color;
-	vec3 color = mix(horizon_color, hemisphere_color, horizon_blend);
-	color *= energy_multiplier;
+void vertex() {
+	sphere_direction = normalize(VERTEX);
+}
 
+
+void fragment() {
+	vec3 direction = normalize(sphere_direction);
 	float time = TIME * flow_speed;
-	vec3 position = normalize(EYEDIR) * pattern_scale;
+	vec3 position = direction * pattern_scale;
 
 	vec3 first_warp = vec3(
 		fbm(position * 0.65 + vec3(time, 0.0, -time * 0.37)),
@@ -95,12 +92,12 @@ void sky() {
 
 	float bands = thickness * band_count + time * 0.35;
 	float liquid_pattern = 0.5 + 0.5 * sin(bands * TAU);
-	float film_strength = film_opacity * mix(0.18, 1.0, liquid_pattern);
-	color = mix(color, soap_color(bands), film_strength);
+	float hemisphere_mask = smoothstep(horizon_clearance, horizon_clearance + 0.12, abs(direction.y));
 
 	vec3 highlight_direction = normalize(vec3(-0.45, 0.7, -0.55));
-	float highlight = pow(max(dot(EYEDIR, highlight_direction), 0.0), 18.0);
-	color = mix(color, vec3(1.0), highlight * highlight_strength);
+	float highlight = pow(max(dot(direction, highlight_direction), 0.0), 14.0);
 
-	COLOR = color;
+	ALBEDO = mix(soap_color(bands), vec3(1.0), highlight * highlight_strength);
+	ALPHA = film_opacity * mix(0.12, 1.0, liquid_pattern) * hemisphere_mask;
+	ALPHA += highlight * highlight_strength * hemisphere_mask;
 }
