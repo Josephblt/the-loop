@@ -1,26 +1,32 @@
-[gd_scene load_steps=7 format=3 uid="uid://dt4q24uysybli"]
+[gd_scene format=3 uid="uid://dt4q24uysybli"]
 
 [ext_resource type="Shader" uid="uid://pyfdrbpm83sd" path="res://shaders/bubble_sky.gdshader" id="1_bubble_sky"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nwvoh"]
-sky_top_color = Color(0.02745098, 0.09411765, 0.14117648, 1)
-sky_horizon_color = Color(0.09411765, 0.043137256, 0.16078432, 1)
-sky_curve = 0.1
-ground_bottom_color = Color(0.15686275, 0.06666667, 0.023529412, 1)
-ground_horizon_color = Color(0.09411765, 0.043137256, 0.16078432, 1)
-ground_curve = 0.1
-energy_multiplier = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bubble_sky"]
 render_priority = 1
 shader = ExtResource("1_bubble_sky")
+shader_parameter/film_blue = Color(0.88235295, 0.8, 1, 1)
+shader_parameter/film_orange = Color(0.45882353, 0.32156864, 0.61960787, 1)
+shader_parameter/film_purple = Color(0.09411765, 0.043137256, 0.16078432, 1)
+shader_parameter/film_opacity = 0.0250000011875
+shader_parameter/pattern_scale = 5.00000023424012
+shader_parameter/flow_speed = 0.250000011875
+shader_parameter/distortion = 2.000000095
+shader_parameter/band_count = 4.000000142499999
 
 [sub_resource type="SphereMesh" id="SphereMesh_bubble_sky"]
 material = SubResource("ShaderMaterial_bubble_sky")
 radius = 1000.0
 height = 2000.0
-radial_segments = 64
-rings = 32
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nwvoh"]
+sky_top_color = Color(0.02745098, 0.09411765, 0.14117648, 1)
+sky_horizon_color = Color(0.09411765, 0.043137256, 0.16078432, 1)
+sky_curve = 0.25
+ground_bottom_color = Color(0.15686275, 0.06666667, 0.023529412, 1)
+ground_horizon_color = Color(0.09411765, 0.043137256, 0.16078432, 1)
+ground_curve = 0.25
+energy_multiplier = 0.5
 
 [sub_resource type="Sky" id="Sky_d3u6q"]
 sky_material = SubResource("ProceduralSkyMaterial_nwvoh")

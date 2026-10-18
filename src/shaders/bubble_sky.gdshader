@@ -11,8 +11,6 @@ uniform float pattern_scale : hint_range(0.1, 10.0) = 1.5;
 uniform float flow_speed : hint_range(0.0, 2.0) = 0.12;
 uniform float distortion : hint_range(0.0, 4.0) = 1.1;
 uniform float band_count : hint_range(1.0, 20.0) = 4.0;
-uniform float highlight_strength : hint_range(0.0, 1.0) = 0.2;
-uniform float horizon_clearance : hint_range(0.0, 0.5) = 0.06;
 
 
 varying vec3 sphere_direction;
@@ -92,12 +90,9 @@ void fragment() {
 
 	float bands = thickness * band_count + time * 0.35;
 	float liquid_pattern = 0.5 + 0.5 * sin(bands * TAU);
-	float hemisphere_mask = smoothstep(horizon_clearance, horizon_clearance + 0.12, abs(direction.y));
 
 	vec3 highlight_direction = normalize(vec3(-0.45, 0.7, -0.55));
-	float highlight = pow(max(dot(direction, highlight_direction), 0.0), 14.0);
-
-	ALBEDO = mix(soap_color(bands), vec3(1.0), highlight * highlight_strength);
-	ALPHA = film_opacity * mix(0.12, 1.0, liquid_pattern) * hemisphere_mask;
-	ALPHA += highlight * highlight_strength * hemisphere_mask;
+	
+	ALBEDO = mix(soap_color(bands), vec3(1.0), vec3(0.0));
+	ALPHA = film_opacity * mix(0.12, 1.0, liquid_pattern);
 }
