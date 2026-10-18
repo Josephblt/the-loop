@@ -2,11 +2,12 @@
 class_name MemoryRoom
 extends Node3D
 
+
 @onready var chest: Chest = %Chest
 @onready var memory_reveal: MemoryReveal = %MemoryReveal
 
 var _memory: Memory
-@export var _player: Player
+var _player: Player
 
 
 func _init(player: Player = null, memory: Memory = Memory.new()) -> void:
