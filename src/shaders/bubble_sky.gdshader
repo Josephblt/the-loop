@@ -6,11 +6,12 @@ group_uniforms SoapFilm;
 uniform vec3 film_blue : source_color = vec3(0.784, 0.925, 1.0);
 uniform vec3 film_orange : source_color = vec3(1.0, 0.839, 0.639);
 uniform vec3 film_purple : source_color = vec3(0.882, 0.8, 1.0);
-uniform float film_opacity : hint_range(0.0, 1.0) = 0.18;
-uniform float pattern_scale : hint_range(0.1, 10.0) = 1.5;
-uniform float flow_speed : hint_range(0.0, 2.0) = 0.12;
-uniform float distortion : hint_range(0.0, 4.0) = 1.1;
-uniform float band_count : hint_range(1.0, 20.0) = 4.0;
+uniform float film_opacity : hint_range(0.0, 1.0) = 0.12;
+uniform float pattern_scale : hint_range(0.1, 10.0) = 1.25;
+uniform float flow_speed : hint_range(0.0, 2.0) = 0.08;
+uniform float distortion : hint_range(0.0, 4.0) = 0.55;
+uniform float interference_cycles : hint_range(0.1, 8.0) = 1.75;
+uniform float highlight_strength : hint_range(0.0, 1.0) = 0.16;
 
 
 varying vec3 sphere_direction;
@@ -51,18 +52,11 @@ float fbm(vec3 position) {
 }
 
 
-vec3 soap_color(float position) {
-	float wrapped_position = fract(position);
-
-	if (wrapped_position < 0.333333) {
-		return mix(film_blue, film_orange, wrapped_position * 3.0);
-	}
-
-	if (wrapped_position < 0.666667) {
-		return mix(film_orange, film_purple, (wrapped_position - 0.333333) * 3.0);
-	}
-
-	return mix(film_purple, film_blue, (wrapped_position - 0.666667) * 3.0);
+vec3 interference_color(float thickness) {
+	float phase = thickness * interference_cycles * TAU;
+	vec3 weights = 0.5 + 0.5 * cos(phase + vec3(0.0, TAU / 3.0, TAU * 2.0 / 3.0));
+	float weight_sum = weights.x + weights.y + weights.z;
+	return (film_blue * weights.x + film_orange * weights.y + film_purple * weights.z) / weight_sum;
 }
 
 
@@ -76,23 +70,23 @@ void fragment() {
 	float time = TIME * flow_speed;
 	vec3 position = direction * pattern_scale;
 
-	vec3 first_warp = vec3(
-		fbm(position * 0.65 + vec3(time, 0.0, -time * 0.37)),
-		fbm(position * 0.65 + vec3(7.3, time * 0.73, 2.1)),
-		fbm(position * 0.65 + vec3(-time * 0.41, 3.7, time * 0.59))
+	vec3 flow = vec3(
+		fbm(position * 0.5 + vec3(time * 0.31, 0.0, -time * 0.12)),
+		fbm(position * 0.5 + vec3(7.3, time * 0.23, 2.1)),
+		fbm(position * 0.5 + vec3(-time * 0.15, 3.7, time * 0.27))
 	);
-	first_warp = first_warp * 2.0 - 1.0;
+	flow = flow * 2.0 - 1.0;
 
-	vec3 warped_position = position + first_warp * distortion;
-	float thickness = fbm(warped_position + vec3(time * 0.19, -time * 0.13, time * 0.17));
-	float detail = fbm(warped_position * 1.7 - vec3(time * 0.11, time * 0.07, -time * 0.09));
-	thickness = mix(thickness, detail, 0.3);
-
-	float bands = thickness * band_count + time * 0.35;
-	float liquid_pattern = 0.5 + 0.5 * sin(bands * TAU);
+	vec3 warped_position = position + flow * distortion;
+	float broad_flow = fbm(warped_position * 0.7 + vec3(time * 0.09, -time * 0.07, time * 0.05));
+	float soft_detail = fbm(warped_position * 1.25 - vec3(time * 0.05, time * 0.03, -time * 0.04));
+	float thickness = mix(broad_flow, soft_detail, 0.2);
 
 	vec3 highlight_direction = normalize(vec3(-0.45, 0.7, -0.55));
-	
-	ALBEDO = mix(soap_color(bands), vec3(1.0), vec3(0.0));
-	ALPHA = film_opacity * mix(0.12, 1.0, liquid_pattern);
+	float highlight = pow(max(dot(direction, highlight_direction), 0.0), 5.0);
+	float soft_opacity = smoothstep(0.15, 0.85, thickness);
+
+	ALBEDO = mix(interference_color(thickness), vec3(1.0), highlight * highlight_strength);
+	ALPHA = film_opacity * mix(0.45, 1.0, soft_opacity);
+	ALPHA += highlight * highlight_strength;
 }

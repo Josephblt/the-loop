@@ -24,11 +24,12 @@ shader = ExtResource("1_bubble_sky")
 shader_parameter/film_blue = Color(0.784, 0.925, 1, 1)
 shader_parameter/film_orange = Color(1, 0.839, 0.639, 1)
 shader_parameter/film_purple = Color(0.882, 0.8, 1, 1)
-shader_parameter/film_opacity = 0.050000002375
-shader_parameter/pattern_scale = 2.00000009174012
-shader_parameter/flow_speed = 0.10000000475
-shader_parameter/distortion = 2.000000095
-shader_parameter/band_count = 15.20800067488
+shader_parameter/film_opacity = 0.12
+shader_parameter/pattern_scale = 1.25
+shader_parameter/flow_speed = 0.08
+shader_parameter/distortion = 0.55
+shader_parameter/interference_cycles = 1.75
+shader_parameter/highlight_strength = 0.16
 
 [sub_resource type="SphereMesh" id="SphereMesh_bubble_sky"]
 material = SubResource("ShaderMaterial_bubble_sky")
