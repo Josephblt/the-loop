@@ -2,23 +2,6 @@
 
 [ext_resource type="Shader" uid="uid://pyfdrbpm83sd" path="res://shaders/bubble_sky.gdshader" id="1_bubble_sky"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bubble_sky"]
-render_priority = 1
-shader = ExtResource("1_bubble_sky")
-shader_parameter/film_blue = Color(0.88235295, 0.8, 1, 1)
-shader_parameter/film_orange = Color(0.45882353, 0.32156864, 0.61960787, 1)
-shader_parameter/film_purple = Color(0.09411765, 0.043137256, 0.16078432, 1)
-shader_parameter/film_opacity = 0.0250000011875
-shader_parameter/pattern_scale = 5.00000023424012
-shader_parameter/flow_speed = 0.250000011875
-shader_parameter/distortion = 2.000000095
-shader_parameter/band_count = 4.000000142499999
-
-[sub_resource type="SphereMesh" id="SphereMesh_bubble_sky"]
-material = SubResource("ShaderMaterial_bubble_sky")
-radius = 1000.0
-height = 2000.0
-
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nwvoh"]
 sky_top_color = Color(0.02745098, 0.09411765, 0.14117648, 1)
 sky_horizon_color = Color(0.09411765, 0.043137256, 0.16078432, 1)
@@ -35,12 +18,24 @@ sky_material = SubResource("ProceduralSkyMaterial_nwvoh")
 background_mode = 2
 sky = SubResource("Sky_d3u6q")
 
-[node name="Lights" type="Node" unique_id=1637738480]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bubble_sky"]
+render_priority = 1
+shader = ExtResource("1_bubble_sky")
+shader_parameter/film_blue = Color(0.784, 0.925, 1, 1)
+shader_parameter/film_orange = Color(1, 0.839, 0.639, 1)
+shader_parameter/film_purple = Color(0.882, 0.8, 1, 1)
+shader_parameter/film_opacity = 0.050000002375
+shader_parameter/pattern_scale = 2.00000009174012
+shader_parameter/flow_speed = 0.10000000475
+shader_parameter/distortion = 2.000000095
+shader_parameter/band_count = 15.20800067488
 
-[node name="BubbleSky" type="MeshInstance3D" parent="." unique_id=1544566764]
-cast_shadow = 0
-extra_cull_margin = 10000.0
-mesh = SubResource("SphereMesh_bubble_sky")
+[sub_resource type="SphereMesh" id="SphereMesh_bubble_sky"]
+material = SubResource("ShaderMaterial_bubble_sky")
+radius = 1000.0
+height = 2000.0
+
+[node name="Lights" type="Node" unique_id=1637738480]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1841173337]
 environment = SubResource("Environment_2gavq")
@@ -54,3 +49,8 @@ shadow_enabled = true
 shadow_opacity = 0.75
 shadow_caster_mask = 4293918721
 directional_shadow_mode = 0
+
+[node name="BubbleSky" type="MeshInstance3D" parent="." unique_id=1544566764]
+cast_shadow = 0
+extra_cull_margin = 10000.0
+mesh = SubResource("SphereMesh_bubble_sky")

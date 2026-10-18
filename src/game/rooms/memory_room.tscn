@@ -103,6 +103,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.7)
 unique_name_in_owner = true
 
 [node name="Player" parent="." unique_id=282310942 instance=ExtResource("14_6h58r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 7.686843)
 
 [connection signal="interaction_triggered" from="Memory/Chest" to="." method="_on_chest_interaction_triggered"]
 [connection signal="dismissed" from="MemoryReveal" to="." method="_on_memory_reveal_dismissed"]
