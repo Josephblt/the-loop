@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelRandomizationCatalog" format=3 uid="uid://bderd85fdsh2j"]
+[gd_resource type="Resource" script_class="RandomizationCatalog" format=3 uid="uid://bderd85fdsh2j"]
 
 [ext_resource type="Script" uid="uid://ctpnaaog7r632" path="res://addons/level_randomization/scene_randomization_binding.gd" id="2_binding"]
 [ext_resource type="PackedScene" uid="uid://pndqjwooagyb" path="res://game/level/blocks/block_cracked_lg.tscn" id="2_yjsdp"]
@@ -18,7 +18,7 @@
 [sub_resource type="Resource" id="Resource_dwnuq"]
 script = ExtResource("4_yxs3g")
 randomize_position = true
-position_variation = Vector3(0.05, 0.01, 0.05)
+position_variation = Vector3(0.05, 0, 0.05)
 randomize_rotation = true
 rotation_variation_degrees = Vector3(0.1, 15, 0)
 randomize_rotation_in_steps = true
@@ -42,7 +42,7 @@ metadata/_custom_type_script = "uid://ctpnaaog7r632"
 [sub_resource type="Resource" id="Resource_t25e1"]
 script = ExtResource("4_yxs3g")
 randomize_position = true
-position_variation = Vector3(0.5, 0.01, 0.5)
+position_variation = Vector3(0.5, 0, 0.5)
 randomize_rotation = true
 rotation_variation_degrees = Vector3(0.1, 10, 0.1)
 metadata/_custom_type_script = "uid://lovaxrlm1xea"
@@ -86,7 +86,7 @@ metadata/_custom_type_script = "uid://ctpnaaog7r632"
 [sub_resource type="Resource" id="Resource_yjsdp"]
 script = ExtResource("4_yxs3g")
 randomize_position = true
-position_variation = Vector3(0.05, 0.05, 0.05)
+position_variation = Vector3(0.05, 0, 0.05)
 randomize_rotation = true
 rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
 randomize_inversion = true
@@ -110,7 +110,7 @@ metadata/_custom_type_script = "uid://ctpnaaog7r632"
 [sub_resource type="Resource" id="Resource_8s35w"]
 script = ExtResource("4_yxs3g")
 randomize_position = true
-position_variation = Vector3(0.05, 0.05, 0.05)
+position_variation = Vector3(0.05, 0, 0.05)
 randomize_rotation = true
 rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
 randomize_inversion = true
@@ -134,7 +134,7 @@ metadata/_custom_type_script = "uid://ctpnaaog7r632"
 [sub_resource type="Resource" id="Resource_aplif"]
 script = ExtResource("4_yxs3g")
 randomize_position = true
-position_variation = Vector3(0.05, 0.05, 0.05)
+position_variation = Vector3(0.05, 0, 0.05)
 randomize_rotation = true
 rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
 randomize_inversion = true
@@ -182,7 +182,7 @@ metadata/_custom_type_script = "uid://ctpnaaog7r632"
 [sub_resource type="Resource" id="Resource_kjtgv"]
 script = ExtResource("4_yxs3g")
 randomize_position = true
-position_variation = Vector3(0.01, 0.01, 0.01)
+position_variation = Vector3(0.01, 0, 0.01)
 randomize_rotation = true
 rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
 randomize_rotation_in_steps = true
@@ -205,7 +205,7 @@ metadata/_custom_type_script = "uid://ctpnaaog7r632"
 
 [sub_resource type="Resource" id="Resource_ek3qr"]
 script = ExtResource("4_yxs3g")
-position_variation = Vector3(0.05, 0.05, 0.05)
+position_variation = Vector3(0.05, 0, 0.05)
 randomize_rotation = true
 rotation_variation_degrees = Vector3(0.5, 0.5, 0)
 metadata/_custom_type_script = "uid://lovaxrlm1xea"
@@ -227,7 +227,7 @@ metadata/_custom_type_script = "uid://ctpnaaog7r632"
 [sub_resource type="Resource" id="Resource_6svt5"]
 script = ExtResource("4_yxs3g")
 randomize_position = true
-position_variation = Vector3(0.05, 0.05, 0.05)
+position_variation = Vector3(0.05, 0, 0.05)
 randomize_rotation = true
 rotation_variation_degrees = Vector3(0.5, 0.5, 0.5)
 metadata/_custom_type_script = "uid://lovaxrlm1xea"

@@ -6,7 +6,7 @@ extends Node3D
 @onready var memory_reveal: MemoryReveal = %MemoryReveal
 
 var _memory: Memory
-var _player: Player
+@export var _player: Player
 
 
 func _init(player: Player = null, memory: Memory = Memory.new()) -> void:

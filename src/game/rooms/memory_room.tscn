@@ -16,10 +16,11 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_jxl8w"]
 size = Vector3(17.8, 5, 17.8)
 
-[node name="MemoryRoom" type="Area3D" unique_id=452683808]
+[node name="MemoryRoom" type="Area3D" unique_id=452683808 node_paths=PackedStringArray("_player")]
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_n6nv3")
+_player = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1593920821]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
