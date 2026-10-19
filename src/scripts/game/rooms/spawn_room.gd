@@ -1,4 +1,3 @@
-@tool
 class_name SpawnRoom
 extends Node3D
 
