@@ -6,7 +6,6 @@
 
 [node name="MemoryRoomTest" type="Node3D" unique_id=2059004775]
 script = ExtResource("1_script")
-randomize_scene = false
 
 [node name="Lights" parent="." unique_id=1886347259 instance=ExtResource("2_lights")]
 
