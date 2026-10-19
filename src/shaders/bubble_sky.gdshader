@@ -1,41 +1,35 @@
 shader_type spatial;
 render_mode unshaded, cull_front, depth_draw_never, shadows_disabled;
 
-
 group_uniforms SoapFilm;
-uniform vec3 film_blue : source_color = vec3(0.784, 0.925, 1.0);
-uniform vec3 film_orange : source_color = vec3(1.0, 0.839, 0.639);
-uniform vec3 film_purple : source_color = vec3(0.882, 0.8, 1.0);
+uniform vec3 film_dark : source_color = vec3(0.784, 0.925, 1.0);
+uniform vec3 film_medium : source_color = vec3(1.0, 0.839, 0.639);
+uniform vec3 film_light : source_color = vec3(0.882, 0.8, 1.0);
 uniform float film_opacity : hint_range(0.0, 1.0) = 0.18;
 uniform float pattern_scale : hint_range(0.1, 10.0) = 1.5;
 uniform float flow_speed : hint_range(0.0, 2.0) = 0.12;
 uniform float distortion : hint_range(0.0, 4.0) = 1.1;
 uniform float band_count : hint_range(1.0, 20.0) = 4.0;
 
-
 varying vec3 sphere_direction;
-
 
 float random(vec3 position) {
 	return fract(sin(dot(position, vec3(127.1, 311.7, 74.7))) * 43758.5453);
 }
 
-
 float value_noise(vec3 position) {
 	vec3 cell = floor(position);
 	vec3 offset = fract(position);
-	vec3 blend = offset * offset * (3.0 - 2.0 * offset);
+	
+	float bottom_back = mix(random(cell), random(cell + vec3(1.0, 0.0, 0.0)), offset.x);
+	float top_back = mix(random(cell + vec3(0.0, 1.0, 0.0)), random(cell + vec3(1.0, 1.0, 0.0)), offset.x);
+	float bottom_front = mix(random(cell + vec3(0.0, 0.0, 1.0)), random(cell + vec3(1.0, 0.0, 1.0)), offset.x);
+	float top_front = mix(random(cell + vec3(0.0, 1.0, 1.0)), random(cell + vec3(1.0, 1.0, 1.0)), offset.x);
 
-	float bottom_back = mix(random(cell), random(cell + vec3(1.0, 0.0, 0.0)), blend.x);
-	float top_back = mix(random(cell + vec3(0.0, 1.0, 0.0)), random(cell + vec3(1.0, 1.0, 0.0)), blend.x);
-	float bottom_front = mix(random(cell + vec3(0.0, 0.0, 1.0)), random(cell + vec3(1.0, 0.0, 1.0)), blend.x);
-	float top_front = mix(random(cell + vec3(0.0, 1.0, 1.0)), random(cell + vec3(1.0, 1.0, 1.0)), blend.x);
-
-	float back = mix(bottom_back, top_back, blend.y);
-	float front = mix(bottom_front, top_front, blend.y);
-	return mix(back, front, blend.z);
+	float back = mix(bottom_back, top_back, offset.y);
+	float front = mix(bottom_front, top_front, offset.y);
+	return mix(back, front, offset.z);
 }
-
 
 float fbm(vec3 position) {
 	float result = 0.0;
@@ -50,26 +44,23 @@ float fbm(vec3 position) {
 	return result / 0.9375;
 }
 
-
 vec3 soap_color(float position) {
 	float wrapped_position = fract(position);
 
 	if (wrapped_position < 0.333333) {
-		return mix(film_blue, film_orange, wrapped_position * 3.0);
+		return mix(film_dark, film_medium, wrapped_position * 3.0);
 	}
 
 	if (wrapped_position < 0.666667) {
-		return mix(film_orange, film_purple, (wrapped_position - 0.333333) * 3.0);
+		return mix(film_medium, film_light, (wrapped_position - 0.333333) * 3.0);
 	}
 
-	return mix(film_purple, film_blue, (wrapped_position - 0.666667) * 3.0);
+	return mix(film_light, film_dark, (wrapped_position - 0.666667) * 3.0);
 }
-
 
 void vertex() {
 	sphere_direction = normalize(VERTEX);
 }
-
 
 void fragment() {
 	vec3 direction = normalize(sphere_direction);
@@ -91,8 +82,6 @@ void fragment() {
 	float bands = thickness * band_count + time * 0.35;
 	float liquid_pattern = 0.5 + 0.5 * sin(bands * TAU);
 
-	vec3 highlight_direction = normalize(vec3(-0.45, 0.7, -0.55));
-	
 	ALBEDO = mix(soap_color(bands), vec3(1.0), vec3(0.0));
 	ALPHA = film_opacity * mix(0.12, 1.0, liquid_pattern);
 }

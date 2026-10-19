@@ -24,8 +24,6 @@ collision_mask = 2
 script = ExtResource("1_n6nv3")
 _player = NodePath("Player")
 
-[node name="Lights" parent="." unique_id=1637738480 instance=ExtResource("2_d3u6q")]
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1593920821]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
 shape = SubResource("BoxShape3D_jxl8w")
@@ -101,6 +99,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.7)
 
 [node name="MemoryReveal" parent="." unique_id=1492686143 instance=ExtResource("12_f4h61")]
 unique_name_in_owner = true
+
+[node name="Lights" parent="." unique_id=1637738480 instance=ExtResource("2_d3u6q")]
 
 [node name="Player" parent="." unique_id=282310942 instance=ExtResource("14_6h58r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 7.686843)

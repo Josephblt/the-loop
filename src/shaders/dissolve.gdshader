@@ -1,14 +1,5 @@
 shader_type canvas_item;
 
-
-/*
- * COLOR
- *
- * The Label's source font color must be white.
- * The Label's source outline color must be black.
- *
- * The shader replaces those source colors with these colors.
- */
 group_uniforms Color;
 
 uniform vec4 font_color : source_color =
@@ -20,10 +11,6 @@ uniform vec4 font_outline : source_color =
 uniform vec4 dissolve_color : source_color =
 	vec4(0.663, 0.545, 1.0, 1.0);
 
-
-/*
- * DISSOLVE
- */
 group_uniforms Dissolve;
 
 uniform float dissolve_amount : hint_range(0.0, 1.0) = 0.50;
@@ -36,15 +23,10 @@ uniform float morph_speed : hint_range(0.0, 3.0) = 0.30;
 uniform float distortion : hint_range(0.0, 5.0) = 2.0;
 uniform float swirl_strength : hint_range(0.0, 5.0) = 1.2;
 
-
-/*
- * OUTLINE
- */
 group_uniforms Outline;
 
 uniform float outline_detection_threshold :
 	hint_range(0.0, 1.0) = 0.5;
-
 
 float random(vec2 position) {
 	return fract(
@@ -52,7 +34,6 @@ float random(vec2 position) {
 		* 43758.5453
 	);
 }
-
 
 float value_noise(vec2 position) {
 	vec2 cell = floor(position);
@@ -72,7 +53,6 @@ float value_noise(vec2 position) {
 	);
 }
 
-
 float fbm(vec2 position) {
 	float result = 0.0;
 	float amplitude = 0.5;
@@ -88,7 +68,6 @@ float fbm(vec2 position) {
 
 	return result / 0.96875;
 }
-
 
 void fragment() {
 	vec4 texture_sample = texture(TEXTURE, UV);
