@@ -50,7 +50,6 @@ light_cull_mask = 4293918721
 shadow_enabled = true
 shadow_opacity = 0.75
 shadow_caster_mask = 4293918721
-directional_shadow_mode = 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1841173337]
 environment = SubResource("Environment_2gavq")
