@@ -6,7 +6,9 @@ const RANDOMIZATION_CATALOG: RandomizationCatalog = preload("res://addons/level_
 
 @export_multiline var memory_description: String = "Unknown Memory..."
 @export var memory_revealed: bool = false
+@export var randomize_scene: bool = true
 @export var randomization_seed: int = 0
+
 
 @onready var player: Player = %Player
 
@@ -16,7 +18,8 @@ func _ready() -> void:
 	memory.revealed = memory_revealed
 
 	var memory_room: MemoryRoom = MEMORY_ROOM_SCENE.instantiate() as MemoryRoom
-	_randomize_scene(memory_room)
+	if randomize_scene:
+		_randomize_scene(memory_room)
 	memory_room.setup_scene(player, memory)
 	add_child(memory_room)
 

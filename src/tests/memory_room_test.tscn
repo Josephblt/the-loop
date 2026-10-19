@@ -7,8 +7,8 @@
 [node name="MemoryRoomTest" type="Node3D" unique_id=2059004775]
 script = ExtResource("1_script")
 
-[node name="Lights" parent="." instance=ExtResource("2_lights")]
+[node name="Lights" parent="." unique_id=1886347259 instance=ExtResource("2_lights")]
 
-[node name="Player" parent="." instance=ExtResource("3_player")]
+[node name="Player" parent="." unique_id=2061682565 instance=ExtResource("3_player")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
