@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cvvhff7lf1cka"]
 
 [ext_resource type="Script" uid="uid://cvmb0s8xio81g" path="res://scripts/game/rooms/memory_room.gd" id="1_n6nv3"]
-[ext_resource type="PackedScene" uid="uid://dt4q24uysybli" path="res://game/level/props/lights.tscn" id="2_d3u6q"]
 [ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="2_n4fvx"]
 [ext_resource type="PackedScene" uid="uid://coql64ga8pi0u" path="res://game/level/blocks/block_cracked_md.tscn" id="3_d3u6q"]
 [ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="4_6h58r"]
@@ -13,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/interactables/altar.tscn" id="10_hqoex"]
 [ext_resource type="PackedScene" uid="uid://dk3ahea1354r8" path="res://game/interactables/chest.tscn" id="11_r0t1e"]
 [ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/memory_reveal.tscn" id="12_f4h61"]
-[ext_resource type="PackedScene" uid="uid://b0lvfjr4ff8hl" path="res://game/actors/player.tscn" id="14_6h58r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jxl8w"]
 size = Vector3(17.8, 5, 17.8)
@@ -22,7 +20,7 @@ size = Vector3(17.8, 5, 17.8)
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_n6nv3")
-_player = NodePath("Player")
+_player = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1593920821]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
@@ -99,11 +97,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.7)
 
 [node name="MemoryReveal" parent="." unique_id=1492686143 instance=ExtResource("12_f4h61")]
 unique_name_in_owner = true
-
-[node name="Lights" parent="." unique_id=1637738480 instance=ExtResource("2_d3u6q")]
-
-[node name="Player" parent="." unique_id=282310942 instance=ExtResource("14_6h58r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 7.686843)
 
 [connection signal="interaction_triggered" from="Memory/Chest" to="." method="_on_chest_interaction_triggered"]
 [connection signal="dismissed" from="MemoryReveal" to="." method="_on_memory_reveal_dismissed"]
