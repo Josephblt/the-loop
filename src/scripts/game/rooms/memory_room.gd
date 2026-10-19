@@ -15,13 +15,18 @@ func _init(player: Player = null, memory: Memory = Memory.new()) -> void:
 	_player = player
 
 
-func configure(player: Player, memory: Memory) -> void:
+func _ready() -> void:
+	if _memory.revealed:
+		chest.open_immediately()
+
+
+func setup_scene(player: Player, memory: Memory) -> void:
 	_player = player
 	_memory = memory
 
 
 func _on_chest_interaction_triggered() -> void:
-	memory_reveal.reveal(_memory._description)
+	memory_reveal.reveal(_memory.reveal())
 
 
 func _on_memory_reveal_dismissed() -> void:

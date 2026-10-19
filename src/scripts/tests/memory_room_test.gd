@@ -14,5 +14,5 @@ func _ready() -> void:
 	memory.revealed = memory_revealed
 
 	var memory_room: MemoryRoom = MEMORY_ROOM_SCENE.instantiate() as MemoryRoom
-	memory_room.configure(player, memory)
+	memory_room.setup_scene(player, memory)
 	add_child(memory_room)
