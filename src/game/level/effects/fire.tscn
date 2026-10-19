@@ -54,16 +54,15 @@ color_ramp = SubResource("Gradient_g2hq4")
 script = ExtResource("1_fire")
 
 [node name="Light" type="OmniLight3D" parent="." unique_id=1664883696]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0358921, 0.07209913, -0.06196992)
 light_color = Color(0.7882353, 0.40392157, 0.14117648, 1)
-light_energy = 2.2002368
+light_energy = 2.0
 light_specular = 5.0
 light_cull_mask = 4293918721
 shadow_enabled = true
 shadow_opacity = 0.75
 shadow_caster_mask = 4293918721
 distance_fade_enabled = true
-omni_range = 15.339301
+omni_range = 15.0
 script = ExtResource("3_fire_light")
 energy_variation = 0.5
 range_variation = 0.1

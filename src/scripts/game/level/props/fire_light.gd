@@ -1,4 +1,3 @@
-@tool
 class_name FireLight
 extends OmniLight3D
 
