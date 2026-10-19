@@ -11,7 +11,7 @@ var _player: Player
 
 
 func _ready() -> void:
-	if _memory.revealed:
+	if _memory and _memory.revealed:
 		chest.open_immediately()
 
 
