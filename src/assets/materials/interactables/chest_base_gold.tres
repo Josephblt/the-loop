@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://bonxf6u35e2d1"]
 
-[ext_resource type="Texture2D" uid="uid://d1htv1poctbcb" path="res://assets/textures/props/chest_base_gold.png" id="1_7qxxm"]
+[ext_resource type="Texture2D" uid="uid://d1htv1poctbcb" path="res://assets/textures/interactables/chest_base_gold.png" id="1_7qxxm"]
 
 [resource]
 resource_name = "ChestBaseGold_2_Material"

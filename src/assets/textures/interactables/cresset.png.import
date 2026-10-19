@@ -2,25 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cji3ms8u3icwx"
-path.s3tc="res://.godot/imported/altar.png-8225d0531673040f47b808a98d318ec5.s3tc.ctex"
+uid="uid://cs3ys44ittqo7"
+path.s3tc="res://.godot/imported/cresset.png-f092627f7e8fe3a3def247a8d10cdac5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "91590cae53cea3552a35c3cc050ae598"
+"md5": "afdce9ac56f37e6ede1482a4f2e4de11"
 }
 
 [deps]
 
-source_file="res://assets/textures/props/altar.png"
-dest_files=["res://.godot/imported/altar.png-8225d0531673040f47b808a98d318ec5.s3tc.ctex"]
+source_file="res://assets/textures/interactables/cresset.png"
+dest_files=["res://.godot/imported/cresset.png-f092627f7e8fe3a3def247a8d10cdac5.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
 compress/high_quality=false
+compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
@@ -29,6 +30,8 @@ compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
+mipmaps/preserve_alpha_test_coverage=false
+mipmaps/alpha_test_threshold=0.5
 roughness/mode=0
 roughness/src_normal=""
 process/channel_remap/red=0

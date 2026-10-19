@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://dqkswpb147hep"]
 
-[ext_resource type="Texture2D" uid="uid://b170hc6sp5x33" path="res://assets/textures/props/chest_cover.png" id="1_5j3yk"]
+[ext_resource type="Texture2D" uid="uid://b170hc6sp5x33" path="res://assets/textures/interactables/chest_cover.png" id="1_5j3yk"]
 
 [resource]
 resource_name = "ChestCover_1_Material"

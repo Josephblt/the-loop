@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cgqydtb4q1c60"
-path="res://.godot/imported/altar.glb-21f78da4561ca243e2f46bfe4c78eea7.scn"
+uid="uid://c5bbngwaqsy0t"
+path="res://.godot/imported/chest_base_gold.glb-697084b5473a54fc885d720ae29a97c5.scn"
 
 [deps]
 
-source_file="res://assets/models/props/altar.glb"
-dest_files=["res://.godot/imported/altar.glb-21f78da4561ca243e2f46bfe4c78eea7.scn"]
+source_file="res://assets/models/interactables/chest_base_gold.glb"
+dest_files=["res://.godot/imported/chest_base_gold.glb-697084b5473a54fc885d720ae29a97c5.scn"]
 
 [params]
 
@@ -42,10 +42,10 @@ materials/extract_format=0
 materials/extract_path="res://assets/materials/props"
 _subresources={
 "materials": {
-"Altar_6_Material": {
+"ChestBaseGold_2_Material": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://assets/materials/props/altar.tres",
-"use_external/path": "uid://0sp8exud2fvb"
+"use_external/fallback_path": "res://assets/materials/props/chest_base_gold.tres",
+"use_external/path": "uid://bonxf6u35e2d1"
 }
 }
 }

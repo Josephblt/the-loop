@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c5bbngwaqsy0t"
-path="res://.godot/imported/chest_base_gold.glb-64d175bcc3c56a40d59bcaf403df2f44.scn"
+uid="uid://664dsb56tg6v"
+path="res://.godot/imported/chest_base.glb-84c6f92e7c6766b1fed97b80a3c35b61.scn"
 
 [deps]
 
-source_file="res://assets/models/props/chest_base_gold.glb"
-dest_files=["res://.godot/imported/chest_base_gold.glb-64d175bcc3c56a40d59bcaf403df2f44.scn"]
+source_file="res://assets/models/interactables/chest_base.glb"
+dest_files=["res://.godot/imported/chest_base.glb-84c6f92e7c6766b1fed97b80a3c35b61.scn"]
 
 [params]
 
@@ -17,6 +17,7 @@ nodes/root_type=""
 nodes/root_name=""
 nodes/root_script=null
 mesh_library/use_node_names_as_mesh_names=false
+mesh_library/create_categories_from_hierarchy=false
 array_mesh/deduplicate_surfaces=true
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -41,10 +42,10 @@ materials/extract_format=0
 materials/extract_path="res://assets/materials/props"
 _subresources={
 "materials": {
-"ChestBaseGold_2_Material": {
+"ChestBase_1_Material": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://assets/materials/props/chest_base_gold.tres",
-"use_external/path": "uid://bonxf6u35e2d1"
+"use_external/fallback_path": "res://assets/materials/props/chest_base.tres",
+"use_external/path": "uid://dr273ka7s5f3r"
 }
 }
 }

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cw2ft1rl2tvu1"
-path="res://.godot/imported/cresset.glb-2c2bbbfe99ddb1f4437357be020a625f.scn"
+uid="uid://cgqydtb4q1c60"
+path="res://.godot/imported/altar.glb-266c6403ca7dfacaa380e81b3c7a0642.scn"
 
 [deps]
 
-source_file="res://assets/models/props/cresset.glb"
-dest_files=["res://.godot/imported/cresset.glb-2c2bbbfe99ddb1f4437357be020a625f.scn"]
+source_file="res://assets/models/interactables/altar.glb"
+dest_files=["res://.godot/imported/altar.glb-266c6403ca7dfacaa380e81b3c7a0642.scn"]
 
 [params]
 
@@ -17,6 +17,7 @@ nodes/root_type=""
 nodes/root_name=""
 nodes/root_script=null
 mesh_library/use_node_names_as_mesh_names=false
+mesh_library/create_categories_from_hierarchy=false
 array_mesh/deduplicate_surfaces=true
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -41,10 +42,10 @@ materials/extract_format=0
 materials/extract_path="res://assets/materials/props"
 _subresources={
 "materials": {
-"WallLight_1_Material": {
+"Altar_6_Material": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://assets/materials/props/cresset.tres",
-"use_external/path": "uid://dtf5ga5d2o3gb"
+"use_external/fallback_path": "res://assets/materials/props/altar.tres",
+"use_external/path": "uid://0sp8exud2fvb"
 }
 }
 }

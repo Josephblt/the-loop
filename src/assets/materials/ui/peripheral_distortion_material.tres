@@ -1,9 +1,9 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://bjrhramjnbda0"]
 
-[ext_resource type="Shader" uid="uid://d0pidojf7n4ah" path="res://shaders/dream_veil.gdshader" id="1_jxl8w"]
+[ext_resource type="Shader" uid="uid://d0pidojf7n4ah" path="res://shaders/peripheral_distortion.gdshader" id="1_3687x"]
 
 [resource]
-shader = ExtResource("1_jxl8w")
+shader = ExtResource("1_3687x")
 shader_parameter/intensity = 0.0
 shader_parameter/pattern_scale = 8.00000037674012
 shader_parameter/flow_speed = 1.0000000475

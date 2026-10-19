@@ -5,8 +5,6 @@ var _collision_shapes: Array[CollisionShape3D] = []
 
 
 func _ready() -> void:
-	body_entered.connect(_on_body_entered)
-	body_exited.connect(_on_body_exited)
 	_collision_shapes = _find_sibling_collision_shapes()
 	_set_collision_shapes_enabled(false)
 

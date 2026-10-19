@@ -2,25 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cs3ys44ittqo7"
-path.s3tc="res://.godot/imported/cresset.png-9ccab55c9e9a715eca13ba03e185dac6.s3tc.ctex"
+uid="uid://bin2gxhatwvu2"
+path.s3tc="res://.godot/imported/chest_base.png-f5f4f73eea6494dfa1c60e548ad4d5cd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "afdce9ac56f37e6ede1482a4f2e4de11"
+"md5": "0382cae61660c6729ace7e00a28e60fd"
 }
 
 [deps]
 
-source_file="res://assets/textures/props/cresset.png"
-dest_files=["res://.godot/imported/cresset.png-9ccab55c9e9a715eca13ba03e185dac6.s3tc.ctex"]
+source_file="res://assets/textures/interactables/chest_base.png"
+dest_files=["res://.godot/imported/chest_base.png-f5f4f73eea6494dfa1c60e548ad4d5cd.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
 compress/high_quality=false
+compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
@@ -29,6 +30,8 @@ compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
+mipmaps/preserve_alpha_test_coverage=false
+mipmaps/alpha_test_threshold=0.5
 roughness/mode=0
 roughness/src_normal=""
 process/channel_remap/red=0

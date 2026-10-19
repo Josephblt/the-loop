@@ -6,12 +6,12 @@ uniform sampler2D texture;
 uniform vec2 tex_size;
 
 void vertex() {
-    vec3 local_pos = VERTEX;
+	vec3 local_pos = VERTEX;
 
-    float sway_factor = sin(TIME * sway_speed + local_pos.y * 2.0) * sway_amplitude;
+	float sway_factor = sin(TIME * sway_speed + local_pos.y * 2.0) * sway_amplitude;
 
 	if (local_pos.y <=2.75 && local_pos.y >1.5){
-    	sway_factor *= 0.65 - clamp(local_pos.y, 0,.5);
+		sway_factor *= 0.65 - clamp(local_pos.y, 0,.5);
 		local_pos.x += sway_factor;
 		
 	}
@@ -21,15 +21,15 @@ void vertex() {
 		
 	}
 	
-    VERTEX = local_pos;
+	VERTEX = local_pos;
 }
 
 void fragment(){
-    vec2 adjusted_uv = floor(UV * tex_size) / tex_size;
-    
-    vec4 tex_color = texture(texture, adjusted_uv);
-    vec3 linear_color = pow(tex_color.rgb, vec3(2.5));
-    ALBEDO = linear_color;
-    ALPHA = tex_color.a;
+	vec2 adjusted_uv = floor(UV * tex_size) / tex_size;
+	
+	vec4 tex_color = texture(texture, adjusted_uv);
+	vec3 linear_color = pow(tex_color.rgb, vec3(2.5));
+	ALBEDO = linear_color;
+	ALPHA = tex_color.a;
 	ROUGHNESS = 0.35;
 }

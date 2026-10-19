@@ -2,25 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b170hc6sp5x33"
-path.s3tc="res://.godot/imported/chest_cover.png-d545609a2865b0f457a71b5374b3f357.s3tc.ctex"
+uid="uid://cji3ms8u3icwx"
+path.s3tc="res://.godot/imported/altar.png-a5ffa45bdcffe210ac7f7384cd3b7527.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "8b4de1ecec53391b7d4ba2d0a029c06f"
+"md5": "91590cae53cea3552a35c3cc050ae598"
 }
 
 [deps]
 
-source_file="res://assets/textures/props/chest_cover.png"
-dest_files=["res://.godot/imported/chest_cover.png-d545609a2865b0f457a71b5374b3f357.s3tc.ctex"]
+source_file="res://assets/textures/interactables/altar.png"
+dest_files=["res://.godot/imported/altar.png-a5ffa45bdcffe210ac7f7384cd3b7527.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
 compress/high_quality=false
+compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
@@ -29,6 +30,8 @@ compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
+mipmaps/preserve_alpha_test_coverage=false
+mipmaps/alpha_test_threshold=0.5
 roughness/mode=0
 roughness/src_normal=""
 process/channel_remap/red=0

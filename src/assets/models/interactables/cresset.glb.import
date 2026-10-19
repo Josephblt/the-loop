@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://664dsb56tg6v"
-path="res://.godot/imported/chest_base.glb-c91e8d03e9ea979fb94310656e79d27b.scn"
+uid="uid://cw2ft1rl2tvu1"
+path="res://.godot/imported/cresset.glb-92d7b1cfb7055383537ce36816797f05.scn"
 
 [deps]
 
-source_file="res://assets/models/props/chest_base.glb"
-dest_files=["res://.godot/imported/chest_base.glb-c91e8d03e9ea979fb94310656e79d27b.scn"]
+source_file="res://assets/models/interactables/cresset.glb"
+dest_files=["res://.godot/imported/cresset.glb-92d7b1cfb7055383537ce36816797f05.scn"]
 
 [params]
 
@@ -17,6 +17,7 @@ nodes/root_type=""
 nodes/root_name=""
 nodes/root_script=null
 mesh_library/use_node_names_as_mesh_names=false
+mesh_library/create_categories_from_hierarchy=false
 array_mesh/deduplicate_surfaces=true
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -41,10 +42,10 @@ materials/extract_format=0
 materials/extract_path="res://assets/materials/props"
 _subresources={
 "materials": {
-"ChestBase_1_Material": {
+"WallLight_1_Material": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://assets/materials/props/chest_base.tres",
-"use_external/path": "uid://dr273ka7s5f3r"
+"use_external/fallback_path": "res://assets/materials/props/cresset.tres",
+"use_external/path": "uid://dtf5ga5d2o3gb"
 }
 }
 }

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cot8vcnllarr3"]
 
 [ext_resource type="Script" uid="uid://d4bwbfhahuvvm" path="res://scripts/game/ui/memory_reveal.gd" id="1_script"]
-[ext_resource type="Material" uid="uid://bjrhramjnbda0" path="res://assets/materials/ui/dream_veil_material.tres" id="2_woq7j"]
+[ext_resource type="Material" uid="uid://bjrhramjnbda0" path="res://assets/materials/ui/peripheral_distortion_material.tres" id="2_woq7j"]
 [ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="3_font"]
 [ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_material.tres" id="4_dissolve"]
 
