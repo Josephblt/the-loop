@@ -12,18 +12,13 @@
 [ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/interactables/altar.tscn" id="10_hqoex"]
 [ext_resource type="PackedScene" uid="uid://dk3ahea1354r8" path="res://game/interactables/chest.tscn" id="11_r0t1e"]
 [ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/memory_reveal.tscn" id="12_f4h61"]
+[ext_resource type="PackedScene" uid="uid://cqrto67h33ydp" path="res://game/behaviours/activator.tscn" id="13_n4fvx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jxl8w"]
-size = Vector3(17.8, 5, 17.8)
+size = Vector3(17.8, 5.2, 17.8)
 
-[node name="MemoryRoom" type="Area3D" unique_id=452683808]
-collision_layer = 8
-collision_mask = 2
+[node name="MemoryRoom" type="Node3D" unique_id=880386851]
 script = ExtResource("1_n6nv3")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1593920821]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
-shape = SubResource("BoxShape3D_jxl8w")
 
 [node name="Floor" type="Node" parent="." unique_id=1354259400]
 unique_name_in_owner = true
@@ -97,6 +92,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.7)
 [node name="MemoryReveal" parent="." unique_id=1492686143 instance=ExtResource("12_f4h61")]
 unique_name_in_owner = true
 
+[node name="Activator" parent="." unique_id=452683808 instance=ExtResource("13_n4fvx")]
+
+[node name="CollisionShape3D" parent="Activator" index="0" unique_id=1593920821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+shape = SubResource("BoxShape3D_jxl8w")
+
 [connection signal="interaction_triggered" from="Memory/Chest" to="." method="_on_chest_interaction_triggered"]
 [connection signal="dismissed" from="MemoryReveal" to="." method="_on_memory_reveal_dismissed"]
 [connection signal="revealed" from="MemoryReveal" to="." method="_on_memory_reveal_revealed"]
+
+[editable path="Activator"]

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cqrto67h33ydp"]
+
+[ext_resource type="Script" uid="uid://x6jy2wnkl1pn" path="res://scripts/game/behaviours/activator.gd" id="1_qlh5e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jxl8w"]
+
+[node name="Activator" type="Area3D" unique_id=452683808]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_qlh5e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1593920821]
+shape = SubResource("BoxShape3D_jxl8w")
