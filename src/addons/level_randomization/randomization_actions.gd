@@ -15,12 +15,12 @@ func _init(undo_redo: EditorUndoRedoManager, catalog: RandomizationCatalog ) -> 
 
 
 func count_randomizable_targets(scene_root: Node) -> int:
-	var entries: Array[RandomizationEntry] = _find_entries(scene_root)
+	var entries: Array[RandomizationEntry] = SceneRandomizer.find_entries(scene_root, _catalog)
 	return entries.size()
 
 
 func randomize_scene(scene_root: Node, settings: RandomizationSettings ) -> int:
-	var entries: Array[RandomizationEntry] = _find_entries(scene_root)
+	var entries: Array[RandomizationEntry] = SceneRandomizer.find_entries(scene_root, _catalog)
 	if entries.is_empty():
 		return 0
 
@@ -32,7 +32,7 @@ func randomize_scene(scene_root: Node, settings: RandomizationSettings ) -> int:
 		if !target_binding.profile:
 			continue
 
-		var identity: String = _get_identity(entry)
+		var identity: String = SceneRandomizer.get_identity(scene_root, entry)
 		var base_state: TransformRandomizationState = _get_base_state(entry, identity)
 		if !base_state:
 			continue
@@ -53,7 +53,7 @@ func randomize_scene(scene_root: Node, settings: RandomizationSettings ) -> int:
 
 
 func reset_scene(scene_root: Node) -> int:
-	var entries: Array[RandomizationEntry] = _find_entries(scene_root)
+	var entries: Array[RandomizationEntry] = SceneRandomizer.find_entries(scene_root, _catalog)
 	if entries.is_empty():
 		return 0
 
@@ -64,7 +64,8 @@ func reset_scene(scene_root: Node) -> int:
 		if !entry.node.has_meta(SEED_METADATA):
 			continue
 
-		var base_state: TransformRandomizationState = _get_base_state(entry, _get_identity(entry))
+		var identity: String = SceneRandomizer.get_identity(scene_root, entry)
+		var base_state: TransformRandomizationState = _get_base_state(entry, identity)
 		if !base_state:
 			continue
 
@@ -79,35 +80,6 @@ func reset_scene(scene_root: Node) -> int:
 	return reset_count
 
 
-func _find_entries(scene_root: Node) -> Array[RandomizationEntry]:
-	var entries: Array[RandomizationEntry] = []
-
-	for child: Node in scene_root.get_children():
-		_find_entries_recursive(child, entries)
-
-	return entries
-
-
-func _find_entries_recursive(node: Node, entries: Array[RandomizationEntry] ) -> void:
-	if node is Node3D:
-		var scene_instance: Node3D = node as Node3D
-		var binding: SceneRandomizationBinding = _catalog.find_binding(scene_instance)
-		if binding:
-			for target_binding: TargetRandomizationBinding in binding.targets:
-				if !target_binding:
-					continue
-				if !target_binding.profile:
-					continue
-				if !target_binding.get_target(scene_instance):
-					continue				
-				
-				var entry: RandomizationEntry = RandomizationEntry.new(scene_instance, binding, target_binding)
-				entries.append(entry)
-
-	for child: Node in node.get_children():
-		_find_entries_recursive(child, entries)
-
-
 func _get_base_state(entry: RandomizationEntry, identity: String) -> TransformRandomizationState:
 	var target: Node3D = entry.target_binding.get_target(entry.node)
 	if !target:
@@ -120,14 +92,6 @@ func _get_base_state(entry: RandomizationEntry, identity: String) -> TransformRa
 	var previous_seed: int = int(entry.node.get_meta(SEED_METADATA))
 	var profile: TransformRandomizationProfile = entry.target_binding.profile
 	return TransformRandomizer.recover_base(current_state.position, current_state.rotation, profile, previous_seed, identity)
-
-
-func _get_identity(entry: RandomizationEntry) -> String:
-	return "%s:%s:%s" % [
-		entry.binding.source_scene.resource_path,
-		str(entry.node.get_path()),
-		str(entry.target_binding.target_path),
-	]
 
 
 func _add_state_change(edited_root: Node, entry: RandomizationEntry, next_state: TransformRandomizationState, keep_seed: bool, seed: int ) -> void:
