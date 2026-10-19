@@ -119,6 +119,7 @@ gi_mode = 2
 mesh = SubResource("ArrayMesh_04snb")
 
 [node name="Fire" parent="MeshInstance3D" unique_id=1932394890 instance=ExtResource("2_tgbp8")]
+unique_name_in_owner = true
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.15, 0.9499999, 0.05)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1210143456]

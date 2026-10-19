@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cvnpe5drc4s7q"]
+
+[ext_resource type="PackedScene" uid="uid://c52ht1hba0la" path="res://game/interactables/cresset.tscn" id="1_xnwon"]
+
+[node name="MiddleCresset" type="Node3D" unique_id=528922892]
+
+[node name="Cresset" parent="." unique_id=865238 instance=ExtResource("1_xnwon")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 4, -1.9)

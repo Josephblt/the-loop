@@ -11,15 +11,21 @@ var _player: Player
 
 
 func _ready() -> void:
-	if _memory and _memory.revealed:
-		chest.open_immediately()
-
+	_setup_chest()
 	_setup_fire_fixtures()
 
 
 func setup_scene(player: Player, memory: Memory) -> void:
 	_player = player
 	_memory = memory
+
+
+func _setup_chest() -> void:
+	if !_memory:
+		return
+	
+	if _memory.revealed:
+		chest.open_immediately()
 
 
 func _setup_fire_fixtures() -> void:

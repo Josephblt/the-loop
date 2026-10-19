@@ -20,7 +20,13 @@ size = Vector3(17.8, 5.2, 17.8)
 [node name="MemoryRoom" type="Node3D" unique_id=880386851]
 script = ExtResource("1_n6nv3")
 
-[node name="Floor" type="Node" parent="." unique_id=1354259400]
+[node name="Activator" parent="." unique_id=452683808 instance=ExtResource("13_n4fvx")]
+
+[node name="CollisionShape3D" parent="Activator" index="0" unique_id=1593920821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+shape = SubResource("BoxShape3D_jxl8w")
+
+[node name="Floor" type="Node3D" parent="." unique_id=368624510]
 unique_name_in_owner = true
 
 [node name="BlockCrackedSM" parent="Floor" unique_id=1701017205 instance=ExtResource("2_n4fvx")]
@@ -52,7 +58,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 0, 5.6)
 [node name="StairsMD" parent="Floor" unique_id=244599151 instance=ExtResource("4_6h58r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.6)
 
-[node name="Fences" type="Node" parent="." unique_id=958499669]
+[node name="Fences" type="Node3D" parent="." unique_id=938368283]
 unique_name_in_owner = true
 
 [node name="CornerRight" parent="Fences" unique_id=2103190392 instance=ExtResource("5_2ejra")]
@@ -76,29 +82,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 [node name="SlopeCornerLeft" parent="Fences" unique_id=127332804 instance=ExtResource("9_n1g6i")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.6, 0)
 
-[node name="Memory" type="Node" parent="." unique_id=594985236]
+[node name="Interactables" type="Node3D" parent="." unique_id=1783042822]
 unique_name_in_owner = true
 
-[node name="AltarLeft" parent="Memory" unique_id=1654990680 instance=ExtResource("10_hqoex")]
+[node name="AltarLeft" parent="Interactables" unique_id=1654990680 instance=ExtResource("10_hqoex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, 4.2)
 
-[node name="AltarRight" parent="Memory" unique_id=1470566160 instance=ExtResource("10_hqoex")]
+[node name="AltarRight" parent="Interactables" unique_id=1470566160 instance=ExtResource("10_hqoex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 4.2)
 
-[node name="Chest" parent="Memory" unique_id=469060 instance=ExtResource("11_r0t1e")]
+[node name="Chest" parent="Interactables" unique_id=469060 instance=ExtResource("11_r0t1e")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.7)
 
 [node name="MemoryReveal" parent="." unique_id=1492686143 instance=ExtResource("12_f4h61")]
 unique_name_in_owner = true
 
-[node name="Activator" parent="." unique_id=452683808 instance=ExtResource("13_n4fvx")]
-
-[node name="CollisionShape3D" parent="Activator" index="0" unique_id=1593920821]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
-shape = SubResource("BoxShape3D_jxl8w")
-
-[connection signal="interaction_triggered" from="Memory/Chest" to="." method="_on_chest_interaction_triggered"]
+[connection signal="interaction_triggered" from="Interactables/Chest" to="." method="_on_chest_interaction_triggered"]
 [connection signal="dismissed" from="MemoryReveal" to="." method="_on_memory_reveal_dismissed"]
 [connection signal="revealed" from="MemoryReveal" to="." method="_on_memory_reveal_revealed"]
 
