@@ -15,6 +15,11 @@ func _init(player: Player = null, memory: Memory = Memory.new()) -> void:
 	_player = player
 
 
+func configure(player: Player, memory: Memory) -> void:
+	_player = player
+	_memory = memory
+
+
 func _on_chest_interaction_triggered() -> void:
 	memory_reveal.reveal(_memory._description)
 
