@@ -10,11 +10,6 @@ var _memory: Memory
 var _player: Player
 
 
-func _init(player: Player = null, memory: Memory = Memory.new()) -> void:
-	_memory = memory
-	_player = player
-
-
 func _ready() -> void:
 	if _memory.revealed:
 		chest.open_immediately()
