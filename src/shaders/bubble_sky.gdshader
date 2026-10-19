@@ -67,12 +67,12 @@ void fragment() {
 	float time = TIME * flow_speed;
 	vec3 position = direction * pattern_scale;
 
-	vec3 first_warp = vec3(
-		fbm(position * 0.65 + vec3(time, 0.0, -time * 0.37)),
-		fbm(position * 0.65 + vec3(7.3, time * 0.73, 2.1)),
-		fbm(position * 0.65 + vec3(-time * 0.41, 3.7, time * 0.59))
+	vec3 flow = vec3(
+		fbm(position * 0.5 + vec3(time * 0.31, 0.0, -time * 0.12)),
+		fbm(position * 0.5 + vec3(7.3, time * 0.23, 2.1)),
+		fbm(position * 0.5 + vec3(-time * 0.15, 3.7, time * 0.27))
 	);
-	first_warp = first_warp * 2.0 - 1.0;
+	flow = flow * 2.0 - 1.0;
 
 	vec3 warped_position = position + first_warp * distortion;
 	float thickness = fbm(warped_position + vec3(time * 0.19, -time * 0.13, time * 0.17));
