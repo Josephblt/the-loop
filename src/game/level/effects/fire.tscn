@@ -19,7 +19,9 @@ offsets = PackedFloat32Array(0, 0.5, 1)
 colors = PackedColorArray(1, 0.8392157, 0.6392157, 1, 0.7882353, 0.40392157, 0.14117648, 1, 0.15686275, 0.06666667, 0.023529412, 1)
 metadata/_snap_enabled = true
 
-[node name="FireParticleProbe" type="CPUParticles3D"]
+[node name="FireProbe" type="Node3D"]
+
+[node name="Particles" type="CPUParticles3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 layers = 4
 amount = 1000
