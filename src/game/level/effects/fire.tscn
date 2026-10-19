@@ -54,6 +54,7 @@ color_ramp = SubResource("Gradient_g2hq4")
 script = ExtResource("1_fire")
 
 [node name="Light" type="OmniLight3D" parent="." unique_id=1664883696]
+visible = false
 light_color = Color(0.7882353, 0.40392157, 0.14117648, 1)
 light_energy = 2.0
 light_specular = 5.0

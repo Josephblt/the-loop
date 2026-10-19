@@ -6,6 +6,10 @@ extends CPUParticles3D
 @onready var fire_audio: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
 
+func _ready() -> void:
+	fire_light.visible = emitting
+
+
 func is_lit() -> bool:
 	return emitting
 
