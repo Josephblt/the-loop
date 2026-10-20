@@ -10,6 +10,11 @@ func _ready() -> void:
 	_setup_fire_fixtures()
 
 
+func setup_scene(player: Player, memory: Memory) -> void:
+	_player = player
+	_memory = memory
+
+
 func _setup_fire_fixtures() -> void:
 	if !_memory:
 		return
@@ -26,11 +31,6 @@ func _setup_fire_fixtures() -> void:
 			fixture.set_lit(_memory.get_fire_fixture_state(fixture_path))
 
 		fixture.lit_changed.connect(_on_fire_fixture_lit_changed.bind(fixture_path))
-
-
-func setup_scene(player: Player, memory: Memory) -> void:
-	_player = player
-	_memory = memory
 
 
 func _on_fire_fixture_lit_changed(is_lit: bool, fixture_path: String) -> void:

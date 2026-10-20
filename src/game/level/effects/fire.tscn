@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://ci5ayfo0lm6xc"]
 
-[ext_resource type="Script" uid="uid://cur0f16avsiyu" path="res://scripts/game/level/effects/fire.gd" id="1_fire"]
+[ext_resource type="Script" uid="uid://cv04okb82d1gk" path="res://scripts/game/level/effects/fire.gd" id="1_fire"]
 [ext_resource type="AudioStream" uid="uid://ckh45fqhwxb8s" path="res://assets/sounds/sfx/flame/flame.tres" id="2_83v8r"]
-[ext_resource type="Script" uid="uid://brr0fl1vysxrw" path="res://scripts/game/level/effects/fire_light.gd" id="3_fire_light"]
+[ext_resource type="Script" uid="uid://8vxf7bqudb3r" path="res://scripts/game/level/effects/fire_light.gd" id="3_fire_light"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya6m2"]
 shading_mode = 0
@@ -28,7 +28,6 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 layers = 4
 amount = 1000
 lifetime = 0.25
-preprocess = 1.0
 speed_scale = 0.25
 explosiveness = 0.1
 randomness = 1.0
@@ -41,7 +40,7 @@ particle_flag_rotate_y = true
 direction = Vector3(0, 1, 0)
 spread = 5.0
 gravity = Vector3(0, 15, 0)
-initial_velocity_min = 25.0
+initial_velocity_min = 1.0
 initial_velocity_max = 25.0
 angular_velocity_min = -45.0
 angular_velocity_max = 45.0
@@ -53,7 +52,7 @@ scale_amount_curve = SubResource("Curve_7qf2r")
 color_ramp = SubResource("Gradient_g2hq4")
 script = ExtResource("1_fire")
 
-[node name="Light" type="OmniLight3D" parent="." unique_id=1664883696]
+[node name="Light" type="OmniLight3D" parent="." unique_id=1717417782]
 light_color = Color(0.7882353, 0.40392157, 0.14117648, 1)
 light_energy = 2.0
 light_specular = 5.0

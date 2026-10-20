@@ -17,8 +17,8 @@ const MEMORY_ROOM_SCENE: PackedScene = preload("res://game/rooms/memory_room.tsc
 func _ready() -> void:
 	var memory: Memory = Memory.new(memory_description)
 	memory.revealed = memory_revealed
-	memory.set_fire_fixture_state("Interactables/AltarLeft", altar_left_active)
-	memory.set_fire_fixture_state("Interactables/AltarRight", altar_right_active)
+	memory.set_fire_fixture_state("Interactables/Altars/AltarLeft", altar_left_active)
+	memory.set_fire_fixture_state("Interactables/Altars/AltarRight", altar_right_active)
 
 	var memory_room: MemoryRoom = MEMORY_ROOM_SCENE.instantiate() as MemoryRoom
 	if randomize_scene:

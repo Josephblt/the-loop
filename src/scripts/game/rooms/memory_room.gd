@@ -56,9 +56,9 @@ func _on_chest_interaction_triggered() -> void:
 	memory_reveal.reveal(_memory.reveal())
 
 
-func _on_memory_reveal_dismissed() -> void:
-	_player.resume_controls()
-
-
-func _on_memory_reveal_revealed() -> void:
+func _on_memory_revealed() -> void:
 	_player.pause_controls()
+
+
+func _on_memory_dismissed() -> void:
+	_player.resume_controls()

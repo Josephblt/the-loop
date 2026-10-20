@@ -85,10 +85,12 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1
 [node name="Interactables" type="Node3D" parent="." unique_id=1783042822]
 unique_name_in_owner = true
 
-[node name="AltarLeft" parent="Interactables" unique_id=1654990680 instance=ExtResource("10_hqoex")]
+[node name="Altars" type="Node3D" parent="Interactables" unique_id=1207596977]
+
+[node name="AltarLeft" parent="Interactables/Altars" unique_id=1654990680 instance=ExtResource("10_hqoex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, 4.2)
 
-[node name="AltarRight" parent="Interactables" unique_id=1470566160 instance=ExtResource("10_hqoex")]
+[node name="AltarRight" parent="Interactables/Altars" unique_id=1470566160 instance=ExtResource("10_hqoex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 4.2)
 
 [node name="Chest" parent="Interactables" unique_id=469060 instance=ExtResource("11_r0t1e")]
@@ -99,7 +101,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.7)
 unique_name_in_owner = true
 
 [connection signal="interaction_triggered" from="Interactables/Chest" to="." method="_on_chest_interaction_triggered"]
-[connection signal="dismissed" from="MemoryReveal" to="." method="_on_memory_reveal_dismissed"]
-[connection signal="revealed" from="MemoryReveal" to="." method="_on_memory_reveal_revealed"]
+[connection signal="dismissed" from="MemoryReveal" to="." method="_on_memory_dismissed"]
+[connection signal="revealed" from="MemoryReveal" to="." method="_on_memory_revealed"]
 
 [editable path="Activator"]

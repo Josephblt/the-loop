@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://80qlq52742m8"]
 
+[ext_resource type="Script" uid="uid://75a75si3nfkr" path="res://scripts/game/rooms/denial_room.gd" id="1_5c8u3"]
 [ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="1_eg3ab"]
 [ext_resource type="PackedScene" uid="uid://coql64ga8pi0u" path="res://game/level/blocks/block_cracked_md.tscn" id="3_5c8u3"]
 [ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="4_5f034"]
@@ -14,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dk3ahea1354r8" path="res://game/interactables/chest.tscn" id="11_mdrh3"]
 
 [node name="DenialRoom" type="Node3D" unique_id=496749782]
+script = ExtResource("1_5c8u3")
 
 [node name="Floor" type="Node3D" parent="." unique_id=489162263]
 

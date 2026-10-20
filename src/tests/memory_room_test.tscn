@@ -6,6 +6,9 @@
 
 [node name="MemoryRoomTest" type="Node3D" unique_id=2059004775]
 script = ExtResource("1_script")
+memory_revealed = true
+altar_left_active = false
+altar_right_active = false
 
 [node name="Lights" parent="." unique_id=1886347259 instance=ExtResource("2_lights")]
 
