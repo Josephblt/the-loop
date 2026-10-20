@@ -1,1 +1,2 @@
-extends Node
+class_name BargainingRoom
+extends Node3D
