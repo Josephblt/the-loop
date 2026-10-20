@@ -44,7 +44,7 @@ _subresources={
 "materials": {
 "ChestBase_1_Material": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://assets/materials/props/chest_base.tres",
+"use_external/fallback_path": "res://assets/materials/interactables/chest_base.tres",
 "use_external/path": "uid://dr273ka7s5f3r"
 }
 }

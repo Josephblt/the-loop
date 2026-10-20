@@ -44,7 +44,7 @@ _subresources={
 "materials": {
 "ChestCover_1_Material": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://assets/materials/props/chest_cover.tres",
+"use_external/fallback_path": "res://assets/materials/interactables/chest_cover.tres",
 "use_external/path": "uid://dqkswpb147hep"
 }
 }

@@ -44,7 +44,7 @@ _subresources={
 "materials": {
 "WallLight_1_Material": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://assets/materials/props/cresset.tres",
+"use_external/fallback_path": "res://assets/materials/interactables/cresset.tres",
 "use_external/path": "uid://dtf5ga5d2o3gb"
 }
 }
