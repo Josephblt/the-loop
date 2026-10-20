@@ -33,7 +33,6 @@ explosiveness = 0.1
 randomness = 1.0
 lifetime_randomness = 1.0
 draw_order = 2
-mesh = SubResource("BoxMesh_imi2h")
 emission_shape = 1
 emission_sphere_radius = 4.0
 particle_flag_rotate_y = true
