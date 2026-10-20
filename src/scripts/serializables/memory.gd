@@ -2,8 +2,8 @@ class_name Memory
 
 
 var _description: String
-var revealed: bool = false
 var _fire_fixture_states: Dictionary[String, bool] = {}
+var revealed: bool = false
 
 
 func _init(memory_description: String = "") -> void:
