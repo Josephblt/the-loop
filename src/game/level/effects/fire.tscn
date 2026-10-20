@@ -23,6 +23,7 @@ metadata/_snap_enabled = true
 
 [node name="Particles" type="CPUParticles3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+emitting = false
 layers = 4
 amount = 1000
 lifetime = 0.25
