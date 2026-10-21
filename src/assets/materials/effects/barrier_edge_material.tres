@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://shaders/barrier_edge.gdshader" id="1_edge"]
+
+[resource]
+render_priority = 2
+shader = ExtResource("1_edge")
+shader_parameter/barrier_outline = Color(0.88235295, 0.8, 1, 1)
+shader_parameter/edge_size = 0.65
+shader_parameter/edge_softness = 0.04
+shader_parameter/edge_intensity = 3.0
+shader_parameter/edge_pulse_speed = 3.0
+shader_parameter/edge_flow_speed = 2.0
+shader_parameter/edge_vibration = 0.025
