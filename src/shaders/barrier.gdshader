@@ -7,6 +7,7 @@ uniform vec4 barrier_color : source_color = vec4(0.094, 0.043, 0.161, 0.58);
 uniform vec4 dissolve_color : source_color = vec4(0.459, 0.322, 0.620, 0.9);
 uniform vec4 edge_color : source_color = vec4(0.882, 0.8, 1.0, 1.0);
 uniform float emission_strength : hint_range(0.0, 8.0) = 2.5;
+uniform float edge_width : hint_range(0.001, 0.2) = 0.035;
 
 group_uniforms Dissolve;
 
@@ -94,16 +95,22 @@ void fragment() {
 		formation_threshold + dissolve_width + softness,
 		formation_position
 	);
+	formation_edge *= 1.0 - smoothstep(0.92, 1.0, formation_amount);
+
+	float edge_distance = min(min(UV.x, 1.0 - UV.x), min(UV.y, 1.0 - UV.y));
+	float perimeter_edge = 1.0 - smoothstep(edge_width, edge_width + softness, edge_distance);
+	perimeter_edge *= formed;
 
 	vec3 surface_color = mix(barrier_color.rgb, dissolve_color.rgb, dense_region);
-	float luminous_edge = max(dissolve_edge, formation_edge);
+	float luminous_edge = max(dissolve_edge, max(formation_edge, perimeter_edge));
 	surface_color = mix(surface_color, edge_color.rgb, luminous_edge);
 
 	float surface_alpha = mix(barrier_color.a * 0.3, barrier_color.a, dense_region);
 	surface_alpha = max(surface_alpha, dissolve_color.a * dissolve_edge);
-	surface_alpha = max(surface_alpha, edge_color.a * formation_edge);
+	surface_alpha = max(surface_alpha, edge_color.a * max(formation_edge, perimeter_edge));
 
 	ALBEDO = surface_color;
-	EMISSION = mix(dissolve_color.rgb, edge_color.rgb, formation_edge) * luminous_edge * emission_strength;
+	EMISSION = mix(dissolve_color.rgb, edge_color.rgb, max(formation_edge, perimeter_edge));
+	EMISSION *= luminous_edge * emission_strength;
 	ALPHA = surface_alpha * formed;
 }
