@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bie4ft3qusmnk"]
 
 [ext_resource type="Script" uid="uid://cld4jcite67wd" path="res://scripts/tests/depression_room_test.gd" id="1_30e3m"]
-[ext_resource type="PackedScene" uid="uid://dt4q24uysybli" path="res://game/level/effects/lights.tscn" id="2_7rc7p"]
+[ext_resource type="PackedScene" uid="uid://dt4q24uysybli" path="res://game/effects/lights.tscn" id="2_7rc7p"]
 [ext_resource type="PackedScene" uid="uid://b0lvfjr4ff8hl" path="res://game/actors/player.tscn" id="3_pjo0v"]
 
 [node name="DepressionRoomTest" type="Node3D" unique_id=2059004775]
