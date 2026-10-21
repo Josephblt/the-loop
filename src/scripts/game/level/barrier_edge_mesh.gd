@@ -2,7 +2,7 @@ class_name BarrierEdgeMesh
 extends RefCounted
 
 
-static func create(polygon: PackedVector2Array, width: float) -> ArrayMesh:
+static func create(polygon: PackedVector2Array, width: float, depth: float) -> ArrayMesh:
 	var mesh: ArrayMesh = ArrayMesh.new()
 	if polygon.size() < 3 or width <= 0.0:
 		return mesh
@@ -27,7 +27,8 @@ static func create(polygon: PackedVector2Array, width: float) -> ArrayMesh:
 			outward_normals[index],
 			outward_normals[next_index],
 			start_offset,
-			end_offset
+			end_offset,
+			depth
 		)
 
 	surface.commit(mesh)
@@ -102,17 +103,34 @@ static func _add_quad(
 	start_normal: Vector2,
 	end_normal: Vector2,
 	start_offset: float,
-	end_offset: float
+	end_offset: float,
+	depth: float
 ) -> void:
-	_add_vertex(surface, outer_start, start_normal, Vector2(0.0, start_offset))
-	_add_vertex(surface, outer_end, end_normal, Vector2(0.0, end_offset))
-	_add_vertex(surface, inner_end, end_normal, Vector2(1.0, end_offset))
-	_add_vertex(surface, outer_start, start_normal, Vector2(0.0, start_offset))
-	_add_vertex(surface, inner_end, end_normal, Vector2(1.0, end_offset))
-	_add_vertex(surface, inner_start, start_normal, Vector2(1.0, start_offset))
+	var front_z: float = 0.002
+	var back_z: float = -depth - 0.002
+	_add_vertex(surface, outer_start, start_normal, Vector2(0.0, start_offset), front_z, 1.0)
+	_add_vertex(surface, outer_end, end_normal, Vector2(0.0, end_offset), front_z, 1.0)
+	_add_vertex(surface, inner_end, end_normal, Vector2(1.0, end_offset), front_z, 1.0)
+	_add_vertex(surface, outer_start, start_normal, Vector2(0.0, start_offset), front_z, 1.0)
+	_add_vertex(surface, inner_end, end_normal, Vector2(1.0, end_offset), front_z, 1.0)
+	_add_vertex(surface, inner_start, start_normal, Vector2(1.0, start_offset), front_z, 1.0)
+	_add_vertex(surface, outer_start, start_normal, Vector2(0.0, start_offset), back_z, -1.0)
+	_add_vertex(surface, inner_end, end_normal, Vector2(1.0, end_offset), back_z, -1.0)
+	_add_vertex(surface, outer_end, end_normal, Vector2(0.0, end_offset), back_z, -1.0)
+	_add_vertex(surface, outer_start, start_normal, Vector2(0.0, start_offset), back_z, -1.0)
+	_add_vertex(surface, inner_start, start_normal, Vector2(1.0, start_offset), back_z, -1.0)
+	_add_vertex(surface, inner_end, end_normal, Vector2(1.0, end_offset), back_z, -1.0)
 
 
-static func _add_vertex(surface: SurfaceTool, point: Vector2, normal: Vector2, uv: Vector2) -> void:
-	surface.set_normal(Vector3(normal.x, normal.y, 0.0))
+static func _add_vertex(
+	surface: SurfaceTool,
+	point: Vector2,
+	outward: Vector2,
+	uv: Vector2,
+	z: float,
+	normal_z: float
+) -> void:
+	surface.set_normal(Vector3(0.0, 0.0, normal_z))
 	surface.set_uv(uv)
-	surface.add_vertex(Vector3(point.x, point.y, 0.0))
+	surface.set_uv2(outward * 0.5 + Vector2(0.5, 0.5))
+	surface.add_vertex(Vector3(point.x, point.y, z))
