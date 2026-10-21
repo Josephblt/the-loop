@@ -173,7 +173,7 @@ func _save_catalog() -> void:
 
 	var save_error: Error = ResourceSaver.save(_catalog, catalog_path)
 	if save_error == OK:
-		_catalog_status_label.text = "Catalog saved."
+		_catalog_status_label.text = "Catalog saved. " + Time.get_date_string_from_system(true) + " " + Time.get_time_string_from_system(true)
 		return
 
 	_catalog_status_label.text = "Catalog save failed: %s" % error_string(save_error)

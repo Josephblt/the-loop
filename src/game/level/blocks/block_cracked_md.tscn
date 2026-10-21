@@ -40,19 +40,21 @@ size = Vector3(6.4, 1.6, 6.4)
 [sub_resource type="BoxShape3D" id="BoxShape3D_6x5e7"]
 size = Vector3(6.4, 1.6, 6.4)
 
-[node name="BlockCrackedMD" type="StaticBody3D" unique_id=938443766]
-collision_mask = 3
+[node name="BlockCrackedMD" type="Node3D" unique_id=133422716]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=837994193]
-unique_name_in_owner = true
-transform = Transform3D(1, -4.5512974e-10, -5.3263204e-07, 4.5513002e-10, 1, 5.201485e-10, 5.3263204e-07, -5.201487e-10, 1, 0, 0, 0)
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=938443766]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+collision_mask = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=837994193]
+transform = Transform3D(1, -4.5512974e-10, -5.3263204e-07, 4.5513002e-10, 1, 5.201485e-10, 5.3263204e-07, -5.201487e-10, 1, 0, -0.85, 0)
 gi_mode = 2
 mesh = SubResource("ArrayMesh_mit2r")
 
-[node name="OccluderInstance3D" type="OccluderInstance3D" parent="MeshInstance3D" unique_id=284903183]
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="StaticBody3D/MeshInstance3D" unique_id=284903183]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 occluder = SubResource("BoxOccluder3D_udh8u")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1697028890]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1697028890]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.050000012, 0)
 shape = SubResource("BoxShape3D_6x5e7")

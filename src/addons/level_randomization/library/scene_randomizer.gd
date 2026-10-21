@@ -9,6 +9,8 @@ const DEFAULT_CATALOG: RandomizationCatalog = preload("res://addons/level_random
 static func randomize_scene(scene_root: Node, seed: int) -> int:
 	var entries: Array[RandomizationEntry] = find_entries(scene_root, DEFAULT_CATALOG)
 	var randomized_count: int = 0
+	print("Randomizing scene with seed: %d" % seed)
+	print("Found %d entries to randomize." % entries.size())
 
 	for entry: RandomizationEntry in entries:
 		var target: Node3D = entry.target_binding.get_target(entry.node)

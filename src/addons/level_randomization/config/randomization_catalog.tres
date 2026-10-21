@@ -1,64 +1,185 @@
 [gd_resource type="Resource" script_class="RandomizationCatalog" format=3 uid="uid://bderd85fdsh2j"]
 
 [ext_resource type="Script" uid="uid://ctpnaaog7r632" path="res://addons/level_randomization/scene_randomization_binding.gd" id="2_binding"]
-[ext_resource type="PackedScene" uid="uid://pndqjwooagyb" path="res://game/level/blocks/block_cracked_lg.tscn" id="2_yjsdp"]
+[ext_resource type="Script" uid="uid://2nfpsw4nlq34" path="res://addons/level_randomization/target_randomization_binding.gd" id="2_eshgl"]
+[ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/interactables/altar.tscn" id="2_yjsdp"]
 [ext_resource type="Script" uid="uid://wckqm3xpf3j" path="res://addons/level_randomization/randomization_catalog.gd" id="3_catalog"]
 [ext_resource type="Script" uid="uid://lovaxrlm1xea" path="res://addons/level_randomization/library/transform_randomization_profile.gd" id="4_yxs3g"]
-[ext_resource type="PackedScene" uid="uid://coql64ga8pi0u" path="res://game/level/blocks/block_cracked_md.tscn" id="5_yxs3g"]
-[ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="6_eh10b"]
-[ext_resource type="PackedScene" uid="uid://clp0iyaq2rd17" path="res://game/level/stairs/stairs_lg.tscn" id="7_aplif"]
-[ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="8_kjinm"]
-[ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/interactables/altar.tscn" id="9_aplif"]
-[ext_resource type="PackedScene" uid="uid://dk3ahea1354r8" path="res://game/interactables/chest.tscn" id="10_kjinm"]
-[ext_resource type="Script" uid="uid://2nfpsw4nlq34" path="res://addons/level_randomization/target_randomization_binding.gd" id="10_target"]
-[ext_resource type="PackedScene" uid="uid://c52ht1hba0la" path="res://game/interactables/cresset.tscn" id="11_8rg4g"]
-[ext_resource type="PackedScene" uid="uid://1e84bakpvbwk" path="res://game/level/fences/parts/fence.tscn" id="12_cy3lc"]
-[ext_resource type="PackedScene" uid="uid://bx0ey0omu3158" path="res://game/level/fences/parts/post.tscn" id="13_bch3r"]
+[ext_resource type="PackedScene" uid="uid://dk3ahea1354r8" path="res://game/interactables/chest.tscn" id="5_yxs3g"]
+[ext_resource type="PackedScene" uid="uid://cvnpe5drc4s7q" path="res://game/interactables/cresset.tscn" id="6_eh10b"]
+[ext_resource type="PackedScene" uid="uid://pndqjwooagyb" path="res://game/level/blocks/block_cracked_lg.tscn" id="7_uuuyl"]
+[ext_resource type="PackedScene" uid="uid://coql64ga8pi0u" path="res://game/level/blocks/block_cracked_md.tscn" id="8_8s35w"]
+[ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="9_aplif"]
+[ext_resource type="PackedScene" uid="uid://1e84bakpvbwk" path="res://game/level/fences/parts/fence.tscn" id="10_kjinm"]
+[ext_resource type="PackedScene" uid="uid://bx0ey0omu3158" path="res://game/level/fences/parts/post.tscn" id="11_8rg4g"]
+[ext_resource type="PackedScene" uid="uid://clp0iyaq2rd17" path="res://game/level/stairs/stairs_lg.tscn" id="12_cy3lc"]
+[ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="13_bch3r"]
+[ext_resource type="PackedScene" uid="uid://v8j2a1egqxgo" path="res://game/level/walls/gate.tscn" id="14_6svt5"]
+[ext_resource type="PackedScene" uid="uid://dfwbglgsmyokl" path="res://game/level/walls/wall_normal_lg.tscn" id="14_injm3"]
+[ext_resource type="PackedScene" uid="uid://b6fydse31tnyb" path="res://game/level/walls/wall_broken_md.tscn" id="15_bnpqw"]
 
-[sub_resource type="Resource" id="Resource_dwnuq"]
+[sub_resource type="Resource" id="Resource_eh10b"]
 script = ExtResource("4_yxs3g")
 randomize_position = true
-position_variation = Vector3(0.05, 0, 0.05)
+position_variation = Vector3(0.05, 0.01, 0.05)
 randomize_rotation = true
-rotation_variation_degrees = Vector3(0.1, 15, 0)
+rotation_variation_degrees = Vector3(0.1, 15, 0.1)
 randomize_rotation_in_steps = true
 rotation_step_degrees = Vector3(0, 90, 0)
 metadata/_custom_type_script = "uid://lovaxrlm1xea"
 
-[sub_resource type="Resource" id="Resource_ofa07"]
-resource_name = "Altar"
-script = ExtResource("10_target")
-target_path = NodePath(".")
-profile = SubResource("Resource_dwnuq")
+[sub_resource type="Resource" id="Resource_yjsdp"]
+resource_name = "StaticBody3D"
+script = ExtResource("2_eshgl")
+target_path = NodePath("StaticBody3D")
+profile = SubResource("Resource_eh10b")
 metadata/_custom_type_script = "uid://2nfpsw4nlq34"
 
-[sub_resource type="Resource" id="Resource_injm3"]
+[sub_resource type="Resource" id="Resource_2vw7l"]
 resource_name = "altar.tscn"
 script = ExtResource("2_binding")
-source_scene = ExtResource("9_aplif")
-targets = Array[ExtResource("10_target")]([SubResource("Resource_ofa07")])
+source_scene = ExtResource("2_yjsdp")
+targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_yjsdp")])
 metadata/_custom_type_script = "uid://ctpnaaog7r632"
 
-[sub_resource type="Resource" id="Resource_t25e1"]
+[sub_resource type="Resource" id="Resource_8s35w"]
 script = ExtResource("4_yxs3g")
 randomize_position = true
-position_variation = Vector3(0.5, 0, 0.5)
+position_variation = Vector3(0.1, 0.01, 0.1)
 randomize_rotation = true
 rotation_variation_degrees = Vector3(0.1, 10, 0.1)
 metadata/_custom_type_script = "uid://lovaxrlm1xea"
 
-[sub_resource type="Resource" id="Resource_57g57"]
-resource_name = "Chest"
-script = ExtResource("10_target")
-target_path = NodePath(".")
-profile = SubResource("Resource_t25e1")
+[sub_resource type="Resource" id="Resource_uuuyl"]
+resource_name = "StaticBody3D"
+script = ExtResource("2_eshgl")
+target_path = NodePath("StaticBody3D")
+profile = SubResource("Resource_8s35w")
 metadata/_custom_type_script = "uid://2nfpsw4nlq34"
 
-[sub_resource type="Resource" id="Resource_dpecs"]
+[sub_resource type="Resource" id="Resource_yxs3g"]
 resource_name = "chest.tscn"
 script = ExtResource("2_binding")
+source_scene = ExtResource("5_yxs3g")
+targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_uuuyl")])
+metadata/_custom_type_script = "uid://ctpnaaog7r632"
+
+[sub_resource type="Resource" id="Resource_m41sm"]
+script = ExtResource("4_yxs3g")
+randomize_position = true
+position_variation = Vector3(0.01, 0.01, 0.01)
+randomize_rotation = true
+rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
+metadata/_custom_type_script = "uid://lovaxrlm1xea"
+
+[sub_resource type="Resource" id="Resource_xip04"]
+resource_name = "StaticBody3D"
+script = ExtResource("2_eshgl")
+target_path = NodePath("StaticBody3D")
+profile = SubResource("Resource_m41sm")
+metadata/_custom_type_script = "uid://2nfpsw4nlq34"
+
+[sub_resource type="Resource" id="Resource_aplif"]
+resource_name = "cresset.tscn"
+script = ExtResource("2_binding")
+source_scene = ExtResource("6_eh10b")
+targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_xip04")])
+metadata/_custom_type_script = "uid://ctpnaaog7r632"
+
+[sub_resource type="Resource" id="Resource_6svt5"]
+script = ExtResource("4_yxs3g")
+randomize_position = true
+position_variation = Vector3(0.01, 0.01, 0.01)
+randomize_rotation = true
+rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
+randomize_inversion = true
+inversion_rotation_degrees = Vector3(0, 180, 0)
+metadata/_custom_type_script = "uid://lovaxrlm1xea"
+
+[sub_resource type="Resource" id="Resource_bch3r"]
+resource_name = "StaticBody3D"
+script = ExtResource("2_eshgl")
+target_path = NodePath("StaticBody3D")
+profile = SubResource("Resource_6svt5")
+metadata/_custom_type_script = "uid://2nfpsw4nlq34"
+
+[sub_resource type="Resource" id="Resource_cy3lc"]
+resource_name = "block_cracked_lg.tscn"
+script = ExtResource("2_binding")
+source_scene = ExtResource("7_uuuyl")
+targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_bch3r")])
+metadata/_custom_type_script = "uid://ctpnaaog7r632"
+
+[sub_resource type="Resource" id="Resource_dwnuq"]
+script = ExtResource("4_yxs3g")
+randomize_position = true
+position_variation = Vector3(0.01, 0.01, 0.01)
+randomize_rotation = true
+rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
+randomize_inversion = true
+inversion_rotation_degrees = Vector3(0, 180, 0)
+metadata/_custom_type_script = "uid://lovaxrlm1xea"
+
+[sub_resource type="Resource" id="Resource_kjinm"]
+resource_name = "StaticBody3D"
+script = ExtResource("2_eshgl")
+target_path = NodePath("StaticBody3D")
+profile = SubResource("Resource_dwnuq")
+metadata/_custom_type_script = "uid://2nfpsw4nlq34"
+
+[sub_resource type="Resource" id="Resource_injm3"]
+resource_name = "block_cracked_md.tscn"
+script = ExtResource("2_binding")
+source_scene = ExtResource("8_8s35w")
+targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_kjinm")])
+metadata/_custom_type_script = "uid://ctpnaaog7r632"
+
+[sub_resource type="Resource" id="Resource_ofa07"]
+script = ExtResource("4_yxs3g")
+randomize_position = true
+position_variation = Vector3(0.01, 0.01, 0.01)
+randomize_rotation = true
+rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
+randomize_inversion = true
+inversion_rotation_degrees = Vector3(0, 180, 0)
+metadata/_custom_type_script = "uid://lovaxrlm1xea"
+
+[sub_resource type="Resource" id="Resource_8rg4g"]
+resource_name = "StaticBody3D"
+script = ExtResource("2_eshgl")
+target_path = NodePath("StaticBody3D")
+profile = SubResource("Resource_ofa07")
+metadata/_custom_type_script = "uid://2nfpsw4nlq34"
+
+[sub_resource type="Resource" id="Resource_bnpqw"]
+resource_name = "block_cracked_sm.tscn"
+script = ExtResource("2_binding")
+source_scene = ExtResource("9_aplif")
+targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_8rg4g")])
+metadata/_custom_type_script = "uid://ctpnaaog7r632"
+
+[sub_resource type="Resource" id="Resource_57g57"]
+script = ExtResource("4_yxs3g")
+randomize_position = true
+position_variation = Vector3(0.01, 0.01, 0.01)
+randomize_rotation = true
+rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
+randomize_inversion = true
+inversion_rotation_degrees = Vector3(0, 180, 0)
+metadata/_custom_type_script = "uid://lovaxrlm1xea"
+
+[sub_resource type="Resource" id="Resource_dpecs"]
+resource_name = "Fence"
+script = ExtResource("2_eshgl")
+target_path = NodePath(".")
+profile = SubResource("Resource_57g57")
+metadata/_custom_type_script = "uid://2nfpsw4nlq34"
+
+[sub_resource type="Resource" id="Resource_ek3qr"]
+resource_name = "fence.tscn"
+script = ExtResource("2_binding")
 source_scene = ExtResource("10_kjinm")
-targets = Array[ExtResource("10_target")]([SubResource("Resource_57g57")])
+targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_dpecs")])
 metadata/_custom_type_script = "uid://ctpnaaog7r632"
 
 [sub_resource type="Resource" id="Resource_so48a"]
@@ -67,95 +188,69 @@ randomize_position = true
 position_variation = Vector3(0.01, 0.01, 0.01)
 randomize_rotation = true
 rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
+randomize_rotation_in_steps = true
+rotation_step_degrees = Vector3(0, 90, 0)
 metadata/_custom_type_script = "uid://lovaxrlm1xea"
 
-[sub_resource type="Resource" id="Resource_nm8ve"]
-resource_name = "Cresset"
-script = ExtResource("10_target")
+[sub_resource type="Resource" id="Resource_t25e1"]
+resource_name = "Post"
+script = ExtResource("2_eshgl")
 target_path = NodePath(".")
 profile = SubResource("Resource_so48a")
 metadata/_custom_type_script = "uid://2nfpsw4nlq34"
 
 [sub_resource type="Resource" id="Resource_3uinr"]
-resource_name = "cresset.tscn"
+resource_name = "post.tscn"
 script = ExtResource("2_binding")
 source_scene = ExtResource("11_8rg4g")
-targets = Array[ExtResource("10_target")]([SubResource("Resource_nm8ve")])
+targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_t25e1")])
 metadata/_custom_type_script = "uid://ctpnaaog7r632"
 
-[sub_resource type="Resource" id="Resource_yjsdp"]
+[sub_resource type="Resource" id="Resource_76axb"]
 script = ExtResource("4_yxs3g")
 randomize_position = true
-position_variation = Vector3(0.05, 0, 0.05)
+position_variation = Vector3(0.01, 0.01, 0.01)
 randomize_rotation = true
 rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
-randomize_inversion = true
-inversion_rotation_degrees = Vector3(0, 180, 0)
 metadata/_custom_type_script = "uid://lovaxrlm1xea"
 
-[sub_resource type="Resource" id="Resource_eshgl"]
-resource_name = "BlockCrackedLG"
-script = ExtResource("10_target")
-target_path = NodePath(".")
-profile = SubResource("Resource_yjsdp")
+[sub_resource type="Resource" id="Resource_5qlpv"]
+resource_name = "StaticBody3D"
+script = ExtResource("2_eshgl")
+target_path = NodePath("StaticBody3D")
+profile = SubResource("Resource_76axb")
 metadata/_custom_type_script = "uid://2nfpsw4nlq34"
 
-[sub_resource type="Resource" id="Resource_11ucq"]
-resource_name = "block_cracked_lg.tscn"
+[sub_resource type="Resource" id="Resource_nm8ve"]
+resource_name = "stairs_lg.tscn"
 script = ExtResource("2_binding")
-source_scene = ExtResource("2_yjsdp")
-targets = Array[ExtResource("10_target")]([SubResource("Resource_eshgl")])
-metadata/_custom_type_script = "uid://ctpnaaog7r632"
-
-[sub_resource type="Resource" id="Resource_8s35w"]
-script = ExtResource("4_yxs3g")
-randomize_position = true
-position_variation = Vector3(0.05, 0, 0.05)
-randomize_rotation = true
-rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
-randomize_inversion = true
-inversion_rotation_degrees = Vector3(0, 180, 0)
-metadata/_custom_type_script = "uid://lovaxrlm1xea"
-
-[sub_resource type="Resource" id="Resource_eh10b"]
-resource_name = "BlockCrackedMD"
-script = ExtResource("10_target")
-target_path = NodePath(".")
-profile = SubResource("Resource_8s35w")
-metadata/_custom_type_script = "uid://2nfpsw4nlq34"
-
-[sub_resource type="Resource" id="Resource_yxs3g"]
-resource_name = "block_cracked_md.tscn"
-script = ExtResource("2_binding")
-source_scene = ExtResource("5_yxs3g")
-targets = Array[ExtResource("10_target")]([SubResource("Resource_eh10b")])
-metadata/_custom_type_script = "uid://ctpnaaog7r632"
-
-[sub_resource type="Resource" id="Resource_aplif"]
-script = ExtResource("4_yxs3g")
-randomize_position = true
-position_variation = Vector3(0.05, 0, 0.05)
-randomize_rotation = true
-rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
-randomize_inversion = true
-inversion_rotation_degrees = Vector3(0, 180, 0)
-metadata/_custom_type_script = "uid://lovaxrlm1xea"
-
-[sub_resource type="Resource" id="Resource_kjinm"]
-resource_name = "BlockCrackedSM"
-script = ExtResource("10_target")
-target_path = NodePath(".")
-profile = SubResource("Resource_aplif")
-metadata/_custom_type_script = "uid://2nfpsw4nlq34"
-
-[sub_resource type="Resource" id="Resource_uuuyl"]
-resource_name = "block_cracked_sm.tscn"
-script = ExtResource("2_binding")
-source_scene = ExtResource("6_eh10b")
-targets = Array[ExtResource("10_target")]([SubResource("Resource_kjinm")])
+source_scene = ExtResource("12_cy3lc")
+targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_5qlpv")])
 metadata/_custom_type_script = "uid://ctpnaaog7r632"
 
 [sub_resource type="Resource" id="Resource_2vt1l"]
+script = ExtResource("4_yxs3g")
+randomize_position = true
+position_variation = Vector3(0.01, 0.01, 0.01)
+randomize_rotation = true
+rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
+metadata/_custom_type_script = "uid://lovaxrlm1xea"
+
+[sub_resource type="Resource" id="Resource_qyxw7"]
+resource_name = "StaticBody3D"
+script = ExtResource("2_eshgl")
+target_path = NodePath("StaticBody3D")
+profile = SubResource("Resource_2vt1l")
+metadata/_custom_type_script = "uid://2nfpsw4nlq34"
+
+[sub_resource type="Resource" id="Resource_atqq1"]
+resource_name = "stairs_md.tscn"
+script = ExtResource("2_binding")
+source_scene = ExtResource("13_bch3r")
+targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_qyxw7")])
+metadata/_custom_type_script = "uid://ctpnaaog7r632"
+
+[sub_resource type="Resource" id="Resource_1001i"]
 script = ExtResource("4_yxs3g")
 randomize_position = true
 position_variation = Vector3(0.01, 0.01, 0.01)
@@ -165,87 +260,68 @@ randomize_inversion = true
 inversion_rotation_degrees = Vector3(0, 180, 0)
 metadata/_custom_type_script = "uid://lovaxrlm1xea"
 
-[sub_resource type="Resource" id="Resource_5qlpv"]
-resource_name = "Fence"
-script = ExtResource("10_target")
-target_path = NodePath(".")
-profile = SubResource("Resource_2vt1l")
+[sub_resource type="Resource" id="Resource_rjox2"]
+resource_name = "StaticBody3D"
+script = ExtResource("2_eshgl")
+target_path = NodePath("StaticBody3D")
+profile = SubResource("Resource_1001i")
 metadata/_custom_type_script = "uid://2nfpsw4nlq34"
 
-[sub_resource type="Resource" id="Resource_76axb"]
-resource_name = "fence.tscn"
+[sub_resource type="Resource" id="Resource_gx6no"]
+resource_name = "gate.tscn"
 script = ExtResource("2_binding")
-source_scene = ExtResource("12_cy3lc")
-targets = Array[ExtResource("10_target")]([SubResource("Resource_5qlpv")])
+source_scene = ExtResource("14_6svt5")
+targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_rjox2")])
 metadata/_custom_type_script = "uid://ctpnaaog7r632"
 
-[sub_resource type="Resource" id="Resource_kjtgv"]
+[sub_resource type="Resource" id="Resource_cukfe"]
 script = ExtResource("4_yxs3g")
 randomize_position = true
-position_variation = Vector3(0.01, 0, 0.01)
+position_variation = Vector3(0.01, 0.01, 0.01)
 randomize_rotation = true
 rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
-randomize_rotation_in_steps = true
-rotation_step_degrees = Vector3(0, 90, 0)
+randomize_inversion = true
+inversion_rotation_degrees = Vector3(0, 180, 0)
 metadata/_custom_type_script = "uid://lovaxrlm1xea"
 
-[sub_resource type="Resource" id="Resource_qyxw7"]
-resource_name = "Post"
-script = ExtResource("10_target")
-target_path = NodePath(".")
-profile = SubResource("Resource_kjtgv")
+[sub_resource type="Resource" id="Resource_jtfbt"]
+resource_name = "StaticBody3D"
+script = ExtResource("2_eshgl")
+target_path = NodePath("StaticBody3D")
+profile = SubResource("Resource_cukfe")
 metadata/_custom_type_script = "uid://2nfpsw4nlq34"
 
-[sub_resource type="Resource" id="Resource_atqq1"]
-resource_name = "post.tscn"
+[sub_resource type="Resource" id="Resource_6tptm"]
+resource_name = "wall_broken_md.tscn"
 script = ExtResource("2_binding")
-source_scene = ExtResource("13_bch3r")
-targets = Array[ExtResource("10_target")]([SubResource("Resource_qyxw7")])
+source_scene = ExtResource("15_bnpqw")
+targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_jtfbt")])
 metadata/_custom_type_script = "uid://ctpnaaog7r632"
 
-[sub_resource type="Resource" id="Resource_ek3qr"]
-script = ExtResource("4_yxs3g")
-position_variation = Vector3(0.05, 0, 0.05)
-randomize_rotation = true
-rotation_variation_degrees = Vector3(0.5, 0.5, 0)
-metadata/_custom_type_script = "uid://lovaxrlm1xea"
-
-[sub_resource type="Resource" id="Resource_bnpqw"]
-resource_name = "StairsLG"
-script = ExtResource("10_target")
-target_path = NodePath(".")
-profile = SubResource("Resource_ek3qr")
-metadata/_custom_type_script = "uid://2nfpsw4nlq34"
-
-[sub_resource type="Resource" id="Resource_8rg4g"]
-resource_name = "stairs_lg.tscn"
-script = ExtResource("2_binding")
-source_scene = ExtResource("7_aplif")
-targets = Array[ExtResource("10_target")]([SubResource("Resource_bnpqw")])
-metadata/_custom_type_script = "uid://ctpnaaog7r632"
-
-[sub_resource type="Resource" id="Resource_6svt5"]
+[sub_resource type="Resource" id="Resource_s5lip"]
 script = ExtResource("4_yxs3g")
 randomize_position = true
-position_variation = Vector3(0.05, 0, 0.05)
+position_variation = Vector3(0.01, 0.01, 0.01)
 randomize_rotation = true
-rotation_variation_degrees = Vector3(0.5, 0.5, 0.5)
+rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
+randomize_inversion = true
+inversion_rotation_degrees = Vector3(0, 180, 0)
 metadata/_custom_type_script = "uid://lovaxrlm1xea"
 
-[sub_resource type="Resource" id="Resource_bch3r"]
-resource_name = "StairsMD"
-script = ExtResource("10_target")
-target_path = NodePath(".")
-profile = SubResource("Resource_6svt5")
+[sub_resource type="Resource" id="Resource_v7bav"]
+resource_name = "StaticBody3D"
+script = ExtResource("2_eshgl")
+target_path = NodePath("StaticBody3D")
+profile = SubResource("Resource_s5lip")
 metadata/_custom_type_script = "uid://2nfpsw4nlq34"
 
-[sub_resource type="Resource" id="Resource_cy3lc"]
-resource_name = "stairs_md.tscn"
+[sub_resource type="Resource" id="Resource_kjtgv"]
+resource_name = "wall_normal_lg.tscn"
 script = ExtResource("2_binding")
-source_scene = ExtResource("8_kjinm")
-targets = Array[ExtResource("10_target")]([SubResource("Resource_bch3r")])
+source_scene = ExtResource("14_injm3")
+targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_v7bav")])
 metadata/_custom_type_script = "uid://ctpnaaog7r632"
 
 [resource]
 script = ExtResource("3_catalog")
-bindings = Array[ExtResource("2_binding")]([SubResource("Resource_injm3"), SubResource("Resource_dpecs"), SubResource("Resource_3uinr"), SubResource("Resource_11ucq"), SubResource("Resource_yxs3g"), SubResource("Resource_uuuyl"), SubResource("Resource_76axb"), SubResource("Resource_atqq1"), SubResource("Resource_8rg4g"), SubResource("Resource_cy3lc")])
+bindings = Array[ExtResource("2_binding")]([SubResource("Resource_2vw7l"), SubResource("Resource_yxs3g"), SubResource("Resource_aplif"), SubResource("Resource_cy3lc"), SubResource("Resource_injm3"), SubResource("Resource_bnpqw"), SubResource("Resource_ek3qr"), SubResource("Resource_3uinr"), SubResource("Resource_nm8ve"), SubResource("Resource_atqq1"), SubResource("Resource_gx6no"), SubResource("Resource_6tptm"), SubResource("Resource_kjtgv")])

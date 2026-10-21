@@ -34,30 +34,33 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_cl2vg")
 
-[node name="StairsLG" type="StaticBody3D" unique_id=1306307531]
+[node name="StairsLG" type="Node3D" unique_id=2050205882]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1306307531]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 1.4)
 collision_mask = 2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1306801432]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -1.2)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1306801432]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, -2.5)
 gi_mode = 2
 mesh = SubResource("ArrayMesh_vjoq4")
 
-[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="." unique_id=1617044910]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.1, -1.2)
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="StaticBody3D" unique_id=1617044910]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -1.2, -2.6000001)
 depth = 6.2
 polygon = PackedVector2Array(1.3, 0, 1.3, 1.6999999, 1, 1.6999999, -1.55, 0)
 
-[node name="CollisionPolygon3D1" type="CollisionPolygon3D" parent="." unique_id=1208850997]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.9, -0.1, -1.2)
+[node name="CollisionPolygon3D1" type="CollisionPolygon3D" parent="StaticBody3D" unique_id=1208850997]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.9, -1.2, -2.6000001)
 depth = 0.4
 polygon = PackedVector2Array(-1.3, 0, -1.3, 1, 0.79999995, 2.1, 1.1999999, 2.1, 1.1999999, 0)
 
-[node name="CollisionPolygon3D2" type="CollisionPolygon3D" parent="." unique_id=993911127]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.1, -1.2)
+[node name="CollisionPolygon3D2" type="CollisionPolygon3D" parent="StaticBody3D" unique_id=993911127]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -1.2, -2.6000001)
 depth = 0.4
 polygon = PackedVector2Array(-1.3, 0, -1.3, 1, 0.79999995, 2.1, 1.1999999, 2.1, 1.1999999, 0)
 
-[node name="CollisionPolygon3D3" type="CollisionPolygon3D" parent="." unique_id=1396935147]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.9, -0.1, -1.2)
+[node name="CollisionPolygon3D3" type="CollisionPolygon3D" parent="StaticBody3D" unique_id=1396935147]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.9, -1.2, -2.6000001)
 depth = 0.4
 polygon = PackedVector2Array(-1.3, 0, -1.3, 1, 0.79999995, 2.1, 1.1999999, 2.1, 1.1999999, 0)

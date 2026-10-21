@@ -35,25 +35,26 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_y57w0")
 
 [sub_resource type="BoxOccluder3D" id="BoxOccluder3D_ocxmx"]
-size = Vector3(6.2, 6.2, 1)
+size = Vector3(6.2, 6.2, 0.8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t4xfb"]
 size = Vector3(1, 6.4, 6.4)
 
-[node name="WallNormalLG" type="StaticBody3D" unique_id=847289766]
+[node name="WallNormalLG" type="Node3D" unique_id=910905716]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=847289766]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, -2.8000002)
 collision_mask = 2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1563595202]
-unique_name_in_owner = true
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, -3.1)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1563595202]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, -3.2000003, -0.29999995)
 gi_mode = 2
 mesh = SubResource("ArrayMesh_kuelc")
 
-[node name="OccluderInstance3D" type="OccluderInstance3D" parent="MeshInstance3D" unique_id=1349840919]
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="StaticBody3D/MeshInstance3D" unique_id=1349840919]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.29999995, 3.2, -1.31134215e-08)
 occluder = SubResource("BoxOccluder3D_ocxmx")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=572469792]
-unique_name_in_owner = true
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 3.2, -2.8)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=572469792]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_t4xfb")

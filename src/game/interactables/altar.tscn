@@ -102,30 +102,34 @@ _data = {
 &"enable_interaction": SubResource("Animation_4iafc")
 }
 
-[node name="Altar" type="StaticBody3D" unique_id=1654990680 node_paths=PackedStringArray("outline_meshes")]
+[node name="Altar" type="Node3D" unique_id=132565479 node_paths=PackedStringArray("outline_meshes")]
+script = ExtResource("1_nuqr6")
+outline_meshes = [NodePath("StaticBody3D/MeshInstance3D")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1654990680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 collision_layer = 5
 collision_mask = 2
-script = ExtResource("1_nuqr6")
-outline_meshes = [NodePath("MeshInstance3D")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=451462226]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0, 0.05)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=451462226]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, -0.75, 0.05)
 gi_mode = 2
 mesh = SubResource("ArrayMesh_4cl36")
 
-[node name="Fire" parent="MeshInstance3D" unique_id=1233533045 instance=ExtResource("2_52cqr")]
+[node name="Fire" parent="StaticBody3D/MeshInstance3D" unique_id=1233533045 instance=ExtResource("2_52cqr")]
 unique_name_in_owner = true
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.05, 1.7, -0.05)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=495281016]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0, 0.05)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=495281016]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, -0.75, 0.05)
 shape = SubResource("ConcavePolygonShape3D_6ntge")
 
-[node name="Protection" type="StaticBody3D" parent="." unique_id=1680381244]
+[node name="Barrier" type="StaticBody3D" parent="StaticBody3D" unique_id=1680381244]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
 collision_mask = 2
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Protection" unique_id=1743945998]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2351742e-08, 2.4, -1.8626451e-08)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/Barrier" unique_id=1743945998]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
 shape = SubResource("BoxShape3D_jxl8w")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1679140222]

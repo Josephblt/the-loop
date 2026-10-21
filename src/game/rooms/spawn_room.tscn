@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="4_52c2p"]
 [ext_resource type="PackedScene" uid="uid://v8j2a1egqxgo" path="res://game/level/walls/gate.tscn" id="4_f4tci"]
 [ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/interactables/altar.tscn" id="5_w5kc3"]
-[ext_resource type="PackedScene" uid="uid://cvnpe5drc4s7q" path="res://game/interactables/middle_cresset.tscn" id="6_o6wsi"]
+[ext_resource type="PackedScene" uid="uid://cvnpe5drc4s7q" path="res://game/interactables/cresset.tscn" id="6_o6wsi"]
 [ext_resource type="PackedScene" uid="uid://dfwbglgsmyokl" path="res://game/level/walls/wall_normal_lg.tscn" id="8_ebo7r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2llnb"]

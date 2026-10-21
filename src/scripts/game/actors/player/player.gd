@@ -2,13 +2,14 @@ class_name Player
 extends CharacterBody3D
 
 
-const RUN_SPEED: float = 10.0
+const RUN_SPEED: float = 7.5
 const WALK_SPEED: float = 3.0
 const SENSITIVITY: float = 0.1
 const JUMP_VELOCITY: float = 10.0
 
 @onready var camera: Camera3D = %Camera3D
 @onready var raycast: RayCast3D = %RayCast3D
+@onready var recticle: Control = %Recticle
 
 var _active_interactable: Interactable
 var _controls_locked: bool = false
@@ -82,15 +83,16 @@ func _handle_look(motion: Vector2):
 
 
 func _handle_interactables():
-	var collider = null
+	var interactable = null
 	if raycast.is_colliding():
-		collider = raycast.get_collider()		
+		var collider = raycast.get_collider()
+		interactable = collider.get_parent() as Interactable
 	
-	if collider is Interactable:
-		if collider != _active_interactable:
+	if interactable:
+		if interactable != _active_interactable:
 			if _active_interactable:
 				_active_interactable.disable_interaction()
-			_active_interactable = collider as Interactable
+			_active_interactable = interactable	
 			_active_interactable.enable_interaction()
 	else:
 		if _active_interactable:
@@ -103,7 +105,9 @@ func _handle_interactables():
 
 func pause_controls():
 	_controls_locked = true
+	recticle.visible = false
 
 
 func resume_controls():
 	_controls_locked = false
+	recticle.visible = true

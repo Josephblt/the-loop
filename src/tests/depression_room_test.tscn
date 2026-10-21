@@ -6,6 +6,7 @@
 
 [node name="DepressionRoomTest" type="Node3D" unique_id=2059004775]
 script = ExtResource("1_30e3m")
+randomization_seed = 1702
 
 [node name="Lights" parent="." unique_id=1886347259 instance=ExtResource("2_7rc7p")]
 

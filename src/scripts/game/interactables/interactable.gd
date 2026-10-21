@@ -1,6 +1,6 @@
 @abstract
 class_name Interactable
-extends StaticBody3D
+extends Node3D
 
 
 signal interaction_enabled()

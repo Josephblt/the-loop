@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dsodgs8nmbiir" path="res://game/level/fences/post_fence_middle_1.tscn" id="8_pm5dm"]
 [ext_resource type="PackedScene" uid="uid://rdh1pb10cdnw" path="res://game/level/fences/post_corner.tscn" id="9_tkjqx"]
 [ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/interactables/altar.tscn" id="13_jih8p"]
-[ext_resource type="PackedScene" uid="uid://cvnpe5drc4s7q" path="res://game/interactables/middle_cresset.tscn" id="13_tkjqx"]
+[ext_resource type="PackedScene" uid="uid://cvnpe5drc4s7q" path="res://game/interactables/cresset.tscn" id="13_tkjqx"]
 [ext_resource type="PackedScene" uid="uid://dk3ahea1354r8" path="res://game/interactables/chest.tscn" id="14_pm5dm"]
 [ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/memory_reveal.tscn" id="17_s6b74"]
 
@@ -107,7 +107,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.599999, 0, 9.536743e-07)
 [node name="BlockCrackedMD" parent="Floor" unique_id=938443766 instance=ExtResource("6_6hj15")]
 
 [node name="StairsMD" parent="Floor" unique_id=244599151 instance=ExtResource("7_avbcp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.6)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5.6, 0, 0)
 
 [node name="BlockCrackedSM25" parent="Floor" unique_id=1628640837 instance=ExtResource("1_8c36o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.600001, 0, 9.536743e-07)
@@ -184,65 +184,65 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.800003, 0, 16.800001)
 [node name="Fences" type="Node3D" parent="." unique_id=815676120]
 
 [node name="CornerRight" parent="Fences" unique_id=1698196344 instance=ExtResource("5_ci3gg")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 1.6, 0)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.6, 0)
 
 [node name="CornerLeft" parent="Fences" unique_id=2071831625 instance=ExtResource("5_ci3gg")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.6, 0)
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 1.6, 0)
 
 [node name="SlopeMiddle" parent="Fences" unique_id=1350352982 instance=ExtResource("6_e0xx7")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.6, 0)
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 1.6, 0)
 
 [node name="FenceMiddleRight" parent="Fences" unique_id=2032147699 instance=ExtResource("7_jih8p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 1.6, 0)
 
 [node name="FenceMiddleLeft" parent="Fences" unique_id=1787633064 instance=ExtResource("8_pm5dm")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="SlopeCornerRight" parent="Fences" unique_id=1868375621 instance=ExtResource("9_tkjqx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="SlopeCornerLeft" parent="Fences" unique_id=727985561 instance=ExtResource("9_tkjqx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.6, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 1.6, 0)
 
 [node name="Interactables" type="Node3D" parent="." unique_id=761738820]
 
 [node name="Chest" parent="Interactables" unique_id=469060 instance=ExtResource("14_pm5dm")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.6999998)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.7, 1.6, 0)
 
 [node name="Altars" type="Node3D" parent="Interactables" unique_id=501502116]
 
 [node name="AltarLeft" parent="Interactables/Altars" unique_id=920264388 instance=ExtResource("13_jih8p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1000023, 0, 4.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0, -2.1)
 
 [node name="AltarRight" parent="Interactables/Altars" unique_id=43818775 instance=ExtResource("13_jih8p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0999985, 0, 4.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0, 2.1)
 
 [node name="Cressets" type="Node3D" parent="Interactables" unique_id=1946866035]
 
 [node name="CressetLeftTop" parent="Interactables/Cressets" unique_id=528922892 instance=ExtResource("13_tkjqx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.8, 0, -11.2)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.8, 0, -5.6)
 
 [node name="CressetTopLeft" parent="Interactables/Cressets" unique_id=586895395 instance=ExtResource("13_tkjqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.199999, 0, -16.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.599999, 0, -16.8)
 
 [node name="CressetTopRight" parent="Interactables/Cressets" unique_id=1017681047 instance=ExtResource("13_tkjqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.200001, 0, -16.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.600001, 0, -16.8)
 
 [node name="CressetRightTop" parent="Interactables/Cressets" unique_id=1747697344 instance=ExtResource("13_tkjqx")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 16.800001, 0, -11.199999)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 16.800001, 0, -5.599999)
 
 [node name="CressetRightBottom" parent="Interactables/Cressets" unique_id=1166262004 instance=ExtResource("13_tkjqx")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 16.800001, 0, 11.200001)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 16.800001, 0, 5.600001)
 
 [node name="CressetBottomRight" parent="Interactables/Cressets" unique_id=1190752026 instance=ExtResource("13_tkjqx")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 11.200001, 0, 16.800001)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 5.600001, 0, 16.800001)
 
 [node name="CressetBottomLeft" parent="Interactables/Cressets" unique_id=1335255981 instance=ExtResource("13_tkjqx")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.199999, 0, 16.800001)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -5.599999, 0, 16.800001)
 
 [node name="CressetLeftBottom" parent="Interactables/Cressets" unique_id=1082750687 instance=ExtResource("13_tkjqx")]
-transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.8, 0, 11.200001)
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.8, 0, 5.600001)
 
 [node name="Walls" type="Node3D" parent="." unique_id=1000695726]
 
@@ -342,7 +342,7 @@ transform = Transform3D(-2.1855695e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855695e-07, 5.
 transform = Transform3D(-1, 0, 2.6226834e-07, 0, 1, 0, -2.6226834e-07, 0, -1, 5.6, 0, 5.599999)
 
 [node name="WallBrokenMD32" parent="Walls/Inner" unique_id=1597982201 instance=ExtResource("4_avbcp")]
-transform = Transform3D(-1, 0, 2.6226834e-07, 0, 1, 0, -2.6226834e-07, 0, -1, -5.6, 0, 5.599999)
+transform = Transform3D(-1, 0, 2.6226834e-07, 0, 1, 0, -2.6226834e-07, 0, -1, 0, 0, 5.599999)
 
 [node name="Outter" type="Node3D" parent="Walls" unique_id=272644957]
 
@@ -435,7 +435,7 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.
 [node name="Bottom" type="Node3D" parent="Walls/Outter" unique_id=1388206044]
 
 [node name="Gate" parent="Walls/Outter/Bottom" unique_id=1011791674 instance=ExtResource("7_e0xx7")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.8, 0.4, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.8, 0, 0)
 
 [node name="WallNormalLG" parent="Walls/Outter/Bottom" unique_id=847289766 instance=ExtResource("6_ci3gg")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.8, 0, -5.6)
