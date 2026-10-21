@@ -6,6 +6,9 @@ group_uniforms Color;
 uniform vec4 font_color : source_color =
 	vec4(0.129, 0.094, 0.184, 1.0);
 
+uniform vec4 font_outline : source_color =
+	vec4(0.914, 0.871, 1.0, 1.0);
+
 uniform vec4 dissolve_color : source_color =
 	vec4(0.663, 0.545, 1.0, 1.0);
 
@@ -22,6 +25,8 @@ uniform float distortion : hint_range(0.0, 5.0) = 2.0;
 uniform float swirl_strength : hint_range(0.0, 5.0) = 1.2;
 
 varying vec2 local_position;
+varying vec2 portal_position;
+varying float rim_surface;
 
 float random(vec2 position) {
 	return fract(
@@ -66,6 +71,14 @@ float fbm(vec2 position) {
 
 void vertex() {
 	local_position = VERTEX.xy;
+	portal_position = VERTEX.xy;
+	rim_surface = 1.0 - smoothstep(0.1, 0.9, abs(NORMAL.z));
+
+	vec2 outward = NORMAL.xy / max(length(NORMAL.xy), 0.0001);
+	float first_vibration = sin(TIME * 13.0 + VERTEX.y * 7.0 + VERTEX.x * 3.0);
+	float second_vibration = sin(TIME * 19.0 - VERTEX.y * 4.0 + VERTEX.x * 9.0);
+	float vibration = (first_vibration + second_vibration) * 0.006;
+	VERTEX.xy += outward * vibration * rim_surface;
 }
 
 void fragment() {
@@ -123,6 +136,21 @@ void fragment() {
 		dissolve_region * dissolve_color.a
 	);
 
-	ALBEDO = center_color;
-	ALPHA = visibility * font_color.a;
+	float pulse = 0.5 + 0.5 * sin(
+		TIME * 6.0
+		+ portal_position.y * 3.0
+		+ portal_position.x * 1.7
+	);
+
+	float moving_energy = 0.5 + 0.5 * sin(
+		TIME * 9.0
+		- portal_position.y * 2.3
+		+ portal_position.x * 4.1
+	);
+
+	float rim_energy = rim_surface * mix(0.5, 1.0, pulse) * mix(0.7, 1.0, moving_energy);
+
+	ALBEDO = mix(center_color, font_outline.rgb, rim_surface);
+	EMISSION = font_outline.rgb * rim_energy * 3.0;
+	ALPHA = mix(visibility * font_color.a, font_outline.a * mix(0.6, 1.0, pulse), rim_surface);
 }
