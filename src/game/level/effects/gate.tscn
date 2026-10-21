@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://bkoj8m61hbv4u" path="res://assets/materials/walls/gate.tres" id="1_njgmt"]
 [ext_resource type="Material" uid="uid://e8uxyqrstxcu" path="res://assets/materials/effects/dissolve_spatial_material.tres" id="2_barrier"]
-[ext_resource type="Script" path="res://scripts/game/effects/random_pulsing_light.gd" id="3_random_light"]
+[ext_resource type="Script" uid="uid://ciumyxrk8e23h" path="res://scripts/game/effects/random_pulsing_light.gd" id="3_random_light"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_b0de2"]
 _surfaces = [{
@@ -86,6 +86,10 @@ light_specular = 2.0
 light_cull_mask = 4294966273
 shadow_enabled = true
 shadow_caster_mask = 4294966273
-omni_range = 6.5
+omni_range = 15.0
 omni_attenuation = 1.5
 script = ExtResource("3_random_light")
+minimum_energy = 1.0
+maximum_energy = 3.0
+minimum_duration = 0.5
+maximum_duration = 1.0
