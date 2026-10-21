@@ -9,10 +9,9 @@ signal interaction_triggered()
 signal _interaction_performed()
 
 
-const HIGHLIGHT_LAYER: int = 3
-const OUTLINE_LAYER: int = 4
+const OUTLINE_LAYER: int = 2
 
-@export var interactable_meshes: Array[VisualInstance3D] = []
+@export var outline_meshes: Array[VisualInstance3D] = []
 @export var one_shot: bool = false
 
 @onready var interaction_animation_player: AnimationPlayer = %InteractionAnimationPlayer
@@ -21,7 +20,6 @@ var _is_interactable: bool = true
 
 
 func _ready() -> void:
-	_update_highlight(true)
 	_update_outline(false)
 
 
@@ -29,17 +27,9 @@ func _ready() -> void:
 func _interact() -> void
 
 
-func _update_highlight(enabled: bool) -> void:
-	_update_mesh_layer(HIGHLIGHT_LAYER, enabled)
-
-
 func _update_outline(enabled: bool) -> void:
-	_update_mesh_layer(OUTLINE_LAYER, enabled)
-
-
-func _update_mesh_layer(layer: int, enabled: bool) -> void:
-	for mesh: VisualInstance3D in interactable_meshes:
-		mesh.set_layer_mask_value(layer, enabled)
+	for mesh in outline_meshes:
+		mesh.set_layer_mask_value(OUTLINE_LAYER, enabled)
 
 
 func enable_interaction() -> void:
@@ -67,7 +57,6 @@ func trigger_interaction() -> void:
 	if one_shot:
 		disable_interaction()
 		_is_interactable = false
-		_update_highlight(false)
 
 	_interact()
 	await _interaction_performed

@@ -14,8 +14,6 @@ func _interact() -> void:
 
 func open_immediately() -> void:
 	_is_interactable = false
-	_update_highlight(false)
-	_update_outline(false)
 	chest_animation_player.play("open")
 	chest_animation_player.seek(chest_animation_player.current_animation_length, true)
 	chest_animation_player.pause()

@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://e8uxyqrstxcu"]
 
-[ext_resource type="Shader" uid="uid://r5p7n42oduwx" path="res://shaders/dissolve_spatial.gdshader" id="1_barrier"]
+[ext_resource type="Shader" uid="uid://r5p7n42oduwx" path="res://shaders/barrier.gdshader" id="1_barrier"]
 
 [resource]
 render_priority = 1

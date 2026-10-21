@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://v8j2a1egqxgo"]
 
 [ext_resource type="Material" uid="uid://bkoj8m61hbv4u" path="res://assets/materials/walls/gate.tres" id="1_njgmt"]
-[ext_resource type="Material" uid="uid://e8uxyqrstxcu" path="res://assets/materials/effects/dissolve_spatial_material.tres" id="2_barrier"]
+[ext_resource type="Material" uid="uid://e8uxyqrstxcu" path="res://assets/materials/effects/barrier_material.tres" id="2_barrier"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_b0de2"]
 _surfaces = [{
