@@ -2,8 +2,6 @@
 
 [ext_resource type="Material" uid="uid://bkoj8m61hbv4u" path="res://assets/materials/walls/gate.tres" id="1_njgmt"]
 [ext_resource type="Material" uid="uid://e8uxyqrstxcu" path="res://assets/materials/effects/barrier_material.tres" id="2_barrier"]
-[ext_resource type="Script" path="res://scripts/game/level/barrier_edge.gd" id="3_edge"]
-[ext_resource type="Material" path="res://assets/materials/effects/barrier_edge_material.tres" id="4_edge"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_b0de2"]
 _surfaces = [{
@@ -74,12 +72,6 @@ polygon = PackedVector2Array(-2.1000001, 0, -2.1000001, 0.1, -1.5, 0.1, -1.5, 0.
 depth = 0.01
 smooth_faces = true
 material = ExtResource("2_barrier")
-
-[node name="BarrierEdge" type="Node3D" parent="Barrier" node_paths=PackedStringArray("source_polygon")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.8)
-script = ExtResource("3_edge")
-source_polygon = NodePath("../CSGPolygon3D")
-edge_material = ExtResource("4_edge")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Barrier" unique_id=399760843]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, -2.8)

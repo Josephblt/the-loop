@@ -3,7 +3,7 @@ render_mode unshaded, blend_mix, cull_disabled, depth_draw_never, shadows_disabl
 
 group_uniforms Color;
 
-uniform vec4 barrier_color : source_color =
+uniform vec4 font_color : source_color =
 	vec4(0.129, 0.094, 0.184, 1.0);
 
 uniform vec4 dissolve_color : source_color =
@@ -118,11 +118,11 @@ void fragment() {
 	);
 
 	vec3 center_color = mix(
-		barrier_color.rgb,
+		font_color.rgb,
 		dissolve_color.rgb,
 		dissolve_region * dissolve_color.a
 	);
 
 	ALBEDO = center_color;
-	ALPHA = visibility * barrier_color.a;
+	ALPHA = visibility * font_color.a;
 }

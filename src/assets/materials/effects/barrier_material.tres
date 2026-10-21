@@ -1,10 +1,11 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://e8uxyqrstxcu"]
 
 [ext_resource type="Shader" uid="uid://r5p7n42oduwx" path="res://shaders/barrier.gdshader" id="1_barrier"]
+
 [resource]
 render_priority = 1
 shader = ExtResource("1_barrier")
-shader_parameter/barrier_color = Color(0.09411765, 0.043137256, 0.16078432, 1)
+shader_parameter/font_color = Color(0.09411765, 0.043137256, 0.16078432, 1)
 shader_parameter/dissolve_color = Color(0.45882353, 0.32156864, 0.61960787, 1)
 shader_parameter/dissolve_amount = 0.250000011875
 shader_parameter/dissolve_width = 0.250000011875
