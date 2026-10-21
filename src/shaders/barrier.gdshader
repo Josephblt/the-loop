@@ -7,7 +7,11 @@ uniform vec4 barrier_color : source_color = vec4(0.094, 0.043, 0.161, 0.58);
 uniform vec4 dissolve_color : source_color = vec4(0.459, 0.322, 0.620, 0.9);
 uniform vec4 edge_color : source_color = vec4(0.882, 0.8, 1.0, 1.0);
 uniform float emission_strength : hint_range(0.0, 8.0) = 2.5;
-uniform float edge_width : hint_range(0.001, 0.2) = 0.035;
+uniform float edge_width : hint_range(0.001, 0.5) = 0.08;
+uniform float edge_pulse_speed : hint_range(0.0, 20.0) = 7.0;
+uniform float edge_pulse_frequency : hint_range(0.0, 10.0) = 3.0;
+uniform float edge_vibration_speed : hint_range(0.0, 10.0) = 2.5;
+uniform float edge_vibration_strength : hint_range(0.0, 0.2) = 0.045;
 
 group_uniforms Dissolve;
 
@@ -21,6 +25,8 @@ uniform float vertical_speed : hint_range(-2.0, 2.0) = 0.08;
 uniform float morph_speed : hint_range(0.0, 3.0) = 0.3;
 uniform float distortion : hint_range(0.0, 2.0) = 0.4;
 uniform float swirl_strength : hint_range(0.0, 2.0) = 0.3;
+
+varying vec2 local_position;
 
 float random(vec2 position) {
 	return fract(sin(dot(position, vec2(127.1, 311.7))) * 43758.5453);
@@ -52,9 +58,44 @@ float fbm(vec2 position) {
 	return result / 0.96875;
 }
 
+float segment_distance(vec2 position, vec2 start, vec2 end) {
+	vec2 segment = end - start;
+	float weight = clamp(dot(position - start, segment) / dot(segment, segment), 0.0, 1.0);
+	return distance(position, start + segment * weight);
+}
+
+float gate_edge_distance(vec2 position) {
+	vec2 point_0 = vec2(-1.5, 0.0);
+	vec2 point_1 = vec2(-1.5, 0.8);
+	vec2 point_2 = vec2(-1.9, 2.0);
+	vec2 point_3 = vec2(-1.9, 4.5);
+	vec2 point_4 = vec2(-0.8, 5.9);
+	vec2 point_5 = vec2(0.8, 5.9);
+	vec2 point_6 = vec2(1.9, 4.5);
+	vec2 point_7 = vec2(1.9, 2.0);
+	vec2 point_8 = vec2(1.5, 0.8);
+	vec2 point_9 = vec2(1.5, 0.0);
+
+	float result = segment_distance(position, point_0, point_1);
+	result = min(result, segment_distance(position, point_1, point_2));
+	result = min(result, segment_distance(position, point_2, point_3));
+	result = min(result, segment_distance(position, point_3, point_4));
+	result = min(result, segment_distance(position, point_4, point_5));
+	result = min(result, segment_distance(position, point_5, point_6));
+	result = min(result, segment_distance(position, point_6, point_7));
+	result = min(result, segment_distance(position, point_7, point_8));
+	result = min(result, segment_distance(position, point_8, point_9));
+	return min(result, segment_distance(position, point_9, point_0));
+}
+
+void vertex() {
+	local_position = VERTEX.xy;
+}
+
 void fragment() {
 	float time = TIME * morph_speed;
-	vec2 position = UV * noise_scale;
+	vec2 gate_uv = vec2((local_position.x + 1.9) / 3.8, 1.0 - local_position.y / 5.9);
+	vec2 position = gate_uv * noise_scale;
 	position += vec2(-TIME * lateral_speed, TIME * vertical_speed);
 
 	vec2 fluid_field = vec2(
@@ -82,7 +123,7 @@ void fragment() {
 	);
 
 	float formation_threshold = mix(1.1, -0.1, formation_amount);
-	float formation_position = UV.y + (pattern - 0.5) * 0.16;
+	float formation_position = gate_uv.y + (pattern - 0.5) * 0.16;
 	float formed = smoothstep(
 		formation_threshold - softness,
 		formation_threshold + softness,
@@ -97,9 +138,19 @@ void fragment() {
 	);
 	formation_edge *= 1.0 - smoothstep(0.92, 1.0, formation_amount);
 
-	float edge_distance = min(min(UV.x, 1.0 - UV.x), min(UV.y, 1.0 - UV.y));
-	float perimeter_edge = 1.0 - smoothstep(edge_width, edge_width + softness, edge_distance);
+	vec2 vibration_position = local_position * vec2(2.8, 1.9);
+	vibration_position += vec2(TIME * edge_vibration_speed, -TIME * edge_vibration_speed * 0.73);
+	float vibration = (fbm(vibration_position) - 0.5) * edge_vibration_strength;
+	float perimeter_distance = gate_edge_distance(local_position) + vibration;
+	float perimeter_edge = 1.0 - smoothstep(edge_width, edge_width + softness, perimeter_distance);
 	perimeter_edge *= formed;
+
+	float edge_pulse = 0.5 + 0.5 * sin(
+		TIME * edge_pulse_speed
+		+ local_position.y * edge_pulse_frequency
+		+ pattern * TAU
+	);
+	float edge_energy = mix(0.45, 1.0, edge_pulse);
 
 	vec3 surface_color = mix(barrier_color.rgb, dissolve_color.rgb, dense_region);
 	float luminous_edge = max(dissolve_edge, max(formation_edge, perimeter_edge));
@@ -111,6 +162,7 @@ void fragment() {
 
 	ALBEDO = surface_color;
 	EMISSION = mix(dissolve_color.rgb, edge_color.rgb, max(formation_edge, perimeter_edge));
-	EMISSION *= luminous_edge * emission_strength;
+	float emission_edge = max(dissolve_edge, max(formation_edge, perimeter_edge * edge_energy));
+	EMISSION *= emission_edge * emission_strength;
 	ALPHA = surface_alpha * formed;
 }
