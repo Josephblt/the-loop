@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://dwj8clsjj6iqy" path="res://scripts/game/actors/player/player.gd" id="1_8itsh"]
 [ext_resource type="Script" uid="uid://dfs8wj1kaybuq" path="res://scripts/game/actors/player/camera.gd" id="2_fyoa2"]
 [ext_resource type="Material" uid="uid://0y0hhoo7hqlx" path="res://assets/materials/effects/outline_material.tres" id="3_3kwvn"]
+[ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_canvas_item_material.tres" id="3_bfqtb"]
+[ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="4_btjqu"]
+[ext_resource type="Script" uid="uid://ckunku72jtdu0" path="res://scripts/game/ui/fps.gd" id="5_btjqu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vapkq"]
 radius = 1.0
@@ -69,20 +72,37 @@ current = true
 
 [node name="UI" type="Node" parent="CanvasLayer" unique_id=347814494]
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/UI" unique_id=1842360196]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UI" unique_id=703731344]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="Recticle" type="TextureRect" parent="CanvasLayer/UI/CenterContainer" unique_id=14765991]
+[node name="FPS" type="Label" parent="CanvasLayer/UI/MarginContainer" unique_id=1232174743]
+unique_name_in_owner = true
+material = ExtResource("3_bfqtb")
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 10
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_btjqu")
+text = "0 FPS"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_btjqu")
+
+[node name="Recticle" type="TextureRect" parent="CanvasLayer/UI/MarginContainer" unique_id=14765991]
 unique_name_in_owner = true
 layout_mode = 2
 texture = SubResource("GradientTexture2D_3kwvn")
-stretch_mode = 5
+stretch_mode = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/UI/CenterContainer" unique_id=367058057]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/UI/MarginContainer" unique_id=367058057]
 root_node = NodePath("../../..")
 libraries/ = SubResource("AnimationLibrary_3kwvn")
 
