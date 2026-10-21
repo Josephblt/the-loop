@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bxw8n4e25palv" path="res://scripts/game/interactables/chest.gd" id="1_68fva"]
 [ext_resource type="Texture2D" uid="uid://b170hc6sp5x33" path="res://assets/textures/interactables/chest_cover.png" id="1_c1jlw"]
 [ext_resource type="Texture2D" uid="uid://bin2gxhatwvu2" path="res://assets/textures/interactables/chest_base.png" id="2_ca5m2"]
+[ext_resource type="Material" uid="uid://dehlmi65vnf1q" path="res://assets/materials/effects/highlight.tres" id="2_vwl60"]
 [ext_resource type="AudioStream" uid="uid://df1ghudtvy2jb" path="res://assets/sounds/sfx/chest/chest_open.tres" id="3_ca5m2"]
-[ext_resource type="Material" uid="uid://dr273ka7s5f3r" path="res://assets/materials/interactables/chest_base.tres" id="4_bk6g0"]
 [ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_canvas_item_material.tres" id="6_3hjkb"]
 [ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="6_bk6g0"]
 
@@ -229,6 +229,7 @@ input_ray_pickable = false
 [node name="MeshInstance3DCover" type="MeshInstance3D" parent="StaticBody3D" unique_id=2107123533]
 unique_name_in_owner = true
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.15000002, -0.70000005)
+material_overlay = ExtResource("2_vwl60")
 gi_mode = 2
 mesh = SubResource("ArrayMesh_qrs7o")
 
@@ -239,9 +240,9 @@ shape = SubResource("ConcavePolygonShape3D_all7c")
 [node name="MeshInstance3DBase" type="MeshInstance3D" parent="StaticBody3D" unique_id=1062975193]
 unique_name_in_owner = true
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, -1.05, -0.1)
+material_overlay = ExtResource("2_vwl60")
 gi_mode = 2
 mesh = SubResource("ArrayMesh_miaoe")
-surface_material_override/0 = ExtResource("4_bk6g0")
 
 [node name="CollisionShape3DBase" type="CollisionShape3D" parent="StaticBody3D" unique_id=1395594244]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, -1.0500001, -0.1)

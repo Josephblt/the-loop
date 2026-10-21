@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dwj8clsjj6iqy" path="res://scripts/game/actors/player/player.gd" id="1_8itsh"]
 [ext_resource type="Script" uid="uid://dfs8wj1kaybuq" path="res://scripts/game/actors/player/camera.gd" id="2_fyoa2"]
-[ext_resource type="Material" uid="uid://0y0hhoo7hqlx" path="res://assets/materials/ui/outline_material.tres" id="3_3kwvn"]
+[ext_resource type="Material" uid="uid://0y0hhoo7hqlx" path="res://assets/materials/effects/outline_material.tres" id="3_3kwvn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vapkq"]
 radius = 1.0

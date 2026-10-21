@@ -1,0 +1,130 @@
+shader_type spatial;
+render_mode unshaded, depth_draw_never;
+
+uniform vec4 shine_color : source_color = vec4(1.0);
+uniform float shine_speed : hint_range(0.0, 100.0) = 10.0;
+
+uniform float shine_angle_x : hint_range(0.0, 360.0) = 0.0;
+uniform float shine_angle_y : hint_range(0.0, 360.0) = 0.0;
+uniform float shine_angle_z : hint_range(0.0, 360.0) = 45.0;
+
+uniform float shine_width : hint_range(0.0, 1.0) = 0.1;
+uniform float shine_spacing : hint_range(0.001, 100.0) = 25.0;
+
+uniform float shine_noise_scale : hint_range(0.1, 100.0) = 5.0;
+uniform float shine_noise_amount : hint_range(0.0, 1.0) = 0.25;
+uniform float shine_noise_speed : hint_range(0.0, 10.0) = 5.0;
+
+float random(vec2 position)
+{
+	return fract(sin(dot(position, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+float noise(vec2 position)
+{
+	vec2 cell = floor(position);
+	vec2 fraction = fract(position);
+	vec2 blend = fraction * fraction * (3.0 - 2.0 * fraction);
+
+	float bottom_left = random(cell);
+	float bottom_right = random(cell + vec2(1.0, 0.0));
+	float top_left = random(cell + vec2(0.0, 1.0));
+	float top_right = random(cell + vec2(1.0, 1.0));
+
+	float bottom = mix(bottom_left, bottom_right, blend.x);
+	float top = mix(top_left, top_right, blend.x);
+
+	return mix(bottom, top, blend.y);
+}
+
+vec3 rotate_x(vec3 vector, float angle)
+{
+	float sine = sin(angle);
+	float cosine = cos(angle);
+
+	return vec3(
+		vector.x,
+		vector.y * cosine - vector.z * sine,
+		vector.y * sine + vector.z * cosine
+	);
+}
+
+vec3 rotate_y(vec3 vector, float angle)
+{
+	float sine = sin(angle);
+	float cosine = cos(angle);
+
+	return vec3(
+		vector.x * cosine + vector.z * sine,
+		vector.y,
+		-vector.x * sine + vector.z * cosine
+	);
+}
+
+vec3 rotate_z(vec3 vector, float angle)
+{
+	float sine = sin(angle);
+	float cosine = cos(angle);
+
+	return vec3(
+		vector.x * cosine - vector.y * sine,
+		vector.x * sine + vector.y * cosine,
+		vector.z
+	);
+}
+
+vec3 rotate_xyz(vec3 vector, vec3 angles)
+{
+	vector = rotate_x(vector, angles.x);
+	vector = rotate_y(vector, angles.y);
+	vector = rotate_z(vector, angles.z);
+
+	return vector;
+}
+
+void fragment()
+{
+	vec3 world_vertex = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
+
+	vec3 angles = radians(vec3(
+		shine_angle_x,
+		shine_angle_y,
+		shine_angle_z
+	));
+
+	vec3 shine_direction = rotate_xyz(
+		vec3(1.0, 0.0, 0.0),
+		angles
+	);
+
+	vec3 shine_normal = rotate_xyz(
+		vec3(0.0, 1.0, 0.0),
+		angles
+	);
+
+	float shine_position = dot(world_vertex, shine_normal);
+	float position_along_shine = dot(world_vertex, shine_direction);
+
+	vec2 noise_position = vec2(
+		position_along_shine * shine_noise_scale,
+		TIME * shine_noise_speed
+	);
+
+	float noise_value = noise(noise_position);
+	float shape_offset = (noise_value * 2.0 - 1.0) * shine_noise_amount;
+	float animated_position = shine_position + shape_offset - TIME * shine_speed;
+
+	float local_position = mod(animated_position, shine_spacing);
+	float distance_to_shine = min(
+		local_position,
+		shine_spacing - local_position
+	);
+
+	float shine_mask = 1.0 - step(
+		shine_width,
+		distance_to_shine
+	);
+
+	ALBEDO = shine_color.rgb;
+	ALPHA = shine_mask * shine_color.a;
+}

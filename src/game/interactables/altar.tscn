@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bannntmc1y4o4" path="res://scripts/game/interactables/altar.gd" id="1_nuqr6"]
 [ext_resource type="Material" uid="uid://0sp8exud2fvb" path="res://assets/materials/interactables/altar.tres" id="1_qa4jq"]
 [ext_resource type="PackedScene" uid="uid://ci5ayfo0lm6xc" path="res://game/level/effects/fire.tscn" id="2_52cqr"]
+[ext_resource type="Material" uid="uid://dehlmi65vnf1q" path="res://assets/materials/effects/highlight.tres" id="2_keu4p"]
 [ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="4_nuqr6"]
 [ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_canvas_item_material.tres" id="4_rsld6"]
 
@@ -113,6 +114,7 @@ collision_mask = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=451462226]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, -0.75, 0.05)
+material_overlay = ExtResource("2_keu4p")
 gi_mode = 2
 mesh = SubResource("ArrayMesh_4cl36")
 
