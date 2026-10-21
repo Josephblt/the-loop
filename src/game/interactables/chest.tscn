@@ -215,9 +215,9 @@ _data = {
 &"open": SubResource("Animation_1u115")
 }
 
-[node name="Chest" type="Node3D" unique_id=146892367 node_paths=PackedStringArray("outline_meshes")]
+[node name="Chest" type="Node3D" unique_id=146892367 node_paths=PackedStringArray("interactable_meshes")]
 script = ExtResource("1_68fva")
-outline_meshes = [NodePath("StaticBody3D/MeshInstance3DCover"), NodePath("StaticBody3D/MeshInstance3DBase")]
+interactable_meshes = [NodePath("StaticBody3D/MeshInstance3DCover"), NodePath("StaticBody3D/MeshInstance3DBase")]
 one_shot = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=469060]
@@ -229,6 +229,7 @@ input_ray_pickable = false
 [node name="MeshInstance3DCover" type="MeshInstance3D" parent="StaticBody3D" unique_id=2107123533]
 unique_name_in_owner = true
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.15000002, -0.70000005)
+layers = 13
 gi_mode = 2
 mesh = SubResource("ArrayMesh_qrs7o")
 
@@ -239,6 +240,7 @@ shape = SubResource("ConcavePolygonShape3D_all7c")
 [node name="MeshInstance3DBase" type="MeshInstance3D" parent="StaticBody3D" unique_id=1062975193]
 unique_name_in_owner = true
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, -1.05, -0.1)
+layers = 13
 gi_mode = 2
 mesh = SubResource("ArrayMesh_miaoe")
 surface_material_override/0 = ExtResource("4_bk6g0")

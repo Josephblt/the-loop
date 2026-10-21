@@ -9,10 +9,10 @@ signal interaction_triggered()
 signal _interaction_performed()
 
 
-const HIGHLIGHT_LAYER: int = 2
-const OUTLINE_LAYER: int = 3
+const HIGHLIGHT_LAYER: int = 3
+const OUTLINE_LAYER: int = 4
 
-@export var outline_meshes: Array[VisualInstance3D] = []
+@export var interactable_meshes: Array[VisualInstance3D] = []
 @export var one_shot: bool = false
 
 @onready var interaction_animation_player: AnimationPlayer = %InteractionAnimationPlayer
@@ -38,7 +38,7 @@ func _update_outline(enabled: bool) -> void:
 
 
 func _update_mesh_layer(layer: int, enabled: bool) -> void:
-	for mesh: VisualInstance3D in outline_meshes:
+	for mesh: VisualInstance3D in interactable_meshes:
 		mesh.set_layer_mask_value(layer, enabled)
 
 
