@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dfwbglgsmyokl" path="res://game/level/walls/wall_normal_lg.tscn" id="5_3npp4"]
 [ext_resource type="PackedScene" uid="uid://bvvd4ra5va18f" path="res://game/level/fences/post_fences_corner.tscn" id="5_le7qa"]
 [ext_resource type="PackedScene" uid="uid://ktrvq6qgill5" path="res://game/level/fences/post_middle.tscn" id="6_22eb3"]
-[ext_resource type="PackedScene" uid="uid://v8j2a1egqxgo" path="res://game/level/gate.tscn" id="6_83rnh"]
+[ext_resource type="PackedScene" uid="uid://v8j2a1egqxgo" path="res://game/level/effects/gate.tscn" id="6_83rnh"]
 [ext_resource type="PackedScene" uid="uid://vsm7olv05rj1" path="res://game/level/fences/post_fence_middle_2.tscn" id="7_6h2h2"]
 [ext_resource type="PackedScene" uid="uid://dsodgs8nmbiir" path="res://game/level/fences/post_fence_middle_1.tscn" id="8_oe3ue"]
 [ext_resource type="PackedScene" uid="uid://rdh1pb10cdnw" path="res://game/level/fences/post_corner.tscn" id="9_h4pch"]
