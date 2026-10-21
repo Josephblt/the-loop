@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://yqqfc36dk0bu" path="res://scripts/game/interactables/cresset.gd" id="1_chd1y"]
 [ext_resource type="Texture2D" uid="uid://cs3ys44ittqo7" path="res://assets/textures/interactables/cresset.png" id="1_uts5g"]
-[ext_resource type="Material" uid="uid://dehlmi65vnf1q" path="res://assets/materials/effects/highlight.tres" id="2_20asm"]
 [ext_resource type="PackedScene" uid="uid://ci5ayfo0lm6xc" path="res://game/level/effects/fire.tscn" id="2_tgbp8"]
 [ext_resource type="Material" uid="uid://dtf5ga5d2o3gb" path="res://assets/materials/interactables/cresset.tres" id="2_xmwar"]
 [ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="5_ur6ep"]
@@ -108,9 +107,10 @@ _data = {
 &"enable_interaction": SubResource("Animation_4iafc")
 }
 
-[node name="Cresset" type="Node3D" unique_id=528922892 node_paths=PackedStringArray("outline_meshes")]
+[node name="Cresset" type="Node3D" unique_id=528922892 node_paths=PackedStringArray("interactable_meshes")]
 script = ExtResource("1_chd1y")
-outline_meshes = [NodePath("StaticBody3D/MeshInstance3D")]
+interactable_meshes = [NodePath("StaticBody3D/MeshInstance3D")]
+interaction_distance = 4.0
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=865238]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 4, -1.9)
@@ -119,7 +119,6 @@ collision_mask = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=871847328]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, -0.05)
-material_overlay = ExtResource("2_20asm")
 gi_mode = 2
 mesh = SubResource("ArrayMesh_04snb")
 

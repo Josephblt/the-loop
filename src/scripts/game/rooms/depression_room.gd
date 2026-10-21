@@ -2,7 +2,7 @@ class_name DepressionRoom
 extends Node3D
 
 
-@onready var chest: Chest = %Chest
+@onready var chest_gold: Chest = %ChestGold
 @onready var memory_reveal: MemoryReveal = %MemoryReveal
 
 var _memory: Memory
@@ -24,7 +24,7 @@ func _setup_chest() -> void:
 		return
 	
 	if _memory.revealed:
-		chest.open_immediately()
+		chest_gold.open_immediately()
 
 
 func _setup_fire_fixtures() -> void:

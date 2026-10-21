@@ -13,6 +13,7 @@ const JUMP_VELOCITY: float = 10.0
 
 var _active_interactable: Interactable
 var _controls_locked: bool = false
+var _interacting: bool = false
 var _look_x: float = 0.0
 var _look_y: float = 0.0
 var _speed: float = RUN_SPEED
@@ -87,7 +88,16 @@ func _handle_interactables():
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
 		interactable = collider.get_parent() as Interactable
-	
+		if interactable:
+			var origin: Vector3 = raycast.to_global(Vector3.ZERO)
+			var collision_point: Vector3 = raycast.get_collision_point()
+			var origin2D: Vector2 = Vector2(origin.x, origin.z)
+			var collision_point2D: Vector2 = Vector2(collision_point.x, collision_point.z)
+			
+			var collision_distance: float = origin2D.distance_to(collision_point2D)
+			if collision_distance > interactable.interaction_distance:
+				interactable = null
+
 	if interactable:
 		if interactable != _active_interactable:
 			if _active_interactable:
@@ -100,6 +110,13 @@ func _handle_interactables():
 			_active_interactable = null
 
 	if Input.is_action_just_pressed("Interact") and _active_interactable:
+		_interacting = true
+	
+	if Input.is_action_just_released("Interact"):
+		_interacting = false
+		
+	if _interacting and _active_interactable:
+		_interacting = false
 		_active_interactable.trigger_interaction()
 
 

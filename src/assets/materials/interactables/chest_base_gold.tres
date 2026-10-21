@@ -6,6 +6,6 @@
 resource_name = "ChestBaseGold_2_Material"
 cull_mode = 2
 albedo_texture = ExtResource("1_7qxxm")
-metallic = 0.5
+metallic_specular = 0.0
 roughness = 0.05
 texture_filter = 2
