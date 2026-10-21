@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dt4q24uysybli"]
 
-[ext_resource type="Material" uid="uid://ddrwfk36qajvj" path="res://assets/materials/effects/iridiscene_material.tres" id="1_cinw8"]
+[ext_resource type="Material" uid="uid://ddrwfk36qajvj" path="res://assets/materials/effects/iridiscent_material.tres" id="1_cinw8"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_bubble_sky"]
 material = ExtResource("1_cinw8")
