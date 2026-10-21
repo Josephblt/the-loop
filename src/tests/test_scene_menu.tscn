@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://sd6rojdjioso" path="res://scripts/tests/test_scene_menu.gd" id="1_script"]
+
+[node name="TestSceneMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SpawnRoomButton" type="Button" parent="CenterContainer/Buttons"]
+layout_mode = 2
+text = "Spawn Room Test"
+
+[node name="DepressionRoomButton" type="Button" parent="CenterContainer/Buttons"]
+layout_mode = 2
+text = "Depression Room Test"
+
+[node name="MemoryRoomButton" type="Button" parent="CenterContainer/Buttons"]
+layout_mode = 2
+text = "Memory Room Test"
+
+[connection signal="pressed" from="CenterContainer/Buttons/SpawnRoomButton" to="." method="_on_spawn_room_pressed"]
+[connection signal="pressed" from="CenterContainer/Buttons/DepressionRoomButton" to="." method="_on_depression_room_pressed"]
+[connection signal="pressed" from="CenterContainer/Buttons/MemoryRoomButton" to="." method="_on_memory_room_pressed"]
