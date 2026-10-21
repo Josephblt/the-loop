@@ -36,14 +36,14 @@ func _ready() -> void:
 	memory.set_fire_fixture_state("Interactables/Altars/AltarLeftTop", altar_left_top_active)
 	memory.set_fire_fixture_state("Interactables/Altars/AltarRightBottom", altar_right_bottom_active)
 	memory.set_fire_fixture_state("Interactables/Altars/AltarRightTop", altar_right_top_active)
-	memory.set_fire_fixture_state("Interactables/Cressets/CressetTopLeft/Cresset", cresset_top_left_active)
-	memory.set_fire_fixture_state("Interactables/Cressets/CressetTopRight/Cresset", cresset_top_right_active)
-	memory.set_fire_fixture_state("Interactables/Cressets/CressetBottomLeft/Cresset", cresset_bottom_left_active)
-	memory.set_fire_fixture_state("Interactables/Cressets/CressetBottomRight/Cresset", cresset_bottom_right_active)
-	memory.set_fire_fixture_state("Interactables/Cressets/CressetLeftBottom/Cresset", cresset_left_bottom_active)
-	memory.set_fire_fixture_state("Interactables/Cressets/CressetLeftTop/Cresset", cresset_left_top_active)
-	memory.set_fire_fixture_state("Interactables/Cressets/CressetRightBottom/Cresset", cresset_right_bottom_active)
-	memory.set_fire_fixture_state("Interactables/Cressets/CressetRightTop/Cresset", cresset_right_top_active)
+	memory.set_fire_fixture_state("Interactables/Cressets/CressetTopLeft", cresset_top_left_active)
+	memory.set_fire_fixture_state("Interactables/Cressets/CressetTopRight", cresset_top_right_active)
+	memory.set_fire_fixture_state("Interactables/Cressets/CressetBottomLeft", cresset_bottom_left_active)
+	memory.set_fire_fixture_state("Interactables/Cressets/CressetBottomRight", cresset_bottom_right_active)
+	memory.set_fire_fixture_state("Interactables/Cressets/CressetLeftBottom", cresset_left_bottom_active)
+	memory.set_fire_fixture_state("Interactables/Cressets/CressetLeftTop", cresset_left_top_active)
+	memory.set_fire_fixture_state("Interactables/Cressets/CressetRightBottom", cresset_right_bottom_active)
+	memory.set_fire_fixture_state("Interactables/Cressets/CressetRightTop", cresset_right_top_active)
 
 	var spawn_room: SpawnRoom = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
 	if randomize_scene:
