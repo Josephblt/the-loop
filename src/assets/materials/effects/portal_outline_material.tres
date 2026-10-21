@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://shaders/portal_outline.gdshader" id="1_outline"]
+
+[resource]
+render_priority = 2
+shader = ExtResource("1_outline")
+shader_parameter/font_outline = Color(0.88235295, 0.8, 1, 1)
