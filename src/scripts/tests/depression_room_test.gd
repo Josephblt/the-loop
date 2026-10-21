@@ -36,6 +36,7 @@ func _ready() -> void:
 	memory.set_fire_fixture_state("Interactables/Cressets/CressetLeftTop/Cresset", cresset_left_top_active)
 	memory.set_fire_fixture_state("Interactables/Cressets/CressetRightBottom/Cresset", cresset_right_bottom_active)
 	memory.set_fire_fixture_state("Interactables/Cressets/CressetRightTop/Cresset", cresset_right_top_active)
+	
 	var depression_room: DepressionRoom = DEPRESSION_ROOM_SCENE.instantiate() as DepressionRoom
 	if randomize_scene:
 		SceneRandomizer.randomize_scene(depression_room, randomization_seed)
