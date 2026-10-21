@@ -47,19 +47,21 @@ void vertex() {
 }
 
 void fragment() {
-	float moving_noise = fbm(vec2(UV.y * 14.0 - TIME * edge_flow_speed, TIME * 0.45));
-	float detail_noise = fbm(vec2(UV.y * 42.0 + TIME * edge_flow_speed * 0.6, TIME * 0.8));
-	float inner_boundary = clamp(edge_size + (moving_noise - 0.5) * 0.3, 0.2, 0.96);
+	float time = TIME * edge_flow_speed;
+	vec2 flowing_uv = vec2(UV.y * 12.0 - time * 0.35, UV.x * 3.0 + time * 0.18);
+	float moving_noise = fbm(flowing_uv);
+	float detail_noise = fbm(flowing_uv * 2.7 + vec2(time * 0.24, -time * 0.31));
+	float inner_boundary = clamp(edge_size + (moving_noise - 0.5) * 0.34 + (detail_noise - 0.5) * 0.12, 0.28, 0.98);
 	float frame = 1.0 - smoothstep(inner_boundary - edge_softness, inner_boundary + edge_softness, UV.x);
-	float outer_fade = smoothstep(0.0, edge_softness * 2.0, UV.x);
-	float highlight_distance = abs(UV.x - inner_boundary);
-	float highlight = 1.0 - smoothstep(edge_softness, edge_softness * 4.0, highlight_distance);
-	float pulse = 0.78 + 0.22 * sin(TIME * edge_pulse_speed + UV.y * 12.0);
-	float flow = 0.5 + 0.5 * sin(UV.y * 54.0 - TIME * edge_flow_speed * 8.0 + detail_noise * 7.0);
-	vec3 frame_color = barrier_outline.rgb * mix(0.32, 0.58, moving_noise);
-	vec3 highlight_color = barrier_outline.rgb * mix(1.15, 1.8, flow);
-	vec3 color = mix(frame_color, highlight_color, highlight);
+	float outer_fade = smoothstep(0.0, edge_softness * 3.0, UV.x);
+	float turbulent_energy = fbm(vec2(UV.y * 30.0 + time * 0.4, UV.x * 7.0 - time));
+	float pulse = 0.86 + 0.14 * sin(TIME * edge_pulse_speed + UV.y * 10.0);
+	float frame_gradient = smoothstep(0.0, inner_boundary, UV.x);
+	frame_gradient *= mix(0.82, 1.0, turbulent_energy) * pulse;
+	vec3 frame_color = pow(barrier_outline.rgb, vec3(3.0)) * 0.55;
+	vec3 highlight_color = pow(barrier_outline.rgb, vec3(1.5)) * 0.9;
+	vec3 color = mix(frame_color, highlight_color, frame_gradient);
 	ALBEDO = color;
-	EMISSION = color * edge_intensity * pulse * mix(0.7, 1.25, highlight);
-	ALPHA = frame * outer_fade * barrier_outline.a * pulse;
+	EMISSION = color * edge_intensity * mix(0.1, 0.32, frame_gradient);
+	ALPHA = frame * outer_fade * barrier_outline.a;
 }
