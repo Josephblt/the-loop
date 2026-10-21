@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bin2gxhatwvu2" path="res://assets/textures/interactables/chest_base.png" id="2_ca5m2"]
 [ext_resource type="AudioStream" uid="uid://df1ghudtvy2jb" path="res://assets/sounds/sfx/chest/chest_open.tres" id="3_ca5m2"]
 [ext_resource type="Material" uid="uid://dr273ka7s5f3r" path="res://assets/materials/interactables/chest_base.tres" id="4_bk6g0"]
-[ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_material.tres" id="6_3hjkb"]
+[ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_canvas_item_material.tres" id="6_3hjkb"]
 [ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="6_bk6g0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nro11"]
