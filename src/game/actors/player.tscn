@@ -52,15 +52,26 @@ hit_back_faces = false
 debug_shape_custom_color = Color(1, 0, 0, 0.5019608)
 debug_shape_thickness = 1
 
-[node name="InteractablesViewport" type="SubViewport" parent="Camera3D" unique_id=1112045214]
+[node name="HighlightViewport" type="SubViewport" parent="Camera3D" unique_id=1112045214]
 unique_name_in_owner = true
 transparent_bg = true
 render_target_update_mode = 4
 
-[node name="InteractablesCamera3D" type="Camera3D" parent="Camera3D/InteractablesViewport" unique_id=1359828356]
+[node name="HighlightCamera3D" type="Camera3D" parent="Camera3D/HighlightViewport" unique_id=1359828356]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 cull_mask = 2
+current = true
+
+[node name="OutlineViewport" type="SubViewport" parent="Camera3D"]
+unique_name_in_owner = true
+transparent_bg = true
+render_target_update_mode = 4
+
+[node name="OutlineCamera3D" type="Camera3D" parent="Camera3D/OutlineViewport"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+cull_mask = 4
 current = true
 
 [node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=1594547787]
@@ -89,7 +100,18 @@ libraries/ = SubResource("AnimationLibrary_3kwvn")
 
 [node name="Interactables" type="Node" parent="CanvasLayer" unique_id=1726678418]
 
-[node name="OutlineTextureRect" type="TextureRect" parent="CanvasLayer/Interactables" unique_id=1830632698]
+[node name="HighlightTextureRect" type="TextureRect" parent="CanvasLayer/Interactables" unique_id=1830632698]
+unique_name_in_owner = true
+material = ExtResource("4_u1ofm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+
+[node name="OutlineTextureRect" type="TextureRect" parent="CanvasLayer/Interactables" unique_id=2053368929]
 unique_name_in_owner = true
 material = ExtResource("3_3kwvn")
 anchors_preset = 15
@@ -99,9 +121,3 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 expand_mode = 1
-
-[node name="HighlightTextureRect" type="TextureRect" parent="CanvasLayer/Interactables" unique_id=2053368929]
-unique_name_in_owner = true
-material = ExtResource("4_u1ofm")
-offset_right = 40.0
-offset_bottom = 40.0
