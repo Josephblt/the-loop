@@ -9,7 +9,7 @@ signal interaction_triggered()
 signal _interaction_performed()
 
 
-const OUTLINE_LAYER: int = 2
+const INTERACTABLES_LAYER: int = 2
 
 @export var outline_meshes: Array[VisualInstance3D] = []
 @export var one_shot: bool = false
@@ -29,7 +29,7 @@ func _interact() -> void
 
 func _update_outline(enabled: bool) -> void:
 	for mesh in outline_meshes:
-		mesh.set_layer_mask_value(OUTLINE_LAYER, enabled)
+		mesh.set_layer_mask_value(INTERACTABLES_LAYER, enabled)
 
 
 func enable_interaction() -> void:
