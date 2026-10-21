@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://shaders/barrier.gdshader" id="1_barrier"]
+
+[resource]
+render_priority = 1
+shader = ExtResource("1_barrier")
+shader_parameter/barrier_color = Color(0.09411765, 0.043137256, 0.16078432, 0.58)
+shader_parameter/dissolve_color = Color(0.45882353, 0.32156864, 0.61960787, 0.9)
+shader_parameter/edge_color = Color(0.88235295, 0.8, 1, 1)
+shader_parameter/emission_strength = 2.5
+shader_parameter/formation_amount = 1.0
+shader_parameter/dissolve_amount = 0.5
+shader_parameter/dissolve_width = 0.12
+shader_parameter/softness = 0.045
+shader_parameter/noise_scale = 8.0
+shader_parameter/lateral_speed = 0.12
+shader_parameter/vertical_speed = 0.08
+shader_parameter/morph_speed = 0.3
+shader_parameter/distortion = 0.4
+shader_parameter/swirl_strength = 0.3
