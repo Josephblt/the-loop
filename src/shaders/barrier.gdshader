@@ -21,6 +21,8 @@ uniform float morph_speed : hint_range(0.0, 3.0) = 0.30;
 uniform float distortion : hint_range(0.0, 5.0) = 2.0;
 uniform float swirl_strength : hint_range(0.0, 5.0) = 1.2;
 
+varying vec2 local_position;
+
 float random(vec2 position) {
 	return fract(
 		sin(dot(position, vec2(127.1, 311.7)))
@@ -62,10 +64,14 @@ float fbm(vec2 position) {
 	return result / 0.96875;
 }
 
+void vertex() {
+	local_position = VERTEX.xy;
+}
+
 void fragment() {
 	float time = TIME * morph_speed;
 
-	vec2 position = FRAGCOORD.xy / noise_scale;
+	vec2 position = local_position * (100.0 / noise_scale);
 
 	position.x -= TIME * lateral_speed;
 
