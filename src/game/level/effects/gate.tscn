@@ -115,14 +115,17 @@ material = ExtResource("2_barrier")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, -2.8)
 shape = SubResource("BoxShape3D_tk26a")
 
-[node name="Light" type="OmniLight3D" parent="Barrier"]
+[node name="Light" type="OmniLight3D" parent="Barrier" unique_id=1776379673]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, -2.8)
 light_color = Color(0.663, 0.545, 1, 1)
 light_energy = 1.5
 light_specular = 2.0
+light_cull_mask = 4294966273
+shadow_enabled = true
+shadow_caster_mask = 4294966273
 omni_range = 6.5
 omni_attenuation = 1.5
 
-[node name="LightAnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="LightAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1194595021]
 libraries/ = SubResource("AnimationLibrary_light")
-autoplay = "pulse"
+autoplay = &"pulse"
