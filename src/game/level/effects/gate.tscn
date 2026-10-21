@@ -76,3 +76,11 @@ material = ExtResource("2_barrier")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Barrier" unique_id=399760843]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, -2.8)
 shape = SubResource("BoxShape3D_tk26a")
+
+[node name="Light" type="OmniLight3D" parent="Barrier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, -2.8)
+light_color = Color(0.663, 0.545, 1, 1)
+light_energy = 1.5
+light_specular = 2.0
+omni_range = 6.5
+omni_attenuation = 1.5
