@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dwj8clsjj6iqy" path="res://scripts/game/actors/player/player.gd" id="1_8itsh"]
 [ext_resource type="Script" uid="uid://dfs8wj1kaybuq" path="res://scripts/game/actors/player/outline_camera.gd" id="2_fyoa2"]
 [ext_resource type="Material" uid="uid://0y0hhoo7hqlx" path="res://assets/materials/effects/outline_material.tres" id="3_3kwvn"]
+[ext_resource type="Material" path="res://assets/materials/effects/portal_rim_material.tres" id="4_portal_rim"]
 [ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_canvas_item_material.tres" id="3_bfqtb"]
 [ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="4_btjqu"]
 [ext_resource type="Script" uid="uid://ckunku72jtdu0" path="res://scripts/game/ui/fps.gd" id="5_btjqu"]
@@ -65,6 +66,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 cull_mask = 1047554
 current = true
 
+[node name="PortalRimViewport" type="SubViewport" parent="Camera3D"]
+unique_name_in_owner = true
+transparent_bg = true
+render_target_update_mode = 4
+
+[node name="PortalRimCamera3D" type="Camera3D" parent="Camera3D/PortalRimViewport"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+cull_mask = 512
+current = true
+
 [node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=1594547787]
 current = true
 
@@ -111,6 +123,17 @@ libraries/ = SubResource("AnimationLibrary_3kwvn")
 [node name="OutlineTextureRect" type="TextureRect" parent="CanvasLayer/Outline" unique_id=1830632698]
 unique_name_in_owner = true
 material = ExtResource("3_3kwvn")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+
+[node name="PortalRimTextureRect" type="TextureRect" parent="CanvasLayer/Outline"]
+unique_name_in_owner = true
+material = ExtResource("4_portal_rim")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
