@@ -5,11 +5,11 @@ group_uniforms Color;
 uniform vec4 color_1 : source_color =
 	vec4(0.129, 0.094, 0.184, 1.0);
 
-uniform vec4 outline_color : source_color =
-	vec4(0.914, 0.871, 1.0, 1.0);
-
 uniform vec4 color_2 : source_color =
 	vec4(0.663, 0.545, 1.0, 1.0);
+
+uniform vec4 outline_color : source_color =
+	vec4(0.914, 0.871, 1.0, 1.0);
 
 group_uniforms Dissolve;
 
