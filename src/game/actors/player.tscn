@@ -45,7 +45,7 @@ shape = SubResource("CapsuleShape3D_vapkq")
 [node name="Camera3D" type="Camera3D" parent="." unique_id=559748373]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-cull_mask = 1047553
+cull_mask = 1048565
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1660884452]
 unique_name_in_owner = true
@@ -57,7 +57,6 @@ debug_shape_thickness = 1
 
 [node name="OutlineViewport" type="SubViewport" parent="Camera3D" unique_id=1112045214]
 transparent_bg = true
-canvas_cull_mask = 4293918722
 render_target_update_mode = 4
 
 [node name="OutlineCamera3D" type="Camera3D" parent="Camera3D/OutlineViewport" unique_id=1359828356 node_paths=PackedStringArray("main_camera", "effect_viewport", "effect_rim_texture_rect")]
@@ -71,7 +70,6 @@ effect_rim_texture_rect = NodePath("../../../CanvasLayer/Effects/OutlineTextureR
 
 [node name="InlineFlowViewport" type="SubViewport" parent="Camera3D" unique_id=2007309479]
 transparent_bg = true
-canvas_cull_mask = 4293918728
 render_target_update_mode = 4
 
 [node name="InlineFlowCamera3D" type="Camera3D" parent="Camera3D/InlineFlowViewport" unique_id=1160782611 node_paths=PackedStringArray("main_camera", "effect_viewport", "effect_rim_texture_rect")]

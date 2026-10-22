@@ -4,7 +4,7 @@
 
 [resource]
 shader = ExtResource("1_u7kqf")
-shader_parameter/core_color = Color(0.92, 0.82, 1, 1)
+shader_parameter/core_color = Color(0.92156863, 0.81960785, 1, 0.5019608)
 shader_parameter/halo_color = Color(0.48, 0.18, 1, 0.55)
 shader_parameter/core_width = 8.0
 shader_parameter/halo_width = 24.0
