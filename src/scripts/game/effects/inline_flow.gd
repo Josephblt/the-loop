@@ -17,4 +17,6 @@ func create_inline_flow_mask() -> void:
 	inline_flow_mask.layers = INLINE_FLOW_LAYER_BIT_VALUE
 	inline_flow_mask.material_override = INLINE_FLOW_MASK_MATERIAL
 	inline_flow_mask.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	add_child(inline_flow_mask)
+	
+	var parent_node: Node3D = get_parent() as Node3D
+	parent_node.add_child(inline_flow_mask)

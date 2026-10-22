@@ -73,7 +73,7 @@ polygon = PackedVector2Array(-3.1999998, 0, -3.1999998, 6.3999996, 3.2, 6.4, 3.2
 collision_layer = 16
 collision_mask = 2
 
-[node name="CSGPolygon3D" type="MeshInstance3D" parent="Barrier" unique_id=665990669]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrier" unique_id=665990669]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.8)
 layers = 16
 material_override = ExtResource("2_barrier")
