@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://shaders/portal_rim_mask.gdshader" id="1_portal_rim_mask"]
+
+[resource]
+shader = ExtResource("1_portal_rim_mask")
