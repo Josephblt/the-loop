@@ -2,13 +2,13 @@ shader_type canvas_item;
 
 group_uniforms Color;
 
-uniform vec4 font_color : source_color =
+uniform vec4 color_1 : source_color =
 	vec4(0.129, 0.094, 0.184, 1.0);
 
-uniform vec4 font_outline : source_color =
+uniform vec4 outline_color : source_color =
 	vec4(0.914, 0.871, 1.0, 1.0);
 
-uniform vec4 dissolve_color : source_color =
+uniform vec4 color_2 : source_color =
 	vec4(0.663, 0.545, 1.0, 1.0);
 
 group_uniforms Dissolve;
@@ -73,10 +73,10 @@ void fragment() {
 	vec4 texture_sample = texture(TEXTURE, UV);
 
 	/*
-	 * The source Label uses:
+	 * The source texture uses:
 	 *
-	 * White = font center
-	 * Black = font outline
+	 * White = interior
+	 * Black = outline
 	 */
 	float source_luminance = dot(
 		COLOR.rgb,
@@ -187,27 +187,27 @@ void fragment() {
 	);
 
 	vec3 center_color = mix(
-		font_color.rgb,
-		dissolve_color.rgb,
-		dissolve_region * dissolve_color.a
+		color_1.rgb,
+		color_2.rgb,
+		dissolve_region * color_2.a
 	);
 
 	/*
-	 * The font center receives the dissolve.
-	 * The font outline remains complete and unaffected.
+	 * The interior receives the dissolve.
+	 * The outline remains complete and unaffected.
 	 */
 	vec3 final_color = mix(
 		center_color,
-		font_outline.rgb,
+		outline_color.rgb,
 		is_outline
 	);
 
 	float center_alpha =
-		visibility * font_color.a;
+		visibility * color_1.a;
 
 	float final_alpha = mix(
 		center_alpha,
-		font_outline.a,
+		outline_color.a,
 		is_outline
 	);
 

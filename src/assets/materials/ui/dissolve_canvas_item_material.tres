@@ -4,9 +4,9 @@
 
 [resource]
 shader = ExtResource("1_8opu4")
-shader_parameter/font_color = Color(0.09411765, 0.043137256, 0.16078432, 1)
-shader_parameter/font_outline = Color(0.88235295, 0.8, 1, 1)
-shader_parameter/dissolve_color = Color(0.45882353, 0.32156864, 0.61960787, 1)
+shader_parameter/color_1 = Color(0.09411765, 0.043137256, 0.16078432, 1)
+shader_parameter/outline_color = Color(0.88235295, 0.8, 1, 1)
+shader_parameter/color_2 = Color(0.45882353, 0.32156864, 0.61960787, 1)
 shader_parameter/dissolve_amount = 0.250000011875
 shader_parameter/dissolve_width = 0.250000011875
 shader_parameter/softness = 0.20000000298023
