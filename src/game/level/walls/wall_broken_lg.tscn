@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://g3wkgliai3vy"]
 
-[ext_resource type="Material" uid="uid://c2wjxgtakqg74" path="res://assets/materials/walls/wall_broken_lg.tres" id="1_ggy0b"]
+[ext_resource type="Material" uid="uid://c2wjxgtakqg74" path="res://assets/materials/level/walls/wall_broken_lg.tres" id="1_ggy0b"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_w6ll4"]
 _surfaces = [{

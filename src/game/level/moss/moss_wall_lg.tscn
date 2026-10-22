@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://bq0jawg3hsgps"]
 
-[ext_resource type="Material" uid="uid://b1cmb67ygjcyk" path="res://assets/materials/moss/moss_wall_lg.tres" id="1_vpliq"]
+[ext_resource type="Material" uid="uid://b1cmb67ygjcyk" path="res://assets/materials/level/moss/moss_wall_lg.tres" id="1_vpliq"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_eyxgd"]
 _surfaces = [{

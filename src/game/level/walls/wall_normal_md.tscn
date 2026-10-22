@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://beyhhkd3rli1s"]
 
-[ext_resource type="Material" uid="uid://brybj5ephcerf" path="res://assets/materials/walls/wall_normal_md.tres" id="1_llsi1"]
+[ext_resource type="Material" uid="uid://brybj5ephcerf" path="res://assets/materials/level/walls/wall_normal_md.tres" id="1_llsi1"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_turlq"]
 _surfaces = [{

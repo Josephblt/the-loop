@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://coql64ga8pi0u"]
 
-[ext_resource type="Material" uid="uid://cs7f0y16tpivp" path="res://assets/materials/blocks/block_cracked_md.tres" id="2_udh8u"]
+[ext_resource type="Material" uid="uid://cs7f0y16tpivp" path="res://assets/materials/level/blocks/block_cracked_md.tres" id="2_udh8u"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_42f1d"]
 _surfaces = [{

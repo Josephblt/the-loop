@@ -10,7 +10,7 @@ signal _interaction_performed()
 
 
 const OUTLINE_LAYER: int = 2
-const HIGHLIGHT_MATERIAL: ShaderMaterial = preload("res://assets/materials/effects/highlight.tres")
+const HIGHLIGHT_MATERIAL: ShaderMaterial = preload("uid://dehlmi65vnf1q")
 
 @export var interactable_meshes: Array[GeometryInstance3D] = []
 @export var one_shot: bool = false

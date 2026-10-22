@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://clp0iyaq2rd17"]
 
-[ext_resource type="Material" uid="uid://dcy0uw2ikfdov" path="res://assets/materials/stairs/stairs_lg.tres" id="1_n31k4"]
+[ext_resource type="Material" uid="uid://dcy0uw2ikfdov" path="res://assets/materials/level/stairs/stairs_lg.tres" id="1_n31k4"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_cl2vg"]
 _surfaces = [{

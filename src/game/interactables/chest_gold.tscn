@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://esslh7fta828"]
 
 [ext_resource type="Script" uid="uid://bxw8n4e25palv" path="res://scripts/game/interactables/chest.gd" id="1_78xc1"]
-[ext_resource type="Texture2D" uid="uid://b170hc6sp5x33" path="res://assets/textures/interactables/chest_cover.png" id="2_yxmji"]
-[ext_resource type="Material" uid="uid://bonxf6u35e2d1" path="res://assets/materials/interactables/chest_base_gold.tres" id="3_78xc1"]
+[ext_resource type="Texture2D" uid="uid://b170hc6sp5x33" path="res://assets/textures/interactables/chest/chest_cover.png" id="2_yxmji"]
+[ext_resource type="Material" uid="uid://bonxf6u35e2d1" path="res://assets/materials/interactables/chest/chest_base_gold.tres" id="3_78xc1"]
 [ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_canvas_item_material.tres" id="4_ef6nr"]
 [ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="5_sllh7"]
 [ext_resource type="AudioStream" uid="uid://df1ghudtvy2jb" path="res://assets/sounds/sfx/chest/chest_open.tres" id="6_3j8aq"]
