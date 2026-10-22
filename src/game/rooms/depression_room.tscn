@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dfwbglgsmyokl" path="res://game/level/walls/wall_normal_lg.tscn" id="6_ci3gg"]
 [ext_resource type="PackedScene" uid="uid://ktrvq6qgill5" path="res://game/level/fences/post_middle.tscn" id="6_e0xx7"]
 [ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="7_avbcp"]
-[ext_resource type="PackedScene" uid="uid://v8j2a1egqxgo" path="res://game/switches/gate.tscn" id="7_e0xx7"]
 [ext_resource type="PackedScene" uid="uid://vsm7olv05rj1" path="res://game/level/fences/post_fence_middle_2.tscn" id="7_jih8p"]
 [ext_resource type="PackedScene" uid="uid://dsodgs8nmbiir" path="res://game/level/fences/post_fence_middle_1.tscn" id="8_pm5dm"]
 [ext_resource type="PackedScene" uid="uid://rdh1pb10cdnw" path="res://game/level/fences/post_corner.tscn" id="9_tkjqx"]
@@ -94,9 +93,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.200001, 0, -5.599999)
 
 [node name="BlockCrackedSM21" parent="Floor" unique_id=20661926 instance=ExtResource("1_8c36o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.800001, 0, -5.599999)
-
-[node name="BlockCrackedSM22" parent="Floor" unique_id=1756424107 instance=ExtResource("1_8c36o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8, 0, 9.536743e-07)
 
 [node name="BlockCrackedSM23" parent="Floor" unique_id=959626601 instance=ExtResource("1_8c36o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.199999, 0, 9.536743e-07)
@@ -420,9 +416,6 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.
 [node name="WallNormalLG24" parent="Walls/Outter/Top" unique_id=884399133 instance=ExtResource("6_ci3gg")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.800003, 5.6, 5.600001)
 
-[node name="WallNormalLG25" parent="Walls/Outter/Top" unique_id=1952772545 instance=ExtResource("6_ci3gg")]
-transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.800003, 5.6, 9.536743e-07)
-
 [node name="WallNormalLG26" parent="Walls/Outter/Top" unique_id=570005750 instance=ExtResource("6_ci3gg")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.800003, 5.6, -5.599999)
 
@@ -433,9 +426,6 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.800003, 5.6, -16.8)
 
 [node name="Bottom" type="Node3D" parent="Walls/Outter" unique_id=1388206044]
-
-[node name="Gate" parent="Walls/Outter/Bottom" unique_id=1011791674 instance=ExtResource("7_e0xx7")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.8, 0, 0)
 
 [node name="WallNormalLG" parent="Walls/Outter/Bottom" unique_id=847289766 instance=ExtResource("6_ci3gg")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.8, 0, -5.6)

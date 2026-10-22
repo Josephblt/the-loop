@@ -1,10 +1,10 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://e8uxyqrstxcu"]
 
-[ext_resource type="Shader" uid="uid://r5p7n42oduwx" path="res://shaders/dissolve_spatial.gdshader" id="1_barrier"]
+[ext_resource type="Shader" uid="uid://r5p7n42oduwx" path="res://shaders/dissolve_spatial.gdshader" id="1_bgwtb"]
 
 [resource]
-render_priority = 0
-shader = ExtResource("1_barrier")
+render_priority = 1
+shader = ExtResource("1_bgwtb")
 shader_parameter/font_color = Color(0.09411765, 0.043137256, 0.16078432, 0.39215687)
 shader_parameter/dissolve_color = Color(0.45882353, 0.32156864, 0.61960787, 0.39215687)
 shader_parameter/dissolve_amount = 0.250000011875
