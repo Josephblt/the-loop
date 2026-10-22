@@ -3,5 +3,6 @@
 [ext_resource type="Shader" uid="uid://b0ep5156rcxce" path="res://shaders/inline_flow_mask.gdshader" id="1_bao8s"]
 
 [resource]
-render_priority = 1
+render_priority = 0
 shader = ExtResource("1_bao8s")
+shader_parameter/TRANSPARENCY = 1.0

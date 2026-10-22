@@ -13,7 +13,7 @@ script = ExtResource("1_30e3m")
 
 [node name="Player" parent="." unique_id=2061682565 instance=ExtResource("3_pjo0v")]
 unique_name_in_owner = true
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16.8, 4, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -22.4, 0, 0)
 
 [node name="DepressionRoom" parent="." unique_id=1670544133 instance=ExtResource("4_7rc7p")]
 unique_name_in_owner = true

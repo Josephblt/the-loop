@@ -121,7 +121,7 @@ _surfaces = [{
 }]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tk26a"]
-size = Vector3(5.7000003, 5.5, 0.5)
+size = Vector3(5.7, 5.5, 0.8)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_y57w0"]
 _surfaces = [{
@@ -164,6 +164,170 @@ size = Vector3(1, 6.4, 6.4)
 [sub_resource type="BoxShape3D" id="BoxShape3D_tlncs"]
 size = Vector3(6.4, 6.4, 6.4)
 
+[sub_resource type="Animation" id="Animation_7hvp7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrier/DissolveSpatial:material_override:shader_parameter/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.09411765, 0.043137256, 0.16078432, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Barrier/DissolveSpatial:material_override:shader_parameter/dissolve_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.45882353, 0.32156864, 0.61960787, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Barrier:collision_layer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Barrier:collision_mask")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_n47wt"]
+resource_name = "activate"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrier/DissolveSpatial:material_override:shader_parameter/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.09411765, 0.043137256, 0.16078432, 0), Color(0.09411765, 0.043137256, 0.16078432, 0.5019608)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Barrier/DissolveSpatial:material_override:shader_parameter/dissolve_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.099999994),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.45882353, 0.32156864, 0.61960787, 0), Color(0.45882353, 0.32156864, 0.61960787, 0.5019608)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Barrier:collision_layer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099920094),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 16]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Barrier:collision_mask")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 2]
+}
+
+[sub_resource type="Animation" id="Animation_8l05i"]
+resource_name = "deactivate"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrier/DissolveSpatial:material_override:shader_parameter/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.09411765, 0.043137256, 0.16078432, 0.5019608), Color(0.09411765, 0.043137256, 0.16078432, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Barrier/DissolveSpatial:material_override:shader_parameter/dissolve_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.45882353, 0.32156864, 0.61960787, 0.5019608), Color(0.45882353, 0.32156864, 0.61960787, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Barrier:collision_layer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [16, 0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Barrier:collision_mask")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tlncs"]
+_data = {
+&"RESET": SubResource("Animation_7hvp7"),
+&"activate": SubResource("Animation_n47wt"),
+&"deactivate": SubResource("Animation_8l05i")
+}
+
 [node name="GateHorizontal" type="Node3D" unique_id=1825569716]
 script = ExtResource("1_tlncs")
 
@@ -187,8 +351,8 @@ polygon = PackedVector2Array(-3.1999998, 0, -3.1999998, 6.3999996, 3.2, 6.4, 3.2
 
 [node name="Barrier" type="StaticBody3D" parent="." unique_id=339110726]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-collision_layer = 16
-collision_mask = 2
+collision_layer = 0
+collision_mask = 0
 
 [node name="DissolveSpatial" type="MeshInstance3D" parent="Barrier" unique_id=2127747107]
 layers = 16
@@ -250,7 +414,11 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Activator" unique_id=1636781492]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, 2.8000002, -4.7683716e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7683716e-07, 2.8000002, -4.7683716e-07)
 shape = SubResource("BoxShape3D_tlncs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1193232212]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_tlncs")
 
 [connection signal="body_exited" from="Activator" to="." method="_on_activator_body_exited"]

@@ -81,11 +81,11 @@ main_camera = NodePath("../..")
 effect_viewport = NodePath("..")
 effect_rim_texture_rect = NodePath("../../../CanvasLayer/Effects/InlineFlowTextureRect")
 
-[node name="InlineFlowVisibilityViewport" type="SubViewport" parent="Camera3D"]
+[node name="InlineFlowVisibilityViewport" type="SubViewport" parent="Camera3D" unique_id=1629366619]
 transparent_bg = true
 render_target_update_mode = 4
 
-[node name="InlineFlowVisibilityCamera3D" type="Camera3D" parent="Camera3D/InlineFlowVisibilityViewport" node_paths=PackedStringArray("main_camera", "effect_viewport", "effect_rim_texture_rect")]
+[node name="InlineFlowVisibilityCamera3D" type="Camera3D" parent="Camera3D/InlineFlowVisibilityViewport" unique_id=126169596 node_paths=PackedStringArray("main_camera", "effect_viewport", "effect_rim_texture_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 cull_mask = 9
 current = true
@@ -96,6 +96,7 @@ effect_rim_texture_rect = NodePath("../../../CanvasLayer/Effects/InlineFlowTextu
 texture_parameter = "visibility_texture"
 
 [node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=1594547787]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 current = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=335031780]
