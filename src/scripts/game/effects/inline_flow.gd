@@ -1,5 +1,5 @@
 class_name InlineFlowEffect
-extends GeometryInstance3D
+extends MeshInstance3D
 
 
 const INLINE_FLOW_MASK_MATERIAL: Material = preload("res://assets/materials/effects/inline_flow_mask_material.tres")
@@ -11,9 +11,10 @@ func _ready() -> void:
 
 
 func create_inline_flow_mask() -> void:
-	var inline_flow_mask: GeometryInstance3D = duplicate() as GeometryInstance3D
-	inline_flow_mask.set_script(null)
+	var inline_flow_mask: MeshInstance3D = MeshInstance3D.new()
 	inline_flow_mask.name = "InlineFlowMask"
+	inline_flow_mask.mesh = mesh
+	inline_flow_mask.transform = transform
 	inline_flow_mask.layers = INLINE_FLOW_LAYER_BIT_VALUE
 	inline_flow_mask.material_override = INLINE_FLOW_MASK_MATERIAL
 	inline_flow_mask.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
