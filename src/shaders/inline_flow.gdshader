@@ -2,11 +2,18 @@ shader_type canvas_item;
 
 uniform vec4 core_color : source_color = vec4(0.92, 0.82, 1.0, 1.0);
 uniform vec4 halo_color : source_color = vec4(0.48, 0.18, 1.0, 0.55);
-uniform float core_width : hint_range(1.0, 8.0) = 2.0;
-uniform float halo_width : hint_range(2.0, 24.0) = 10.0;
+uniform float core_width : hint_range(0.01, 0.5) = 0.04;
+uniform float halo_width : hint_range(0.02, 1.5) = 0.2;
 uniform float noise_scale : hint_range(1.0, 40.0) = 18.0;
 uniform float flow_speed : hint_range(0.0, 8.0) = 2.6;
 uniform float breakup : hint_range(0.0, 1.0) = 0.65;
+
+const float LOCAL_PIXEL_ENCODING_SCALE = 8.0;
+
+
+float mask_value(vec3 mask_color) {
+	return step(0.9, mask_color.r) * step(mask_color.g, 0.8) * step(0.9, mask_color.b);
+}
 
 float random_value(vec2 position) {
 	return fract(sin(dot(position, vec2(12.9898, 78.233))) * 43758.5453);
@@ -22,17 +29,20 @@ float value_noise(vec2 position) {
 
 void fragment() {
 	vec3 center_color = texture(TEXTURE, UV).rgb;
-	float center = step(0.9, center_color.r) * step(center_color.g, 0.1) * step(0.9, center_color.b);
+	float center = mask_value(center_color);
+	float local_pixel_size = max(center_color.g / LOCAL_PIXEL_ENCODING_SCALE, 0.0001);
+	float core_radius = core_width / local_pixel_size;
+	float halo_radius = halo_width / local_pixel_size;
 	float core_mask = 1.0;
 	float halo_mask = 1.0;
 
 	for (int index = 0; index < 16; index++) {
 		float angle = float(index) * 0.3926991;
 		vec2 direction = vec2(cos(angle), sin(angle));
-		vec3 core_color_sample = texture(TEXTURE, UV + direction * TEXTURE_PIXEL_SIZE * core_width).rgb;
-		vec3 halo_color_sample = texture(TEXTURE, UV + direction * TEXTURE_PIXEL_SIZE * halo_width).rgb;
-		float core_sample = step(0.9, core_color_sample.r) * step(core_color_sample.g, 0.1) * step(0.9, core_color_sample.b);
-		float halo_sample = step(0.9, halo_color_sample.r) * step(halo_color_sample.g, 0.1) * step(0.9, halo_color_sample.b);
+		vec3 core_color_sample = texture(TEXTURE, UV + direction * TEXTURE_PIXEL_SIZE * core_radius).rgb;
+		vec3 halo_color_sample = texture(TEXTURE, UV + direction * TEXTURE_PIXEL_SIZE * halo_radius).rgb;
+		float core_sample = mask_value(core_color_sample);
+		float halo_sample = mask_value(halo_color_sample);
 		core_mask = min(core_mask, core_sample);
 		halo_mask = min(halo_mask, halo_sample);
 	}
