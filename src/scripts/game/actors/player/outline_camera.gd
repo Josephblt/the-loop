@@ -1,3 +1,4 @@
+class_name OutlineCamera3D
 extends Camera3D
 
 @onready var outline_viewport: SubViewport = %OutlineViewport

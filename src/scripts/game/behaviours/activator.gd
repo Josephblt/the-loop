@@ -1,3 +1,4 @@
+class_name Activator
 extends Area3D
 
 

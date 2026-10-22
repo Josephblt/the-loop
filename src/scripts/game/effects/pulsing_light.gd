@@ -1,4 +1,4 @@
-class_name RandomPulsingLight
+class_name PulsingLight
 extends OmniLight3D
 
 

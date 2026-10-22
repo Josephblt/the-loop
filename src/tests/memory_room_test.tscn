@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dx6d4mhxny3ew" path="res://scripts/tests/memory_room_test.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://dt4q24uysybli" path="res://game/effects/lights.tscn" id="2_lights"]
 [ext_resource type="PackedScene" uid="uid://b0lvfjr4ff8hl" path="res://game/actors/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" uid="uid://cvvhff7lf1cka" path="res://game/rooms/memory_room.tscn" id="4_coft2"]
 
 [node name="MemoryRoomTest" type="Node3D" unique_id=2059004775]
 script = ExtResource("1_script")
@@ -12,3 +13,6 @@ script = ExtResource("1_script")
 [node name="Player" parent="." unique_id=2061682565 instance=ExtResource("3_player")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="MemoryRoom" parent="." unique_id=880386851 instance=ExtResource("4_coft2")]
+unique_name_in_owner = true

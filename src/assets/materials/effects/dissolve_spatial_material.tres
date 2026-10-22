@@ -5,8 +5,8 @@
 [resource]
 render_priority = 1
 shader = ExtResource("1_barrier")
-shader_parameter/font_color = Color(0.09411765, 0.043137256, 0.16078432, 0.5019608)
-shader_parameter/dissolve_color = Color(0.45882353, 0.32156864, 0.61960787, 0.5019608)
+shader_parameter/font_color = Color(0.09411765, 0.043137256, 0.16078432, 0.39215687)
+shader_parameter/dissolve_color = Color(0.45882353, 0.32156864, 0.61960787, 0.39215687)
 shader_parameter/dissolve_amount = 0.250000011875
 shader_parameter/dissolve_width = 0.250000011875
 shader_parameter/softness = 0.20000000298023

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dj1p28x8ggol4" path="res://scripts/tests/spawn_room_test.gd" id="1_2llnb"]
 [ext_resource type="PackedScene" uid="uid://dt4q24uysybli" path="res://game/effects/lights.tscn" id="2_0qcbj"]
 [ext_resource type="PackedScene" uid="uid://b0lvfjr4ff8hl" path="res://game/actors/player.tscn" id="3_ecmwq"]
+[ext_resource type="PackedScene" uid="uid://i64r11soytmg" path="res://game/rooms/spawn_room.tscn" id="4_0qcbj"]
 
 [node name="SpawnRoomTest" type="Node3D" unique_id=2059004775]
 script = ExtResource("1_2llnb")
@@ -10,4 +11,7 @@ script = ExtResource("1_2llnb")
 [node name="Lights" parent="." unique_id=1886347259 instance=ExtResource("2_0qcbj")]
 
 [node name="Player" parent="." unique_id=2061682565 instance=ExtResource("3_ecmwq")]
+unique_name_in_owner = true
+
+[node name="SpawnRoom" parent="." unique_id=496749782 instance=ExtResource("4_0qcbj")]
 unique_name_in_owner = true

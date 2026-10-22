@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cld4jcite67wd" path="res://scripts/tests/depression_room_test.gd" id="1_30e3m"]
 [ext_resource type="PackedScene" uid="uid://dt4q24uysybli" path="res://game/effects/lights.tscn" id="2_7rc7p"]
 [ext_resource type="PackedScene" uid="uid://b0lvfjr4ff8hl" path="res://game/actors/player.tscn" id="3_pjo0v"]
+[ext_resource type="PackedScene" uid="uid://bxx66w6ljq3po" path="res://game/rooms/depression_room.tscn" id="4_7rc7p"]
 
 [node name="DepressionRoomTest" type="Node3D" unique_id=2059004775]
 script = ExtResource("1_30e3m")
@@ -12,3 +13,6 @@ script = ExtResource("1_30e3m")
 [node name="Player" parent="." unique_id=2061682565 instance=ExtResource("3_pjo0v")]
 unique_name_in_owner = true
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16.8, 4, 0)
+
+[node name="DepressionRoom" parent="." unique_id=1670544133 instance=ExtResource("4_7rc7p")]
+unique_name_in_owner = true
