@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://yqqfc36dk0bu" path="res://scripts/game/interactables/cresset.gd" id="1_chd1y"]
 [ext_resource type="Texture2D" uid="uid://cs3ys44ittqo7" path="res://assets/textures/interactables/cresset.png" id="1_uts5g"]
-[ext_resource type="PackedScene" uid="uid://ci5ayfo0lm6xc" path="res://game/effects/fire.tscn" id="2_tgbp8"]
+[ext_resource type="PackedScene" uid="uid://ci5ayfo0lm6xc" path="res://game/switches/fire.tscn" id="2_tgbp8"]
 [ext_resource type="Material" uid="uid://dtf5ga5d2o3gb" path="res://assets/materials/interactables/cresset.tres" id="2_xmwar"]
 [ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="5_ur6ep"]
 [ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_canvas_item_material.tres" id="5_xip04"]

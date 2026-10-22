@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cqrto67h33ydp"]
 
-[ext_resource type="Script" uid="uid://x6jy2wnkl1pn" path="res://scripts/game/behaviours/activator.gd" id="1_qlh5e"]
+[ext_resource type="Script" uid="uid://x6jy2wnkl1pn" path="res://scripts/game/switches/activator.gd" id="1_qlh5e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jxl8w"]
 

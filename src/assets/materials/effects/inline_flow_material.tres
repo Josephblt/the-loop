@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dfw8stp1jnqeg"]
+
+[ext_resource type="Shader" uid="uid://ct15sfrirx4c5" path="res://shaders/inline_flow.gdshader" id="1_u7kqf"]
+
+[resource]
+shader = ExtResource("1_u7kqf")
+shader_parameter/core_color = Color(0.92, 0.82, 1, 1)
+shader_parameter/halo_color = Color(0.48, 0.18, 1, 0.55)
+shader_parameter/core_width = 8.0
+shader_parameter/halo_width = 24.0
+shader_parameter/noise_scale = 40.0
+shader_parameter/flow_speed = 5.0000002375
+shader_parameter/breakup = 0.750000035625

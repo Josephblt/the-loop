@@ -1,4 +1,4 @@
-class_name FireLight
+class_name FireLightEffect
 extends OmniLight3D
 
 

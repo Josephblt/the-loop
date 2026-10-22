@@ -1,4 +1,4 @@
-class_name PulsingLight
+class_name PulsingLightEffect
 extends OmniLight3D
 
 

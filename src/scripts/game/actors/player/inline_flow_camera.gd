@@ -1,0 +1,2 @@
+class_name InlineFlowCamera3D
+extends EffectCamera3D

@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bx0ey0omu3158" path="res://game/level/fences/parts/post.tscn" id="11_8rg4g"]
 [ext_resource type="PackedScene" uid="uid://clp0iyaq2rd17" path="res://game/level/stairs/stairs_lg.tscn" id="12_cy3lc"]
 [ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="13_bch3r"]
-[ext_resource type="PackedScene" uid="uid://v8j2a1egqxgo" path="res://game/effects/gate.tscn" id="14_bnpqw"]
+[ext_resource type="PackedScene" uid="uid://v8j2a1egqxgo" path="res://game/switches/gate.tscn" id="14_bnpqw"]
 [ext_resource type="PackedScene" uid="uid://dfwbglgsmyokl" path="res://game/level/walls/wall_normal_lg.tscn" id="14_injm3"]
 [ext_resource type="PackedScene" uid="uid://b6fydse31tnyb" path="res://game/level/walls/wall_broken_md.tscn" id="15_bnpqw"]
 

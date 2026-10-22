@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://dwj8clsjj6iqy" path="res://scripts/game/actors/player/player.gd" id="1_8itsh"]
 [ext_resource type="Script" uid="uid://dfs8wj1kaybuq" path="res://scripts/game/actors/player/outline_camera.gd" id="2_fyoa2"]
 [ext_resource type="Material" uid="uid://0y0hhoo7hqlx" path="res://assets/materials/effects/outline_material.tres" id="3_3kwvn"]
-[ext_resource type="Material" path="res://assets/materials/effects/portal_rim_material.tres" id="4_portal_rim"]
+[ext_resource type="Script" uid="uid://bb7ochilsb5l6" path="res://scripts/game/actors/player/inline_flow_camera.gd" id="3_14rfe"]
 [ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_canvas_item_material.tres" id="3_bfqtb"]
 [ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="4_btjqu"]
+[ext_resource type="Material" uid="uid://dfw8stp1jnqeg" path="res://assets/materials/effects/inline_flow_material.tres" id="4_portal_rim"]
 [ext_resource type="Script" uid="uid://ckunku72jtdu0" path="res://scripts/game/ui/fps.gd" id="5_btjqu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vapkq"]
@@ -44,8 +45,7 @@ shape = SubResource("CapsuleShape3D_vapkq")
 [node name="Camera3D" type="Camera3D" parent="." unique_id=559748373]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-cull_mask = 1048061
-script = ExtResource("2_fyoa2")
+cull_mask = 1047553
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1660884452]
 unique_name_in_owner = true
@@ -56,26 +56,32 @@ debug_shape_custom_color = Color(1, 0, 0, 0.5019608)
 debug_shape_thickness = 1
 
 [node name="OutlineViewport" type="SubViewport" parent="Camera3D" unique_id=1112045214]
-unique_name_in_owner = true
 transparent_bg = true
+canvas_cull_mask = 4293918722
 render_target_update_mode = 4
 
-[node name="OutlineCamera3D" type="Camera3D" parent="Camera3D/OutlineViewport" unique_id=1359828356]
-unique_name_in_owner = true
+[node name="OutlineCamera3D" type="Camera3D" parent="Camera3D/OutlineViewport" unique_id=1359828356 node_paths=PackedStringArray("main_camera", "effect_viewport", "effect_rim_texture_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-cull_mask = 1047554
+cull_mask = 2
 current = true
+script = ExtResource("2_fyoa2")
+main_camera = NodePath("../..")
+effect_viewport = NodePath("..")
+effect_rim_texture_rect = NodePath("../../../CanvasLayer/Effects/OutlineTextureRect")
 
-[node name="PortalRimViewport" type="SubViewport" parent="Camera3D"]
-unique_name_in_owner = true
+[node name="InlineFlowViewport" type="SubViewport" parent="Camera3D" unique_id=2007309479]
 transparent_bg = true
+canvas_cull_mask = 4293918728
 render_target_update_mode = 4
 
-[node name="PortalRimCamera3D" type="Camera3D" parent="Camera3D/PortalRimViewport"]
-unique_name_in_owner = true
+[node name="InlineFlowCamera3D" type="Camera3D" parent="Camera3D/InlineFlowViewport" unique_id=1160782611 node_paths=PackedStringArray("main_camera", "effect_viewport", "effect_rim_texture_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-cull_mask = 1048569
+cull_mask = 8
 current = true
+script = ExtResource("3_14rfe")
+main_camera = NodePath("../..")
+effect_viewport = NodePath("..")
+effect_rim_texture_rect = NodePath("../../../CanvasLayer/Effects/InlineFlowTextureRect")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=1594547787]
 current = true
@@ -118,10 +124,9 @@ stretch_mode = 3
 root_node = NodePath("../../..")
 libraries/ = SubResource("AnimationLibrary_3kwvn")
 
-[node name="Outline" type="Node" parent="CanvasLayer" unique_id=1726678418]
+[node name="Effects" type="Node" parent="CanvasLayer" unique_id=1726678418]
 
-[node name="OutlineTextureRect" type="TextureRect" parent="CanvasLayer/Outline" unique_id=1830632698]
-unique_name_in_owner = true
+[node name="OutlineTextureRect" type="TextureRect" parent="CanvasLayer/Effects" unique_id=1830632698]
 material = ExtResource("3_3kwvn")
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,8 +136,7 @@ grow_vertical = 2
 mouse_filter = 2
 expand_mode = 1
 
-[node name="PortalRimTextureRect" type="TextureRect" parent="CanvasLayer/Outline"]
-unique_name_in_owner = true
+[node name="InlineFlowTextureRect" type="TextureRect" parent="CanvasLayer/Effects" unique_id=1153724575]
 material = ExtResource("4_portal_rim")
 anchors_preset = 15
 anchor_right = 1.0

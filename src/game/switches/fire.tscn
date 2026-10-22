@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ci5ayfo0lm6xc"]
 
-[ext_resource type="Script" uid="uid://cv04okb82d1gk" path="res://scripts/game/effects/fire.gd" id="1_gfcvc"]
+[ext_resource type="Script" uid="uid://cv04okb82d1gk" path="res://scripts/game/switches/fire.gd" id="1_gfcvc"]
 [ext_resource type="Script" uid="uid://8vxf7bqudb3r" path="res://scripts/game/effects/fire_light.gd" id="2_7vuj1"]
 [ext_resource type="AudioStream" uid="uid://ckh45fqhwxb8s" path="res://assets/sounds/sfx/flame/flame.tres" id="3_llhjr"]
 
