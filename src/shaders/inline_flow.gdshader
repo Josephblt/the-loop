@@ -2,6 +2,7 @@ shader_type canvas_item;
 
 uniform vec4 core_color : source_color = vec4(0.92, 0.82, 1.0, 1.0);
 uniform vec4 halo_color : source_color = vec4(0.48, 0.18, 1.0, 0.55);
+uniform sampler2D visibility_texture : filter_nearest;
 uniform float core_width : hint_range(0.01, 0.5) = 0.04;
 uniform float halo_width : hint_range(0.02, 1.5) = 0.2;
 uniform float noise_scale : hint_range(1.0, 40.0) = 18.0;
@@ -29,7 +30,9 @@ float value_noise(vec2 position) {
 
 void fragment() {
 	vec3 center_color = texture(TEXTURE, UV).rgb;
+	vec3 visibility_color = texture(visibility_texture, UV).rgb;
 	float center = mask_value(center_color);
+	float visibility = mask_value(visibility_color);
 	float local_pixel_size = max(center_color.g / LOCAL_PIXEL_ENCODING_SCALE, 0.0001);
 	float core_radius = core_width / local_pixel_size;
 	float halo_radius = halo_width / local_pixel_size;
@@ -57,6 +60,7 @@ void fragment() {
 	float flare = 0.55 + chaos * chaos * 1.1;
 	float alpha = core_mask * core_color.a * broken_edge * flare;
 	alpha += halo_mask * halo_color.a * broken_edge * chaos;
+	alpha *= visibility;
 	vec3 color = mix(halo_color.rgb, core_color.rgb, core_mask);
 
 	COLOR = vec4(color, alpha);
