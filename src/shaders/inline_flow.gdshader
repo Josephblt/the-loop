@@ -6,6 +6,7 @@ uniform float rim_width : hint_range(0.01, 1.5) = 0.24;
 uniform float rim_blur : hint_range(0.0, 1.0) = 0.12;
 
 const float LOCAL_PIXEL_ENCODING_SCALE = 8.0;
+const float GOLDEN_ANGLE = 2.39996323;
 
 
 float mask_value(vec3 mask_color) {
@@ -26,26 +27,36 @@ float hard_rim(sampler2D mask_texture, vec2 pixel_size, vec2 uv, float radius) {
 	return max(center - interior, 0.0);
 }
 
+float blurred_rim(sampler2D mask_texture, vec2 pixel_size, vec2 uv, float rim_radius, float blur_radius) {
+	float weighted_rim = hard_rim(mask_texture, pixel_size, uv, rim_radius);
+	float total_weight = 1.0;
+
+	for (int index = 0; index < 8; index++) {
+		float sample_fraction = (float(index) + 0.5) / 8.0;
+		float sample_radius = sqrt(sample_fraction) * blur_radius;
+		float angle = float(index) * GOLDEN_ANGLE;
+		vec2 direction = vec2(cos(angle), sin(angle));
+		vec2 offset = direction * pixel_size * sample_radius;
+		float weight = exp(-2.5 * sample_fraction);
+		weighted_rim += hard_rim(mask_texture, pixel_size, uv + offset, rim_radius) * weight;
+		weighted_rim += hard_rim(mask_texture, pixel_size, uv - offset, rim_radius) * weight;
+		total_weight += weight * 2.0;
+	}
+
+	return weighted_rim / total_weight;
+}
+
 void fragment() {
 	vec3 center_color = texture(TEXTURE, UV).rgb;
 	vec3 visibility_color = texture(visibility_texture, UV).rgb;
 	float visibility = mask_value(visibility_color);
 	float local_pixel_size = max(center_color.g / LOCAL_PIXEL_ENCODING_SCALE, 0.0001);
 	float rim_radius = rim_width / local_pixel_size;
-	vec2 blur_offset = TEXTURE_PIXEL_SIZE * rim_blur / local_pixel_size;
+	float blur_radius = rim_blur / local_pixel_size;
 	float rim = 0.0;
 
 	if (visibility > 0.0) {
-		rim += hard_rim(TEXTURE, TEXTURE_PIXEL_SIZE, UV, rim_radius) * 4.0;
-		rim += hard_rim(TEXTURE, TEXTURE_PIXEL_SIZE, UV + vec2(-blur_offset.x, 0.0), rim_radius) * 2.0;
-		rim += hard_rim(TEXTURE, TEXTURE_PIXEL_SIZE, UV + vec2(blur_offset.x, 0.0), rim_radius) * 2.0;
-		rim += hard_rim(TEXTURE, TEXTURE_PIXEL_SIZE, UV + vec2(0.0, -blur_offset.y), rim_radius) * 2.0;
-		rim += hard_rim(TEXTURE, TEXTURE_PIXEL_SIZE, UV + vec2(0.0, blur_offset.y), rim_radius) * 2.0;
-		rim += hard_rim(TEXTURE, TEXTURE_PIXEL_SIZE, UV - blur_offset, rim_radius);
-		rim += hard_rim(TEXTURE, TEXTURE_PIXEL_SIZE, UV + blur_offset, rim_radius);
-		rim += hard_rim(TEXTURE, TEXTURE_PIXEL_SIZE, UV + vec2(-blur_offset.x, blur_offset.y), rim_radius);
-		rim += hard_rim(TEXTURE, TEXTURE_PIXEL_SIZE, UV + vec2(blur_offset.x, -blur_offset.y), rim_radius);
-		rim /= 16.0;
+		rim = blurred_rim(TEXTURE, TEXTURE_PIXEL_SIZE, UV, rim_radius, blur_radius);
 	}
 
 	COLOR = vec4(rim_color.rgb, rim);
