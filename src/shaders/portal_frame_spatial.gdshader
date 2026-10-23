@@ -1,0 +1,52 @@
+shader_type spatial;
+render_mode unshaded, blend_mix, cull_disabled, depth_draw_never, shadows_disabled;
+
+group_uniforms Ellipse;
+
+uniform float ellipse_width : hint_range(0.01, 0.5, 0.005) = 0.32;
+uniform float ellipse_height : hint_range(0.01, 0.5, 0.005) = 0.43;
+uniform float edge_softness : hint_range(0.001, 0.1, 0.001) = 0.01;
+
+group_uniforms Highlight;
+
+uniform sampler2D noise_texture : repeat_enable, filter_linear;
+uniform float highlight_width : hint_range(0.0, 0.5, 0.005) = 0.16;
+uniform float highlight_noise : hint_range(0.0, 0.25, 0.005) = 0.08;
+
+group_uniforms Color;
+
+uniform vec4 portal_frame_color : source_color = vec4(0.094, 0.043, 0.161, 1.0);
+uniform vec4 portal_highlight_color : source_color = vec4(0.459, 0.322, 0.620, 1.0);
+
+instance uniform float activation = 0.0;
+
+vec2 rotate_uv(vec2 uv, float angle) {
+	float sine = sin(angle);
+	float cosine = cos(angle);
+	mat2 rotation = mat2(vec2(cosine, -sine), vec2(sine, cosine));
+	return rotation * (uv - vec2(0.5)) + vec2(0.5);
+}
+
+void fragment() {
+	vec2 ellipse_position = (UV - vec2(0.5)) / vec2(ellipse_width, ellipse_height);
+	float ellipse_distance = length(ellipse_position);
+
+	vec2 noise_uv = rotate_uv(UV, TIME * 0.45);
+	noise_uv += vec2(TIME * 0.1, -TIME * 0.1);
+	float noise_value = texture(noise_texture, noise_uv).r;
+
+	float frame_mask = smoothstep(1.0 - edge_softness, 1.0 + edge_softness, ellipse_distance);
+	float noisy_highlight_width = highlight_width + noise_value * highlight_noise;
+	float highlight_start = 1.0 - noisy_highlight_width;
+	float highlight_mask = smoothstep(highlight_start - edge_softness, highlight_start + edge_softness, ellipse_distance);
+	highlight_mask *= 1.0 - frame_mask;
+
+	float frame_alpha = frame_mask * portal_frame_color.a;
+	float highlight_alpha = highlight_mask * portal_highlight_color.a;
+	float overlay_alpha = max(frame_alpha, highlight_alpha) * activation;
+	vec3 overlay_color = mix(portal_highlight_color.rgb, portal_frame_color.rgb, frame_mask);
+
+	ALBEDO = overlay_color;
+	EMISSION = overlay_color;
+	ALPHA = overlay_alpha;
+}
