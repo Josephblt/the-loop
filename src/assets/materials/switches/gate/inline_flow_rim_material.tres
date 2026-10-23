@@ -1,7 +1,0 @@
-[gd_resource type="ShaderMaterial" format=3]
-
-[ext_resource type="Shader" uid="uid://c2eu0jxo511jc" path="res://shaders/inline_flow_rim.gdshader" id="1_rim"]
-
-[resource]
-shader = ExtResource("1_rim")
-shader_parameter/rim_width = 0.24

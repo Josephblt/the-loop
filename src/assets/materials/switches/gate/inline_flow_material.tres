@@ -1,9 +1,0 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://dfw8stp1jnqeg"]
-
-[ext_resource type="Shader" uid="uid://ct15sfrirx4c5" path="res://shaders/inline_flow.gdshader" id="1_gddip"]
-
-[resource]
-shader = ExtResource("1_gddip")
-shader_parameter/rim_color = Color(0.92156863, 0.81960785, 1, 1)
-shader_parameter/rim_width = 0.24
-shader_parameter/rim_blur = 2.0

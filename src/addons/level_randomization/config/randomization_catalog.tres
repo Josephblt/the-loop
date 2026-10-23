@@ -268,7 +268,7 @@ profile = SubResource("Resource_1001i")
 metadata/_custom_type_script = "uid://2nfpsw4nlq34"
 
 [sub_resource type="Resource" id="Resource_gx6no"]
-resource_name = "gate.tscn"
+resource_name = "gate_vertical.tscn"
 script = ExtResource("2_binding")
 source_scene = ExtResource("14_bnpqw")
 targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_rjox2")])
