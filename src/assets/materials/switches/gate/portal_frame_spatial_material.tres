@@ -12,6 +12,8 @@ noise = SubResource("FastNoiseLite_portal")
 [resource]
 render_priority = 1
 shader = ExtResource("1_portal")
+shader_parameter/ellipse_x = 0.5
+shader_parameter/ellipse_y = 0.5
 shader_parameter/ellipse_width = 0.32
 shader_parameter/ellipse_height = 0.43
 shader_parameter/edge_softness = 0.01

@@ -3,6 +3,8 @@ render_mode unshaded, blend_mix, cull_disabled, depth_draw_never, shadows_disabl
 
 group_uniforms Ellipse;
 
+uniform float ellipse_x : hint_range(0.0, 1.0, 0.005) = 0.5;
+uniform float ellipse_y : hint_range(0.0, 1.0, 0.005) = 0.5;
 uniform float ellipse_width : hint_range(0.01, 0.5, 0.005) = 0.32;
 uniform float ellipse_height : hint_range(0.01, 0.5, 0.005) = 0.43;
 uniform float edge_softness : hint_range(0.001, 0.1, 0.001) = 0.01;
@@ -28,7 +30,7 @@ vec2 rotate_uv(vec2 uv, float angle) {
 }
 
 void fragment() {
-	vec2 ellipse_position = (UV - vec2(0.5)) / vec2(ellipse_width, ellipse_height);
+	vec2 ellipse_position = (UV - vec2(ellipse_x, ellipse_y)) / vec2(ellipse_width, ellipse_height);
 	float ellipse_distance = length(ellipse_position);
 
 	vec2 noise_uv = rotate_uv(UV, TIME * 0.45);
