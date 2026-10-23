@@ -9,6 +9,8 @@ uniform vec4 color_1 : source_color =
 uniform vec4 color_2 : source_color =
 	vec4(0.663, 0.545, 1.0, 1.0);
 
+instance uniform float activation = 0.0;
+
 group_uniforms Dissolve;
 
 uniform float dissolve_amount : hint_range(0.0, 1.0) = 0.50;
@@ -120,9 +122,9 @@ void fragment() {
 	vec3 center_color = mix(
 		color_1.rgb,
 		color_2.rgb,
-		dissolve_region * color_2.a
+		dissolve_region * color_2.a * activation
 	);
 
 	ALBEDO = center_color;
-	ALPHA = visibility * color_1.a;
+	ALPHA = visibility * color_1.a * activation;
 }
