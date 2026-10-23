@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" uid="uid://c4nuhrukkgs07" path="res://shaders/inline_flow_blur_horizontal.gdshader" id="1_blur"]
+
+[resource]
+shader = ExtResource("1_blur")
+shader_parameter/rim_blur = 2.0

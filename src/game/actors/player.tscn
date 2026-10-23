@@ -8,6 +8,9 @@
 [ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="4_btjqu"]
 [ext_resource type="Material" uid="uid://dfw8stp1jnqeg" path="res://assets/materials/switches/gate/inline_flow_material.tres" id="4_portal_rim"]
 [ext_resource type="Script" uid="uid://ckunku72jtdu0" path="res://scripts/game/ui/fps.gd" id="5_btjqu"]
+[ext_resource type="Script" uid="uid://piwqpltdaoh5" path="res://scripts/game/actors/player/inline_flow_blur_pipeline.gd" id="6_blur_pipeline"]
+[ext_resource type="Material" path="res://assets/materials/switches/gate/inline_flow_rim_material.tres" id="7_rim"]
+[ext_resource type="Material" path="res://assets/materials/switches/gate/inline_flow_blur_horizontal_material.tres" id="8_horizontal_blur"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vapkq"]
 radius = 1.0
@@ -79,7 +82,7 @@ current = true
 script = ExtResource("3_14rfe")
 main_camera = NodePath("../..")
 effect_viewport = NodePath("..")
-effect_rim_texture_rect = NodePath("../../../CanvasLayer/Effects/InlineFlowTextureRect")
+effect_rim_texture_rect = NodePath("../../InlineFlowRimViewport/InlineFlowRimTextureRect")
 
 [node name="InlineFlowVisibilityViewport" type="SubViewport" parent="Camera3D" unique_id=1629366619]
 transparent_bg = true
@@ -94,6 +97,44 @@ main_camera = NodePath("../..")
 effect_viewport = NodePath("..")
 effect_rim_texture_rect = NodePath("../../../CanvasLayer/Effects/InlineFlowTextureRect")
 texture_parameter = "visibility_texture"
+
+[node name="InlineFlowRimViewport" type="SubViewport" parent="Camera3D"]
+transparent_bg = true
+disable_3d = true
+render_target_update_mode = 4
+
+[node name="InlineFlowRimTextureRect" type="TextureRect" parent="Camera3D/InlineFlowRimViewport"]
+material = ExtResource("7_rim")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+
+[node name="InlineFlowHorizontalBlurViewport" type="SubViewport" parent="Camera3D"]
+transparent_bg = true
+disable_3d = true
+render_target_update_mode = 4
+
+[node name="InlineFlowHorizontalBlurTextureRect" type="TextureRect" parent="Camera3D/InlineFlowHorizontalBlurViewport"]
+material = ExtResource("8_horizontal_blur")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+
+[node name="InlineFlowBlurPipeline" type="Node" parent="Camera3D" node_paths=PackedStringArray("rim_viewport", "horizontal_blur_viewport", "rim_texture_rect", "horizontal_blur_texture_rect", "output_texture_rect")]
+script = ExtResource("6_blur_pipeline")
+rim_viewport = NodePath("../InlineFlowRimViewport")
+horizontal_blur_viewport = NodePath("../InlineFlowHorizontalBlurViewport")
+rim_texture_rect = NodePath("../InlineFlowRimViewport/InlineFlowRimTextureRect")
+horizontal_blur_texture_rect = NodePath("../InlineFlowHorizontalBlurViewport/InlineFlowHorizontalBlurTextureRect")
+output_texture_rect = NodePath("../../CanvasLayer/Effects/InlineFlowTextureRect")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=1594547787]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
