@@ -6,3 +6,4 @@
 shader = ExtResource("1_gddip")
 shader_parameter/rim_color = Color(0.92156863, 0.81960785, 1, 1)
 shader_parameter/rim_width = 0.24
+shader_parameter/rim_roundness = 0.75
