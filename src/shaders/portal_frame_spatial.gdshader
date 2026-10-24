@@ -1,12 +1,9 @@
 shader_type spatial;
 render_mode unshaded, blend_mix, cull_disabled, depth_draw_never, shadows_disabled;
 
-group_uniforms Ellipse;
+group_uniforms Shape;
 
-uniform float ellipse_x : hint_range(0.0, 1.0, 0.005) = 0.5;
-uniform float ellipse_y : hint_range(0.0, 1.0, 0.005) = 0.5;
-uniform float ellipse_width : hint_range(0.01, 0.5, 0.005) = 0.32;
-uniform float ellipse_height : hint_range(0.01, 0.5, 0.005) = 0.43;
+uniform sampler2D portal_shape_sdf : filter_linear, repeat_disable;
 uniform float edge_softness : hint_range(0.001, 0.1, 0.001) = 0.01;
 
 group_uniforms Highlight;
@@ -30,17 +27,16 @@ vec2 rotate_uv(vec2 uv, float angle) {
 }
 
 void fragment() {
-	vec2 ellipse_position = (UV - vec2(ellipse_x, ellipse_y)) / vec2(ellipse_width, ellipse_height);
-	float ellipse_distance = length(ellipse_position);
+	float shape_distance = texture(portal_shape_sdf, UV).r;
 
 	vec2 noise_uv = rotate_uv(UV, TIME * 0.45);
 	noise_uv += vec2(TIME * 0.1, -TIME * 0.1);
 	float noise_value = texture(noise_texture, noise_uv).r;
 
-	float frame_mask = smoothstep(1.0 - edge_softness, 1.0 + edge_softness, ellipse_distance);
+	float frame_mask = 1.0 - smoothstep(0.5 - edge_softness, 0.5 + edge_softness, shape_distance);
 	float noisy_highlight_width = highlight_width + noise_value * highlight_noise;
-	float highlight_start = 1.0 - noisy_highlight_width;
-	float highlight_mask = smoothstep(highlight_start - edge_softness, highlight_start + edge_softness, ellipse_distance);
+	float highlight_end = 0.5 + noisy_highlight_width;
+	float highlight_mask = 1.0 - smoothstep(highlight_end - edge_softness, highlight_end + edge_softness, shape_distance);
 	highlight_mask *= 1.0 - frame_mask;
 
 	float frame_alpha = frame_mask * portal_frame_color.a;
