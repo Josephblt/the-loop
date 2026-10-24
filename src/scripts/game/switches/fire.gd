@@ -1,5 +1,5 @@
 class_name Fire
-extends CPUParticles3D
+extends GeometryInstance3D
 
 
 @onready var fire_light: OmniLight3D = $Light
@@ -7,15 +7,15 @@ extends CPUParticles3D
 
 
 func _ready() -> void:
-	fire_light.visible = emitting
+	fire_light.visible = self.emitting
 
 
 func is_lit() -> bool:
-	return emitting
+	return self.emitting
 
 
 func ignite() -> void:
-	emitting = true
+	self.emitting = true
 	fire_light.visible = true
 
 	if not fire_audio.playing:
@@ -23,6 +23,6 @@ func ignite() -> void:
 
 
 func extinguish() -> void:
-	emitting = false
+	self.emitting = false
 	fire_light.visible = false
 	fire_audio.stop()

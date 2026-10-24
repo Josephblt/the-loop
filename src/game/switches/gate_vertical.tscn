@@ -11,6 +11,9 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_n47wt"]
 size = Vector3(6.4, 6.4, 6.4)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_vmqm7"]
+size = Vector3(6.4, 6.4, 5.6)
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_b0de2"]
 _surfaces = [{
 "aabb": AABB(-0.8, -7.15256e-07, -3.3, 1, 6.5, 6.6),
@@ -102,9 +105,34 @@ tracks/3/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("InsideArea:monitoring")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OutsideArea:monitoring")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_7hvp7"]
 resource_name = "activate"
+capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -112,10 +140,10 @@ tracks/0/path = NodePath("Barrier/DissolveSpatial:instance_shader_parameters/act
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 2,
+"values": [1.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -148,14 +176,39 @@ tracks/3/path = NodePath("Barrier/Light:omni_range")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 15.0]
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 2,
+"values": [15.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("InsideArea:monitoring")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OutsideArea:monitoring")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_8l05i"]
 resource_name = "deactivate"
+capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -163,10 +216,10 @@ tracks/0/path = NodePath("Barrier/DissolveSpatial:instance_shader_parameters/act
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 0.0]
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 2,
+"values": [0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -199,10 +252,34 @@ tracks/3/path = NodePath("Barrier/Light:omni_range")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [15.0, 0.0]
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 2,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("InsideArea:monitoring")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OutsideArea:monitoring")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8l05i"]
@@ -215,14 +292,24 @@ _data = {
 [node name="GateVertical" type="Node3D" unique_id=1825569716]
 script = ExtResource("1_3bxv0")
 
-[node name="Activator" type="Area3D" parent="." unique_id=1132991346]
+[node name="InsideArea" type="Area3D" parent="." unique_id=1132991346]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.6)
 collision_layer = 8
 collision_mask = 2
+monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Activator" unique_id=1422371395]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InsideArea" unique_id=1422371395]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, 2.8000002, -4.7683716e-07)
 shape = SubResource("BoxShape3D_n47wt")
+
+[node name="OutsideArea" type="Area3D" parent="." unique_id=597536510]
+collision_layer = 8
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OutsideArea" unique_id=321753079]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, 2.8000002, 0.39999962)
+shape = SubResource("BoxShape3D_vmqm7")
 
 [node name="Gate" type="StaticBody3D" parent="." unique_id=1011791674]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, -2.8)
@@ -247,10 +334,11 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="DissolveSpatial" type="MeshInstance3D" parent="Barrier" unique_id=2127747107]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, -2.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, -2.799)
 material_override = ExtResource("5_4x01p")
 material_overlay = ExtResource("6_portal")
 cast_shadow = 0
+instance_shader_parameters/activation = 0.0
 mesh = SubResource("QuadMesh_7c6s6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Barrier" unique_id=399760843]
@@ -285,4 +373,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 0)
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_8l05i")
 
-[connection signal="body_exited" from="Activator" to="." method="_on_activator_body_exited"]
+[connection signal="body_entered" from="InsideArea" to="." method="_on_inside_area_body_entered"]
+[connection signal="body_exited" from="InsideArea" to="." method="_on_inside_area_body_exited"]
+[connection signal="body_entered" from="OutsideArea" to="." method="_on_outside_area_body_entered"]
+[connection signal="body_exited" from="OutsideArea" to="." method="_on_outside_area_body_exited"]

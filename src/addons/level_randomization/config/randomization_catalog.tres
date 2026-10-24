@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://bx0ey0omu3158" path="res://game/level/fences/parts/post.tscn" id="11_8rg4g"]
 [ext_resource type="PackedScene" uid="uid://clp0iyaq2rd17" path="res://game/level/stairs/stairs_lg.tscn" id="12_cy3lc"]
 [ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="13_bch3r"]
-[ext_resource type="PackedScene" uid="uid://v8j2a1egqxgo" path="res://game/switches/gate_vertical.tscn" id="14_bnpqw"]
 [ext_resource type="PackedScene" uid="uid://dfwbglgsmyokl" path="res://game/level/walls/wall_normal_lg.tscn" id="14_injm3"]
 [ext_resource type="PackedScene" uid="uid://b6fydse31tnyb" path="res://game/level/walls/wall_broken_md.tscn" id="15_bnpqw"]
 
@@ -250,30 +249,6 @@ source_scene = ExtResource("13_bch3r")
 targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_qyxw7")])
 metadata/_custom_type_script = "uid://ctpnaaog7r632"
 
-[sub_resource type="Resource" id="Resource_1001i"]
-script = ExtResource("4_yxs3g")
-randomize_position = true
-position_variation = Vector3(0.01, 0.01, 0.01)
-randomize_rotation = true
-rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
-randomize_inversion = true
-inversion_rotation_degrees = Vector3(0, 180, 0)
-metadata/_custom_type_script = "uid://lovaxrlm1xea"
-
-[sub_resource type="Resource" id="Resource_rjox2"]
-resource_name = "StaticBody3D"
-script = ExtResource("2_eshgl")
-target_path = NodePath("StaticBody3D")
-profile = SubResource("Resource_1001i")
-metadata/_custom_type_script = "uid://2nfpsw4nlq34"
-
-[sub_resource type="Resource" id="Resource_gx6no"]
-resource_name = "gate_vertical.tscn"
-script = ExtResource("2_binding")
-source_scene = ExtResource("14_bnpqw")
-targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_rjox2")])
-metadata/_custom_type_script = "uid://ctpnaaog7r632"
-
 [sub_resource type="Resource" id="Resource_cukfe"]
 script = ExtResource("4_yxs3g")
 randomize_position = true
@@ -324,4 +299,4 @@ metadata/_custom_type_script = "uid://ctpnaaog7r632"
 
 [resource]
 script = ExtResource("3_catalog")
-bindings = Array[ExtResource("2_binding")]([SubResource("Resource_2vw7l"), SubResource("Resource_yxs3g"), SubResource("Resource_aplif"), SubResource("Resource_cy3lc"), SubResource("Resource_injm3"), SubResource("Resource_bnpqw"), SubResource("Resource_ek3qr"), SubResource("Resource_3uinr"), SubResource("Resource_nm8ve"), SubResource("Resource_atqq1"), SubResource("Resource_gx6no"), SubResource("Resource_6tptm"), SubResource("Resource_kjtgv")])
+bindings = Array[ExtResource("2_binding")]([SubResource("Resource_2vw7l"), SubResource("Resource_yxs3g"), SubResource("Resource_aplif"), SubResource("Resource_cy3lc"), SubResource("Resource_injm3"), SubResource("Resource_bnpqw"), SubResource("Resource_ek3qr"), SubResource("Resource_3uinr"), SubResource("Resource_nm8ve"), SubResource("Resource_atqq1"), SubResource("Resource_6tptm"), SubResource("Resource_kjtgv")])

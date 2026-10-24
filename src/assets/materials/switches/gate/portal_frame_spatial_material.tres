@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://c4r7p1m8v2x5q"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c4r7p1m8v2x5q"]
 
 [ext_resource type="Shader" uid="uid://dhar1pc3m8x5q" path="res://shaders/portal_frame_spatial.gdshader" id="1_portal"]
 
@@ -6,19 +6,19 @@
 frequency = 0.02
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_portal"]
-seamless = true
 noise = SubResource("FastNoiseLite_portal")
+seamless = true
 
 [resource]
 render_priority = 1
 shader = ExtResource("1_portal")
-shader_parameter/ellipse_x = 0.5
-shader_parameter/ellipse_y = 0.5
-shader_parameter/ellipse_width = 0.32
-shader_parameter/ellipse_height = 0.43
-shader_parameter/edge_softness = 0.01
+shader_parameter/ellipse_x = 0.499999988824
+shader_parameter/ellipse_y = 0.5749999871476
+shader_parameter/ellipse_width = 0.3999999910592
+shader_parameter/ellipse_height = 0.4499999899415999
+shader_parameter/edge_softness = 0.10000000149012
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_portal")
-shader_parameter/highlight_width = 0.16
-shader_parameter/highlight_noise = 0.08
-shader_parameter/portal_frame_color = Color(0.09411765, 0.043137256, 0.16078432, 1)
-shader_parameter/portal_highlight_color = Color(0.45882353, 0.32156864, 0.61960787, 1)
+shader_parameter/highlight_width = 0.0999999977648
+shader_parameter/highlight_noise = 0.249999994412
+shader_parameter/portal_frame_color = Color(0.88235295, 0.8, 1, 0.7529412)
+shader_parameter/portal_highlight_color = Color(0.45882353, 0.32156864, 0.61960787, 0.7529412)

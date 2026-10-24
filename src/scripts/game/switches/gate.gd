@@ -4,6 +4,8 @@ extends Node3D
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
+var _is_inside: bool = false
+var _is_outside: bool = false
 var _active: bool = false
 
 
@@ -48,5 +50,20 @@ func _deactivate_immediately() -> void:
 	_active = false
 
 
-func _on_activator_body_exited(_body: Node3D) -> void:
-	activate()
+func _on_inside_area_body_entered(_body: Node3D) -> void:
+	_is_inside = true
+
+
+func _on_inside_area_body_exited(_body: Node3D) -> void:
+	if _is_outside:
+		activate()
+		
+	_is_inside = false
+
+
+func _on_outside_area_body_entered(_body: Node3D) -> void:
+	_is_outside = true
+
+
+func _on_outside_area_body_exited(_body: Node3D) -> void:
+	_is_outside = false

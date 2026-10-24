@@ -4,6 +4,40 @@
 [ext_resource type="Script" uid="uid://8vxf7bqudb3r" path="res://scripts/game/effects/fire_light.gd" id="2_7vuj1"]
 [ext_resource type="AudioStream" uid="uid://ckh45fqhwxb8s" path="res://assets/sounds/sfx/flame/flame.tres" id="3_llhjr"]
 
+[sub_resource type="Gradient" id="Gradient_g2hq4"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0.8392157, 0.6392157, 1, 0.7882353, 0.40392157, 0.14117648, 1, 0.15686275, 0.06666667, 0.023529412, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8bvk7"]
+gradient = SubResource("Gradient_g2hq4")
+
+[sub_resource type="Curve" id="Curve_7qf2r"]
+_data = [Vector2(0.00531915, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.351648), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7q4kp"]
+curve = SubResource("Curve_7qf2r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jawpm"]
+lifetime_randomness = 1.0
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 4.0
+angle_min = -15.0
+angle_max = 15.0
+direction = Vector3(0, 1, 0)
+spread = 5.0
+initial_velocity_min = 1.0
+initial_velocity_max = 25.0
+angular_velocity_min = -45.0
+angular_velocity_max = 45.0
+gravity = Vector3(0, 15, 0)
+radial_accel_min = -30.0
+scale_min = 0.1
+scale_curve = SubResource("CurveTexture_7q4kp")
+color_ramp = SubResource("GradientTexture1D_8bvk7")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya6m2"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
@@ -14,16 +48,7 @@ proximity_fade_distance = 0.01
 material = SubResource("StandardMaterial3D_ya6m2")
 size = Vector3(0.1, 0.1, 0.1)
 
-[sub_resource type="Curve" id="Curve_7qf2r"]
-_data = [Vector2(0.00531915, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.351648), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="Gradient_g2hq4"]
-offsets = PackedFloat32Array(0, 0.5, 1)
-colors = PackedColorArray(1, 0.8392157, 0.6392157, 1, 0.7882353, 0.40392157, 0.14117648, 1, 0.15686275, 0.06666667, 0.023529412, 1)
-metadata/_snap_enabled = true
-
-[node name="Fire" type="CPUParticles3D" unique_id=476398159]
+[node name="Fire" type="GPUParticles3D" unique_id=604713834]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 layers = 4
 amount = 1000
@@ -31,25 +56,10 @@ lifetime = 0.25
 speed_scale = 0.25
 explosiveness = 0.1
 randomness = 1.0
-lifetime_randomness = 1.0
+fixed_fps = 0
 draw_order = 2
-mesh = SubResource("BoxMesh_imi2h")
-emission_shape = 1
-emission_sphere_radius = 4.0
-particle_flag_rotate_y = true
-direction = Vector3(0, 1, 0)
-spread = 5.0
-gravity = Vector3(0, 15, 0)
-initial_velocity_min = 1.0
-initial_velocity_max = 25.0
-angular_velocity_min = -45.0
-angular_velocity_max = 45.0
-radial_accel_min = -30.0
-angle_min = -15.0
-angle_max = 15.0
-scale_amount_min = 0.1
-scale_amount_curve = SubResource("Curve_7qf2r")
-color_ramp = SubResource("Gradient_g2hq4")
+process_material = SubResource("ParticleProcessMaterial_jawpm")
+draw_pass_1 = SubResource("BoxMesh_imi2h")
 script = ExtResource("1_gfcvc")
 
 [node name="Light" type="OmniLight3D" parent="." unique_id=1717417782]
