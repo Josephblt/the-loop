@@ -2,9 +2,9 @@ class_name Player
 extends CharacterBody3D
 
 
-const DEFAULT_RUN_SPEED: float = 7.5
+const DEFAULT_RUN_SPEED: float = 8.0
 const DEFAULT_WALK_SPEED: float = 3.0
-const DEFAULT_MOUSE_SENSITIVITY: float = 0.1
+const DEFAULT_MOUSE_SENSITIVITY: float = 0.25
 const JUMP_VELOCITY: float = 10.0
 
 @onready var camera: Camera3D = %Camera3D

@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://m7bdu67mr6p"]
 
 [ext_resource type="Script" uid="uid://sd6rojdjioso" path="res://scripts/tests/test_scene_menu.gd" id="1_script"]
 
-[node name="TestSceneMenu" type="Control"]
+[node name="TestSceneMenu" type="Control" unique_id=842957743]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=164273597]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,19 +19,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Buttons" type="VBoxContainer" parent="CenterContainer"]
+[node name="Buttons" type="VBoxContainer" parent="CenterContainer" unique_id=1619424987]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="SpawnRoomButton" type="Button" parent="CenterContainer/Buttons"]
+[node name="SpawnRoomButton" type="Button" parent="CenterContainer/Buttons" unique_id=615114758]
 layout_mode = 2
 text = "Spawn Room Test"
 
-[node name="DepressionRoomButton" type="Button" parent="CenterContainer/Buttons"]
+[node name="DepressionRoomButton" type="Button" parent="CenterContainer/Buttons" unique_id=431966967]
 layout_mode = 2
-text = "Depression Room Test"
+text = "Room 1 Test"
 
-[node name="MemoryRoomButton" type="Button" parent="CenterContainer/Buttons"]
+[node name="MemoryRoomButton" type="Button" parent="CenterContainer/Buttons" unique_id=833605764]
 layout_mode = 2
 text = "Memory Room Test"
 
