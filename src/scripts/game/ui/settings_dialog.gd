@@ -6,7 +6,7 @@ signal mouse_sensitivity_changed(value: float)
 signal run_speed_changed(value: float)
 signal walk_speed_changed(value: float)
 
-const MAIN_MENU_SCENE_PATH: String = "res://scenes/main_menu.tscn"
+const MAIN_MENU_SCENE_PATH: String = "res://tests/test_scene_menu.tscn"
 const SLIDER_SCALE: float = 10.0
 
 @onready var mouse_sensitivity_slider: HSlider = %MouseSensitivitySlider
