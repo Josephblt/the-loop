@@ -2,9 +2,9 @@ class_name Player
 extends CharacterBody3D
 
 
-const RUN_SPEED: float = 7.5
-const WALK_SPEED: float = 3.0
-const SENSITIVITY: float = 0.1
+const DEFAULT_RUN_SPEED: float = 7.5
+const DEFAULT_WALK_SPEED: float = 3.0
+const DEFAULT_MOUSE_SENSITIVITY: float = 0.1
 const JUMP_VELOCITY: float = 10.0
 
 @onready var camera: Camera3D = %Camera3D
@@ -16,7 +16,10 @@ var _controls_locked: bool = false
 var _interacting: bool = false
 var _look_x: float = 0.0
 var _look_y: float = 0.0
-var _speed: float = RUN_SPEED
+var _mouse_sensitivity: float = DEFAULT_MOUSE_SENSITIVITY
+var _run_speed: float = DEFAULT_RUN_SPEED
+var _speed: float = DEFAULT_RUN_SPEED
+var _walk_speed: float = DEFAULT_WALK_SPEED
 
 
 func _ready() -> void:
@@ -55,11 +58,11 @@ func _handle_jump() -> void:
 		velocity.y = JUMP_VELOCITY
 
 
-func _handle_speed():
+func _handle_speed() -> void:
 	if Input.is_action_pressed("Walk"):
-		_speed = WALK_SPEED
+		_speed = _walk_speed
 	if Input.is_action_just_released("Walk"):
-		_speed = RUN_SPEED
+		_speed = _run_speed
 
 
 func _handle_movement():
@@ -75,9 +78,9 @@ func _handle_movement():
 			velocity.z = move_toward(velocity.z, 0, _speed)
 
 
-func _handle_look(motion: Vector2):
-	_look_y -= motion.x * SENSITIVITY
-	_look_x -= motion.y * SENSITIVITY
+func _handle_look(motion: Vector2) -> void:
+	_look_y -= motion.x * _mouse_sensitivity
+	_look_x -= motion.y * _mouse_sensitivity
 	_look_x = clamp(_look_x, -80, 80) 
 	rotation_degrees.y = _look_y 
 	camera.rotation_degrees.x = _look_x	
@@ -128,3 +131,19 @@ func pause_controls():
 func resume_controls():
 	_controls_locked = false
 	recticle.visible = true
+
+
+func _on_settings_dialog_mouse_sensitivity_changed(value: float) -> void:
+	_mouse_sensitivity = value
+
+
+func _on_settings_dialog_run_speed_changed(value: float) -> void:
+	_run_speed = value
+	if not Input.is_action_pressed("Walk"):
+		_speed = _run_speed
+
+
+func _on_settings_dialog_walk_speed_changed(value: float) -> void:
+	_walk_speed = value
+	if Input.is_action_pressed("Walk"):
+		_speed = _walk_speed

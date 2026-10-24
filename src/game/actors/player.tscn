@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_canvas_item_material.tres" id="3_bfqtb"]
 [ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="4_btjqu"]
 [ext_resource type="Script" uid="uid://ckunku72jtdu0" path="res://scripts/game/ui/fps.gd" id="5_btjqu"]
+[ext_resource type="PackedScene" path="res://game/ui/settings_dialog.tscn" id="6_settings"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vapkq"]
 radius = 1.0
@@ -35,6 +36,8 @@ _data = {
 collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_8itsh")
+
+[node name="SettingsDialog" parent="." instance=ExtResource("6_settings")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1346864791]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -119,3 +122,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 expand_mode = 1
+
+[connection signal="mouse_sensitivity_changed" from="SettingsDialog" to="." method="_on_settings_dialog_mouse_sensitivity_changed"]
+[connection signal="run_speed_changed" from="SettingsDialog" to="." method="_on_settings_dialog_run_speed_changed"]
+[connection signal="walk_speed_changed" from="SettingsDialog" to="." method="_on_settings_dialog_walk_speed_changed"]
