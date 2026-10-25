@@ -1,9 +1,9 @@
 shader_type spatial;
 render_mode unshaded, cull_front, depth_draw_never, shadows_disabled;
 
-uniform vec3 color_1 : source_color = vec3(0.784, 0.925, 1.0);
-uniform vec3 color_2 : source_color = vec3(1.0, 0.839, 0.639);
-uniform vec3 color_3 : source_color = vec3(0.882, 0.8, 1.0);
+uniform vec3 color_1 : source_color = vec3(0.09411765, 0.043137256, 0.16078432);
+uniform vec3 color_2 : source_color = vec3(0.45882353, 0.32156864, 0.61960787);
+uniform vec3 color_3 : source_color = vec3(0.88235295, 0.8, 1.0);
 uniform float opacity : hint_range(0.0, 1.0) = 0.05;
 uniform float pattern_scale : hint_range(0.1, 10.0) = 5.0;
 uniform float flow_speed : hint_range(0.0, 2.0) = 0.25;

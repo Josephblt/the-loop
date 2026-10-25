@@ -6,9 +6,8 @@ uniform sampler2D screen_texture :
 	repeat_disable,
 	filter_linear_mipmap;
 
+group_uniforms Distortion;
 uniform float intensity : hint_range(0.0, 1.0) = 0.0;
-
-group_uniforms Dream;
 uniform float pattern_scale : hint_range(0.1, 10.0) = 8.0;
 uniform float flow_speed : hint_range(0.0, 2.0) = 1.0;
 uniform float morph_speed : hint_range(0.0, 2.0) = 1.0;
@@ -16,7 +15,7 @@ uniform float distortion_pixels : hint_range(0.0, 16.0) = 16.0;
 uniform float blur_lod : hint_range(0.0, 5.0) = 5.0;
 uniform float center_calm : hint_range(0.0, 1.0) = 0.5;
 
-group_uniforms Grade;
+group_uniforms Color;
 uniform float dim : hint_range(0.0, 1.0) = 0.25;
 uniform float desaturation : hint_range(0.0, 1.0) = 0.75;
 uniform vec4 vignette_color : source_color = vec4(0.09411765, 0.043137256, 0.16078432, 1.0);

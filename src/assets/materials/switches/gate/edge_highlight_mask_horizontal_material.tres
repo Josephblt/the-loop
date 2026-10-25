@@ -13,5 +13,5 @@ seamless = true
 [resource]
 render_priority = 1
 shader = ExtResource("1_asyxa")
-shader_parameter/portal_shape_sdf = ExtResource("2_46l0e")
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_portal")
+shader_parameter/shape_sdf = ExtResource("2_46l0e")
+shader_parameter/noise = SubResource("NoiseTexture2D_portal")

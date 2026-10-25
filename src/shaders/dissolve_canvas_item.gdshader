@@ -16,7 +16,6 @@ uniform float swirl_strength : hint_range(0.0, 5.0) = 3.0;
 group_uniforms Outline;
 
 uniform vec4 color_3 : source_color = vec4(0.88235295, 0.8, 1.0, 1.0);
-uniform float detection_threshold : hint_range(0.0, 1.0) = 0.5;
 
 float random(vec2 position) {
 	return fract(
@@ -67,10 +66,7 @@ void fragment() {
 		vec3(0.299, 0.587, 0.114)
 	);
 
-	float border_mask = 1.0 - step(
-		detection_threshold,
-		source_luminance
-	);
+	float border_mask = 1.0 - step(0.5, source_luminance);
 
 	float time = TIME * morph_speed;
 
