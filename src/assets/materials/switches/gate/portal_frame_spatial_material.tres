@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://c4r7p1m8v2x5q"]
 
 [ext_resource type="Shader" uid="uid://dhar1pc3m8x5q" path="res://shaders/portal_frame_spatial.gdshader" id="1_portal"]
-[ext_resource type="Texture2D" path="res://assets/textures/switches/gate_horizontal_mask_sdf.png" id="2_shape"]
+[ext_resource type="Texture2D" uid="uid://c7icnj8kpdjbc" path="res://assets/textures/switches/gate_horizontal_mask_sdf.png" id="2_shape"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_portal"]
 frequency = 0.02
