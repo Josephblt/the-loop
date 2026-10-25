@@ -4,6 +4,7 @@ render_mode unshaded, blend_mix, cull_disabled, depth_draw_never, shadows_disabl
 group_uniforms Shape;
 
 uniform sampler2D portal_shape_sdf : filter_linear, repeat_disable;
+uniform float edge_width : hint_range(0.0, 0.5, 0.005) = 0.05;
 uniform float edge_softness : hint_range(0.001, 0.1, 0.001) = 0.01;
 
 group_uniforms Highlight;
@@ -33,7 +34,8 @@ void fragment() {
 	noise_uv += vec2(TIME * 0.1, -TIME * 0.1);
 	float noise_value = texture(noise_texture, noise_uv).r;
 
-	float frame_mask = 1.0 - smoothstep(0.5 - edge_softness, 0.5 + edge_softness, shape_distance);
+	float frame_end = 0.5 + edge_width;
+	float frame_mask = 1.0 - smoothstep(frame_end - edge_softness, frame_end + edge_softness, shape_distance);
 	float noisy_highlight_width = highlight_width + noise_value * highlight_noise;
 	float highlight_end = 0.5 + noisy_highlight_width;
 	float highlight_mask = 1.0 - smoothstep(highlight_end - edge_softness, highlight_end + edge_softness, shape_distance);

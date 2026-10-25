@@ -14,6 +14,7 @@ seamless = true
 render_priority = 1
 shader = ExtResource("1_portal")
 shader_parameter/portal_shape_sdf = ExtResource("2_shape")
+shader_parameter/edge_width = 0.05
 shader_parameter/edge_softness = 0.10000000149012
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_portal")
 shader_parameter/highlight_width = 0.48499998915928
