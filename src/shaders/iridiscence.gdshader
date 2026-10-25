@@ -1,11 +1,10 @@
 shader_type spatial;
 render_mode unshaded, cull_front, depth_draw_never, shadows_disabled;
 
-group_uniforms SoapFilm;
-uniform vec3 film_dark : source_color = vec3(0.784, 0.925, 1.0);
-uniform vec3 film_medium : source_color = vec3(1.0, 0.839, 0.639);
-uniform vec3 film_light : source_color = vec3(0.882, 0.8, 1.0);
-uniform float film_opacity : hint_range(0.0, 1.0) = 0.05;
+uniform vec3 color_1 : source_color = vec3(0.784, 0.925, 1.0);
+uniform vec3 color_2 : source_color = vec3(1.0, 0.839, 0.639);
+uniform vec3 color_3 : source_color = vec3(0.882, 0.8, 1.0);
+uniform float opacity : hint_range(0.0, 1.0) = 0.05;
 uniform float pattern_scale : hint_range(0.1, 10.0) = 5.0;
 uniform float flow_speed : hint_range(0.0, 2.0) = 0.25;
 uniform float distortion : hint_range(0.0, 4.0) = 2.0;
@@ -44,18 +43,18 @@ float fbm(vec3 position) {
 	return result / 0.9375;
 }
 
-vec3 soap_color(float position) {
+vec3 iridescence_color(float position) {
 	float wrapped_position = fract(position);
 
 	if (wrapped_position < 0.333333) {
-		return mix(film_dark, film_medium, wrapped_position * 3.0);
+		return mix(color_1, color_2, wrapped_position * 3.0);
 	}
 
 	if (wrapped_position < 0.666667) {
-		return mix(film_medium, film_light, (wrapped_position - 0.333333) * 3.0);
+		return mix(color_2, color_3, (wrapped_position - 0.333333) * 3.0);
 	}
 
-	return mix(film_light, film_dark, (wrapped_position - 0.666667) * 3.0);
+	return mix(color_3, color_1, (wrapped_position - 0.666667) * 3.0);
 }
 
 void vertex() {
@@ -82,6 +81,6 @@ void fragment() {
 	float bands = thickness * band_count + time * 0.35;
 	float liquid_pattern = 0.5 + 0.5 * sin(bands * TAU);
 
-	ALBEDO = mix(soap_color(bands), vec3(1.0), vec3(0.0));
-	ALPHA = film_opacity * mix(0.12, 1.0, liquid_pattern);
+	ALBEDO = iridescence_color(bands);
+	ALPHA = opacity * mix(0.12, 1.0, liquid_pattern);
 }
