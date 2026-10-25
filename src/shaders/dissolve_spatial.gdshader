@@ -7,6 +7,8 @@ uniform vec4 color_1 : source_color =
 uniform vec4 color_2 : source_color =
 	vec4(0.45882353, 0.32156864, 0.61960787, 0.5019608);
 
+uniform sampler2D noise : repeat_enable, filter_linear;
+
 instance uniform float activation = 0.0;
 
 uniform float amount : hint_range(0.0, 1.0) = 0.25;
@@ -21,45 +23,8 @@ uniform float swirl_strength : hint_range(0.0, 5.0) = 2.5;
 
 varying vec2 local_position;
 
-float random(vec2 position) {
-	return fract(
-		sin(dot(position, vec2(127.1, 311.7)))
-		* 43758.5453
-	);
-}
-
-float value_noise(vec2 position) {
-	vec2 cell = floor(position);
-	vec2 offset = fract(position);
-
-	vec2 blend = offset * offset * (3.0 - 2.0 * offset);
-
-	float bottom_left = random(cell);
-	float bottom_right = random(cell + vec2(1.0, 0.0));
-	float top_left = random(cell + vec2(0.0, 1.0));
-	float top_right = random(cell + vec2(1.0, 1.0));
-
-	return mix(
-		mix(bottom_left, bottom_right, blend.x),
-		mix(top_left, top_right, blend.x),
-		blend.y
-	);
-}
-
-float fbm(vec2 position) {
-	float result = 0.0;
-	float amplitude = 0.5;
-
-	for (int octave = 0; octave < 5; octave++) {
-		result += value_noise(position) * amplitude;
-
-		position = position * 2.03
-			+ vec2(17.1, 9.2);
-
-		amplitude *= 0.5;
-	}
-
-	return result / 0.96875;
+float sample_noise(vec2 position) {
+	return texture(noise, position * 0.05).r;
 }
 
 void vertex() {
@@ -74,8 +39,8 @@ void fragment() {
 	position.x -= TIME * lateral_speed;
 
 	vec2 fluid_field = vec2(
-		fbm(position * 0.55 + vec2(time * 0.13, time * 0.09)),
-		fbm(position * 0.55 + vec2(6.8 - time * 0.11, 3.4 + time * 0.15))
+		sample_noise(position * 0.55 + vec2(time * 0.13, time * 0.09)),
+		sample_noise(position * 0.55 + vec2(6.8 - time * 0.11, 3.4 + time * 0.15))
 	);
 
 	fluid_field = fluid_field * 2.0 - 1.0;
@@ -88,11 +53,11 @@ void fragment() {
 		+ swirl * swirl_strength;
 
 	vec2 secondary_field = vec2(
-		fbm(warped_position + vec2(1.7 + time * 0.08, 9.2 - time * 0.06)),
-		fbm(warped_position + vec2(8.3 - time * 0.07, 2.8 + time * 0.10))
+		sample_noise(warped_position + vec2(1.7 + time * 0.08, 9.2 - time * 0.06)),
+		sample_noise(warped_position + vec2(8.3 - time * 0.07, 2.8 + time * 0.10))
 	);
 
-	float pattern = fbm(
+	float pattern = sample_noise(
 		warped_position
 		+ (secondary_field - 0.5) * distortion
 	);

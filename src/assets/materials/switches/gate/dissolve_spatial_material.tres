@@ -2,6 +2,17 @@
 
 [ext_resource type="Shader" uid="uid://r5p7n42oduwx" path="res://shaders/dissolve_spatial.gdshader" id="1_bgwtb"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_spatial_dissolve"]
+seed = 311
+frequency = 0.04
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_spatial_dissolve"]
+width = 512
+height = 512
+seamless = true
+noise = SubResource("FastNoiseLite_spatial_dissolve")
+
 [resource]
 render_priority = 0
 shader = ExtResource("1_bgwtb")
+shader_parameter/noise = SubResource("NoiseTexture2D_spatial_dissolve")
