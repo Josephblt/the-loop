@@ -162,10 +162,9 @@ _surfaces = [{
 [node name="GateHorizontalCSG" type="Node3D" unique_id=1825569716]
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1685562463]
-visible = false
 
 [node name="Barrier" type="CSGBox3D" parent="CSGCombiner3D" unique_id=343412453]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 2.6000001, -0.15000072)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 2.6, -0.15)
 size = Vector3(0.2, 5.6, 5.5)
 
 [node name="Gate" type="CSGMesh3D" parent="CSGCombiner3D" unique_id=1522782978]
