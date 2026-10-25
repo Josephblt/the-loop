@@ -23,4 +23,4 @@ shader_parameter/highlight_width = 0.249999994412
 shader_parameter/highlight_noise = 0.249999994412
 shader_parameter/highlight_softness = 0.10000000149012
 shader_parameter/portal_frame_color = Color(0.88235295, 0.8, 1, 1)
-shader_parameter/portal_highlight_color = Color(0.45882353, 0.32156864, 0.61960787, 1)
+shader_parameter/portal_highlight_color = Color(0.45882353, 0.32156864, 0.61960787, 0.7529412)

@@ -5,13 +5,13 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_4oxpx")
-shader_parameter/shine_color = Color(0.88235295, 0.8, 1, 0.5019608)
-shader_parameter/shine_speed = 1.0000000475
+shader_parameter/shine_color = Color(0.88235295, 0.8, 1, 0.7529412)
+shader_parameter/shine_speed = 5.0000002375
 shader_parameter/shine_angle_x = 30.000001425
 shader_parameter/shine_angle_y = 45.0000021375
 shader_parameter/shine_angle_z = 60.00000285
 shader_parameter/shine_width = 0.10000000475
-shader_parameter/shine_spacing = 2.50000011875
+shader_parameter/shine_spacing = 10.000000474999998
 shader_parameter/shine_noise_scale = 5.0
 shader_parameter/shine_noise_amount = 0.25
 shader_parameter/shine_noise_speed = 5.0
