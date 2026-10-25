@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://dj5kds8cy7fnu" path="res://scripts/game/switches/gate.gd" id="1_3bxv0"]
 [ext_resource type="Material" uid="uid://bkoj8m61hbv4u" path="res://assets/materials/switches/gate/gate.tres" id="1_njgmt"]
 [ext_resource type="Script" uid="uid://ciumyxrk8e23h" path="res://scripts/game/effects/pulsing_light.gd" id="3_random_light"]
+[ext_resource type="Material" uid="uid://c1ns6boghwkap" path="res://assets/materials/switches/gate/edge_highlight_mask_vertical_material.tres" id="4_vmqm7"]
 [ext_resource type="PackedScene" uid="uid://dfwbglgsmyokl" path="res://game/level/walls/wall_normal_lg.tscn" id="5_1j2kj"]
 [ext_resource type="Material" uid="uid://e8uxyqrstxcu" path="res://assets/materials/switches/gate/dissolve_spatial_material.tres" id="5_4x01p"]
-[ext_resource type="Material" uid="uid://c1ns6boghwkap" path="res://assets/materials/switches/gate/portal_frame_vertical_spatial_material.tres" id="6_portal"]
 [ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="8_ai4gf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n47wt"]
@@ -336,7 +336,7 @@ collision_mask = 0
 [node name="DissolveSpatial" type="MeshInstance3D" parent="Barrier" unique_id=2127747107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 2.6, -2.799)
 material_override = ExtResource("5_4x01p")
-material_overlay = ExtResource("6_portal")
+material_overlay = ExtResource("4_vmqm7")
 cast_shadow = 0
 instance_shader_parameters/activation = 0.0
 mesh = SubResource("QuadMesh_7c6s6")
