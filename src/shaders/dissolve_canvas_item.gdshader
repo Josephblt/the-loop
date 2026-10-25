@@ -4,8 +4,8 @@ group_uniforms Dissolve;
 
 uniform vec4 color_1 : source_color = vec4(0.09411765, 0.043137256, 0.16078432, 1.0);
 uniform vec4 color_2 : source_color = vec4(0.45882353, 0.32156864, 0.61960787, 1.0);
-uniform float dissolve_amount : hint_range(0.0, 1.0) = 0.25;
-uniform float dissolve_width : hint_range(0.0, 0.3) = 0.25;
+uniform float amount : hint_range(0.0, 1.0) = 0.25;
+uniform float width : hint_range(0.0, 0.3) = 0.25;
 uniform float softness : hint_range(0.001, 0.2) = 0.2;
 uniform float noise_scale : hint_range(5.0, 100.0) = 45.0;
 uniform float lateral_speed : hint_range(-5.0, 5.0) = 0.5;
@@ -15,8 +15,8 @@ uniform float swirl_strength : hint_range(0.0, 5.0) = 3.0;
 
 group_uniforms Outline;
 
-uniform vec4 outline_color : source_color =	vec4(0.88235295, 0.8, 1.0, 1.0);
-uniform float outline_detection_threshold :	hint_range(0.0, 1.0) = 0.5;
+uniform vec4 color_3 : source_color = vec4(0.88235295, 0.8, 1.0, 1.0);
+uniform float detection_threshold : hint_range(0.0, 1.0) = 0.5;
 
 float random(vec2 position) {
 	return fract(
@@ -67,8 +67,8 @@ void fragment() {
 		vec3(0.299, 0.587, 0.114)
 	);
 
-	float is_outline = 1.0 - step(
-		outline_detection_threshold,
+	float border_mask = 1.0 - step(
+		detection_threshold,
 		source_luminance
 	);
 
@@ -131,33 +131,33 @@ void fragment() {
 	);
 
 	float visibility = smoothstep(
-		dissolve_amount - softness,
-		dissolve_amount + softness,
+		amount - softness,
+		amount + softness,
 		pattern
 	);
 
-	float dissolve_region = smoothstep(
-		dissolve_amount,
-		dissolve_amount + softness,
+	float region = smoothstep(
+		amount,
+		amount + softness,
 		pattern
 	);
 
-	dissolve_region *= 1.0 - smoothstep(
-		dissolve_amount + dissolve_width,
-		dissolve_amount + dissolve_width + softness,
+	region *= 1.0 - smoothstep(
+		amount + width,
+		amount + width + softness,
 		pattern
 	);
 
 	vec3 center_color = mix(
 		color_1.rgb,
 		color_2.rgb,
-		dissolve_region * color_2.a
+		region * color_2.a
 	);
 
 	vec3 final_color = mix(
 		center_color,
-		outline_color.rgb,
-		is_outline
+		color_3.rgb,
+		border_mask
 	);
 
 	float center_alpha =
@@ -165,8 +165,8 @@ void fragment() {
 
 	float final_alpha = mix(
 		center_alpha,
-		outline_color.a,
-		is_outline
+		color_3.a,
+		border_mask
 	);
 
 	final_alpha *= texture_sample.a * COLOR.a;

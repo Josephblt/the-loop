@@ -15,4 +15,3 @@ render_priority = 1
 shader = ExtResource("1_bqtdl")
 shader_parameter/portal_shape_sdf = ExtResource("2_1uhtr")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_portal")
-shader_parameter/portal_highlight_color = Color(0.45882353, 0.32156864, 0.61960787, 1)

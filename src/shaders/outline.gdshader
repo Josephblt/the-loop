@@ -1,11 +1,11 @@
 shader_type canvas_item;
 
-uniform vec4 outline_color : source_color = vec4(0.88235295, 0.8, 1.0, 1.0);
-uniform float outline_width : hint_range(1.0, 10.0) = 1.0;
+uniform vec4 color : source_color = vec4(0.88235295, 0.8, 1.0, 1.0);
+uniform float width : hint_range(1.0, 10.0) = 1.0;
 
 void fragment() {
 	float center = texture(TEXTURE, UV).a;
-	vec2 offset = TEXTURE_PIXEL_SIZE * outline_width;
+	vec2 offset = TEXTURE_PIXEL_SIZE * width;
 
 	float neighbors = 0.0;
 
@@ -19,10 +19,10 @@ void fragment() {
 	neighbors = max(neighbors, texture(TEXTURE, UV + vec2( offset.x, -offset.y)).a);
 	neighbors = max(neighbors, texture(TEXTURE, UV + vec2(-offset.x, -offset.y)).a);
 
-	float outline = max(neighbors - center, 0.0);
+	float border_mask = max(neighbors - center, 0.0);
 
 	COLOR = vec4(
-		outline_color.rgb,
-		outline_color.a * outline
+		color.rgb,
+		color.a * border_mask
 	);
 }

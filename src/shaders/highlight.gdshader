@@ -1,19 +1,19 @@
 shader_type spatial;
 render_mode unshaded, depth_draw_never;
 
-uniform vec4 shine_color : source_color = vec4(0.88235295, 0.8, 1.0, 0.7529412);
-uniform float shine_speed : hint_range(0.0, 100.0) = 5.0;
+uniform vec4 color : source_color = vec4(0.88235295, 0.8, 1.0, 0.7529412);
+uniform float speed : hint_range(0.0, 100.0) = 5.0;
 
-uniform float shine_angle_x : hint_range(0.0, 360.0) = 30.0;
-uniform float shine_angle_y : hint_range(0.0, 360.0) = 45.0;
-uniform float shine_angle_z : hint_range(0.0, 360.0) = 60.0;
+uniform float angle_x : hint_range(0.0, 360.0) = 30.0;
+uniform float angle_y : hint_range(0.0, 360.0) = 45.0;
+uniform float angle_z : hint_range(0.0, 360.0) = 60.0;
 
-uniform float shine_width : hint_range(0.0, 1.0) = 0.1;
-uniform float shine_spacing : hint_range(0.001, 100.0) = 10.0;
+uniform float width : hint_range(0.0, 1.0) = 0.1;
+uniform float spacing : hint_range(0.001, 100.0) = 10.0;
 
-uniform float shine_noise_scale : hint_range(0.1, 100.0) = 5.0;
-uniform float shine_noise_amount : hint_range(0.0, 1.0) = 0.25;
-uniform float shine_noise_speed : hint_range(0.0, 10.0) = 5.0;
+uniform float noise_scale : hint_range(0.1, 100.0) = 5.0;
+uniform float noise_amount : hint_range(0.0, 1.0) = 0.25;
+uniform float noise_speed : hint_range(0.0, 10.0) = 5.0;
 
 float random(vec2 position)
 {
@@ -87,44 +87,44 @@ void fragment()
 	vec3 world_vertex = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
 
 	vec3 angles = radians(vec3(
-		shine_angle_x,
-		shine_angle_y,
-		shine_angle_z
+		angle_x,
+		angle_y,
+		angle_z
 	));
 
-	vec3 shine_direction = rotate_xyz(
+	vec3 direction = rotate_xyz(
 		vec3(1.0, 0.0, 0.0),
 		angles
 	);
 
-	vec3 shine_normal = rotate_xyz(
+	vec3 normal = rotate_xyz(
 		vec3(0.0, 1.0, 0.0),
 		angles
 	);
 
-	float shine_position = dot(world_vertex, shine_normal);
-	float position_along_shine = dot(world_vertex, shine_direction);
+	float band_position = dot(world_vertex, normal);
+	float position_along_band = dot(world_vertex, direction);
 
 	vec2 noise_position = vec2(
-		position_along_shine * shine_noise_scale,
-		TIME * shine_noise_speed
+		position_along_band * noise_scale,
+		TIME * noise_speed
 	);
 
 	float noise_value = noise(noise_position);
-	float shape_offset = (noise_value * 2.0 - 1.0) * shine_noise_amount;
-	float animated_position = shine_position + shape_offset - TIME * shine_speed;
+	float shape_offset = (noise_value * 2.0 - 1.0) * noise_amount;
+	float animated_position = band_position + shape_offset - TIME * speed;
 
-	float local_position = mod(animated_position, shine_spacing);
-	float distance_to_shine = min(
+	float local_position = mod(animated_position, spacing);
+	float distance_to_band = min(
 		local_position,
-		shine_spacing - local_position
+		spacing - local_position
 	);
 
-	float shine_mask = 1.0 - step(
-		shine_width,
-		distance_to_shine
+	float mask = 1.0 - step(
+		width,
+		distance_to_band
 	);
 
-	ALBEDO = shine_color.rgb;
-	ALPHA = shine_mask * shine_color.a;
+	ALBEDO = color.rgb;
+	ALPHA = mask * color.a;
 }
