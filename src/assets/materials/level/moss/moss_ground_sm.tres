@@ -7,5 +7,7 @@
 resource_name = "moss_ground_sm"
 render_priority = 0
 shader = ExtResource("1_qqrwf")
+shader_parameter/sway_amplitude = 0.1
+shader_parameter/sway_speed = 2.0
 shader_parameter/texture = ExtResource("1_u0h3q")
 shader_parameter/tex_size = Vector2(21, 21)

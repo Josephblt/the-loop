@@ -7,5 +7,7 @@
 resource_name = "moss_wall_md"
 render_priority = 0
 shader = ExtResource("1_akqv0")
+shader_parameter/sway_amplitude = 0.15
+shader_parameter/sway_speed = 2.0
 shader_parameter/texture = ExtResource("1_py488")
 shader_parameter/tex_size = Vector2(33, 33)

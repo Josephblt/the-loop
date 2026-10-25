@@ -5,11 +5,11 @@ group_uniforms SoapFilm;
 uniform vec3 film_dark : source_color = vec3(0.784, 0.925, 1.0);
 uniform vec3 film_medium : source_color = vec3(1.0, 0.839, 0.639);
 uniform vec3 film_light : source_color = vec3(0.882, 0.8, 1.0);
-uniform float film_opacity : hint_range(0.0, 1.0) = 0.05;
-uniform float pattern_scale : hint_range(0.1, 10.0) = 5.0;
-uniform float flow_speed : hint_range(0.0, 2.0) = 0.25;
-uniform float distortion : hint_range(0.0, 4.0) = 2.0;
-uniform float band_count : hint_range(1.0, 20.0) = 5.0;
+uniform float film_opacity : hint_range(0.0, 1.0) = 0.18;
+uniform float pattern_scale : hint_range(0.1, 10.0) = 1.5;
+uniform float flow_speed : hint_range(0.0, 2.0) = 0.12;
+uniform float distortion : hint_range(0.0, 4.0) = 1.1;
+uniform float band_count : hint_range(1.0, 20.0) = 4.0;
 
 varying vec3 sphere_direction;
 

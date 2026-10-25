@@ -5,3 +5,13 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_bgwtb")
+shader_parameter/color_1 = Color(0.09411765, 0.043137256, 0.16078432, 0.5019608)
+shader_parameter/color_2 = Color(0.45882353, 0.32156864, 0.61960787, 0.5019608)
+shader_parameter/dissolve_amount = 0.250000011875
+shader_parameter/dissolve_width = 0.250000011875
+shader_parameter/softness = 0.20000000298023
+shader_parameter/noise_scale = 100.0
+shader_parameter/lateral_speed = 2.375000001109129e-07
+shader_parameter/morph_speed = 2.50000011875
+shader_parameter/distortion = 2.50000011875
+shader_parameter/swirl_strength = 2.50000011875
