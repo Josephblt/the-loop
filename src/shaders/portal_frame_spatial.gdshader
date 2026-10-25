@@ -44,14 +44,15 @@ void fragment() {
 	float noisy_highlight_width = max(highlight_width - noise_value * highlight_noise, 0.0);
 	float highlight_end = frame_end + noisy_highlight_width;
 	float highlight_mask = 1.0 - smoothstep(highlight_end - highlight_softness, highlight_end + highlight_softness, shape_distance);
-	highlight_mask *= 1.0 - frame_mask;
 
 	float frame_alpha = frame_mask * portal_frame_color.a;
 	float highlight_alpha = highlight_mask * portal_highlight_color.a;
-	float overlay_alpha = max(frame_alpha, highlight_alpha) * activation;
-	vec3 overlay_color = mix(portal_highlight_color.rgb, portal_frame_color.rgb, frame_mask);
+	float overlay_alpha = frame_alpha + highlight_alpha * (1.0 - frame_alpha);
+	vec3 overlay_color = portal_frame_color.rgb * frame_alpha;
+	overlay_color += portal_highlight_color.rgb * highlight_alpha * (1.0 - frame_alpha);
+	overlay_color /= max(overlay_alpha, 0.0001);
 
 	ALBEDO = overlay_color;
 	EMISSION = overlay_color;
-	ALPHA = overlay_alpha;
+	ALPHA = overlay_alpha * activation;
 }
