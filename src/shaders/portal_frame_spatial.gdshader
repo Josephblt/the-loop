@@ -5,13 +5,16 @@ group_uniforms Shape;
 
 uniform sampler2D portal_shape_sdf : filter_linear, repeat_disable;
 uniform float edge_width : hint_range(0.0, 0.5, 0.005) = 0.05;
-uniform float edge_softness : hint_range(0.001, 0.1, 0.001) = 0.01;
+uniform float edge_pulse_amount : hint_range(0.0, 0.25, 0.005) = 0.025;
+uniform float edge_pulse_speed : hint_range(0.0, 4.0, 0.05) = 1.0;
+uniform float edge_blur : hint_range(0.001, 0.25, 0.001) = 0.01;
 
 group_uniforms Highlight;
 
 uniform sampler2D noise_texture : repeat_enable, filter_linear;
 uniform float highlight_width : hint_range(0.0, 0.5, 0.005) = 0.16;
 uniform float highlight_noise : hint_range(0.0, 0.25, 0.005) = 0.08;
+uniform float highlight_softness : hint_range(0.001, 0.1, 0.001) = 0.01;
 
 group_uniforms Color;
 
@@ -34,11 +37,12 @@ void fragment() {
 	noise_uv += vec2(TIME * 0.1, -TIME * 0.1);
 	float noise_value = texture(noise_texture, noise_uv).r;
 
-	float frame_end = 0.5 + edge_width;
-	float frame_mask = 1.0 - smoothstep(frame_end - edge_softness, frame_end + edge_softness, shape_distance);
+	float edge_pulse = sin(TIME * edge_pulse_speed * 6.28318530718) * edge_pulse_amount;
+	float frame_end = 0.5 + max(edge_width + edge_pulse, 0.0);
+	float frame_mask = 1.0 - smoothstep(frame_end - edge_blur, frame_end + edge_blur, shape_distance);
 	float noisy_highlight_width = highlight_width + noise_value * highlight_noise;
 	float highlight_end = 0.5 + noisy_highlight_width;
-	float highlight_mask = 1.0 - smoothstep(highlight_end - edge_softness, highlight_end + edge_softness, shape_distance);
+	float highlight_mask = 1.0 - smoothstep(highlight_end - highlight_softness, highlight_end + highlight_softness, shape_distance);
 	highlight_mask *= 1.0 - frame_mask;
 
 	float frame_alpha = frame_mask * portal_frame_color.a;
