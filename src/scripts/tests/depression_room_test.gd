@@ -26,6 +26,7 @@ extends Node3D
 
 @onready var player: Player = %Player
 @onready var depression_room: DepressionRoom = %DepressionRoom
+@onready var left_gate: Gate = %LeftGate
 
 
 func _ready() -> void:
@@ -44,4 +45,5 @@ func _ready() -> void:
 	
 	if randomize_scene:
 		SceneRandomizer.randomize_scene(depression_room, randomization_seed)
+		SceneRandomizer.randomize_scene(left_gate, randomization_seed)
 	depression_room.setup_scene(player, memory)

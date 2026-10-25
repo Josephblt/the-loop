@@ -18,5 +18,6 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -22.
 [node name="DepressionRoom" parent="." unique_id=1670544133 instance=ExtResource("4_7rc7p")]
 unique_name_in_owner = true
 
-[node name="GateHorizontal" parent="." unique_id=1825569716 instance=ExtResource("5_pjo0v")]
+[node name="LeftGate" parent="." unique_id=1825569716 instance=ExtResource("5_pjo0v")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8, 0, 0)
