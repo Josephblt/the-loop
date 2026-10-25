@@ -4,24 +4,24 @@ render_mode unshaded, blend_mix, cull_disabled, depth_draw_never, shadows_disabl
 group_uniforms Color;
 
 uniform vec4 color_1 : source_color =
-	vec4(0.129, 0.094, 0.184, 1.0);
+	vec4(0.09411765, 0.043137256, 0.16078432, 0.5019608);
 
 uniform vec4 color_2 : source_color =
-	vec4(0.663, 0.545, 1.0, 1.0);
+	vec4(0.45882353, 0.32156864, 0.61960787, 0.5019608);
 
 instance uniform float activation = 0.0;
 
 group_uniforms Dissolve;
 
-uniform float dissolve_amount : hint_range(0.0, 1.0) = 0.50;
-uniform float dissolve_width : hint_range(0.0, 0.3) = 0.12;
-uniform float softness : hint_range(0.001, 0.2) = 0.045;
+uniform float dissolve_amount : hint_range(0.0, 1.0) = 0.25;
+uniform float dissolve_width : hint_range(0.0, 0.3) = 0.25;
+uniform float softness : hint_range(0.001, 0.2) = 0.2;
 
-uniform float noise_scale : hint_range(5.0, 100.0) = 24.0;
-uniform float lateral_speed : hint_range(-5.0, 5.0) = 0.45;
-uniform float morph_speed : hint_range(0.0, 3.0) = 0.30;
-uniform float distortion : hint_range(0.0, 5.0) = 2.0;
-uniform float swirl_strength : hint_range(0.0, 5.0) = 1.2;
+uniform float noise_scale : hint_range(5.0, 100.0) = 100.0;
+uniform float lateral_speed : hint_range(-5.0, 5.0) = 0.0000002375;
+uniform float morph_speed : hint_range(0.0, 3.0) = 2.5;
+uniform float distortion : hint_range(0.0, 5.0) = 2.5;
+uniform float swirl_strength : hint_range(0.0, 5.0) = 2.5;
 
 varying vec2 local_position;
 

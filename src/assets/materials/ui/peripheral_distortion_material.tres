@@ -4,14 +4,3 @@
 
 [resource]
 shader = ExtResource("1_3687x")
-shader_parameter/intensity = 0.0
-shader_parameter/pattern_scale = 8.00000037674012
-shader_parameter/flow_speed = 1.0000000475
-shader_parameter/morph_speed = 1.0000000475
-shader_parameter/distortion_pixels = 16.0
-shader_parameter/blur_lod = 5.0
-shader_parameter/center_calm = 0.50000002375
-shader_parameter/dim = 0.250000011875
-shader_parameter/desaturation = 0.750000035625
-shader_parameter/vignette_color = Color(0.09411765, 0.043137256, 0.16078432, 1)
-shader_parameter/vignette_strength = 0.750000035625
