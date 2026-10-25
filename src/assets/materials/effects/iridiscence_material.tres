@@ -5,11 +5,3 @@
 [resource]
 render_priority = 1
 shader = ExtResource("1_0fpq8")
-shader_parameter/film_dark = Color(0.784, 0.925, 1, 1)
-shader_parameter/film_medium = Color(1, 0.839, 0.639, 1)
-shader_parameter/film_light = Color(0.882, 0.8, 1, 1)
-shader_parameter/film_opacity = 0.050000002375
-shader_parameter/pattern_scale = 5.00000023424012
-shader_parameter/flow_speed = 0.250000011875
-shader_parameter/distortion = 2.000000095
-shader_parameter/band_count = 5.00000019
