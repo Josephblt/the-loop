@@ -39,10 +39,10 @@ void fragment() {
 
 	float edge_pulse = sin(TIME * edge_pulse_speed * 6.28318530718) * 0.5 + 0.5;
 	float pulsed_edge_width = mix(edge_min_width, max(edge_min_width, edge_max_width), edge_pulse);
-	float frame_end = min(0.5 + pulsed_edge_width, 1.0 - edge_blur);
+	float frame_end = 0.5 + pulsed_edge_width;
 	float frame_mask = 1.0 - smoothstep(frame_end - edge_blur, frame_end + edge_blur, shape_distance);
 	float noisy_highlight_width = max(highlight_width - noise_value * highlight_noise, 0.0);
-	float highlight_end = min(frame_end + noisy_highlight_width, 1.0 - highlight_softness);
+	float highlight_end = frame_end + noisy_highlight_width;
 	float highlight_mask = 1.0 - smoothstep(highlight_end - highlight_softness, highlight_end + highlight_softness, shape_distance);
 	highlight_mask *= 1.0 - frame_mask;
 
