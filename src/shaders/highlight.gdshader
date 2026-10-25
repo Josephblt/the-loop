@@ -1,15 +1,15 @@
 shader_type spatial;
 render_mode unshaded, depth_draw_never;
 
-uniform vec4 shine_color : source_color = vec4(1.0);
-uniform float shine_speed : hint_range(0.0, 100.0) = 10.0;
+uniform vec4 shine_color : source_color = vec4(0.88235295, 0.8, 1.0, 0.7529412);
+uniform float shine_speed : hint_range(0.0, 100.0) = 5.0;
 
-uniform float shine_angle_x : hint_range(0.0, 360.0) = 0.0;
-uniform float shine_angle_y : hint_range(0.0, 360.0) = 0.0;
-uniform float shine_angle_z : hint_range(0.0, 360.0) = 45.0;
+uniform float shine_angle_x : hint_range(0.0, 360.0) = 30.0;
+uniform float shine_angle_y : hint_range(0.0, 360.0) = 45.0;
+uniform float shine_angle_z : hint_range(0.0, 360.0) = 60.0;
 
 uniform float shine_width : hint_range(0.0, 1.0) = 0.1;
-uniform float shine_spacing : hint_range(0.001, 100.0) = 25.0;
+uniform float shine_spacing : hint_range(0.001, 100.0) = 10.0;
 
 uniform float shine_noise_scale : hint_range(0.1, 100.0) = 5.0;
 uniform float shine_noise_amount : hint_range(0.0, 1.0) = 0.25;
