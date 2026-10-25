@@ -337,7 +337,7 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="DissolveSpatial" type="MeshInstance3D" parent="Barrier" unique_id=2127747107]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 2.6, -2.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 2.6, -2.799)
 layers = 16
 material_override = ExtResource("3_6ueo5")
 material_overlay = ExtResource("4_portal")
