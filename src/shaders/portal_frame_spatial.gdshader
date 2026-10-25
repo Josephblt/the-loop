@@ -4,22 +4,22 @@ render_mode unshaded, blend_mix, cull_disabled, depth_draw_never, shadows_disabl
 group_uniforms Shape;
 
 uniform sampler2D portal_shape_sdf : filter_linear, repeat_disable;
-uniform float edge_min_width : hint_range(0.0, 0.5, 0.005) = 0.025;
-uniform float edge_max_width : hint_range(0.0, 0.5, 0.005) = 0.075;
+uniform float edge_min_width : hint_range(0.0, 0.5, 0.005) = 0.1;
+uniform float edge_max_width : hint_range(0.0, 0.5, 0.005) = 0.25;
 uniform float edge_pulse_speed : hint_range(0.0, 4.0, 0.05) = 1.0;
-uniform float edge_blur : hint_range(0.001, 0.25, 0.001) = 0.01;
+uniform float edge_blur : hint_range(0.001, 0.25, 0.001) = 0.25;
 
 group_uniforms Highlight;
 
 uniform sampler2D noise_texture : repeat_enable, filter_linear;
-uniform float highlight_width : hint_range(0.0, 0.5, 0.005) = 0.16;
-uniform float highlight_noise : hint_range(0.0, 0.25, 0.005) = 0.08;
-uniform float highlight_softness : hint_range(0.001, 0.1, 0.001) = 0.01;
+uniform float highlight_width : hint_range(0.0, 0.5, 0.005) = 0.25;
+uniform float highlight_noise : hint_range(0.0, 0.25, 0.005) = 0.25;
+uniform float highlight_softness : hint_range(0.001, 0.1, 0.001) = 0.1;
 
 group_uniforms Color;
 
-uniform vec4 portal_frame_color : source_color = vec4(0.094, 0.043, 0.161, 1.0);
-uniform vec4 portal_highlight_color : source_color = vec4(0.459, 0.322, 0.620, 1.0);
+uniform vec4 portal_frame_color : source_color = vec4(0.88235295, 0.8, 1.0, 1.0);
+uniform vec4 portal_highlight_color : source_color = vec4(0.45882353, 0.32156864, 0.61960787, 0.7529412);
 
 instance uniform float activation = 0.0;
 
