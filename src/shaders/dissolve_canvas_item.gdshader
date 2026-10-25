@@ -1,22 +1,12 @@
 shader_type canvas_item;
 
-group_uniforms Color;
-
-uniform vec4 color_1 : source_color =
-	vec4(0.09411765, 0.043137256, 0.16078432, 1.0);
-
-uniform vec4 color_2 : source_color =
-	vec4(0.45882353, 0.32156864, 0.61960787, 1.0);
-
-uniform vec4 outline_color : source_color =
-	vec4(0.88235295, 0.8, 1.0, 1.0);
-
 group_uniforms Dissolve;
 
+uniform vec4 color_1 : source_color = vec4(0.09411765, 0.043137256, 0.16078432, 1.0);
+uniform vec4 color_2 : source_color = vec4(0.45882353, 0.32156864, 0.61960787, 1.0);
 uniform float dissolve_amount : hint_range(0.0, 1.0) = 0.25;
 uniform float dissolve_width : hint_range(0.0, 0.3) = 0.25;
 uniform float softness : hint_range(0.001, 0.2) = 0.2;
-
 uniform float noise_scale : hint_range(5.0, 100.0) = 45.0;
 uniform float lateral_speed : hint_range(-5.0, 5.0) = 0.5;
 uniform float morph_speed : hint_range(0.0, 3.0) = 2.5;
@@ -25,8 +15,8 @@ uniform float swirl_strength : hint_range(0.0, 5.0) = 3.0;
 
 group_uniforms Outline;
 
-uniform float outline_detection_threshold :
-	hint_range(0.0, 1.0) = 0.5;
+uniform vec4 outline_color : source_color =	vec4(0.88235295, 0.8, 1.0, 1.0);
+uniform float outline_detection_threshold :	hint_range(0.0, 1.0) = 0.5;
 
 float random(vec2 position) {
 	return fract(
@@ -72,12 +62,6 @@ float fbm(vec2 position) {
 void fragment() {
 	vec4 texture_sample = texture(TEXTURE, UV);
 
-	/*
-	 * The source texture uses:
-	 *
-	 * White = interior
-	 * Black = outline
-	 */
 	float source_luminance = dot(
 		COLOR.rgb,
 		vec3(0.299, 0.587, 0.114)
@@ -92,14 +76,9 @@ void fragment() {
 
 	vec2 position = FRAGCOORD.xy / noise_scale;
 
-	// Constant lateral movement.
 	position.x -= TIME * lateral_speed;
 
-	/*
-	 * First fluid field.
-	 *
-	 * Both axes evolve independently and continuously.
-	 */
+	
 	vec2 fluid_field = vec2(
 		fbm(
 			position * 0.55
@@ -119,10 +98,6 @@ void fragment() {
 
 	fluid_field = fluid_field * 2.0 - 1.0;
 
-	/*
-	 * Rotate part of the fluid field perpendicular to itself.
-	 * This creates curling and swirling rather than plain noise drift.
-	 */
 	vec2 swirl = vec2(
 		-fluid_field.y,
 		fluid_field.x
@@ -133,10 +108,6 @@ void fragment() {
 		+ fluid_field * distortion
 		+ swirl * swirl_strength;
 
-	/*
-	 * A second evolving field prevents the motion from looking like
-	 * a texture simply sliding across the Label.
-	 */
 	vec2 secondary_field = vec2(
 		fbm(
 			warped_position
@@ -159,21 +130,12 @@ void fragment() {
 		+ (secondary_field - 0.5) * distortion
 	);
 
-	/*
-	 * The threshold remains fixed.
-	 *
-	 * The moving fluid field causes some areas to disappear while
-	 * approximately the same amount regenerates elsewhere.
-	 */
 	float visibility = smoothstep(
 		dissolve_amount - softness,
 		dissolve_amount + softness,
 		pattern
 	);
 
-	/*
-	 * Soft colored region along the fluid boundary.
-	 */
 	float dissolve_region = smoothstep(
 		dissolve_amount,
 		dissolve_amount + softness,
@@ -192,10 +154,6 @@ void fragment() {
 		dissolve_region * color_2.a
 	);
 
-	/*
-	 * The interior receives the dissolve.
-	 * The outline remains complete and unaffected.
-	 */
 	vec3 final_color = mix(
 		center_color,
 		outline_color.rgb,

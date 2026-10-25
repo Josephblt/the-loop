@@ -4,6 +4,7 @@ render_mode unshaded, blend_mix, cull_disabled, depth_draw_never, shadows_disabl
 group_uniforms Shape;
 
 uniform sampler2D portal_shape_sdf : filter_linear, repeat_disable;
+uniform vec4 edge_color : source_color = vec4(0.88235295, 0.8, 1.0, 1.0);
 uniform float edge_min_width : hint_range(0.0, 0.5, 0.005) = 0.1;
 uniform float edge_max_width : hint_range(0.0, 0.5, 0.005) = 0.25;
 uniform float edge_pulse_speed : hint_range(0.0, 4.0, 0.05) = 1.0;
@@ -12,14 +13,11 @@ uniform float edge_blur : hint_range(0.001, 0.25, 0.001) = 0.25;
 group_uniforms Highlight;
 
 uniform sampler2D noise_texture : repeat_enable, filter_linear;
+uniform vec4 highlight_color : source_color = vec4(0.45882353, 0.32156864, 0.61960787, 1.0);
 uniform float highlight_width : hint_range(0.0, 0.5, 0.005) = 0.25;
 uniform float highlight_noise : hint_range(0.0, 0.25, 0.005) = 0.25;
 uniform float highlight_softness : hint_range(0.001, 0.1, 0.001) = 0.1;
 
-group_uniforms Color;
-
-uniform vec4 portal_frame_color : source_color = vec4(0.88235295, 0.8, 1.0, 1.0);
-uniform vec4 portal_highlight_color : source_color = vec4(0.45882353, 0.32156864, 0.61960787, 0.7529412);
 
 instance uniform float activation = 0.0;
 
@@ -45,11 +43,11 @@ void fragment() {
 	float highlight_end = frame_end + noisy_highlight_width;
 	float highlight_mask = 1.0 - smoothstep(highlight_end - highlight_softness, highlight_end + highlight_softness, shape_distance);
 
-	float frame_alpha = frame_mask * portal_frame_color.a;
-	float highlight_alpha = highlight_mask * portal_highlight_color.a;
+	float frame_alpha = frame_mask * edge_color.a;
+	float highlight_alpha = highlight_mask * highlight_color.a;
 	float overlay_alpha = frame_alpha + highlight_alpha * (1.0 - frame_alpha);
-	vec3 overlay_color = portal_frame_color.rgb * frame_alpha;
-	overlay_color += portal_highlight_color.rgb * highlight_alpha * (1.0 - frame_alpha);
+	vec3 overlay_color = edge_color.rgb * frame_alpha;
+	overlay_color += highlight_color.rgb * highlight_alpha * (1.0 - frame_alpha);
 	overlay_color /= max(overlay_alpha, 0.0001);
 
 	ALBEDO = overlay_color;
