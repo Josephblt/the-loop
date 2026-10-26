@@ -1,6 +1,7 @@
 shader_type spatial;
 render_mode unshaded, cull_front, depth_draw_never, shadows_disabled;
 
+uniform sampler2D noise : repeat_enable, filter_linear;
 uniform vec3 color_1 : source_color = vec3(0.09411765, 0.043137256, 0.16078432);
 uniform vec3 color_2 : source_color = vec3(0.45882353, 0.32156864, 0.61960787);
 uniform vec3 color_3 : source_color = vec3(0.88235295, 0.8, 1.0);
@@ -12,35 +13,11 @@ uniform float band_count : hint_range(1.0, 20.0) = 5.0;
 
 varying vec3 sphere_direction;
 
-float random(vec3 position) {
-	return fract(sin(dot(position, vec3(127.1, 311.7, 74.7))) * 43758.5453);
-}
-
-float value_noise(vec3 position) {
-	vec3 cell = floor(position);
-	vec3 offset = fract(position);
-	
-	float bottom_back = mix(random(cell), random(cell + vec3(1.0, 0.0, 0.0)), offset.x);
-	float top_back = mix(random(cell + vec3(0.0, 1.0, 0.0)), random(cell + vec3(1.0, 1.0, 0.0)), offset.x);
-	float bottom_front = mix(random(cell + vec3(0.0, 0.0, 1.0)), random(cell + vec3(1.0, 0.0, 1.0)), offset.x);
-	float top_front = mix(random(cell + vec3(0.0, 1.0, 1.0)), random(cell + vec3(1.0, 1.0, 1.0)), offset.x);
-
-	float back = mix(bottom_back, top_back, offset.y);
-	float front = mix(bottom_front, top_front, offset.y);
-	return mix(back, front, offset.z);
-}
-
-float fbm(vec3 position) {
-	float result = 0.0;
-	float amplitude = 0.5;
-
-	for (int octave = 0; octave < 4; octave++) {
-		result += value_noise(position) * amplitude;
-		position = position * 2.03 + vec3(17.1, 9.2, 13.7);
-		amplitude *= 0.5;
-	}
-
-	return result / 0.9375;
+float sample_noise(vec3 position, vec3 projection_weights) {
+	float x_projection = texture(noise, position.yz * 0.05).r;
+	float y_projection = texture(noise, position.xz * 0.05 + vec2(0.37, 0.17)).r;
+	float z_projection = texture(noise, position.xy * 0.05 + vec2(0.73, 0.53)).r;
+	return dot(vec3(x_projection, y_projection, z_projection), projection_weights);
 }
 
 vec3 iridescence_color(float position) {
@@ -63,19 +40,24 @@ void vertex() {
 
 void fragment() {
 	vec3 direction = normalize(sphere_direction);
+	vec3 projection_weights = abs(direction);
+	projection_weights *= projection_weights;
+	projection_weights *= projection_weights;
+	projection_weights /= dot(projection_weights, vec3(1.0));
+
 	float time = TIME * flow_speed;
 	vec3 position = direction * pattern_scale;
 
 	vec3 first_warp = vec3(
-		fbm(position * 0.65 + vec3(time, 0.0, -time * 0.37)),
-		fbm(position * 0.65 + vec3(7.3, time * 0.73, 2.1)),
-		fbm(position * 0.65 + vec3(-time * 0.41, 3.7, time * 0.59))
+		sample_noise(position * 0.65 + vec3(time, 0.0, -time * 0.37), projection_weights),
+		sample_noise(position * 0.65 + vec3(7.3, time * 0.73, 2.1), projection_weights),
+		sample_noise(position * 0.65 + vec3(-time * 0.41, 3.7, time * 0.59), projection_weights)
 	);
 	first_warp = first_warp * 2.0 - 1.0;
 
 	vec3 warped_position = position + first_warp * distortion;
-	float thickness = fbm(warped_position + vec3(time * 0.19, -time * 0.13, time * 0.17));
-	float detail = fbm(warped_position * 1.7 - vec3(time * 0.11, time * 0.07, -time * 0.09));
+	float thickness = sample_noise(warped_position + vec3(time * 0.19, -time * 0.13, time * 0.17), projection_weights);
+	float detail = sample_noise(warped_position * 1.7 - vec3(time * 0.11, time * 0.07, -time * 0.09), projection_weights);
 	thickness = mix(thickness, detail, 0.3);
 
 	float bands = thickness * band_count + time * 0.35;
