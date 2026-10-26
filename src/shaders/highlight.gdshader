@@ -13,30 +13,14 @@ uniform float spacing : hint_range(0.001, 100.0) = 10.0;
 
 group_uniforms Noise;
 
+uniform sampler2D pattern : repeat_enable, filter_linear;
 uniform float scale : hint_range(0.1, 100.0) = 5.0;
 uniform float amount : hint_range(0.0, 1.0) = 0.25;
 uniform float speed : hint_range(0.0, 10.0) = 5.0;
 
-float random(vec2 position)
+float sample_pattern(vec2 position)
 {
-	return fract(sin(dot(position, vec2(12.9898, 78.233))) * 43758.5453);
-}
-
-float noise(vec2 position)
-{
-	vec2 cell = floor(position);
-	vec2 fraction = fract(position);
-	vec2 blend = fraction * fraction * (3.0 - 2.0 * fraction);
-
-	float bottom_left = random(cell);
-	float bottom_right = random(cell + vec2(1.0, 0.0));
-	float top_left = random(cell + vec2(0.0, 1.0));
-	float top_right = random(cell + vec2(1.0, 1.0));
-
-	float bottom = mix(bottom_left, bottom_right, blend.x);
-	float top = mix(top_left, top_right, blend.x);
-
-	return mix(bottom, top, blend.y);
+	return texture(pattern, position * 0.05).r;
 }
 
 vec3 rotate_x(vec3 vector, float angle)
@@ -107,13 +91,13 @@ void fragment()
 	float band_position = dot(world_vertex, normal);
 	float position_along_band = dot(world_vertex, direction);
 
-	vec2 noise_position = vec2(
+	vec2 sample_position = vec2(
 		position_along_band * scale,
 		TIME * speed
 	);
 
-	float noise_value = noise(noise_position);
-	float shape_offset = (noise_value * 2.0 - 1.0) * amount;
+	float sample_value = sample_pattern(sample_position);
+	float shape_offset = (sample_value * 2.0 - 1.0) * amount;
 	float animated_position = band_position + shape_offset - TIME * flow_speed;
 
 	float local_position = mod(animated_position, spacing);
