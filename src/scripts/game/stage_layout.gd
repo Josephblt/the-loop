@@ -9,8 +9,8 @@ const SPAWN_ROOM_SIZE: int = 7
 const MEMORY_ROOM_SIZE: int = 3
 const MEMORY_ROOM_COUNT: int = 5
 
-const _MEMORY_ROOM_HALF_SIZE: int = MEMORY_ROOM_SIZE / 2
-const _SPAWN_ROOM_HALF_SIZE: int = SPAWN_ROOM_SIZE / 2
+const _MEMORY_ROOM_HALF_SIZE: int = int(MEMORY_ROOM_SIZE / 2.0)
+const _SPAWN_ROOM_HALF_SIZE: int = int(SPAWN_ROOM_SIZE / 2.0)
 const _INNER_GATE_DISTANCE: float = float(_SPAWN_ROOM_HALF_SIZE + 1) * CELL_SIZE
 
 var grid_size: int
@@ -31,7 +31,7 @@ static func create(seed: int, maze_grid_size: int = DEFAULT_GRID_SIZE) -> StageL
 
 	var layout: StageLayout = StageLayout.new()
 	layout.grid_size = maze_grid_size
-	layout._grid_center = maze_grid_size / 2
+	layout._grid_center = int(maze_grid_size / 2.0)
 	var randomizer: RandomNumberGenerator = RandomNumberGenerator.new()
 	randomizer.seed = seed
 
@@ -190,7 +190,7 @@ func _gate_approaches() -> Array[Rect2i]:
 
 
 func _stage_room_positions() -> Array[Vector2i]:
-	var stage_room_offset: int = (grid_size + SPAWN_ROOM_SIZE) / 2
+	var stage_room_offset: int = int((grid_size + SPAWN_ROOM_SIZE) / 2.0)
 	return [
 		Vector2i(_grid_center, _grid_center - stage_room_offset),
 		Vector2i(_grid_center, _grid_center + stage_room_offset),
