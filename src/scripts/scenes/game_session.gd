@@ -11,16 +11,17 @@ const DEPRESSION_ROOM_SCENE: PackedScene = preload("res://game/rooms/depression_
 const VERTICAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_vertical.tscn")
 const HORIZONTAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_horizontal.tscn")
 
-var session_seed: int
 
 @export_category("Maze")
 @export_range(17, 127, 2) var maze_grid_size: int = StageLayout.DEFAULT_GRID_SIZE
+@export var session_seed: int
+
+@onready var _stage: Node3D = %Stage
 
 var _grief_stages_stack: GriefStagesStack
 var _memories_stack: MemoriesStack
 var _loop_count: int = -1
 
-@onready var _stage: Node3D = %Stage
 
 
 func _ready() -> void:

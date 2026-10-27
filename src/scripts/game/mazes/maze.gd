@@ -32,7 +32,7 @@ func valid_cells() -> Array[Cell]:
 
 
 func cell_world_position(cell: Cell) -> Vector3:
-	var center: int = grid_size / 2
+	var center: int = int(grid_size / 2.0)
 	return Vector3(
 		float(cell.position.x - center) * cell_size,
 		0.0,
