@@ -38,10 +38,13 @@ static func _create_memory_room_transforms(randomizer: RandomNumberGenerator) ->
 	var candidates: Array[Vector2i] = _create_memory_room_candidates()
 	ArrayRandomizer.shuffle(candidates, randomizer)
 
-	var selected: Array[Vector2i] = [candidates.pop_back()]
+	var selected: Array[Vector2i] = []
+	var spacing_points: Array[Vector2i] = _stage_room_positions()
 	while selected.size() < MEMORY_ROOM_COUNT:
-		var candidate_index: int = _find_farthest_candidate(candidates, selected)
-		selected.append(candidates.pop_at(candidate_index))
+		var candidate_index: int = _find_farthest_candidate(candidates, selected, spacing_points)
+		var selected_position: Vector2i = candidates.pop_at(candidate_index)
+		selected.append(selected_position)
+		spacing_points.append(selected_position)
 
 	var transforms: Array[Transform3D] = []
 	for position: Vector2i in selected:
@@ -71,11 +74,13 @@ static func _create_memory_room_candidates() -> Array[Vector2i]:
 				continue
 			if _memory_room_contains_gate(position):
 				continue
+			if _memory_room_intersects_gate_approach(position):
+				continue
 			candidates.append(position)
 	return candidates
 
 
-static func _find_farthest_candidate(candidates: Array[Vector2i], selected: Array[Vector2i]) -> int:
+static func _find_farthest_candidate(candidates: Array[Vector2i], selected: Array[Vector2i], spacing_points: Array[Vector2i]) -> int:
 	var farthest_index: int = -1
 	var farthest_distance: int = -1
 
@@ -84,7 +89,7 @@ static func _find_farthest_candidate(candidates: Array[Vector2i], selected: Arra
 		if _overlaps_selected_room(candidate, selected):
 			continue
 
-		var distance: int = _minimum_squared_distance(candidate, selected)
+		var distance: int = _minimum_squared_distance(candidate, spacing_points)
 		if distance <= farthest_distance:
 			continue
 		farthest_distance = distance
@@ -118,6 +123,14 @@ static func _memory_room_contains_gate(position: Vector2i) -> bool:
 	return false
 
 
+static func _memory_room_intersects_gate_approach(position: Vector2i) -> bool:
+	var bounds: Rect2i = _memory_room_bounds(position)
+	for approach: Rect2i in _gate_approaches():
+		if bounds.intersects(approach):
+			return true
+	return false
+
+
 static func _memory_room_bounds(position: Vector2i) -> Rect2i:
 	return Rect2i(
 		position - Vector2i(_MEMORY_ROOM_HALF_SIZE, _MEMORY_ROOM_HALF_SIZE),
@@ -137,6 +150,29 @@ static func _gate_positions() -> Array[Vector2i]:
 		Vector2i(_GRID_CENTER, inner_maximum),
 		Vector2i(inner_minimum, _GRID_CENTER),
 		Vector2i(inner_maximum, _GRID_CENTER),
+	]
+
+
+static func _gate_approaches() -> Array[Rect2i]:
+	var approach_width: int = MEMORY_ROOM_SIZE
+	var approach_offset: int = _GRID_CENTER - _MEMORY_ROOM_HALF_SIZE
+	var approach_length: int = _GRID_CENTER - _SPAWN_ROOM_HALF_SIZE
+	var far_approach_start: int = _GRID_CENTER + _SPAWN_ROOM_HALF_SIZE + 1
+	return [
+		Rect2i(approach_offset, 0, approach_width, approach_length),
+		Rect2i(approach_offset, far_approach_start, approach_width, approach_length),
+		Rect2i(0, approach_offset, approach_length, approach_width),
+		Rect2i(far_approach_start, approach_offset, approach_length, approach_width),
+	]
+
+
+static func _stage_room_positions() -> Array[Vector2i]:
+	var stage_room_offset: int = (GRID_SIZE + SPAWN_ROOM_SIZE) / 2
+	return [
+		Vector2i(_GRID_CENTER, _GRID_CENTER - stage_room_offset),
+		Vector2i(_GRID_CENTER, _GRID_CENTER + stage_room_offset),
+		Vector2i(_GRID_CENTER - stage_room_offset, _GRID_CENTER),
+		Vector2i(_GRID_CENTER + stage_room_offset, _GRID_CENTER),
 	]
 
 
