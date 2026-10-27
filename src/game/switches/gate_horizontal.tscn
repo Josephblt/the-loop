@@ -362,8 +362,6 @@ omni_attenuation = 1.5
 script = ExtResource("7_tkxbe")
 minimum_energy = 0.5
 maximum_energy = 1.5
-minimum_duration = 0.5
-maximum_duration = 1.0
 
 [node name="InsideBlockCrackedSM" parent="." unique_id=2041578037 instance=ExtResource("8_ydell")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 0, 0)

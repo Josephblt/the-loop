@@ -358,8 +358,6 @@ omni_attenuation = 1.5
 script = ExtResource("3_random_light")
 minimum_energy = 0.5
 maximum_energy = 1.5
-minimum_duration = 0.5
-maximum_duration = 1.0
 
 [node name="OutsideBlockCrackedSM" parent="." unique_id=2041578037 instance=ExtResource("8_ai4gf")]
 
