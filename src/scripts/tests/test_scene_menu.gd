@@ -26,9 +26,4 @@ func _on_memory_room_pressed() -> void:
 
 
 func _on_game_session_pressed() -> void:
-	GameSession.create(
-		GAME_SESSION_SEED,
-		GriefStagesStack.new(GAME_SESSION_SEED),
-		MemoriesStack.new(GAME_SESSION_SEED),
-		0
-	)
+	GameSession.start(GAME_SESSION_SEED)

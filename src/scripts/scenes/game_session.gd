@@ -21,7 +21,8 @@ var _loop_count: int = -1
 
 func _ready() -> void:
 	_start_loop()
-	_perform_stage_layout(StageLayout.create(session_seed))
+	var random_seeds: Array[int] = _derive_random_seeds(session_seed)
+	_perform_stage_layout(StageLayout.create(random_seeds[0]))
 
 
 func _start_loop() -> void:
@@ -57,7 +58,17 @@ func _add_scene(scene: PackedScene, node_name: String, scene_transform: Transfor
 	_stage.add_child(instance)
 
 
-static func create(random_seed: int, grief_stages_stack: GriefStagesStack, memories_stack: MemoriesStack, loop_count: int) -> void:
+static func start(random_seed: int) -> void:
+	var random_seeds: Array[int] = _derive_random_seeds(random_seed)
+	_create(
+		random_seed,
+		GriefStagesStack.new(random_seeds[1]),
+		MemoriesStack.new(random_seeds[2]),
+		0
+	)
+
+
+static func _create(random_seed: int, grief_stages_stack: GriefStagesStack, memories_stack: MemoriesStack, loop_count: int) -> void:
 	var game_session: GameSession = preload(GAME_SESSION_SCENE_PATH).instantiate()
 	game_session.session_seed = random_seed
 	game_session._grief_stages_stack = grief_stages_stack
@@ -68,6 +79,12 @@ static func create(random_seed: int, grief_stages_stack: GriefStagesStack, memor
 	scene_tree.current_scene.queue_free()
 	scene_tree.root.add_child(game_session)
 	scene_tree.current_scene = game_session
+
+
+static func _derive_random_seeds(random_seed: int) -> Array[int]:
+	var randomizer: RandomNumberGenerator = RandomNumberGenerator.new()
+	randomizer.seed = random_seed
+	return [randomizer.randi(), randomizer.randi(), randomizer.randi()]
 
 
 static func serialize(game_session: GameSession) -> void:
@@ -93,7 +110,7 @@ static func deserialize() -> void:
 	var memories_stack: MemoriesStack = data["_memories_stack"]
 	var loop_count: int = data["_loop_count"]
 
-	GameSession.create(
+	GameSession._create(
 		random_seed,
 		grief_stages_stack,
 		memories_stack,

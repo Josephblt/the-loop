@@ -18,12 +18,7 @@ func continue_game():
 
 
 func new_game():
-	GameSession.create(
-		randi(),
-		GriefStagesStack.new(randi()),
-		MemoriesStack.new(randi()),
-		0
-	)	
+	GameSession.start(randi())
 
 
 func _on_continue_pressed() -> void:
