@@ -4,9 +4,11 @@ extends Node
 const SAVE_FILE_PATH = "user://the_loop_save_game.dat"
 
 const GAME_SESSION_SCENE_PATH = "res://scenes/game_session.tscn"
-const MAZE_ROOM_SIZE: int = 101
-const MEMORY_ROOM_SIZE: int = 3
-const STAGE_ROOM_SIZE: int = 7
+const SPAWN_ROOM_SCENE: PackedScene = preload("res://game/rooms/spawn_room.tscn")
+const MEMORY_ROOM_SCENE: PackedScene = preload("res://game/rooms/memory_room.tscn")
+const DEPRESSION_ROOM_SCENE: PackedScene = preload("res://game/rooms/depression_room.tscn")
+const VERTICAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_vertical.tscn")
+const HORIZONTAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_horizontal.tscn")
 
 var session_seed: int
 
@@ -14,29 +16,50 @@ var _grief_stages_stack: GriefStagesStack
 var _memories_stack: MemoriesStack
 var _loop_count: int = -1
 
+@onready var _stage: Node3D = %Stage
 
-func _ready():
-	print("Ready method")
+
+func _ready() -> void:
 	_start_loop()
+	_perform_stage_layout(StageLayout.create(session_seed))
 
 
-func _start_loop():	
+func _start_loop() -> void:
 	_loop_count += 1	
 	var grief_stage = _grief_stages_stack.peek()
 	_memories_stack.load_grief_stack(grief_stage)
 	GameSession.serialize(self)
 
 
-func _end_loop():
+func _end_loop() -> void:
 	_grief_stages_stack.pop()
 	GameSession.deserialize()
 
 
+func _perform_stage_layout(layout: StageLayout) -> void:
+	_add_scene(SPAWN_ROOM_SCENE, "SpawnRoom", layout.spawn_room_transform)
+	_add_scene(DEPRESSION_ROOM_SCENE, "DepressionRoom", layout.depression_room_transform)
+
+	for index: int in layout.memory_room_transforms.size():
+		_add_scene(MEMORY_ROOM_SCENE, "MemoryRoom%d" % (index + 1), layout.memory_room_transforms[index])
+
+	for index: int in layout.vertical_gate_transforms.size():
+		_add_scene(VERTICAL_GATE_SCENE, "VerticalGate%d" % (index + 1), layout.vertical_gate_transforms[index])
+
+	for index: int in layout.horizontal_gate_transforms.size():
+		_add_scene(HORIZONTAL_GATE_SCENE, "HorizontalGate%d" % (index + 1), layout.horizontal_gate_transforms[index])
+
+
+func _add_scene(scene: PackedScene, node_name: String, scene_transform: Transform3D) -> void:
+	var instance: Node3D = scene.instantiate() as Node3D
+	instance.name = node_name
+	instance.transform = scene_transform
+	_stage.add_child(instance)
+
+
 static func create(random_seed: int, grief_stages_stack: GriefStagesStack, memories_stack: MemoriesStack, loop_count: int) -> void:
 	var game_session: GameSession = preload(GAME_SESSION_SCENE_PATH).instantiate()
-	print("Instantiate method")
 	game_session.session_seed = random_seed
-	print("Session seed set")
 	game_session._grief_stages_stack = grief_stages_stack
 	game_session._memories_stack = memories_stack
 	game_session._loop_count = loop_count
