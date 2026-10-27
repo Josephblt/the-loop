@@ -19,7 +19,7 @@ uniform float softness : hint_range(0.001, 0.1, 0.001) = 0.1;
 
 
 instance uniform float activation = 0.0;
-instance uniform float edge_pulse = 0.5;
+instance uniform float pulse_speed : hint_range(0.0, 4.0, 0.05) = 1.0;
 
 vec2 rotate_uv(vec2 uv, float angle) {
 	float sine = sin(angle);
@@ -35,6 +35,7 @@ void fragment() {
 	noise_uv += vec2(TIME * 0.1, -TIME * 0.1);
 	float noise_value = texture(noise, noise_uv).r;
 
+	float edge_pulse = sin(TIME * pulse_speed * 6.28318530718) * 0.5 + 0.5;
 	float pulsed_edge_width = mix(min_width, max(min_width, max_width), edge_pulse);
 	float frame_end = 0.5 + pulsed_edge_width;
 	float frame_mask = 1.0 - smoothstep(frame_end - blur, frame_end + blur, shape_distance);
