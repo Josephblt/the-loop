@@ -4,6 +4,7 @@ extends Node
 const SAVE_FILE_PATH = "user://the_loop_save_game.dat"
 
 const GAME_SESSION_SCENE_PATH = "res://scenes/game_session.tscn"
+const MAZE_ROOM_SCENE: PackedScene = preload("res://game/rooms/maze_room.tscn")
 const SPAWN_ROOM_SCENE: PackedScene = preload("res://game/rooms/spawn_room.tscn")
 const MEMORY_ROOM_SCENE: PackedScene = preload("res://game/rooms/memory_room.tscn")
 const DEPRESSION_ROOM_SCENE: PackedScene = preload("res://game/rooms/depression_room.tscn")
@@ -11,6 +12,9 @@ const VERTICAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_verti
 const HORIZONTAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_horizontal.tscn")
 
 var session_seed: int
+
+@export_category("Maze")
+@export_range(17, 127, 2) var maze_grid_size: int = StageLayout.DEFAULT_GRID_SIZE
 
 var _grief_stages_stack: GriefStagesStack
 var _memories_stack: MemoriesStack
@@ -22,7 +26,7 @@ var _loop_count: int = -1
 func _ready() -> void:
 	_start_loop()
 	var random_seeds: Array[int] = _derive_random_seeds(session_seed)
-	_perform_stage_layout(StageLayout.create(random_seeds[0]))
+	_perform_stage_layout(StageLayout.create(random_seeds[0], maze_grid_size))
 
 
 func _start_loop() -> void:
@@ -38,6 +42,7 @@ func _end_loop() -> void:
 
 
 func _perform_stage_layout(layout: StageLayout) -> void:
+	_add_maze(layout.maze)
 	_add_scene(SPAWN_ROOM_SCENE, "SpawnRoom", layout.spawn_room_transform)
 	_add_scene(DEPRESSION_ROOM_SCENE, "DepressionRoom", layout.depression_room_transform)
 
@@ -49,6 +54,12 @@ func _perform_stage_layout(layout: StageLayout) -> void:
 
 	for index: int in layout.horizontal_gate_transforms.size():
 		_add_scene(HORIZONTAL_GATE_SCENE, "HorizontalGate%d" % (index + 1), layout.horizontal_gate_transforms[index])
+
+
+func _add_maze(maze: Maze) -> void:
+	var maze_room: MazeRoom = MAZE_ROOM_SCENE.instantiate() as MazeRoom
+	maze_room.maze = maze
+	_stage.add_child(maze_room)
 
 
 func _add_scene(scene: PackedScene, node_name: String, scene_transform: Transform3D) -> void:
