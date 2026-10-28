@@ -6,6 +6,7 @@ const DEFAULT_GRID_SIZE: int = 31
 const MINIMUM_GRID_SIZE: int = 17
 const CELL_SIZE: float = 5.6
 const SPAWN_ROOM_SIZE: int = 7
+const STAGE_ROOM_SIZE: int = 9
 const MEMORY_ROOM_SIZE: int = 3
 const MEMORY_ROOM_COUNT: int = 5
 
@@ -195,7 +196,7 @@ func _gate_approaches() -> Array[Rect2i]:
 
 
 func _stage_room_positions() -> Array[Vector2i]:
-	var stage_room_offset: int = int((grid_size + SPAWN_ROOM_SIZE) / 2.0)
+	var stage_room_offset: int = int((grid_size + STAGE_ROOM_SIZE) / 2.0)
 	return [
 		Vector2i(_grid_center, _grid_center - stage_room_offset),
 		Vector2i(_grid_center, _grid_center + stage_room_offset),
@@ -225,7 +226,7 @@ func _create_horizontal_gate_transforms() -> Array[Transform3D]:
 
 
 func _stage_room_distance() -> float:
-	return (float(grid_size + SPAWN_ROOM_SIZE) / 2.0) * CELL_SIZE
+	return (float(grid_size + STAGE_ROOM_SIZE) / 2.0) * CELL_SIZE
 
 
 func _transform(position: Vector3, rotation: float) -> Transform3D:

@@ -15,6 +15,11 @@ const SPEED_SLIDER_SCALE: float = 10.0
 @onready var walk_speed_value: Label = %WalkSpeedValue
 
 
+func _ready() -> void:
+	mouse_sensitivity_slider.set_value_no_signal(Player.DEFAULT_MOUSE_SENSITIVITY)
+	_on_mouse_sensitivity_slider_value_changed(mouse_sensitivity_slider.value)
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_action_pressed("Pause") or event.is_echo():
 		return
