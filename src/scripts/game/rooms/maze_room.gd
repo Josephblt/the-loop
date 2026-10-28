@@ -4,7 +4,7 @@ extends Node3D
 
 const FLOOR_BLOCK_SCENE: PackedScene = preload("res://game/level/blocks/block_cracked_sm.tscn")
 const BORDER_WALL_SCENE: PackedScene = preload("res://game/level/walls/wall_normal_lg.tscn")
-const BORDER_WALL_STACK_HEIGHT: float = 6.0
+const BORDER_WALL_STACK_HEIGHT: float = 5.6
 
 var maze: Maze
 
