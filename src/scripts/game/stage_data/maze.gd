@@ -10,7 +10,13 @@ var vertical_walls: Array[Array] = []
 var walls: Array[Wall] = []
 
 
-func _init(size: int, spacing: float, excluded_areas: Array[Rect2i], excluded_cells: Array[Vector2i]) -> void:
+func _init(
+	size: int,
+	spacing: float,
+	excluded_areas: Array[Rect2i],
+	excluded_cells: Array[Vector2i],
+	bordered_areas: Array[Rect2i]
+) -> void:
 	grid_size = size
 	cell_size = spacing
 
@@ -25,7 +31,8 @@ func _init(size: int, spacing: float, excluded_areas: Array[Rect2i], excluded_ce
 		grid.append(column)
 
 	_create_wall_grids()
-	_create_border_walls()
+	_create_outer_border_walls()
+	_create_area_border_walls(bordered_areas)
 
 
 func valid_cells() -> Array[Cell]:
@@ -46,15 +53,18 @@ func wall_world_transform(wall: Wall) -> Transform3D:
 	var rotation: float
 
 	if wall.axis == Wall.WallAxis.HORIZONTAL:
-		cell_position = Vector2i(wall.position.x, 0)
-		if wall.position.y == grid_size:
-			cell_position.y = grid_size - 1
+		cell_position = wall.position
+		if _has_cell(cell_position):
+			rotation = 0.0
+		else:
+			cell_position.y -= 1
 			rotation = PI
 	else:
-		cell_position = Vector2i(0, wall.position.y)
-		rotation = PI / 2.0
-		if wall.position.x == grid_size:
-			cell_position.x = grid_size - 1
+		cell_position = wall.position
+		if _has_cell(cell_position):
+			rotation = PI / 2.0
+		else:
+			cell_position.x -= 1
 			rotation = -PI / 2.0
 
 	return Transform3D(Basis(Vector3.UP, rotation), _grid_world_position(cell_position))
@@ -81,7 +91,7 @@ func _create_wall_grids() -> void:
 		vertical_walls.append(vertical_column)
 
 
-func _create_border_walls() -> void:
+func _create_outer_border_walls() -> void:
 	var last_cell: int = grid_size - 1
 	for x: int in range(grid_size):
 		if grid[x][0] != null:
@@ -96,10 +106,35 @@ func _create_border_walls() -> void:
 			_add_wall(vertical_walls, Vector2i(grid_size, y), Wall.WallAxis.VERTICAL)
 
 
+func _create_area_border_walls(areas: Array[Rect2i]) -> void:
+	for area: Rect2i in areas:
+		var area_end: Vector2i = area.position + area.size
+		for x: int in range(area.position.x, area_end.x):
+			if _has_cell(Vector2i(x, area.position.y - 1)):
+				_add_wall(horizontal_walls, Vector2i(x, area.position.y), Wall.WallAxis.HORIZONTAL)
+			if _has_cell(Vector2i(x, area_end.y)):
+				_add_wall(horizontal_walls, Vector2i(x, area_end.y), Wall.WallAxis.HORIZONTAL)
+
+		for y: int in range(area.position.y, area_end.y):
+			if _has_cell(Vector2i(area.position.x - 1, y)):
+				_add_wall(vertical_walls, Vector2i(area.position.x, y), Wall.WallAxis.VERTICAL)
+			if _has_cell(Vector2i(area_end.x, y)):
+				_add_wall(vertical_walls, Vector2i(area_end.x, y), Wall.WallAxis.VERTICAL)
+
+
 func _add_wall(wall_grid: Array[Array], position: Vector2i, axis: Wall.WallAxis) -> void:
+	assert(wall_grid[position.x][position.y] == null, "Wall edge already occupied")
 	var wall: Wall = Wall.new(Wall.WallType.BORDER, axis, position)
 	wall_grid[position.x][position.y] = wall
 	walls.append(wall)
+
+
+func _has_cell(position: Vector2i) -> bool:
+	if position.x < 0 or position.x >= grid_size:
+		return false
+	if position.y < 0 or position.y >= grid_size:
+		return false
+	return grid[position.x][position.y] != null
 
 
 func _is_excluded(position: Vector2i, excluded_areas: Array[Rect2i], excluded_cells: Array[Vector2i]) -> bool:

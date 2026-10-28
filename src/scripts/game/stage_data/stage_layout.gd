@@ -42,7 +42,8 @@ static func create(random_seed: int, maze_grid_size: int = DEFAULT_GRID_SIZE) ->
 	layout.horizontal_gate_transforms = layout._create_horizontal_gate_transforms()
 	var excluded_areas: Array[Rect2i] = layout._excluded_areas(layout.memory_room_positions)
 	var excluded_cells: Array[Vector2i] = layout._gate_positions()
-	layout.maze = Maze.new(maze_grid_size, CELL_SIZE, excluded_areas, excluded_cells)
+	var bordered_areas: Array[Rect2i] = [layout._spawn_room_area()]
+	layout.maze = Maze.new(maze_grid_size, CELL_SIZE, excluded_areas, excluded_cells, bordered_areas)
 	return layout
 
 
@@ -74,11 +75,15 @@ func _create_memory_room_transforms(positions: Array[Vector2i], randomizer: Rand
 
 
 func _excluded_areas(positions: Array[Vector2i]) -> Array[Rect2i]:
-	var spawn_room_start: Vector2i = Vector2i(_grid_center - _SPAWN_ROOM_HALF_SIZE, _grid_center - _SPAWN_ROOM_HALF_SIZE)
-	var areas: Array[Rect2i] = [Rect2i(spawn_room_start, Vector2i(SPAWN_ROOM_SIZE, SPAWN_ROOM_SIZE))]
+	var areas: Array[Rect2i] = [_spawn_room_area()]
 	for position: Vector2i in positions:
 		areas.append(_memory_room_bounds(position))
 	return areas
+
+
+func _spawn_room_area() -> Rect2i:
+	var start: Vector2i = Vector2i(_grid_center - _SPAWN_ROOM_HALF_SIZE, _grid_center - _SPAWN_ROOM_HALF_SIZE)
+	return Rect2i(start, Vector2i(SPAWN_ROOM_SIZE, SPAWN_ROOM_SIZE))
 
 
 func _create_memory_room_candidates() -> Array[Vector2i]:
