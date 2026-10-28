@@ -60,6 +60,7 @@ func _perform_stage_layout(layout: StageLayout) -> void:
 func _add_maze(maze: Maze) -> void:
 	var maze_room: MazeRoom = MAZE_ROOM_SCENE.instantiate() as MazeRoom
 	maze_room.maze = maze
+	maze_room.randomization_seed = session_seed
 	_stage.add_child(maze_room)
 
 
