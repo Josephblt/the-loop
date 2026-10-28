@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cfd01q26as6sx"]
 
 [ext_resource type="Script" uid="uid://fbubr4uydpt" path="res://scripts/scenes/main_menu.gd" id="1_l6cm7"]
-[ext_resource type="Resource" path="res://game/stories/mother_and_daughter.tres" id="2_story"]
+[ext_resource type="Resource" path="res://game/stories/borrowed_weather.tres" id="2_story"]
 
 [node name="MainMenuScene" type="Node3D" unique_id=492336053]
 script = ExtResource("1_l6cm7")
