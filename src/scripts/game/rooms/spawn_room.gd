@@ -2,6 +2,9 @@ class_name SpawnRoom
 extends Node3D
 
 
+signal player_left
+
+
 var _memory: Memory
 var _player: Player
 
@@ -35,3 +38,8 @@ func _setup_fire_fixtures() -> void:
 
 func _on_fire_fixture_lit_changed(is_lit: bool, fixture_path: String) -> void:
 	_memory.set_fire_fixture_state(fixture_path, is_lit)
+
+
+func _on_activator_body_exited(body: Node3D) -> void:
+	if body is Player:
+		player_left.emit()
