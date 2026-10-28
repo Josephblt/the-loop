@@ -132,9 +132,9 @@ static func serialize(game_session: GameSession) -> void:
 	
 	data["session_seed"] = game_session._session_seed
 	data["story_path"] = game_session._story.resource_path
-	data["_grief_stages_stack"] = game_session._grief_stages_stack.serialize()
-	data["_memories_stack"] = game_session._memories_stack.serialize()
-	data["_loop_count"] = game_session._loop_count
+	data["grief_stages_stack"] = game_session._grief_stages_stack.serialize()
+	data["memories_stack"] = game_session._memories_stack.serialize()
+	data["loop_count"] = game_session._loop_count
 	
 	var file: FileAccess = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
 	file.store_var(data)
@@ -148,11 +148,14 @@ static func deserialize() -> void:
 
 	var random_seed: int = data["session_seed"]
 	var selected_story: Story = load(data["story_path"]) as Story
+	
 	var grief_stages_stack: GriefStagesStack = GriefStagesStack.new(0)
-	grief_stages_stack.deserialize(data["_grief_stages_stack"])
+	grief_stages_stack.deserialize(data["grief_stages_stack"])
+	
 	var memories_stack: MemoriesStack = MemoriesStack.new(0)
-	memories_stack.deserialize(data["_memories_stack"])
-	var loop_count: int = data["_loop_count"]
+	memories_stack.deserialize(data["memories_stack"])
+	
+	var loop_count: int = data["loop_count"]
 
 	GameSession._create(
 		random_seed,
