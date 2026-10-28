@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dj5kds8cy7fnu" path="res://scripts/game/switches/gate.gd" id="1_3bxv0"]
 [ext_resource type="Material" uid="uid://bkoj8m61hbv4u" path="res://assets/materials/switches/gate/gate.tres" id="1_njgmt"]
-[ext_resource type="Script" uid="uid://ciumyxrk8e23h" path="res://scripts/game/effects/pulsing_light.gd" id="3_random_light"]
+[ext_resource type="Script" uid="uid://ciumyxrk8e23h" path="res://scripts/game/lights/pulsing_light.gd" id="3_random_light"]
 [ext_resource type="Material" uid="uid://c1ns6boghwkap" path="res://assets/materials/switches/gate/edge_highlight_mask_vertical_material.tres" id="4_vmqm7"]
 [ext_resource type="PackedScene" uid="uid://dfwbglgsmyokl" path="res://game/level/walls/wall_normal_lg.tscn" id="5_1j2kj"]
 [ext_resource type="Material" uid="uid://e8uxyqrstxcu" path="res://assets/materials/switches/gate/dissolve_spatial_material.tres" id="5_4x01p"]

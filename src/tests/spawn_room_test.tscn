@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://uqydf7hmtrdr"]
 
 [ext_resource type="Script" uid="uid://dj1p28x8ggol4" path="res://scripts/tests/spawn_room_test.gd" id="1_2llnb"]
-[ext_resource type="PackedScene" uid="uid://dt4q24uysybli" path="res://game/effects/lights.tscn" id="2_0qcbj"]
+[ext_resource type="PackedScene" uid="uid://dt4q24uysybli" path="res://game/lights/lights.tscn" id="2_0qcbj"]
 [ext_resource type="PackedScene" uid="uid://b0lvfjr4ff8hl" path="res://game/actors/player.tscn" id="3_ecmwq"]
 [ext_resource type="PackedScene" uid="uid://i64r11soytmg" path="res://game/rooms/spawn_room.tscn" id="4_0qcbj"]
 [ext_resource type="PackedScene" uid="uid://v8j2a1egqxgo" path="res://game/switches/gate_vertical.tscn" id="4_ecmwq"]

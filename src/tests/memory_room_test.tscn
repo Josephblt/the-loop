@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cbhq5vawf2sjp"]
 
 [ext_resource type="Script" uid="uid://dx6d4mhxny3ew" path="res://scripts/tests/memory_room_test.gd" id="1_script"]
-[ext_resource type="PackedScene" uid="uid://dt4q24uysybli" path="res://game/effects/lights.tscn" id="2_lights"]
+[ext_resource type="PackedScene" uid="uid://dt4q24uysybli" path="res://game/lights/lights.tscn" id="2_lights"]
 [ext_resource type="PackedScene" uid="uid://b0lvfjr4ff8hl" path="res://game/actors/player.tscn" id="3_player"]
 [ext_resource type="PackedScene" uid="uid://cvvhff7lf1cka" path="res://game/rooms/memory_room.tscn" id="4_coft2"]
 

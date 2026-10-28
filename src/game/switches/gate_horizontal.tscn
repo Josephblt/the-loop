@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://e8uxyqrstxcu" path="res://assets/materials/switches/gate/dissolve_spatial_material.tres" id="3_6ueo5"]
 [ext_resource type="Material" uid="uid://c4r7p1m8v2x5q" path="res://assets/materials/switches/gate/edge_highlight_mask_horizontal_material.tres" id="4_portal"]
 [ext_resource type="PackedScene" uid="uid://dfwbglgsmyokl" path="res://game/level/walls/wall_normal_lg.tscn" id="6_dmahr"]
-[ext_resource type="Script" uid="uid://ciumyxrk8e23h" path="res://scripts/game/effects/pulsing_light.gd" id="7_tkxbe"]
+[ext_resource type="Script" uid="uid://ciumyxrk8e23h" path="res://scripts/game/lights/pulsing_light.gd" id="7_tkxbe"]
 [ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="8_ydell"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pt6l6"]
