@@ -13,32 +13,28 @@ const HORIZONTAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_hor
 const QUICK_TEST_STAGE: GriefStagesStack.GriefStages = GriefStagesStack.GriefStages.DEPRESSION
 
 
-@export_category("Maze")
-@export_range(17, 127, 2) var maze_grid_size: int = StageLayout.DEFAULT_GRID_SIZE
-@export var session_seed: int
-
 @onready var _player: Player = %Player
 @onready var _stage: Node3D = %Stage
 
-var story: Story
 var _grief_stages_stack: GriefStagesStack
 var _load_existing_loop: bool = false
 var _memories_stack: MemoriesStack
 var _loop_count: int = -1
+var _session_seed: int
+var _story: Story
 
 
 
 func _ready() -> void:
 	if not _load_existing_loop:
 		_start_loop()
-	var random_seeds: Array[int] = _derive_random_seeds(session_seed)
-	var layout: StageLayout = StageLayout.create(random_seeds[0], maze_grid_size, _memories_stack.memory_count())
+	var layout: StageLayout = StageLayout.create(_session_seed, StageLayout.DEFAULT_GRID_SIZE, _memories_stack.memory_count())
 	_perform_stage_layout(layout)
 
 
 func _start_loop() -> void:
 	_loop_count += 1
-	var story_stage: StoryStage = story.get_stage(_loop_count, QUICK_TEST_STAGE)
+	var story_stage: StoryStage = _story.get_stage(_loop_count, QUICK_TEST_STAGE)
 	_memories_stack.load_story_stage(story_stage)
 	GameSession.serialize(self)
 
@@ -90,16 +86,15 @@ func _add_instance(instance: Node3D, node_name: String, scene_transform: Transfo
 	instance.name = node_name
 	instance.transform = scene_transform
 	_stage.add_child(instance)
-	SceneRandomizer.randomize_scene(instance, session_seed)
+	SceneRandomizer.randomize_scene(instance, _session_seed)
 
 
 static func start(random_seed: int, selected_story: Story) -> void:
-	var random_seeds: Array[int] = _derive_random_seeds(random_seed)
 	_create(
 		random_seed,
 		selected_story,
-		GriefStagesStack.new(random_seeds[1]),
-		MemoriesStack.new(random_seeds[2]),
+		GriefStagesStack.new(random_seed),
+		MemoriesStack.new(random_seed),
 		-1,
 		false
 	)
@@ -114,12 +109,12 @@ static func _create(
 	load_existing_loop: bool
 ) -> void:
 	var game_session: GameSession = preload(GAME_SESSION_SCENE_PATH).instantiate()
-	game_session.session_seed = random_seed
-	game_session.story = selected_story
 	game_session._grief_stages_stack = grief_stages_stack
 	game_session._memories_stack = memories_stack
 	game_session._loop_count = loop_count
 	game_session._load_existing_loop = load_existing_loop
+	game_session._session_seed = random_seed
+	game_session._story = selected_story
 	
 	var scene_tree: SceneTree = Engine.get_main_loop() as SceneTree
 	scene_tree.current_scene.queue_free()
@@ -127,17 +122,11 @@ static func _create(
 	scene_tree.current_scene = game_session
 
 
-static func _derive_random_seeds(random_seed: int) -> Array[int]:
-	var randomizer: RandomNumberGenerator = RandomNumberGenerator.new()
-	randomizer.seed = random_seed
-	return [randomizer.randi(), randomizer.randi(), randomizer.randi()]
-
-
 static func serialize(game_session: GameSession) -> void:
 	var data: Dictionary = {}
 	
-	data["session_seed"] = game_session.session_seed
-	data["story_path"] = game_session.story.resource_path
+	data["session_seed"] = game_session._session_seed
+	data["story_path"] = game_session._story.resource_path
 	data["_grief_stages_stack"] = game_session._grief_stages_stack.serialize()
 	data["_memories_stack"] = game_session._memories_stack.serialize()
 	data["_loop_count"] = game_session._loop_count
