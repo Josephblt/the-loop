@@ -76,8 +76,6 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1
 [node name="PostCorner4" parent="Fences" unique_id=120645519 instance=ExtResource("3_nq5t1")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 1.6, 0)
 
-[node name="Gates" type="Node3D" parent="." unique_id=1344621558]
-
 [node name="Interactables" type="Node3D" parent="." unique_id=1525573364]
 
 [node name="Altars" type="Node3D" parent="Interactables" unique_id=957300393]
