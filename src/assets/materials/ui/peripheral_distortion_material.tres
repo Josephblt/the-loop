@@ -3,15 +3,23 @@
 [ext_resource type="Shader" uid="uid://d0pidojf7n4ah" path="res://shaders/peripheral_distortion.gdshader" id="1_3687x"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_peripheral_distortion"]
-seed = 719
-frequency = 0.04
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_peripheral_distortion"]
-width = 512
-height = 512
-seamless = true
 noise = SubResource("FastNoiseLite_peripheral_distortion")
+seamless = true
+seamless_blend_skirt = 1.0
 
 [resource]
 shader = ExtResource("1_3687x")
 shader_parameter/noise = SubResource("NoiseTexture2D_peripheral_distortion")
+shader_parameter/intensity = 0.0
+shader_parameter/pattern_scale = 8.0
+shader_parameter/flow_speed = 1.0
+shader_parameter/morph_speed = 1.0
+shader_parameter/distortion_pixels = 16.0
+shader_parameter/blur_lod = 5.0
+shader_parameter/center_calm = 0.5
+shader_parameter/dim = 0.25
+shader_parameter/desaturation = 0.75
+shader_parameter/vignette_color = Color(0.09411765, 0.043137256, 0.16078432, 1)
+shader_parameter/vignette_strength = 0.75

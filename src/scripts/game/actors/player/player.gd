@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 
 const DEFAULT_RUN_SPEED: float = 8.0
-const DEFAULT_WALK_SPEED: float = 3.0
+const DEFAULT_WALK_SPEED: float = 20.0
 const DEFAULT_MOUSE_SENSITIVITY: float = 0.25
 const JUMP_VELOCITY: float = 10.0
 
