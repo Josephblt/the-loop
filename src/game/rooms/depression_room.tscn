@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/memory_reveal.tscn" id="17_s6b74"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tkjqx"]
-size = Vector3(40.2, 12.5, 40.2)
+size = Vector3(51.3, 12.5, 40.2)
 
 [node name="DepressionRoom" type="Node3D" unique_id=1670544133]
 script = ExtResource("1_d3oih")
@@ -26,7 +26,7 @@ script = ExtResource("1_d3oih")
 [node name="Activator" parent="." unique_id=452683808 instance=ExtResource("2_pm5dm")]
 
 [node name="CollisionShape3D" parent="Activator" index="0" unique_id=1593920821]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4305115e-06, 5.8499994, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5500007, 5.8499994, 0)
 shape = SubResource("BoxShape3D_tkjqx")
 
 [node name="Floor" type="Node3D" parent="." unique_id=1738241915]
