@@ -25,7 +25,7 @@ var maze: Maze
 var _grid_center: int
 
 
-static func create(seed: int, maze_grid_size: int = DEFAULT_GRID_SIZE) -> StageLayout:
+static func create(random_seed: int, maze_grid_size: int = DEFAULT_GRID_SIZE) -> StageLayout:
 	assert(maze_grid_size % 2 == 1, "Maze grid size must be odd")
 	assert(maze_grid_size >= MINIMUM_GRID_SIZE, "Maze grid is too small for its rooms")
 
@@ -33,7 +33,7 @@ static func create(seed: int, maze_grid_size: int = DEFAULT_GRID_SIZE) -> StageL
 	layout.grid_size = maze_grid_size
 	layout._grid_center = int(maze_grid_size / 2.0)
 	var randomizer: RandomNumberGenerator = RandomNumberGenerator.new()
-	randomizer.seed = seed
+	randomizer.seed = random_seed
 
 	layout.depression_room_transform = Transform3D(Basis.IDENTITY, Vector3(layout._stage_room_distance(), 0.0, 0.0))
 	layout.memory_room_positions = layout._create_memory_room_positions(randomizer)
@@ -73,10 +73,10 @@ func _create_memory_room_transforms(positions: Array[Vector2i], randomizer: Rand
 	return transforms
 
 
-func _excluded_areas(memory_room_positions: Array[Vector2i]) -> Array[Rect2i]:
+func _excluded_areas(positions: Array[Vector2i]) -> Array[Rect2i]:
 	var spawn_room_start: Vector2i = Vector2i(_grid_center - _SPAWN_ROOM_HALF_SIZE, _grid_center - _SPAWN_ROOM_HALF_SIZE)
 	var areas: Array[Rect2i] = [Rect2i(spawn_room_start, Vector2i(SPAWN_ROOM_SIZE, SPAWN_ROOM_SIZE))]
-	for position: Vector2i in memory_room_positions:
+	for position: Vector2i in positions:
 		areas.append(_memory_room_bounds(position))
 	return areas
 
