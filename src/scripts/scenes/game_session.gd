@@ -18,8 +18,8 @@ const QUICK_TEST_STAGE: GriefStagesStack.GriefStages = GriefStagesStack.GriefSta
 
 var _grief_stages_stack: GriefStagesStack
 var _load_existing_loop: bool = false
-var _memories_stack: MemoriesStack
 var _loop_count: int = -1
+var _memories_stack: MemoriesStack
 var _session_seed: int
 var _story: Story
 
