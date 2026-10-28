@@ -10,6 +10,7 @@ script = ExtResource("1_d8o6b")
 [node name="Lights" parent="." instance=ExtResource("2_lights")]
 
 [node name="Player" parent="." instance=ExtResource("3_player")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="Stage" type="Node3D" parent="."]

@@ -1,37 +1,8 @@
 class_name MemoriesStack
 
 
-const DENIAL_MEMORIES: Array[String] = [
-	"Denial Memories 1",
-	"Denial Memories 2",
-	"Denial Memories 3"
-]
-
-const ANGER_MEMORIES: Array[String] = [
-	"Anger Memories 1",
-	"Anger Memories 2",
-	"Anger Memories 3"
-]
-
-const BARGAINING_MEMORIES: Array[String] = [
-	"Bargaining Memories 1",
-	"Bargaining Memories 2",
-	"Bargaining Memories 3"
-]
-
-const DEPRESSION_MEMORIES: Array[String] = [
-	"Depression Memories 1",
-	"Depression Memories 2",
-	"Depression Memories 3"
-]
-
-const ACCEPTANCE_MEMORIES: Array[String] = [
-	"Acceptance Memories 1",
-	"Acceptance Memories 2",
-	"Acceptance Memories 3"
-]
-
-var _memories_stack: Array[Memory]
+var _closing_memory: Memory
+var _maze_memories: Array[Memory] = []
 var _randomizer: RandomNumberGenerator
 
 
@@ -40,53 +11,48 @@ func _init(session_seed: int) -> void:
 	_randomizer.seed = session_seed
 
 
-func fetch_memory(chest_id: int) -> Memory:
-	var memory: Memory = _memories_stack[chest_id]
-	memory.reveal()
-	return memory
+func load_story_stage(story_stage: StoryStage) -> void:
+	_maze_memories.clear()
+	for description: String in story_stage.maze_memories:
+		_maze_memories.append(Memory.new(description))
+	ArrayRandomizer.shuffle(_maze_memories, _randomizer)
+	_closing_memory = Memory.new(story_stage.closing_memory)
+
+
+func memory_count() -> int:
+	return _maze_memories.size()
+
+
+func memory_at(index: int) -> Memory:
+	return _maze_memories[index]
+
+
+func closing_memory() -> Memory:
+	return _closing_memory
 
 
 func serialize() -> Dictionary:
-	var serialized_memories_stack: Array[Dictionary] = []
-	for memory in _memories_stack:
-		serialized_memories_stack.append(memory.serialize())
+	var serialized_maze_memories: Array[Dictionary] = []
+	for memory: Memory in _maze_memories:
+		serialized_maze_memories.append(memory.serialize())
 
 	return {
 		"memories_stack": {
-			"_memories_stack": serialized_memories_stack,
+			"maze_memories": serialized_maze_memories,
+			"closing_memory": _closing_memory.serialize(),
 		}
 	}
 
 
 func deserialize(data: Dictionary) -> void:
-	var memories_stack_data = data.get("memories_stack", {})
-	var serialized_memories_stack: Array = memories_stack_data.get("_memories_stack", [])
+	var memories_stack_data: Dictionary = data.get("memories_stack", {})
+	var serialized_maze_memories: Array = memories_stack_data.get("maze_memories", [])
 
-	_memories_stack = []
-	for memory_data in serialized_memories_stack:
+	_maze_memories.clear()
+	for memory_data: Dictionary in serialized_maze_memories:
 		var memory: Memory = Memory.new()
 		memory.deserialize(memory_data)
-		_memories_stack.append(memory)
+		_maze_memories.append(memory)
 
-
-func load_grief_stack(grief_stage: GriefStagesStack.GriefStages) -> void:
-	var memory_descriptions: Array[String] = []
-
-	match grief_stage:
-		GriefStagesStack.GriefStages.DENIAL:
-			memory_descriptions = DENIAL_MEMORIES.duplicate()
-		GriefStagesStack.GriefStages.ANGER:
-			memory_descriptions = ANGER_MEMORIES.duplicate()
-		GriefStagesStack.GriefStages.BARGAINING:
-			memory_descriptions = BARGAINING_MEMORIES.duplicate()
-		GriefStagesStack.GriefStages.DEPRESSION:
-			memory_descriptions = DEPRESSION_MEMORIES.duplicate()
-		GriefStagesStack.GriefStages.ACCEPTANCE:
-			memory_descriptions = ACCEPTANCE_MEMORIES.duplicate()
-	
-	_memories_stack = []
-	for memory_description in memory_descriptions:
-		var memory: Memory = Memory.new(memory_description)
-		_memories_stack.append(memory)
-
-	ArrayRandomizer.shuffle(_memories_stack, _randomizer)
+	_closing_memory = Memory.new()
+	_closing_memory.deserialize(memories_stack_data.get("closing_memory", {}))

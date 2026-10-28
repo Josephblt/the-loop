@@ -7,6 +7,9 @@ const MEMORY_ROOM_TEST_SCENE: String = "res://tests/memory_room_test.tscn"
 const GAME_SESSION_SEED: int = 0
 
 
+@export var story: Story
+
+
 func _open_test_scene(scene_path: String) -> void:
 	var error: Error = get_tree().change_scene_to_file(scene_path)
 	if error != OK:
@@ -26,4 +29,5 @@ func _on_memory_room_pressed() -> void:
 
 
 func _on_game_session_pressed() -> void:
-	GameSession.start(GAME_SESSION_SEED)
+	assert(story != null, "TestSceneMenu requires a story")
+	GameSession.start(GAME_SESSION_SEED, story)

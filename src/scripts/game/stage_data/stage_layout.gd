@@ -8,7 +8,6 @@ const CELL_SIZE: float = 5.6
 const SPAWN_ROOM_SIZE: int = 7
 const STAGE_ROOM_SIZE: int = 9
 const MEMORY_ROOM_SIZE: int = 3
-const MEMORY_ROOM_COUNT: int = 5
 
 const _MEMORY_ROOM_HALF_SIZE: int = int(MEMORY_ROOM_SIZE / 2.0)
 const _SPAWN_ROOM_HALF_SIZE: int = int(SPAWN_ROOM_SIZE / 2.0)
@@ -27,7 +26,7 @@ var maze: Maze
 var _grid_center: int
 
 
-static func create(random_seed: int, maze_grid_size: int = DEFAULT_GRID_SIZE) -> StageLayout:
+static func create(random_seed: int, maze_grid_size: int, memory_room_count: int) -> StageLayout:
 	assert(maze_grid_size % 2 == 1, "Maze grid size must be odd")
 	assert(maze_grid_size >= MINIMUM_GRID_SIZE, "Maze grid is too small for its rooms")
 
@@ -38,7 +37,7 @@ static func create(random_seed: int, maze_grid_size: int = DEFAULT_GRID_SIZE) ->
 	randomizer.seed = random_seed
 
 	layout.depression_room_transform = Transform3D(Basis.IDENTITY, Vector3(layout._stage_room_distance(), 0.0, 0.0))
-	layout.memory_room_positions = layout._create_memory_room_positions(randomizer)
+	layout.memory_room_positions = layout._create_memory_room_positions(randomizer, memory_room_count)
 	layout.memory_room_transforms = layout._create_memory_room_transforms(layout.memory_room_positions, randomizer)
 	layout.vertical_gate_transforms = layout._create_vertical_gate_transforms()
 	layout.horizontal_gate_transforms = layout._create_horizontal_gate_transforms()
@@ -49,13 +48,13 @@ static func create(random_seed: int, maze_grid_size: int = DEFAULT_GRID_SIZE) ->
 	return layout
 
 
-func _create_memory_room_positions(randomizer: RandomNumberGenerator) -> Array[Vector2i]:
+func _create_memory_room_positions(randomizer: RandomNumberGenerator, memory_room_count: int) -> Array[Vector2i]:
 	var candidates: Array[Vector2i] = _create_memory_room_candidates()
 	ArrayRandomizer.shuffle(candidates, randomizer)
 
 	var selected: Array[Vector2i] = []
 	var spacing_points: Array[Vector2i] = _stage_room_positions()
-	while selected.size() < MEMORY_ROOM_COUNT:
+	while selected.size() < memory_room_count:
 		var candidate_index: int = _find_farthest_candidate(candidates, selected, spacing_points)
 		var selected_position: Vector2i = candidates.pop_at(candidate_index)
 		selected.append(selected_position)

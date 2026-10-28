@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://m7bdu67mr6p"]
+[gd_scene load_steps=3 format=3 uid="uid://m7bdu67mr6p"]
 
 [ext_resource type="Script" uid="uid://sd6rojdjioso" path="res://scripts/tests/test_scene_menu.gd" id="1_script"]
+[ext_resource type="Resource" path="res://game/stories/mother_and_daughter.tres" id="2_story"]
 
 [node name="TestSceneMenu" type="Control" unique_id=842957743]
 layout_mode = 3
@@ -10,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
+story = ExtResource("2_story")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=164273597]
 layout_mode = 1

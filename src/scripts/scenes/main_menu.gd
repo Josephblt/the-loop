@@ -2,7 +2,9 @@ class_name MainMenu
 extends Node
 
 
-@onready var continue_button = %ContinueButton
+@export var story: Story
+
+@onready var continue_button: Button = %ContinueButton
 
 
 func _ready() -> void:
@@ -17,8 +19,9 @@ func continue_game():
 	GameSession.deserialize()
 
 
-func new_game():
-	GameSession.start(randi())
+func new_game() -> void:
+	assert(story != null, "MainMenu requires a story")
+	GameSession.start(randi(), story)
 
 
 func _on_continue_pressed() -> void:
