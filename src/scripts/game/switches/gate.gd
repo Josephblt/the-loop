@@ -2,6 +2,9 @@ class_name Gate
 extends Node3D
 
 
+signal activated
+
+
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 var _is_inside: bool = false
@@ -18,10 +21,14 @@ func is_active() -> bool:
 
 
 func activate() -> void:
+	if _active:
+		return
+
 	animation_player.play("activate")
 	await animation_player.animation_finished
 	_active = true
-	
+	activated.emit()
+
 
 func deactivate() -> void:
 	animation_player.play("deactivate")
