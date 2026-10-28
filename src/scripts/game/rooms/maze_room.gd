@@ -7,7 +7,6 @@ const BORDER_WALL_SCENE: PackedScene = preload("res://game/level/walls/wall_norm
 const BORDER_WALL_STACK_HEIGHT: float = 5.6
 
 var maze: Maze
-var randomization_seed: int
 
 @onready var _blocks: Node3D = %Blocks
 @onready var _walls: Node3D = %Walls
@@ -24,8 +23,6 @@ func _ready() -> void:
 	for wall: Wall in maze.walls:
 		if wall.wall_type == Wall.WallType.BORDER:
 			_spawn_border_wall(wall)
-
-	SceneRandomizer.randomize_scene(self, randomization_seed)
 
 
 func _spawn_border_wall(wall: Wall) -> void:

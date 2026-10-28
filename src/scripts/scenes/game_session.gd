@@ -60,8 +60,8 @@ func _perform_stage_layout(layout: StageLayout) -> void:
 func _add_maze(maze: Maze) -> void:
 	var maze_room: MazeRoom = MAZE_ROOM_SCENE.instantiate() as MazeRoom
 	maze_room.maze = maze
-	maze_room.randomization_seed = session_seed
 	_stage.add_child(maze_room)
+	SceneRandomizer.randomize_scene(maze_room, session_seed)
 
 
 func _add_scene(scene: PackedScene, node_name: String, scene_transform: Transform3D) -> void:
@@ -69,6 +69,7 @@ func _add_scene(scene: PackedScene, node_name: String, scene_transform: Transfor
 	instance.name = node_name
 	instance.transform = scene_transform
 	_stage.add_child(instance)
+	SceneRandomizer.randomize_scene(instance, session_seed)
 
 
 static func start(random_seed: int) -> void:
