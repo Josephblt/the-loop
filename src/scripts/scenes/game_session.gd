@@ -52,11 +52,16 @@ func _perform_stage_layout(layout: StageLayout) -> void:
 	for index: int in layout.memory_room_transforms.size():
 		_add_memory_room(index, layout.memory_room_transforms[index])
 
-	for index: int in layout.vertical_gate_transforms.size():
-		_add_scene(VERTICAL_GATE_SCENE, "VerticalGate%d" % (index + 1), layout.vertical_gate_transforms[index])
+	_add_scene(VERTICAL_GATE_SCENE, "SpawnNorthGate", layout.spawn_north_gate_transform)
+	_add_scene(VERTICAL_GATE_SCENE, "SpawnSouthGate", layout.spawn_south_gate_transform)
+	_add_scene(HORIZONTAL_GATE_SCENE, "SpawnWestGate", layout.spawn_west_gate_transform)
+	_add_scene(HORIZONTAL_GATE_SCENE, "SpawnEastGate", layout.spawn_east_gate_transform)
 
-	for index: int in layout.horizontal_gate_transforms.size():
-		_add_scene(HORIZONTAL_GATE_SCENE, "HorizontalGate%d" % (index + 1), layout.horizontal_gate_transforms[index])
+	for index: int in layout.vertical_stage_portal_transforms.size():
+		_add_scene(VERTICAL_GATE_SCENE, "VerticalStagePortal%d" % (index + 1), layout.vertical_stage_portal_transforms[index])
+
+	for index: int in layout.horizontal_stage_portal_transforms.size():
+		_add_scene(HORIZONTAL_GATE_SCENE, "HorizontalStagePortal%d" % (index + 1), layout.horizontal_stage_portal_transforms[index])
 
 
 func _add_maze(maze: Maze) -> void:

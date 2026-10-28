@@ -17,10 +17,14 @@ const _STAGE_ROOM_OUTER_EXTENT: int = 4
 var grid_size: int
 var spawn_room_transform: Transform3D = Transform3D.IDENTITY
 var depression_room_transform: Transform3D = Transform3D.IDENTITY
+var spawn_north_gate_transform: Transform3D = Transform3D.IDENTITY
+var spawn_south_gate_transform: Transform3D = Transform3D.IDENTITY
+var spawn_west_gate_transform: Transform3D = Transform3D.IDENTITY
+var spawn_east_gate_transform: Transform3D = Transform3D.IDENTITY
 var memory_room_positions: Array[Vector2i] = []
 var memory_room_transforms: Array[Transform3D] = []
-var vertical_gate_transforms: Array[Transform3D] = []
-var horizontal_gate_transforms: Array[Transform3D] = []
+var vertical_stage_portal_transforms: Array[Transform3D] = []
+var horizontal_stage_portal_transforms: Array[Transform3D] = []
 var maze: Maze
 
 var _grid_center: int
@@ -37,10 +41,14 @@ static func create(random_seed: int, maze_grid_size: int, memory_room_count: int
 	randomizer.seed = random_seed
 
 	layout.depression_room_transform = Transform3D(Basis.IDENTITY, Vector3(layout._stage_room_distance(), 0.0, 0.0))
+	layout.spawn_north_gate_transform = layout._transform(Vector3(0.0, 0.0, -_INNER_GATE_DISTANCE), PI)
+	layout.spawn_south_gate_transform = layout._transform(Vector3(0.0, 0.0, _INNER_GATE_DISTANCE), 0.0)
+	layout.spawn_west_gate_transform = layout._transform(Vector3(-_INNER_GATE_DISTANCE, 0.0, 0.0), PI)
+	layout.spawn_east_gate_transform = layout._transform(Vector3(_INNER_GATE_DISTANCE, 0.0, 0.0), 0.0)
 	layout.memory_room_positions = layout._create_memory_room_positions(randomizer, memory_room_count)
 	layout.memory_room_transforms = layout._create_memory_room_transforms(layout.memory_room_positions, randomizer)
-	layout.vertical_gate_transforms = layout._create_vertical_gate_transforms()
-	layout.horizontal_gate_transforms = layout._create_horizontal_gate_transforms()
+	layout.vertical_stage_portal_transforms = layout._create_vertical_stage_portal_transforms()
+	layout.horizontal_stage_portal_transforms = layout._create_horizontal_stage_portal_transforms()
 	var excluded_areas: Array[Rect2i] = layout._excluded_areas(layout.memory_room_positions)
 	var excluded_cells: Array[Vector2i] = layout._gate_positions()
 	var bordered_areas: Array[Rect2i] = [layout._spawn_room_area()]
@@ -205,21 +213,17 @@ func _stage_room_positions() -> Array[Vector2i]:
 	]
 
 
-func _create_vertical_gate_transforms() -> Array[Transform3D]:
+func _create_vertical_stage_portal_transforms() -> Array[Transform3D]:
 	var outer_gate_distance: float = float(_grid_center + 1) * CELL_SIZE
 	return [
-		_transform(Vector3(0.0, 0.0, -_INNER_GATE_DISTANCE), PI),
-		_transform(Vector3(0.0, 0.0, _INNER_GATE_DISTANCE), 0.0),
 		_transform(Vector3(0.0, 0.0, -outer_gate_distance), PI),
 		_transform(Vector3(0.0, 0.0, outer_gate_distance), 0.0),
 	]
 
 
-func _create_horizontal_gate_transforms() -> Array[Transform3D]:
+func _create_horizontal_stage_portal_transforms() -> Array[Transform3D]:
 	var outer_gate_distance: float = float(_grid_center + 1) * CELL_SIZE
 	return [
-		_transform(Vector3(-_INNER_GATE_DISTANCE, 0.0, 0.0), PI),
-		_transform(Vector3(_INNER_GATE_DISTANCE, 0.0, 0.0), 0.0),
 		_transform(Vector3(-outer_gate_distance, 0.0, 0.0), PI),
 		_transform(Vector3(outer_gate_distance, 0.0, 0.0), 0.0),
 	]
