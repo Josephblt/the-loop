@@ -13,6 +13,7 @@ const MEMORY_ROOM_COUNT: int = 5
 const _MEMORY_ROOM_HALF_SIZE: int = int(MEMORY_ROOM_SIZE / 2.0)
 const _SPAWN_ROOM_HALF_SIZE: int = int(SPAWN_ROOM_SIZE / 2.0)
 const _INNER_GATE_DISTANCE: float = float(_SPAWN_ROOM_HALF_SIZE + 1) * CELL_SIZE
+const _STAGE_ROOM_OUTER_EXTENT: int = 4
 
 var grid_size: int
 var spawn_room_transform: Transform3D = Transform3D.IDENTITY
@@ -196,7 +197,7 @@ func _gate_approaches() -> Array[Rect2i]:
 
 
 func _stage_room_positions() -> Array[Vector2i]:
-	var stage_room_offset: int = int((grid_size + STAGE_ROOM_SIZE) / 2.0)
+	var stage_room_offset: int = _stage_room_offset()
 	return [
 		Vector2i(_grid_center, _grid_center - stage_room_offset),
 		Vector2i(_grid_center, _grid_center + stage_room_offset),
@@ -226,7 +227,13 @@ func _create_horizontal_gate_transforms() -> Array[Transform3D]:
 
 
 func _stage_room_distance() -> float:
-	return (float(grid_size + STAGE_ROOM_SIZE) / 2.0) * CELL_SIZE
+	return float(_stage_room_offset()) * CELL_SIZE
+
+
+func _stage_room_offset() -> int:
+	var outer_gate_offset: int = _grid_center + 1
+	var entrance_to_origin: int = STAGE_ROOM_SIZE - _STAGE_ROOM_OUTER_EXTENT
+	return outer_gate_offset + entrance_to_origin
 
 
 func _transform(position: Vector3, rotation: float) -> Transform3D:
