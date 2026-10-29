@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://rdh1pb10cdnw" path="res://game/level/fences/post_corner.tscn" id="9_h4pch"]
 [ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/interactables/altar.tscn" id="10_pbdpi"]
 [ext_resource type="PackedScene" uid="uid://dk3ahea1354r8" path="res://game/interactables/chest.tscn" id="11_mdrh3"]
+[ext_resource type="PackedScene" uid="uid://cvnpe5drc4s7q" path="res://game/interactables/cresset.tscn" id="12_5c8u3"]
 
 [node name="DenialRoom" type="Node3D" unique_id=496749782]
 script = ExtResource("1_5c8u3")
@@ -192,15 +193,52 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1
 [node name="Interactables" type="Node3D" parent="." unique_id=519993567]
 unique_name_in_owner = true
 
-[node name="AltarLeft" parent="Interactables" unique_id=1654990680 instance=ExtResource("10_pbdpi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, -7)
-
-[node name="AltarRight" parent="Interactables" unique_id=1323775839 instance=ExtResource("10_pbdpi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -7)
-
 [node name="Chest" parent="Interactables" unique_id=469060 instance=ExtResource("11_mdrh3")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -11.9)
+
+[node name="Altars" type="Node3D" parent="Interactables" unique_id=1379329169]
+
+[node name="AltarLeft" parent="Interactables/Altars" unique_id=1654990680 instance=ExtResource("10_pbdpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, -7)
+
+[node name="AltarRight" parent="Interactables/Altars" unique_id=1323775839 instance=ExtResource("10_pbdpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -7)
+
+[node name="Cressets" type="Node3D" parent="Interactables" unique_id=1656243008]
+
+[node name="CressetLeftTop" parent="Interactables/Cressets" unique_id=528922892 instance=ExtResource("12_5c8u3")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.8, 0, -11.2)
+
+[node name="CressetTopLeft" parent="Interactables/Cressets" unique_id=1041625640 instance=ExtResource("12_5c8u3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.199999, 0, -16.8)
+
+[node name="CressetTop" parent="Interactables/Cressets" unique_id=1643397694 instance=ExtResource("12_5c8u3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.536743e-07, 0, -16.8)
+
+[node name="CressetTopRight" parent="Interactables/Cressets" unique_id=106295385 instance=ExtResource("12_5c8u3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.200001, 0, -16.8)
+
+[node name="CressetRightTop" parent="Interactables/Cressets" unique_id=1282501924 instance=ExtResource("12_5c8u3")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 16.800001, 0, -11.199999)
+
+[node name="CressetRight" parent="Interactables/Cressets" unique_id=541598542 instance=ExtResource("12_5c8u3")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 16.800001, 0, 9.536743e-07)
+
+[node name="CressetRightBottom" parent="Interactables/Cressets" unique_id=935789715 instance=ExtResource("12_5c8u3")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 16.800001, 0, 11.200001)
+
+[node name="CressetBottomRight" parent="Interactables/Cressets" unique_id=955594833 instance=ExtResource("12_5c8u3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 11.200001, 0, 16.800001)
+
+[node name="CressetBottomLeft" parent="Interactables/Cressets" unique_id=645743990 instance=ExtResource("12_5c8u3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.199999, 0, 16.800001)
+
+[node name="CressetLeftBottom" parent="Interactables/Cressets" unique_id=158869062 instance=ExtResource("12_5c8u3")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.8, 0, 11.200001)
+
+[node name="CressetLeft" parent="Interactables/Cressets" unique_id=291655543 instance=ExtResource("12_5c8u3")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.8, 0, 1.9073486e-06)
 
 [node name="Walls" type="Node3D" parent="." unique_id=1000695726]
 

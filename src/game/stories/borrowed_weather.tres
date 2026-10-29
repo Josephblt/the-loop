@@ -1,12 +1,11 @@
-[gd_resource type="Resource" script_class="Story" load_steps=22 format=3]
+[gd_resource type="Resource" script_class="Story" format=3 uid="uid://b50sfsrr16usc"]
 
-[ext_resource type="Script" path="res://scripts/game/story_data/story.gd" id="1_story"]
-[ext_resource type="Script" path="res://scripts/game/story_data/story_loop.gd" id="2_loop"]
-[ext_resource type="Script" path="res://scripts/game/story_data/story_stage.gd" id="3_stage"]
+[ext_resource type="Script" uid="uid://cxbfgfn57t2wx" path="res://scripts/game/story_data/story.gd" id="1_story"]
+[ext_resource type="Script" uid="uid://cpqpuectutiv0" path="res://scripts/game/story_data/story_loop.gd" id="2_loop"]
+[ext_resource type="Script" uid="uid://erhlgkdvc6lh" path="res://scripts/game/story_data/story_stage.gd" id="3_stage"]
 
 [sub_resource type="Resource" id="LoopOne_denial"]
 script = ExtResource("3_stage")
-grief_stage = 0
 maze_memories = Array[String](["I told everyone children are resilient because the alternative had teeth.", "Your shoes still lit up when I stepped on them by accident.", "The dinosaur cup stayed by the sink, waiting for apple juice.", "You asked if the hospital had a playground, and I said probably.", "I folded your pajamas for next week."])
 closing_memory = "I found one of your drawings folded in the pocket of my coat. A sun, a house, three people with stick arms. I remembered you giving it to me in the waiting room, and I remembered saying, \"I'll look properly when we get home.\""
 
@@ -41,7 +40,6 @@ stages = Array[ExtResource("3_stage")]([SubResource("LoopOne_denial"), SubResour
 
 [sub_resource type="Resource" id="LoopTwo_denial"]
 script = ExtResource("3_stage")
-grief_stage = 0
 maze_memories = Array[String](["I kept the nightlight on because darkness had not earned your room yet.", "Your toothbrush stayed in the cup, stiff with a final morning.", "I washed everything except the blanket.", "I woke at two to check your temperature and found the air instead.", "I bought apple juice before remembering who drank it."])
 closing_memory = "For weeks, I left your door open the exact width of a sleeping child's breath. Not open. Not closed. Just enough for a mother to pretend she was being practical."
 
@@ -76,7 +74,6 @@ stages = Array[ExtResource("3_stage")]([SubResource("LoopTwo_denial"), SubResour
 
 [sub_resource type="Resource" id="LoopThree_denial"]
 script = ExtResource("3_stage")
-grief_stage = 0
 maze_memories = Array[String](["Years later, I heard a girl laugh in a pharmacy and turned before I could stop myself.", "I told myself grief had become manageable because I had learned its schedule.", "I kept her age wrong in my head because seven was where I could still hold her.", "The anniversary arrived quietly, and I mistook that for mercy.", "I thought healing meant the memories would stop ambushing me."])
 closing_memory = "I saw a school uniform in a shop window and thought, for one clean second, that I should buy the larger size. My hand was already on the glass before the years came back."
 
@@ -113,4 +110,8 @@ stages = Array[ExtResource("3_stage")]([SubResource("LoopThree_denial"), SubReso
 script = ExtResource("1_story")
 title = "Borrowed Weather"
 loops = Array[ExtResource("2_loop")]([SubResource("LoopOne"), SubResource("LoopTwo"), SubResource("LoopThree")])
-reveal = "I thought I was losing her when the machines got louder than her voice. I thought if I watched closely enough, counted carefully enough, loved fiercely enough, I could keep some door from closing. But children do not become less children because they are dying. She still wanted apple juice. She still asked about playgrounds. She still thanked God for pudding while I sat beside her inventing bargains no heaven accepted.\n\nAfterward, I thought the loss would be simple because it had already done the impossible. She was gone. What more could grief take? Then I learned it could take her toothbrush one morning, her blanket another, the way people looked at me when I said daughter. It made me pack drawers like I was betraying her one folded shirt at a time. I became the mother of a dead child, which is still a mother, though no one knows where to put you at the table.\n\nYears later, I discovered grief had not ended. It had only changed rooms. I started losing the sound of her laugh. I lost the exact weight of her in my arms. I lost the girl she would have been, and the teenager, and the woman. I had to stop asking memory to raise her for me. She was seven. She is seven. She would have been everything. I light the candle now and let it go out, because loving her was never the same thing as keeping her."
+reveal = "I thought I was losing her when the machines got louder than her voice. I thought if I watched closely enough, counted carefully enough, loved fiercely enough, I could keep some door from closing. But children do not become less children because they are dying. She still wanted apple juice. She still asked about playgrounds. She still thanked God for pudding while I sat beside her inventing bargains no heaven accepted.
+
+Afterward, I thought the loss would be simple because it had already done the impossible. She was gone. What more could grief take? Then I learned it could take her toothbrush one morning, her blanket another, the way people looked at me when I said daughter. It made me pack drawers like I was betraying her one folded shirt at a time. I became the mother of a dead child, which is still a mother, though no one knows where to put you at the table.
+
+Years later, I discovered grief had not ended. It had only changed rooms. I started losing the sound of her laugh. I lost the exact weight of her in my arms. I lost the girl she would have been, and the teenager, and the woman. I had to stop asking memory to raise her for me. She was seven. She is seven. She would have been everything. I light the candle now and let it go out, because loving her was never the same thing as keeping her."

@@ -221,17 +221,26 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.
 [node name="CressetTopLeft" parent="Interactables/Cressets" unique_id=586895395 instance=ExtResource("13_tkjqx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.199999, 0, -16.8)
 
+[node name="CressetTop" parent="Interactables/Cressets" unique_id=504490837 instance=ExtResource("13_tkjqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.536743e-07, 0, -16.8)
+
 [node name="CressetTopRight" parent="Interactables/Cressets" unique_id=1017681047 instance=ExtResource("13_tkjqx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.200001, 0, -16.8)
 
 [node name="CressetRightTop" parent="Interactables/Cressets" unique_id=1747697344 instance=ExtResource("13_tkjqx")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 16.800001, 0, -11.199999)
 
+[node name="CressetRight" parent="Interactables/Cressets" unique_id=122812521 instance=ExtResource("13_tkjqx")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 16.800001, 0, 9.536743e-07)
+
 [node name="CressetRightBottom" parent="Interactables/Cressets" unique_id=1166262004 instance=ExtResource("13_tkjqx")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 16.800001, 0, 11.200001)
 
 [node name="CressetBottomRight" parent="Interactables/Cressets" unique_id=1190752026 instance=ExtResource("13_tkjqx")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 11.200001, 0, 16.800001)
+
+[node name="CressetBottom" parent="Interactables/Cressets" unique_id=563067480 instance=ExtResource("13_tkjqx")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 9.536743e-07, 0, 16.800001)
 
 [node name="CressetBottomLeft" parent="Interactables/Cressets" unique_id=1335255981 instance=ExtResource("13_tkjqx")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.199999, 0, 16.800001)
