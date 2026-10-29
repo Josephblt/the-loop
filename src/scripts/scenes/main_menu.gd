@@ -2,7 +2,9 @@ class_name MainMenu
 extends Node
 
 
-@export var story: Story
+const TEST_SCENE: PackedScene = preload("res://scenes/test_scene_menu.tscn")
+
+@export var stories: Array[Story]
 
 @onready var continue_button: Button = %ContinueButton
 
@@ -15,18 +17,14 @@ func _update_continue_button() -> void:
 	continue_button.disabled = not FileAccess.file_exists(GameSession.SAVE_FILE_PATH)
 
 
-func continue_game():
-	GameSession.deserialize()
-
-
-func new_game() -> void:
-	assert(story != null, "MainMenu requires a story")
+func _on_new_game_pressed() -> void:
+	var story = stories[randi() % stories.size()]
 	GameSession.start(randi(), story)
 
 
 func _on_continue_pressed() -> void:
-	continue_game()
+	GameSession.deserialize()
 
 
-func _on_new_game_pressed() -> void:
-	new_game()
+func _on_tests_pressed() -> void:
+	get_tree().change_scene_to_packed(TEST_SCENE)

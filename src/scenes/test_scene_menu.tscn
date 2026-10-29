@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://m7bdu67mr6p"]
+[gd_scene format=3 uid="uid://m7bdu67mr6p"]
 
 [ext_resource type="Script" uid="uid://sd6rojdjioso" path="res://scripts/tests/test_scene_menu.gd" id="1_script"]
-[ext_resource type="Resource" path="res://game/stories/borrowed_weather.tres" id="2_story"]
+[ext_resource type="Resource" uid="uid://b50sfsrr16usc" path="res://game/stories/borrowed_weather.tres" id="2_story"]
 
 [node name="TestSceneMenu" type="Control" unique_id=842957743]
 layout_mode = 3
@@ -29,19 +29,19 @@ theme_override_constants/separation = 12
 layout_mode = 2
 text = "Spawn Room Test"
 
+[node name="DenialRoomButton" type="Button" parent="CenterContainer/Buttons" unique_id=1955033039]
+layout_mode = 2
+text = "Denial Room Test"
+
 [node name="DepressionRoomButton" type="Button" parent="CenterContainer/Buttons" unique_id=431966967]
 layout_mode = 2
-text = "Room 1 Test"
+text = "Depression Room Test"
 
 [node name="MemoryRoomButton" type="Button" parent="CenterContainer/Buttons" unique_id=833605764]
 layout_mode = 2
 text = "Memory Room Test"
 
-[node name="GameSessionButton" type="Button" parent="CenterContainer/Buttons"]
-layout_mode = 2
-text = "Game Session Test"
-
 [connection signal="pressed" from="CenterContainer/Buttons/SpawnRoomButton" to="." method="_on_spawn_room_pressed"]
+[connection signal="pressed" from="CenterContainer/Buttons/DenialRoomButton" to="." method="_on_denial_room_button_pressed"]
 [connection signal="pressed" from="CenterContainer/Buttons/DepressionRoomButton" to="." method="_on_depression_room_pressed"]
 [connection signal="pressed" from="CenterContainer/Buttons/MemoryRoomButton" to="." method="_on_memory_room_pressed"]
-[connection signal="pressed" from="CenterContainer/Buttons/GameSessionButton" to="." method="_on_game_session_pressed"]

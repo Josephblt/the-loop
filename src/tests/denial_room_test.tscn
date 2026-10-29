@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cpdchhtwqmpfo"]
+
+[ext_resource type="Script" uid="uid://covsba2g5ceam" path="res://scripts/tests/denial_room_test.gd" id="1_ou15u"]
+[ext_resource type="PackedScene" uid="uid://dt4q24uysybli" path="res://game/lights/lights.tscn" id="2_4kdsc"]
+[ext_resource type="PackedScene" uid="uid://b0lvfjr4ff8hl" path="res://game/actors/player.tscn" id="3_532r1"]
+[ext_resource type="PackedScene" uid="uid://80qlq52742m8" path="res://game/rooms/denial_room.tscn" id="4_ou15u"]
+[ext_resource type="PackedScene" uid="uid://v8j2a1egqxgo" path="res://game/switches/gate_vertical.tscn" id="5_4kdsc"]
+
+[node name="DenialRoomTest" type="Node3D" unique_id=2059004775]
+script = ExtResource("1_ou15u")
+
+[node name="Lights" parent="." unique_id=1886347259 instance=ExtResource("2_4kdsc")]
+
+[node name="Player" parent="." unique_id=2061682565 instance=ExtResource("3_532r1")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22.4)
+
+[node name="DenialRoom" parent="." unique_id=496749782 instance=ExtResource("4_ou15u")]
+unique_name_in_owner = true
+
+[node name="BottomGate" parent="." unique_id=1825569716 instance=ExtResource("5_4kdsc")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22.4)

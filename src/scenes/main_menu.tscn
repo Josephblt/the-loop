@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfd01q26as6sx"]
+[gd_scene format=3 uid="uid://cfd01q26as6sx"]
 
 [ext_resource type="Script" uid="uid://fbubr4uydpt" path="res://scripts/scenes/main_menu.gd" id="1_l6cm7"]
-[ext_resource type="Resource" path="res://game/stories/borrowed_weather.tres" id="2_story"]
+[ext_resource type="Resource" uid="uid://b50sfsrr16usc" path="res://game/stories/borrowed_weather.tres" id="2_story"]
 
 [node name="MainMenuScene" type="Node3D" unique_id=492336053]
 script = ExtResource("1_l6cm7")
@@ -33,5 +33,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Continue"
 
+[node name="Tests" type="Button" parent="UI/MarginContainer/VBoxContainer" unique_id=646493029]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Tests"
+
 [connection signal="pressed" from="UI/MarginContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/Tests" to="." method="_on_tests_pressed"]

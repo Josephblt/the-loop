@@ -12,12 +12,14 @@ extends Node3D
 
 @export_group("Cressets")
 @export var cresset_top_left_active: bool = true
+@export var cresset_top: bool = true
 @export var cresset_top_right_active: bool = true
 @export var cresset_bottom_left_active: bool = true
 @export var cresset_bottom_right_active: bool = true
 @export var cresset_left_bottom_active: bool = true
 @export var cresset_left_top_active: bool = true
 @export var cresset_right_bottom_active: bool = true
+@export var cresset_right: bool = true
 @export var cresset_right_top_active: bool = true
 
 @export_group("Randomization")
@@ -35,12 +37,14 @@ func _ready() -> void:
 	memory.set_fire_fixture_state("Interactables/Altars/AltarLeft", altar_left_active)
 	memory.set_fire_fixture_state("Interactables/Altars/AltarRight", altar_right_active)
 	memory.set_fire_fixture_state("Interactables/Cressets/CressetTopLeft", cresset_top_left_active)
+	memory.set_fire_fixture_state("Interactables/Cressets/CressetTop", cresset_top)
 	memory.set_fire_fixture_state("Interactables/Cressets/CressetTopRight", cresset_top_right_active)
 	memory.set_fire_fixture_state("Interactables/Cressets/CressetBottomLeft", cresset_bottom_left_active)
 	memory.set_fire_fixture_state("Interactables/Cressets/CressetBottomRight", cresset_bottom_right_active)
 	memory.set_fire_fixture_state("Interactables/Cressets/CressetLeftBottom", cresset_left_bottom_active)
 	memory.set_fire_fixture_state("Interactables/Cressets/CressetLeftTop", cresset_left_top_active)
 	memory.set_fire_fixture_state("Interactables/Cressets/CressetRightBottom", cresset_right_bottom_active)
+	memory.set_fire_fixture_state("Interactables/Cressets/CressetRight", cresset_right)
 	memory.set_fire_fixture_state("Interactables/Cressets/CressetRightTop", cresset_right_top_active)
 	
 	if randomize_scene:

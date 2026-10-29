@@ -8,6 +8,20 @@
 
 [node name="DepressionRoomTest" type="Node3D" unique_id=2059004775]
 script = ExtResource("1_30e3m")
+memory_description = null
+memory_revealed = null
+altar_left_active = null
+altar_right_active = null
+cresset_top_left_active = null
+cresset_top_right_active = null
+cresset_bottom_left_active = null
+cresset_bottom_right_active = null
+cresset_left_bottom_active = null
+cresset_left_top_active = null
+cresset_right_bottom_active = null
+cresset_right_top_active = null
+randomize_scene = null
+randomization_seed = null
 
 [node name="Lights" parent="." unique_id=1886347259 instance=ExtResource("2_7rc7p")]
 
