@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="StageLayout" format=3 uid="uid://dtrmitimy65g7"]
+
+[ext_resource type="Script" uid="uid://k8uld80d8eyg" path="res://scripts/game/stage_data/stage_layout.gd" id="1_kh0nl"]
+
+[resource]
+script = ExtResource("1_kh0nl")
+metadata/_custom_type_script = "uid://k8uld80d8eyg"
