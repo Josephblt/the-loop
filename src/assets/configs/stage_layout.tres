@@ -1,7 +1,10 @@
 [gd_resource type="Resource" script_class="StageLayout" format=3 uid="uid://dtrmitimy65g7"]
 
 [ext_resource type="Script" uid="uid://k8uld80d8eyg" path="res://scripts/game/stage_data/stage_layout.gd" id="1_kh0nl"]
+[ext_resource type="Script" uid="uid://cxbfgfn57t2wx" path="res://scripts/game/story_data/story.gd" id="2_87tuf"]
+[ext_resource type="Resource" uid="uid://b50sfsrr16usc" path="res://assets/stories/borrowed_weather.tres" id="3_l7kh6"]
 
 [resource]
 script = ExtResource("1_kh0nl")
+stories = Array[ExtResource("2_87tuf")]([ExtResource("3_l7kh6")])
 metadata/_custom_type_script = "uid://k8uld80d8eyg"

@@ -18,6 +18,7 @@ func _update_continue_button() -> void:
 
 func _on_new_game_pressed() -> void:
 	GameSession.erase_save_data()
+	GameSession.create_save_data()
 	get_tree().change_scene_to_packed(GAME_SESSION_SCENE)
 
 
