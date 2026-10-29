@@ -7,16 +7,10 @@ const GAME_SESSION_SCENE_PATH = "res://scenes/game_session.tscn"
 const QUICK_TEST_STAGE: GriefStagesStack.GriefStages = GriefStagesStack.GriefStages.DEPRESSION
 
 var _grief_stages_stack: GriefStagesStack
-var _load_existing_loop: bool = false
 var _loop_count: int = -1
 var _memories_stack: MemoriesStack
 var _session_seed: int
 var _story: Story
-
-func _ready() -> void:
-	if not _load_existing_loop:
-		_start_loop()
-
 
 func _start_loop() -> void:
 	_loop_count += 1
@@ -31,14 +25,14 @@ func _end_loop() -> void:
 
 
 static func start(random_seed: int, selected_story: Story) -> void:
-	_create(
+	var game_session: GameSession = _create(
 		random_seed,
 		selected_story,
 		GriefStagesStack.new(random_seed),
 		MemoriesStack.new(random_seed),
-		-1,
-		false
+		-1
 	)
+	game_session._start_loop()
 
 
 static func _create(
@@ -46,14 +40,12 @@ static func _create(
 	selected_story: Story,
 	grief_stages_stack: GriefStagesStack,
 	memories_stack: MemoriesStack,
-	loop_count: int,
-	load_existing_loop: bool
-) -> void:
+	loop_count: int
+) -> GameSession:
 	var game_session: GameSession = preload(GAME_SESSION_SCENE_PATH).instantiate()
 	game_session._grief_stages_stack = grief_stages_stack
 	game_session._memories_stack = memories_stack
 	game_session._loop_count = loop_count
-	game_session._load_existing_loop = load_existing_loop
 	game_session._session_seed = random_seed
 	game_session._story = selected_story
 	
@@ -61,6 +53,7 @@ static func _create(
 	scene_tree.current_scene.queue_free()
 	scene_tree.root.add_child(game_session)
 	scene_tree.current_scene = game_session
+	return game_session
 
 
 static func serialize(game_session: GameSession) -> void:
@@ -98,6 +91,5 @@ static func deserialize() -> void:
 		selected_story,
 		grief_stages_stack,
 		memories_stack,
-		loop_count,
-		true
+		loop_count
 	)
