@@ -4,7 +4,6 @@ extends Node
 const SAVE_FILE_PATH = "user://the_loop_save_game.dat"
 
 const GAME_SESSION_SCENE_PATH = "res://scenes/game_session.tscn"
-const QUICK_TEST_STAGE: GriefStagesStack.GriefStages = GriefStagesStack.GriefStages.DEPRESSION
 
 var _grief_stages_stack: GriefStagesStack
 var _loop_count: int = -1
@@ -14,8 +13,6 @@ var _story: Story
 
 func _start_loop() -> void:
 	_loop_count += 1
-	var story_stage: StoryStage = _story.get_stage(_loop_count, QUICK_TEST_STAGE)
-	_memories_stack.load_story_stage(story_stage)
 	GameSession.serialize(self)
 
 
