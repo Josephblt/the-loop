@@ -3,8 +3,7 @@ extends Node
 
 
 const TEST_SCENE: PackedScene = preload("res://scenes/test_scene_menu.tscn")
-
-@export var stories: Array[Story]
+const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn")
 
 @onready var continue_button: Button = %ContinueButton
 
@@ -18,12 +17,12 @@ func _update_continue_button() -> void:
 
 
 func _on_new_game_pressed() -> void:
-	var story = stories[randi() % stories.size()]
-	GameSession.start(randi(), story)
+	GameSession.erase_save_data()
+	get_tree().change_scene_to_packed(GAME_SESSION_SCENE)
 
 
 func _on_continue_pressed() -> void:
-	GameSession.deserialize()
+	get_tree().change_scene_to_packed(GAME_SESSION_SCENE)
 
 
 func _on_tests_pressed() -> void:
