@@ -2,8 +2,8 @@ class_name MainMenu
 extends Node
 
 
-const TEST_SCENE: PackedScene = preload("res://scenes/test_scene_menu.tscn")
 const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn")
+const TEST_SCENE: PackedScene = preload("res://scenes/test_scene_menu.tscn")
 
 @onready var continue_button: Button = %ContinueButton
 
