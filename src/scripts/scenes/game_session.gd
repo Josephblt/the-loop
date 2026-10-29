@@ -12,28 +12,15 @@ var _session_seed: int
 
 
 func _ready() -> void:
-	if FileAccess.file_exists(SAVE_FILE_PATH):
-		load_save_data()
-		return
-
-	_start_new_session()
-
-
-func _start_new_session() -> void:
-	_session_seed = randi()
-	_grief_stages_stack = GriefStagesStack.new(_session_seed)
-	_memories_stack = MemoriesStack.new(_session_seed)
-	_start_loop()
+	pass
 
 
 func _start_loop() -> void:
-	_loop_count += 1
-	update_save_data()
+	pass
 
 
 func _end_loop() -> void:
-	_grief_stages_stack.pop()
-	load_save_data()
+	pass
 
 
 func update_save_data() -> void:
