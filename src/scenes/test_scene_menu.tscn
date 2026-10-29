@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://m7bdu67mr6p"]
 
 [ext_resource type="Script" uid="uid://sd6rojdjioso" path="res://scripts/tests/test_scene_menu.gd" id="1_script"]
-[ext_resource type="Resource" uid="uid://b50sfsrr16usc" path="res://game/stories/borrowed_weather.tres" id="2_story"]
+[ext_resource type="Resource" uid="uid://b50sfsrr16usc" path="res://assets/stories/borrowed_weather.tres" id="2_story"]
 
 [node name="TestSceneMenu" type="Control" unique_id=842957743]
 layout_mode = 3

@@ -4,17 +4,7 @@ extends Node
 const SAVE_FILE_PATH = "user://the_loop_save_game.dat"
 
 const GAME_SESSION_SCENE_PATH = "res://scenes/game_session.tscn"
-const MAZE_ROOM_SCENE: PackedScene = preload("res://game/rooms/maze_room.tscn")
-const SPAWN_ROOM_SCENE: PackedScene = preload("res://game/rooms/spawn_room.tscn")
-const MEMORY_ROOM_SCENE: PackedScene = preload("res://game/rooms/memory_room.tscn")
-const DEPRESSION_ROOM_SCENE: PackedScene = preload("res://game/rooms/depression_room.tscn")
-const VERTICAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_vertical.tscn")
-const HORIZONTAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_horizontal.tscn")
 const QUICK_TEST_STAGE: GriefStagesStack.GriefStages = GriefStagesStack.GriefStages.DEPRESSION
-
-
-@onready var _player: Player = %Player
-@onready var _stage: Node3D = %Stage
 
 var _grief_stages_stack: GriefStagesStack
 var _load_existing_loop: bool = false
@@ -23,13 +13,9 @@ var _memories_stack: MemoriesStack
 var _session_seed: int
 var _story: Story
 
-
-
 func _ready() -> void:
 	if not _load_existing_loop:
 		_start_loop()
-	var layout: StageLayout = StageLayout.create(_session_seed, StageLayout.DEFAULT_GRID_SIZE, _memories_stack.memory_count())
-	_perform_stage_layout(layout)
 
 
 func _start_loop() -> void:
@@ -42,56 +28,6 @@ func _start_loop() -> void:
 func _end_loop() -> void:
 	_grief_stages_stack.pop()
 	GameSession.deserialize()
-
-
-func _perform_stage_layout(layout: StageLayout) -> void:
-	_add_maze(layout.maze)
-	_add_scene(SPAWN_ROOM_SCENE, "SpawnRoom", layout.spawn_room_transform)
-	_add_depression_room(layout.depression_room_transform)
-
-	for index: int in layout.memory_room_transforms.size():
-		_add_memory_room(index, layout.memory_room_transforms[index])
-
-	_add_scene(VERTICAL_GATE_SCENE, "SpawnNorthGate", layout.spawn_north_gate_transform)
-	_add_scene(VERTICAL_GATE_SCENE, "SpawnSouthGate", layout.spawn_south_gate_transform)
-	_add_scene(HORIZONTAL_GATE_SCENE, "SpawnWestGate", layout.spawn_west_gate_transform)
-	_add_scene(HORIZONTAL_GATE_SCENE, "SpawnEastGate", layout.spawn_east_gate_transform)
-
-	for index: int in layout.vertical_stage_portal_transforms.size():
-		_add_scene(VERTICAL_GATE_SCENE, "VerticalStagePortal%d" % (index + 1), layout.vertical_stage_portal_transforms[index])
-
-	for index: int in layout.horizontal_stage_portal_transforms.size():
-		_add_scene(HORIZONTAL_GATE_SCENE, "HorizontalStagePortal%d" % (index + 1), layout.horizontal_stage_portal_transforms[index])
-
-
-func _add_maze(maze: Maze) -> void:
-	var maze_room: MazeRoom = MAZE_ROOM_SCENE.instantiate() as MazeRoom
-	maze_room.maze = maze
-	_add_instance(maze_room, "MazeRoom", Transform3D.IDENTITY)
-
-
-func _add_depression_room(scene_transform: Transform3D) -> void:
-	var depression_room: DepressionRoom = DEPRESSION_ROOM_SCENE.instantiate() as DepressionRoom
-	depression_room.setup_scene(_player, _memories_stack.closing_memory())
-	_add_instance(depression_room, "DepressionRoom", scene_transform)
-
-
-func _add_memory_room(index: int, scene_transform: Transform3D) -> void:
-	var memory_room: MemoryRoom = MEMORY_ROOM_SCENE.instantiate() as MemoryRoom
-	memory_room.setup_scene(_player, _memories_stack.memory_at(index))
-	_add_instance(memory_room, "MemoryRoom%d" % (index + 1), scene_transform)
-
-
-func _add_scene(scene: PackedScene, node_name: String, scene_transform: Transform3D) -> void:
-	var instance: Node3D = scene.instantiate() as Node3D
-	_add_instance(instance, node_name, scene_transform)
-
-
-func _add_instance(instance: Node3D, node_name: String, scene_transform: Transform3D) -> void:
-	instance.name = node_name
-	instance.transform = scene_transform
-	_stage.add_child(instance)
-	SceneRandomizer.randomize_scene(instance, _session_seed)
 
 
 static func start(random_seed: int, selected_story: Story) -> void:
