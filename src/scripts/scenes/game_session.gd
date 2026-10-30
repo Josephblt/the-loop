@@ -2,9 +2,11 @@ class_name GameSession
 extends Node
 
 const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn")
+const HORIZONTAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_horizontal.tscn")
 const SAVE_FILE_PATH: String = "user://the_loop_save_game.dat"
 const SPAWN_ROOM_SCENE: PackedScene = preload("res://game/rooms/spawn_room.tscn")
 const STAGE_LAYOUT_PATH: StageLayout = preload("res://assets/configs/stage_layout.tres")
+const VERTICAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_vertical.tscn")
 
 @onready var _stage: Node3D = %Stage
 
@@ -21,8 +23,27 @@ func _ready() -> void:
 
 
 func _start_loop() -> void:
+	_add_spawn_room()
+	_add_spawn_room_gates()
+
+
+func _add_spawn_room() -> void:
 	var spawn_room: SpawnRoom = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
 	_stage.add_child(spawn_room)
+
+
+func _add_spawn_room_gates() -> void:
+	_add_gate(VERTICAL_GATE_SCENE, "SpawnNorthGate", STAGE_LAYOUT_PATH.spawn_north_gate_transform)
+	_add_gate(VERTICAL_GATE_SCENE, "SpawnSouthGate", STAGE_LAYOUT_PATH.spawn_south_gate_transform)
+	_add_gate(HORIZONTAL_GATE_SCENE, "SpawnWestGate", STAGE_LAYOUT_PATH.spawn_west_gate_transform)
+	_add_gate(HORIZONTAL_GATE_SCENE, "SpawnEastGate", STAGE_LAYOUT_PATH.spawn_east_gate_transform)
+
+
+func _add_gate(scene: PackedScene, node_name: String, gate_transform: Transform3D) -> void:
+	var gate: Gate = scene.instantiate() as Gate
+	gate.name = node_name
+	gate.transform = gate_transform
+	_stage.add_child(gate)
 
 
 func _end_loop() -> void:
