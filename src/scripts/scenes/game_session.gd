@@ -11,7 +11,7 @@ const VERTICAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_verti
 @onready var _stage: Node3D = %Stage
 
 var _grief_stages_stack: GriefStagesStack
-var _fire_fixtures_state: FireFixturesState
+var _fire_fixture_states: Array[FireFixtureState] = []
 var _loop_count: int = 0
 var _memories_stack: MemoriesStack
 var _session_seed: int
@@ -33,7 +33,7 @@ func _add_spawn_room() -> void:
 	var spawn_room: SpawnRoom = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
 	spawn_room.room_deactivated.connect(_activate_spawn_room_gates, CONNECT_ONE_SHOT)
 	_stage.add_child(spawn_room)
-	_fire_fixtures_state.bind_room("spawn_room", spawn_room)
+	spawn_room.setup_fire_fixtures("spawn_room", _fire_fixture_states)
 
 
 func _add_spawn_room_gates() -> void:
@@ -66,7 +66,7 @@ func update_save_data() -> void:
 	var data: Dictionary = {}
 	data["session_seed"] = _session_seed
 	data["story_path"] = _story.resource_path
-	data["fire_fixtures_state"] = _fire_fixtures_state.serialize()
+	data["fire_fixture_states"] = _serialize_fire_fixture_states(_fire_fixture_states)
 	data["grief_stages_stack"] = _grief_stages_stack.serialize()
 	data["memories_stack"] = _memories_stack.serialize()
 	data["loop_count"] = _loop_count
@@ -83,9 +83,7 @@ func load_save_data() -> void:
 
 	_session_seed = data["session_seed"]
 	_story = load(data["story_path"]) as Story
-
-	_fire_fixtures_state = FireFixturesState.new()
-	_fire_fixtures_state.deserialize(data.get("fire_fixtures_state", {}))
+	_fire_fixture_states = _deserialize_fire_fixture_states(data.get("fire_fixture_states", []))
 
 	_grief_stages_stack = GriefStagesStack.new(0)
 	_grief_stages_stack.deserialize(data["grief_stages_stack"])
@@ -95,17 +93,32 @@ func load_save_data() -> void:
 	_loop_count = data["loop_count"]
 
 
+func _serialize_fire_fixture_states(states: Array[FireFixtureState]) -> Array[Dictionary]:
+	var serialized_states: Array[Dictionary] = []
+	for state: FireFixtureState in states:
+		serialized_states.append(state.serialize())
+	return serialized_states
+
+
+func _deserialize_fire_fixture_states(data: Array) -> Array[FireFixtureState]:
+	var states: Array[FireFixtureState] = []
+	for state_data: Dictionary in data:
+		var state: FireFixtureState = FireFixtureState.new()
+		state.deserialize(state_data)
+		states.append(state)
+	return states
+
+
 static func create_save_data() -> void:
 	var session_seed: int = randi()
 	var story: Story = STAGE_LAYOUT_PATH.stories[randi() % STAGE_LAYOUT_PATH.stories.size()]
-	var fire_fixtures_state: FireFixturesState = FireFixturesState.new()
 	var grief_stages_stack: GriefStagesStack = GriefStagesStack.new(session_seed)
 	var memories_stack: MemoriesStack = MemoriesStack.new(session_seed)
 
 	var data: Dictionary = {}
 	data["session_seed"] = session_seed
 	data["story_path"] = story.resource_path
-	data["fire_fixtures_state"] = fire_fixtures_state.serialize()
+	data["fire_fixture_states"] = []
 	data["grief_stages_stack"] = grief_stages_stack.serialize()
 	data["memories_stack"] = memories_stack.serialize()
 	data["loop_count"] = 0

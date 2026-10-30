@@ -1,5 +1,5 @@
 class_name MemoryRoom
-extends Node3D
+extends Room
 
 
 @onready var chest: Chest = %Chest

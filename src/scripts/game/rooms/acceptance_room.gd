@@ -1,2 +1,2 @@
 class_name AcceptanceRoom
-extends Node3D
+extends Room

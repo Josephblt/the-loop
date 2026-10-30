@@ -1,2 +1,2 @@
 class_name AngerRoom
-extends Node3D
+extends Room

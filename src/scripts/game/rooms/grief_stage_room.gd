@@ -1,5 +1,5 @@
 class_name GriefStageRoom
-extends Node3D
+extends Room
 
 
 @onready var chest_gold: Chest = %ChestGold

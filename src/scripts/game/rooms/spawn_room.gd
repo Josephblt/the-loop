@@ -1,5 +1,5 @@
 class_name SpawnRoom
-extends Node3D
+extends Room
 
 
 signal room_deactivated
