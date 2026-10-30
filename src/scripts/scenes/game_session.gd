@@ -13,6 +13,7 @@ var _story: Story
 
 
 func _ready() -> void:
+	load_save_data()
 	_start_loop()
 
 

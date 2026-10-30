@@ -3,11 +3,9 @@
 [ext_resource type="Script" uid="uid://bujsmgagvi6u1" path="res://scripts/scenes/game_session.gd" id="1_d8o6b"]
 [ext_resource type="PackedScene" uid="uid://dt4q24uysybli" path="res://game/lights/lights.tscn" id="2_lights"]
 [ext_resource type="PackedScene" uid="uid://b0lvfjr4ff8hl" path="res://game/actors/player.tscn" id="3_player"]
-[ext_resource type="Resource" uid="uid://b50sfsrr16usc" path="res://assets/stories/borrowed_weather.tres" id="4_story"]
 
 [node name="GameSession" type="Node3D" unique_id=202320514]
 script = ExtResource("1_d8o6b")
-story = ExtResource("4_story")
 
 [node name="Lights" parent="." instance=ExtResource("2_lights")]
 
