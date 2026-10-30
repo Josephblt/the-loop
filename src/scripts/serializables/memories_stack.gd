@@ -34,12 +34,18 @@ func closing_memory() -> Memory:
 func serialize() -> Dictionary:
 	var serialized_maze_memories: Array[Dictionary] = []
 	for memory: Memory in _maze_memories:
+		if memory == null:
+			serialized_maze_memories.append({})
+			continue
 		serialized_maze_memories.append(memory.serialize())
+	var serialized_closing_memory: Dictionary = {}
+	if _closing_memory != null:
+		serialized_closing_memory = _closing_memory.serialize()
 
 	return {
 		"memories_stack": {
 			"maze_memories": serialized_maze_memories,
-			"closing_memory": _closing_memory.serialize(),
+			"closing_memory": serialized_closing_memory,
 		}
 	}
 
@@ -50,9 +56,17 @@ func deserialize(data: Dictionary) -> void:
 
 	_maze_memories.clear()
 	for memory_data: Dictionary in serialized_maze_memories:
+		if memory_data.is_empty():
+			_maze_memories.append(null)
+			continue
 		var memory: Memory = Memory.new()
 		memory.deserialize(memory_data)
 		_maze_memories.append(memory)
 
+	var closing_memory_data: Dictionary = memories_stack_data.get("closing_memory", {})
+	if closing_memory_data.is_empty():
+		_closing_memory = null
+		return
+
 	_closing_memory = Memory.new()
-	_closing_memory.deserialize(memories_stack_data.get("closing_memory", {}))
+	_closing_memory.deserialize(closing_memory_data)
