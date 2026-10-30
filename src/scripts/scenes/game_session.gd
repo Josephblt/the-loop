@@ -14,6 +14,7 @@ var _grief_stages_stack: GriefStagesStack
 var _loop_count: int = 0
 var _memories_stack: MemoriesStack
 var _session_seed: int
+var _spawn_room_gates: Array[Gate] = []
 var _story: Story
 
 
@@ -29,21 +30,28 @@ func _start_loop() -> void:
 
 func _add_spawn_room() -> void:
 	var spawn_room: SpawnRoom = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
+	spawn_room.room_deactivated.connect(_activate_spawn_room_gates, CONNECT_ONE_SHOT)
 	_stage.add_child(spawn_room)
 
 
 func _add_spawn_room_gates() -> void:
-	_add_gate(VERTICAL_GATE_SCENE, "SpawnNorthGate", STAGE_LAYOUT_PATH.spawn_north_gate_transform)
-	_add_gate(VERTICAL_GATE_SCENE, "SpawnSouthGate", STAGE_LAYOUT_PATH.spawn_south_gate_transform)
-	_add_gate(HORIZONTAL_GATE_SCENE, "SpawnWestGate", STAGE_LAYOUT_PATH.spawn_west_gate_transform)
-	_add_gate(HORIZONTAL_GATE_SCENE, "SpawnEastGate", STAGE_LAYOUT_PATH.spawn_east_gate_transform)
+	_spawn_room_gates.append(_add_gate(VERTICAL_GATE_SCENE, "SpawnNorthGate", STAGE_LAYOUT_PATH.spawn_north_gate_transform))
+	_spawn_room_gates.append(_add_gate(VERTICAL_GATE_SCENE, "SpawnSouthGate", STAGE_LAYOUT_PATH.spawn_south_gate_transform))
+	_spawn_room_gates.append(_add_gate(HORIZONTAL_GATE_SCENE, "SpawnWestGate", STAGE_LAYOUT_PATH.spawn_west_gate_transform))
+	_spawn_room_gates.append(_add_gate(HORIZONTAL_GATE_SCENE, "SpawnEastGate", STAGE_LAYOUT_PATH.spawn_east_gate_transform))
 
 
-func _add_gate(scene: PackedScene, node_name: String, gate_transform: Transform3D) -> void:
+func _add_gate(scene: PackedScene, node_name: String, gate_transform: Transform3D) -> Gate:
 	var gate: Gate = scene.instantiate() as Gate
 	gate.name = node_name
 	gate.transform = gate_transform
 	_stage.add_child(gate)
+	return gate
+
+
+func _activate_spawn_room_gates() -> void:
+	for gate: Gate in _spawn_room_gates:
+		gate.activate()
 
 
 func _end_loop() -> void:
