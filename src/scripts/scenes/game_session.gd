@@ -11,6 +11,7 @@ const VERTICAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_verti
 @onready var _stage: Node3D = %Stage
 
 var _grief_stages_stack: GriefStagesStack
+var _fire_fixtures_state: FireFixturesState
 var _loop_count: int = 0
 var _memories_stack: MemoriesStack
 var _session_seed: int
@@ -32,6 +33,7 @@ func _add_spawn_room() -> void:
 	var spawn_room: SpawnRoom = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
 	spawn_room.room_deactivated.connect(_activate_spawn_room_gates, CONNECT_ONE_SHOT)
 	_stage.add_child(spawn_room)
+	_fire_fixtures_state.bind_room("spawn_room", spawn_room)
 
 
 func _add_spawn_room_gates() -> void:
@@ -64,6 +66,7 @@ func update_save_data() -> void:
 	var data: Dictionary = {}
 	data["session_seed"] = _session_seed
 	data["story_path"] = _story.resource_path
+	data["fire_fixtures_state"] = _fire_fixtures_state.serialize()
 	data["grief_stages_stack"] = _grief_stages_stack.serialize()
 	data["memories_stack"] = _memories_stack.serialize()
 	data["loop_count"] = _loop_count
@@ -81,6 +84,9 @@ func load_save_data() -> void:
 	_session_seed = data["session_seed"]
 	_story = load(data["story_path"]) as Story
 
+	_fire_fixtures_state = FireFixturesState.new()
+	_fire_fixtures_state.deserialize(data.get("fire_fixtures_state", {}))
+
 	_grief_stages_stack = GriefStagesStack.new(0)
 	_grief_stages_stack.deserialize(data["grief_stages_stack"])
 
@@ -92,12 +98,14 @@ func load_save_data() -> void:
 static func create_save_data() -> void:
 	var session_seed: int = randi()
 	var story: Story = STAGE_LAYOUT_PATH.stories[randi() % STAGE_LAYOUT_PATH.stories.size()]
+	var fire_fixtures_state: FireFixturesState = FireFixturesState.new()
 	var grief_stages_stack: GriefStagesStack = GriefStagesStack.new(session_seed)
 	var memories_stack: MemoriesStack = MemoriesStack.new(session_seed)
 
 	var data: Dictionary = {}
 	data["session_seed"] = session_seed
 	data["story_path"] = story.resource_path
+	data["fire_fixtures_state"] = fire_fixtures_state.serialize()
 	data["grief_stages_stack"] = grief_stages_stack.serialize()
 	data["memories_stack"] = memories_stack.serialize()
 	data["loop_count"] = 0
