@@ -3,7 +3,10 @@ extends Node
 
 const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn")
 const SAVE_FILE_PATH: String = "user://the_loop_save_game.dat"
+const SPAWN_ROOM_SCENE: PackedScene = preload("res://game/rooms/spawn_room.tscn")
 const STAGE_LAYOUT_PATH: StageLayout = preload("res://assets/configs/stage_layout.tres")
+
+@onready var _stage: Node3D = %Stage
 
 var _grief_stages_stack: GriefStagesStack
 var _loop_count: int = 0
@@ -18,7 +21,8 @@ func _ready() -> void:
 
 
 func _start_loop() -> void:
-	pass
+	var spawn_room: SpawnRoom = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
+	_stage.add_child(spawn_room)
 
 
 func _end_loop() -> void:
