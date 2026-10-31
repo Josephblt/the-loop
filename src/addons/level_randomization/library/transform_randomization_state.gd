@@ -1,5 +1,4 @@
 class_name TransformRandomizationState
-extends RefCounted
 
 
 var position: Vector3

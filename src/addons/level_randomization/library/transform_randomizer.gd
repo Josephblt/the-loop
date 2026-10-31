@@ -1,5 +1,4 @@
 class_name TransformRandomizer
-extends RefCounted
 
 
 static func generate(authored_position: Vector3, authored_rotation: Vector3, profile: TransformRandomizationProfile, seed: int, identity: String ) -> TransformRandomizationState:

@@ -1,6 +1,5 @@
 @tool
 class_name SceneRandomizer
-extends RefCounted
 
 
 const DEFAULT_CATALOG: RandomizationCatalog = preload("res://addons/level_randomization/config/randomization_catalog.tres")

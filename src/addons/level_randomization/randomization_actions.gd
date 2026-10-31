@@ -1,6 +1,5 @@
 @tool
 class_name RandomizationActions
-extends RefCounted
 
 
 const SEED_METADATA: StringName = "_randomization_seed"

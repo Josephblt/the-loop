@@ -1,6 +1,5 @@
 @tool
 class_name RandomizationEntry
-extends RefCounted
 
 
 var node: Node3D
