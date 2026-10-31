@@ -33,7 +33,7 @@ func _add_spawn_room() -> void:
 	var spawn_room: SpawnRoom = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
 	spawn_room.room_deactivated.connect(_activate_spawn_room_gates, CONNECT_ONE_SHOT)
 	_stage.add_child(spawn_room)
-	spawn_room.setup_fire_fixtures(_fire_fixture_states.spawn_room)
+	spawn_room.setup_fire_fixtures(_fire_fixture_states.get_room_states(FireFixtureStates.Rooms.SPAWN))
 
 
 func _add_spawn_room_gates() -> void:

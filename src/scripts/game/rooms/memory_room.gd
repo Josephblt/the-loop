@@ -9,10 +9,6 @@ var _memory: Memory
 var _player: Player
 
 
-func get_room_id() -> String:
-	return name.to_snake_case()
-
-
 func _ready() -> void:
 	_setup_chest()
 
