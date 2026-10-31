@@ -2,5 +2,5 @@ class_name AcceptanceRoom
 extends Room
 
 
-func _init() -> void:
-	room_id = "acceptance_room"
+func get_room_id() -> String:
+	return "acceptance_room"

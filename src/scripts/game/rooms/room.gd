@@ -1,11 +1,14 @@
+@abstract
 class_name Room
 extends Node3D
 
 
-var room_id: String
+@abstract
+func get_room_id() -> String
 
 
 func setup_fire_fixtures(states: Array[FireFixtureState]) -> void:
+	var room_id: String = get_room_id()
 	var fixture_nodes: Array[Node] = find_children("*", "", true, false)
 	for fixture_node: Node in fixture_nodes:
 		if not fixture_node is FireFixture:

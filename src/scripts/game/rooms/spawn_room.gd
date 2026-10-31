@@ -5,8 +5,8 @@ extends Room
 signal room_deactivated
 
 
-func _init() -> void:
-	room_id = "spawn_room"
+func get_room_id() -> String:
+	return "spawn_room"
 
 
 func _on_activator_body_exited(body: Node3D) -> void:

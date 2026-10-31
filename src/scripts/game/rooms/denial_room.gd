@@ -2,5 +2,5 @@ class_name DenialRoom
 extends GriefStageRoom
 
 
-func _init() -> void:
-	room_id = "denial_room"
+func get_room_id() -> String:
+	return "denial_room"
