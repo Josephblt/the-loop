@@ -36,6 +36,7 @@ func _start_loop() -> void:
 	_add_spawn_room()
 	_add_spawn_room_gates()
 	_add_grief_rooms()
+	_add_grief_room_gates()
 
 
 func _add_spawn_room() -> void:
@@ -62,6 +63,13 @@ func _add_grief_rooms() -> void:
 	_add_grief_room(DENIAL_ROOM_SCENE, STAGE_LAYOUT_PATH.denial_room_transform, FireFixtureStates.Rooms.DENIAL)
 	_add_grief_room(BARGAINING_ROOM_SCENE, STAGE_LAYOUT_PATH.bargaining_room_transform, FireFixtureStates.Rooms.BARGAINING)
 	_add_grief_room(DEPRESSION_ROOM_SCENE, STAGE_LAYOUT_PATH.depression_room_transform, FireFixtureStates.Rooms.DEPRESSION)
+
+
+func _add_grief_room_gates() -> void:
+	_add_gate(VERTICAL_GATE_SCENE, "AngerRoomGate", STAGE_LAYOUT_PATH.anger_room_gate_transform)
+	_add_gate(VERTICAL_GATE_SCENE, "DenialRoomGate", STAGE_LAYOUT_PATH.denial_room_gate_transform)
+	_add_gate(HORIZONTAL_GATE_SCENE, "BargainingRoomGate", STAGE_LAYOUT_PATH.bargaining_room_gate_transform)
+	_add_gate(HORIZONTAL_GATE_SCENE, "DepressionRoomGate", STAGE_LAYOUT_PATH.depression_room_gate_transform)
 
 
 func _add_grief_room(scene: PackedScene, room_transform: Transform3D, room_id: FireFixtureStates.Rooms) -> void:
