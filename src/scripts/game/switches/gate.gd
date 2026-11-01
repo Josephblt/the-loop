@@ -2,59 +2,59 @@ class_name Gate
 extends Node3D
 
 
-signal activated
+signal closed
 
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 var _is_inside: bool = false
 var _is_outside: bool = false
-var _active: bool = false
+var _closed: bool = false
 
 
 func _ready() -> void:
-	setup(_active)
+	setup(_closed)
 
 
-func is_active() -> bool:
-	return _active
+func is_closed() -> bool:
+	return _closed
 
 
-func activate() -> void:
-	if _active:
+func close() -> void:
+	if _closed:
 		return
 
-	animation_player.play("activate")
+	animation_player.play("close")
 	await animation_player.animation_finished
-	_active = true
-	activated.emit()
+	_closed = true
+	closed.emit()
 
 
-func deactivate() -> void:
-	animation_player.play("deactivate")
+func open() -> void:
+	animation_player.play("open")
 	await animation_player.animation_finished
-	_active = false
+	_closed = false
 
 
-func setup(active: bool) -> void:
-	if active:
-		_activate_immediately()
+func setup(closed_state: bool) -> void:
+	if closed_state:
+		_close_immediately()
 	else:
-		_deactivate_immediately()
+		_open_immediately()
 
 
-func _activate_immediately() -> void:
-	animation_player.play("activate")
+func _close_immediately() -> void:
+	animation_player.play("close")
 	animation_player.seek(animation_player.current_animation_length, true)
 	animation_player.pause()
-	_active = true
+	_closed = true
 
 
-func _deactivate_immediately() -> void:
-	animation_player.play("deactivate")
+func _open_immediately() -> void:
+	animation_player.play("open")
 	animation_player.seek(animation_player.current_animation_length, true)
-	animation_player.pause()	
-	_active = false
+	animation_player.pause()
+	_closed = false
 
 
 func _on_inside_area_body_entered(_body: Node3D) -> void:
@@ -63,7 +63,7 @@ func _on_inside_area_body_entered(_body: Node3D) -> void:
 
 func _on_inside_area_body_exited(_body: Node3D) -> void:
 	if _is_outside:
-		activate()
+		close()
 		
 	_is_inside = false
 

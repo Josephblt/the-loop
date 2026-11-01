@@ -131,7 +131,7 @@ tracks/5/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_n47wt"]
-resource_name = "activate"
+resource_name = "close"
 step = 0.05
 capture_included = true
 tracks/0/type = "value"
@@ -208,7 +208,7 @@ tracks/5/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_8l05i"]
-resource_name = "deactivate"
+resource_name = "open"
 step = 0.05
 capture_included = true
 tracks/0/type = "value"
@@ -287,8 +287,8 @@ tracks/5/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tlncs"]
 _data = {
 &"RESET": SubResource("Animation_7hvp7"),
-&"activate": SubResource("Animation_n47wt"),
-&"deactivate": SubResource("Animation_8l05i")
+&"close": SubResource("Animation_n47wt"),
+&"open": SubResource("Animation_8l05i")
 }
 
 [node name="GateHorizontal" type="Node3D" unique_id=1825569716]
