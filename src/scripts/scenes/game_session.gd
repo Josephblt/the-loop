@@ -77,13 +77,13 @@ func _add_grief_rooms() -> void:
 
 func _add_grief_room_gates() -> void:
 	_anger_room_gate = _add_gate(VERTICAL_GATE_SCENE, "AngerRoomGate", STAGE_LAYOUT_PATH.anger_room_gate_transform)
-	_anger_room_gate.setup(false)
+	_anger_room_gate.setup(true)
 	_denial_room_gate = _add_gate(VERTICAL_GATE_SCENE, "DenialRoomGate", STAGE_LAYOUT_PATH.denial_room_gate_transform)
-	_denial_room_gate.setup(false)
+	_denial_room_gate.setup(true)
 	_bargaining_room_gate = _add_gate(HORIZONTAL_GATE_SCENE, "BargainingRoomGate", STAGE_LAYOUT_PATH.bargaining_room_gate_transform)
-	_bargaining_room_gate.setup(false)
+	_bargaining_room_gate.setup(true)
 	_depression_room_gate = _add_gate(HORIZONTAL_GATE_SCENE, "DepressionRoomGate", STAGE_LAYOUT_PATH.depression_room_gate_transform)
-	_depression_room_gate.setup(false)
+	_depression_room_gate.setup(true)
 
 
 func _add_grief_room(scene: PackedScene, room_transform: Transform3D, room_id: FireFixtureStates.Rooms) -> Room:
