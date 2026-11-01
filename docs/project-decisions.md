@@ -22,11 +22,19 @@ Locked decisions:
 - The maze has four fixed inner gateways connecting it to the central room.
 - The maze has four fixed outer cardinal gateways connecting it to Denial, Anger, Bargaining, and Depression.
 - Acceptance is a separate sixth room reached through gateways on the corner edges of the maze.
-- All active threat, chase, and battle pressure happens inside the maze section.
-- The grief rooms are closure spaces, not combat arenas: maze memories stay in the maze, and each grief room contains only one loop-specific final memory that gives the stage emotional meaning without fully giving it away.
-- The active grief room entrance unlocks only after the player collects all required maze memories for the current stage; once entered, the room locks behind the player, the only available action is viewing the final room memory, and viewing it ends the stage.
 - The final room memory must feel like part of the person's lived experience, not a summary or authorial explanation.
 - The game should express itself through the feelings of the person living the premise rather than through authorial explanation.
 - Only one grief-stage destination is active at a time.
 - The maze body is generated randomly each time.
 - Maze generation should be tailored to the active smoke behavior.
+
+## 2026-11-01: Maze And Room Smoke Roles
+
+The original closure-only room design has been superseded.
+
+- Each stage uses a Maze Hunter to teach the player a stage-specific survival response.
+- The corresponding Room Guardian makes that learned response dangerous and forces the player to break it.
+- Maze memories remain in the maze, while each cardinal grief room holds its Closing Memory on an altar.
+- After collecting the required maze memories, the player enters the active grief room, resolves its Room Guardian encounter, reaches the altar, and views the Closing Memory to end the stage.
+- Acceptance is different: the smoke must be willingly embraced, its engulfment is nonlethal, and the altar materializes afterward for the Story Reveal.
+- The smoke represents grief and suffering rather than an evil force to be defeated.
