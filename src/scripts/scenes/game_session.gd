@@ -34,11 +34,11 @@ func _notification(what: int) -> void:
 func _start_loop() -> void:
 	_add_spawn_room()
 	_add_spawn_room_gates()
+	_spawn_room.setup_gates(_spawn_room_gates)
 
 
 func _add_spawn_room() -> void:
 	_spawn_room = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
-	_spawn_room.room_deactivated.connect(_close_spawn_room_gates, CONNECT_ONE_SHOT)
 	_stage.add_child(_spawn_room)
 	_spawn_room.apply_fire_fixture_states(_fire_fixture_states.get_room_states(FireFixtureStates.Rooms.SPAWN))
 
@@ -56,11 +56,6 @@ func _add_gate(scene: PackedScene, node_name: String, gate_transform: Transform3
 	gate.transform = gate_transform
 	_stage.add_child(gate)
 	return gate
-
-
-func _close_spawn_room_gates() -> void:
-	for gate: Gate in _spawn_room_gates:
-		gate.close()
 
 
 func _end_loop() -> void:

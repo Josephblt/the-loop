@@ -2,9 +2,16 @@ class_name SpawnRoom
 extends Room
 
 
-signal room_deactivated
+var _gates: Array[Gate] = []
+
+
+func setup_gates(gates: Array[Gate]) -> void:
+	_gates.assign(gates)
 
 
 func _on_activator_body_exited(body: Node3D) -> void:
-	if body is Player:
-		room_deactivated.emit()
+	if not body is Player:
+		return
+
+	for gate: Gate in _gates:
+		gate.close()
