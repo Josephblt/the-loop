@@ -7,6 +7,8 @@ extends GeometryInstance3D
 
 
 func _ready() -> void:
+	if !Engine.is_editor_hint():
+		self.emitting = true
 	fire_light.visible = self.emitting
 
 

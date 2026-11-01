@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dfwbglgsmyokl" path="res://game/level/walls/wall_normal_lg.tscn" id="8_ebo7r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2llnb"]
-size = Vector3(40.2, 12.5, 40.2)
+size = Vector3(40.2, 12.1, 40.2)
 
 [node name="SpawnRoom" type="Node3D" unique_id=496749782]
 script = ExtResource("1_o6wsi")
@@ -19,7 +19,7 @@ script = ExtResource("1_o6wsi")
 [node name="Activator" parent="." unique_id=452683808 instance=ExtResource("2_ebo7r")]
 
 [node name="CollisionShape3D" parent="Activator" index="0" unique_id=1593920821]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.85, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.65, 0)
 shape = SubResource("BoxShape3D_2llnb")
 
 [node name="Floor" type="Node3D" parent="." unique_id=1881721258]
