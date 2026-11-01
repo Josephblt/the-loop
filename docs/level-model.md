@@ -55,11 +55,11 @@ Acceptance is structurally different from the four cardinal grief rooms. It is r
 
 ## Maze And Room Roles
 
-All active threat, chase, and battle pressure happens inside the maze section. The smoke belongs to the maze as the primary hostile force.
+Each active stage uses two smoke encounters with different purposes. The Maze Hunter creates sustained pressure and teaches a stage-specific survival response. The Room Guardian then makes that response dangerous, forcing the player to break it before reaching the altar.
 
-The authored rooms are not combat arenas. They are closure spaces reached after the player gathers the required memories for the active stage in the current loop. Maze memories remain in the maze; the grief room itself contains only one loop-specific final memory that lets the emotional shape of the stage land.
+The authored rooms are focused behavioral encounters reached after the player gathers the required memories for the active stage in the current loop. Maze memories remain in the maze; the grief room contains one loop-specific Closing Memory on its altar.
 
-The active grief room entrance becomes available only after the player collects all required maze memories for that stage. Once the player enters, the room locks behind them. The player cannot return to the maze from inside the grief room; the only available action is to view the room's final memory. After that memory is viewed, the stage ends and the next transition begins.
+The active grief room entrance becomes available only after the player collects all required maze memories for that stage. Once the player enters, the room locks behind them. The player cannot return to the maze. They must resolve the Room Guardian encounter, reach the altar, and view the Closing Memory. Viewing it ends the stage and starts the next transition.
 
 The closing memory should give meaning to the stage without giving it away entirely. It should feel like another piece of the person's lived experience, not a summary or authorial explanation. The rooms must not reveal the loop premise, name the stage of grief, or give concrete interpretation. The game should express itself through the feelings of the person living the premise.
 
@@ -68,10 +68,12 @@ Room flow:
 1. The player gathers memories in the maze.
 2. The active grief room entrance unlocks.
 3. The player enters the grief room and the room locks behind them.
-4. The room quiets the threat pressure.
-5. The only available action is to view the loop-specific final room memory.
-6. The final memory ties the collected maze memories together emotionally while preserving ambiguity.
-7. Viewing the final memory ends the stage and starts the next transition.
+4. The Room Guardian turns the survival response learned in the maze against the player.
+5. The player breaks that behavior and reaches the altar.
+6. The Closing Memory ties the collected maze memories together emotionally while preserving ambiguity.
+7. Viewing the Closing Memory ends the stage and starts the next transition.
+
+Acceptance is the exception. Its room begins as an apparently infinite expanse of sand without an altar. After the player willingly allows the smoke to engulf them, the smoke dissolves and the altar materializes for the Story Reveal.
 
 ## Generation Principle
 
