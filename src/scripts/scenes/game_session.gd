@@ -8,10 +8,12 @@ const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn"
 const STAGE_LAYOUT_PATH: StageLayout = preload("res://assets/configs/stage_layout.tres")
 
 const SPAWN_ROOM_SCENE: PackedScene = preload("res://game/rooms/spawn_room.tscn")
+
 const ANGER_ROOM_SCENE: PackedScene = preload("res://game/rooms/anger_room.tscn")
 const DENIAL_ROOM_SCENE: PackedScene = preload("res://game/rooms/denial_room.tscn")
 const BARGAINING_ROOM_SCENE: PackedScene = preload("res://game/rooms/bargaining_room.tscn")
 const DEPRESSION_ROOM_SCENE: PackedScene = preload("res://game/rooms/depression_room.tscn")
+
 const HORIZONTAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_horizontal.tscn")
 const VERTICAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_vertical.tscn")
 
@@ -22,6 +24,14 @@ var _fire_fixture_states: FireFixtureStates
 var _loop_count: int = 0
 var _memories_stack: MemoriesStack
 var _session_seed: int
+var _anger_room: AngerRoom
+var _anger_room_gate: Gate
+var _bargaining_room: BargainingRoom
+var _bargaining_room_gate: Gate
+var _denial_room: DenialRoom
+var _denial_room_gate: Gate
+var _depression_room: DepressionRoom
+var _depression_room_gate: Gate
 var _spawn_room: SpawnRoom
 var _spawn_room_gates: Array[Gate] = []
 var _story: Story
@@ -59,24 +69,29 @@ func _add_spawn_room_gates() -> void:
 
 
 func _add_grief_rooms() -> void:
-	_add_grief_room(ANGER_ROOM_SCENE, STAGE_LAYOUT_PATH.anger_room_transform, FireFixtureStates.Rooms.ANGER)
-	_add_grief_room(DENIAL_ROOM_SCENE, STAGE_LAYOUT_PATH.denial_room_transform, FireFixtureStates.Rooms.DENIAL)
-	_add_grief_room(BARGAINING_ROOM_SCENE, STAGE_LAYOUT_PATH.bargaining_room_transform, FireFixtureStates.Rooms.BARGAINING)
-	_add_grief_room(DEPRESSION_ROOM_SCENE, STAGE_LAYOUT_PATH.depression_room_transform, FireFixtureStates.Rooms.DEPRESSION)
+	_anger_room = _add_grief_room(ANGER_ROOM_SCENE, STAGE_LAYOUT_PATH.anger_room_transform, FireFixtureStates.Rooms.ANGER)
+	_denial_room = _add_grief_room(DENIAL_ROOM_SCENE, STAGE_LAYOUT_PATH.denial_room_transform, FireFixtureStates.Rooms.DENIAL)
+	_bargaining_room = _add_grief_room(BARGAINING_ROOM_SCENE, STAGE_LAYOUT_PATH.bargaining_room_transform, FireFixtureStates.Rooms.BARGAINING)
+	_depression_room = _add_grief_room(DEPRESSION_ROOM_SCENE, STAGE_LAYOUT_PATH.depression_room_transform, FireFixtureStates.Rooms.DEPRESSION)
 
 
 func _add_grief_room_gates() -> void:
-	_add_gate(VERTICAL_GATE_SCENE, "AngerRoomGate", STAGE_LAYOUT_PATH.anger_room_gate_transform)
-	_add_gate(VERTICAL_GATE_SCENE, "DenialRoomGate", STAGE_LAYOUT_PATH.denial_room_gate_transform)
-	_add_gate(HORIZONTAL_GATE_SCENE, "BargainingRoomGate", STAGE_LAYOUT_PATH.bargaining_room_gate_transform)
-	_add_gate(HORIZONTAL_GATE_SCENE, "DepressionRoomGate", STAGE_LAYOUT_PATH.depression_room_gate_transform)
+	_anger_room_gate = _add_gate(VERTICAL_GATE_SCENE, "AngerRoomGate", STAGE_LAYOUT_PATH.anger_room_gate_transform)
+	_anger_room_gate.setup(false)
+	_denial_room_gate = _add_gate(VERTICAL_GATE_SCENE, "DenialRoomGate", STAGE_LAYOUT_PATH.denial_room_gate_transform)
+	_denial_room_gate.setup(false)
+	_bargaining_room_gate = _add_gate(HORIZONTAL_GATE_SCENE, "BargainingRoomGate", STAGE_LAYOUT_PATH.bargaining_room_gate_transform)
+	_bargaining_room_gate.setup(false)
+	_depression_room_gate = _add_gate(HORIZONTAL_GATE_SCENE, "DepressionRoomGate", STAGE_LAYOUT_PATH.depression_room_gate_transform)
+	_depression_room_gate.setup(false)
 
 
-func _add_grief_room(scene: PackedScene, room_transform: Transform3D, room_id: FireFixtureStates.Rooms) -> void:
+func _add_grief_room(scene: PackedScene, room_transform: Transform3D, room_id: FireFixtureStates.Rooms) -> Room:
 	var room: Room = scene.instantiate() as Room
 	room.transform = room_transform
 	room.apply_fire_fixture_states(_fire_fixture_states.get_room_states(room_id))
 	_stage.add_child(room)
+	return room
 
 
 func _add_gate(scene: PackedScene, node_name: String, gate_transform: Transform3D) -> Gate:
