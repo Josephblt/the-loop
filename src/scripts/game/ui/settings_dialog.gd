@@ -13,6 +13,7 @@ const SPEED_SLIDER_SCALE: float = 10.0
 @onready var mouse_sensitivity_value: Label = %MouseSensitivityValue
 @onready var run_speed_value: Label = %RunSpeedValue
 @onready var walk_speed_value: Label = %WalkSpeedValue
+@onready var fullscreen_button: Button = %FullscreenButton
 
 
 func _ready() -> void:
@@ -39,6 +40,7 @@ func _open() -> void:
 	visible = true
 	get_tree().paused = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	_update_fullscreen_button()
 	mouse_sensitivity_slider.grab_focus()
 
 
@@ -61,6 +63,18 @@ func _on_run_speed_slider_value_changed(value: float) -> void:
 func _on_walk_speed_slider_value_changed(value: float) -> void:
 	walk_speed_value.text = str(int(value))
 	walk_speed_changed.emit(value / SPEED_SLIDER_SCALE)
+
+
+func _on_fullscreen_button_pressed() -> void:
+	var fullscreen: bool = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+	var mode: DisplayServer.WindowMode = DisplayServer.WINDOW_MODE_WINDOWED if fullscreen else DisplayServer.WINDOW_MODE_FULLSCREEN
+	DisplayServer.window_set_mode(mode)
+	fullscreen_button.text = "Enter Fullscreen" if fullscreen else "Exit Fullscreen"
+
+
+func _update_fullscreen_button() -> void:
+	var fullscreen: bool = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+	fullscreen_button.text = "Exit Fullscreen" if fullscreen else "Enter Fullscreen"
 
 
 func _on_main_menu_button_pressed() -> void:
