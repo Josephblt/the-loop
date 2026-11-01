@@ -17,10 +17,17 @@
 [ext_resource type="PackedScene" uid="uid://b6fydse31tnyb" path="res://game/level/walls/wall_broken_md.tscn" id="15_6h2h2"]
 [ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/memory_reveal.tscn" id="15_22eb3"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_3687x"]
+size = Vector3(40.2, 12.1, 51.4)
+
 [node name="DenialRoom" type="Node3D" unique_id=496749782]
 script = ExtResource("1_5c8u3")
 
 [node name="Activator" parent="." unique_id=452683808 instance=ExtResource("2_le7qa")]
+
+[node name="CollisionShape3D" parent="Activator" index="0" unique_id=1593920821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.536743e-07, 5.65, 5.600002)
+shape = SubResource("BoxShape3D_3687x")
 
 [node name="Floor" type="Node3D" parent="." unique_id=489162263]
 
@@ -543,3 +550,5 @@ unique_name_in_owner = true
 [connection signal="interaction_triggered" from="Interactables/ChestGold" to="." method="_on_chest_interaction_triggered"]
 [connection signal="dismissed" from="MemoryReveal" to="." method="_on_memory_reveal_dismissed"]
 [connection signal="revealed" from="MemoryReveal" to="." method="_on_memory_reveal_revealed"]
+
+[editable path="Activator"]
