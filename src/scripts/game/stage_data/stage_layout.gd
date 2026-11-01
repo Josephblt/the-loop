@@ -3,7 +3,8 @@ extends Resource
 
 @export var cell_size: float = 5.6
 @export var spawn_room_size: int = 7
-@export var grief_room_gate_distance: int = 5
+@export var maze_size: int = 21
+@export var grief_room_entrance_offset: int = 5
 
 @export var stories: Array[Story] = []
 
@@ -47,6 +48,6 @@ func _spawn_gate_transform(direction: Vector3, rotation: float) -> Transform3D:
 
 
 func _grief_room_transform(direction: Vector3) -> Transform3D:
-	var room_half_size: int = int(spawn_room_size / 2.0)
-	var room_distance: float = float(room_half_size + 1 + grief_room_gate_distance) * cell_size
+	var maze_half_size: int = int(maze_size / 2.0)
+	var room_distance: float = float(maze_half_size + 1 + grief_room_entrance_offset) * cell_size
 	return Transform3D(Basis.IDENTITY, direction * room_distance)
