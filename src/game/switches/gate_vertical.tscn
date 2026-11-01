@@ -8,12 +8,6 @@
 [ext_resource type="Material" uid="uid://e8uxyqrstxcu" path="res://assets/materials/switches/gate/dissolve_spatial_material.tres" id="5_4x01p"]
 [ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="8_ai4gf"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_n47wt"]
-size = Vector3(6.4, 6.4, 6.4)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_vmqm7"]
-size = Vector3(6.4, 6.4, 5.6)
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_b0de2"]
 _surfaces = [{
 "aabb": AABB(-0.8, -7.15256e-07, -3.3, 1, 6.5, 6.6),
@@ -105,30 +99,6 @@ tracks/3/keys = {
 "update": 0,
 "values": [0.0]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("InsideArea:monitoring")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("OutsideArea:monitoring")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_7hvp7"]
 resource_name = "close"
@@ -180,30 +150,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 2,
 "values": [15.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("InsideArea:monitoring")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("OutsideArea:monitoring")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_8l05i"]
@@ -257,30 +203,6 @@ tracks/3/keys = {
 "update": 2,
 "values": [0.0]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("InsideArea:monitoring")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("OutsideArea:monitoring")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8l05i"]
 _data = {
@@ -291,25 +213,6 @@ _data = {
 
 [node name="GateVertical" type="Node3D" unique_id=1825569716]
 script = ExtResource("1_3bxv0")
-
-[node name="InsideArea" type="Area3D" parent="." unique_id=1132991346]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.6)
-collision_layer = 8
-collision_mask = 2
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InsideArea" unique_id=1422371395]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, 2.8000002, -4.7683716e-07)
-shape = SubResource("BoxShape3D_n47wt")
-
-[node name="OutsideArea" type="Area3D" parent="." unique_id=597536510]
-collision_layer = 8
-collision_mask = 2
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="OutsideArea" unique_id=321753079]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, 2.8000002, 0.39999962)
-shape = SubResource("BoxShape3D_vmqm7")
 
 [node name="Gate" type="StaticBody3D" parent="." unique_id=1011791674]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, -2.8)
@@ -370,8 +273,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 0)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1166608189]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_8l05i")
-
-[connection signal="body_entered" from="InsideArea" to="." method="_on_inside_area_body_entered"]
-[connection signal="body_exited" from="InsideArea" to="." method="_on_inside_area_body_exited"]
-[connection signal="body_entered" from="OutsideArea" to="." method="_on_outside_area_body_entered"]
-[connection signal="body_exited" from="OutsideArea" to="." method="_on_outside_area_body_exited"]

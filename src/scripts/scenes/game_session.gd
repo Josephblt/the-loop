@@ -1,11 +1,14 @@
 class_name GameSession
 extends Node
 
-const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn")
-const HORIZONTAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_horizontal.tscn")
 const SAVE_FILE_PATH: String = "user://the_loop_save_game.dat"
-const SPAWN_ROOM_SCENE: PackedScene = preload("res://game/rooms/spawn_room.tscn")
+
+const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn")
+
 const STAGE_LAYOUT_PATH: StageLayout = preload("res://assets/configs/stage_layout.tres")
+
+const SPAWN_ROOM_SCENE: PackedScene = preload("res://game/rooms/spawn_room.tscn")
+const HORIZONTAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_horizontal.tscn")
 const VERTICAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_vertical.tscn")
 
 @onready var _stage: Node3D = %Stage
@@ -25,29 +28,28 @@ func _ready() -> void:
 	_start_loop()
 
 
-func _notification(what: int) -> void:
-	if what != NOTIFICATION_WM_CLOSE_REQUEST or _fire_fixture_states == null:
-		return
-	update_save_data()
-
-
 func _start_loop() -> void:
 	_add_spawn_room()
 	_add_spawn_room_gates()
-	_spawn_room.setup_gates(_spawn_room_gates)
 
 
 func _add_spawn_room() -> void:
 	_spawn_room = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
-	_stage.add_child(_spawn_room)
 	_spawn_room.apply_fire_fixture_states(_fire_fixture_states.get_room_states(FireFixtureStates.Rooms.SPAWN))
+	_stage.add_child(_spawn_room)
 
 
 func _add_spawn_room_gates() -> void:
-	_spawn_room_gates.append(_add_gate(VERTICAL_GATE_SCENE, "SpawnNorthGate", STAGE_LAYOUT_PATH.spawn_north_gate_transform))
-	_spawn_room_gates.append(_add_gate(VERTICAL_GATE_SCENE, "SpawnSouthGate", STAGE_LAYOUT_PATH.spawn_south_gate_transform))
-	_spawn_room_gates.append(_add_gate(HORIZONTAL_GATE_SCENE, "SpawnWestGate", STAGE_LAYOUT_PATH.spawn_west_gate_transform))
-	_spawn_room_gates.append(_add_gate(HORIZONTAL_GATE_SCENE, "SpawnEastGate", STAGE_LAYOUT_PATH.spawn_east_gate_transform))
+	var north_gate: Gate = _add_gate(VERTICAL_GATE_SCENE, "SpawnNorthGate", STAGE_LAYOUT_PATH.spawn_north_gate_transform)
+	_spawn_room_gates.append(north_gate)
+	var south_gate: Gate = _add_gate(VERTICAL_GATE_SCENE, "SpawnSouthGate", STAGE_LAYOUT_PATH.spawn_south_gate_transform)
+	_spawn_room_gates.append(south_gate)
+	var west_gate: Gate = _add_gate(HORIZONTAL_GATE_SCENE, "SpawnWestGate", STAGE_LAYOUT_PATH.spawn_west_gate_transform)
+	_spawn_room_gates.append(west_gate)
+	var east_gate: Gate = _add_gate(HORIZONTAL_GATE_SCENE, "SpawnEastGate", STAGE_LAYOUT_PATH.spawn_east_gate_transform)
+	_spawn_room_gates.append(east_gate)
+
+	_spawn_room.setup_gates(_spawn_room_gates)
 
 
 func _add_gate(scene: PackedScene, node_name: String, gate_transform: Transform3D) -> Gate:
