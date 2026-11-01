@@ -15,6 +15,7 @@ var _fire_fixture_states: FireFixtureStates
 var _loop_count: int = 0
 var _memories_stack: MemoriesStack
 var _session_seed: int
+var _spawn_room: SpawnRoom
 var _spawn_room_gates: Array[Gate] = []
 var _story: Story
 
@@ -24,16 +25,22 @@ func _ready() -> void:
 	_start_loop()
 
 
+func _notification(what: int) -> void:
+	if what != NOTIFICATION_WM_CLOSE_REQUEST or _fire_fixture_states == null:
+		return
+	update_save_data()
+
+
 func _start_loop() -> void:
 	_add_spawn_room()
 	_add_spawn_room_gates()
 
 
 func _add_spawn_room() -> void:
-	var spawn_room: SpawnRoom = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
-	spawn_room.room_deactivated.connect(_activate_spawn_room_gates, CONNECT_ONE_SHOT)
-	_stage.add_child(spawn_room)
-	spawn_room.setup_fire_fixtures(_fire_fixture_states.get_room_states(FireFixtureStates.Rooms.SPAWN))
+	_spawn_room = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
+	_spawn_room.room_deactivated.connect(_activate_spawn_room_gates, CONNECT_ONE_SHOT)
+	_stage.add_child(_spawn_room)
+	_spawn_room.apply_fire_fixture_states(_fire_fixture_states.get_room_states(FireFixtureStates.Rooms.SPAWN))
 
 
 func _add_spawn_room_gates() -> void:
@@ -63,6 +70,8 @@ func _end_loop() -> void:
 
 
 func update_save_data() -> void:
+	_capture_fire_fixture_states()
+
 	var data: Dictionary = {}
 	data["session_seed"] = _session_seed
 	data["story_path"] = _story.resource_path
@@ -74,6 +83,13 @@ func update_save_data() -> void:
 	var file: FileAccess = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
 	file.store_var(data)
 	file.close()
+
+
+func _capture_fire_fixture_states() -> void:
+	if not is_instance_valid(_spawn_room):
+		return
+	var states: Array[FireFixtureState] = _spawn_room.capture_fire_fixture_states()
+	_fire_fixture_states.set_room_states(FireFixtureStates.Rooms.SPAWN, states)
 
 
 func load_save_data() -> void:

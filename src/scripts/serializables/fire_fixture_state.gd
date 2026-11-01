@@ -1,17 +1,13 @@
 class_name FireFixtureState
 
 
-var fixture_id: String
+var fixture_id: NodePath
 var is_lit: bool
 
 
-func _init(initial_fixture_id: String = "", initially_lit: bool = false) -> void:
+func _init(initial_fixture_id: NodePath = NodePath(), initially_lit: bool = false) -> void:
 	fixture_id = initial_fixture_id
 	is_lit = initially_lit
-
-
-func set_lit(lit: bool) -> void:
-	is_lit = lit
 
 
 func serialize() -> Dictionary:
@@ -22,5 +18,5 @@ func serialize() -> Dictionary:
 
 
 func deserialize(data: Dictionary) -> void:
-	fixture_id = data.get("fixture_id", "")
+	fixture_id = NodePath(str(data.get("fixture_id", "")))
 	is_lit = data.get("is_lit", false)
