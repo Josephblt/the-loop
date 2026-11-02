@@ -8,6 +8,7 @@ const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn"
 const STAGE_LAYOUT_PATH: StageLayout = preload("res://assets/configs/stage_layout.tres")
 
 const SPAWN_ROOM_SCENE: PackedScene = preload("res://game/rooms/spawn_room.tscn")
+const MEMORY_ROOM_SCENE: PackedScene = preload("res://game/rooms/memory_room.tscn")
 
 const ANGER_ROOM_SCENE: PackedScene = preload("res://game/rooms/anger_room.tscn")
 const DENIAL_ROOM_SCENE: PackedScene = preload("res://game/rooms/denial_room.tscn")
@@ -17,11 +18,13 @@ const DEPRESSION_ROOM_SCENE: PackedScene = preload("res://game/rooms/depression_
 const HORIZONTAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_horizontal.tscn")
 const VERTICAL_GATE_SCENE: PackedScene = preload("res://game/switches/gate_vertical.tscn")
 
+@onready var _player: Player = %Player
 @onready var _stage: Node3D = %Stage
 
 var _grief_stages_stack: GriefStagesStack
 var _fire_fixture_states: FireFixtureStates
 var _loop_count: int = 0
+var _memory_rooms: Array[MemoryRoom] = []
 var _memories_stack: MemoriesStack
 var _session_seed: int
 var _anger_room: AngerRoom
@@ -43,10 +46,14 @@ func _ready() -> void:
 
 
 func _start_loop() -> void:
+	var grief_stage: GriefStagesStack.GriefStages = _grief_stages_stack.peek()
+	var story_stage: StoryStage = _story.get_stage(_loop_count, grief_stage)
+	_memories_stack.load_story_stage(story_stage)
 	_add_spawn_room()
 	_add_spawn_room_gates()
 	_add_grief_rooms()
 	_add_grief_room_gates()
+	_add_memory_rooms()
 
 
 func _add_spawn_room() -> void:
@@ -92,6 +99,23 @@ func _add_grief_room(scene: PackedScene, room_transform: Transform3D, room_id: F
 	room.apply_fire_fixture_states(_fire_fixture_states.get_room_states(room_id))
 	_stage.add_child(room)
 	return room
+
+
+func _add_memory_rooms() -> void:
+	var transforms: Array[Transform3D] = STAGE_LAYOUT_PATH.memory_room_transforms(_session_seed, _memories_stack.memory_count())
+	for index: int in transforms.size():
+		_add_memory_room(index, transforms[index])
+
+
+func _add_memory_room(index: int, room_transform: Transform3D) -> void:
+	var room_id: String = "MemoryRoom%d" % (index + 1)
+	var room: MemoryRoom = MEMORY_ROOM_SCENE.instantiate() as MemoryRoom
+	room.name = room_id
+	room.transform = room_transform
+	room.setup_scene(_player, _memories_stack.memory_at(index))
+	room.apply_fire_fixture_states(_fire_fixture_states.get_room_states(FireFixtureStates.Rooms.MEMORY, room_id))
+	_stage.add_child(room)
+	_memory_rooms.append(room)
 
 
 func _add_gate(scene: PackedScene, node_name: String, gate_transform: Transform3D) -> Gate:
