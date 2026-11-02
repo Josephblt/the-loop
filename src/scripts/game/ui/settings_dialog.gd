@@ -6,6 +6,7 @@ signal mouse_sensitivity_changed(value: float)
 signal run_speed_changed(value: float)
 signal walk_speed_changed(value: float)
 
+
 const MAIN_MENU_SCENE_PATH: String = "uid://cfd01q26as6sx"
 const SPEED_SLIDER_SCALE: float = 10.0
 
