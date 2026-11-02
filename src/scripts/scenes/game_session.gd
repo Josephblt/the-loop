@@ -46,9 +46,7 @@ func _ready() -> void:
 
 
 func _start_loop() -> void:
-	var grief_stage: GriefStagesStack.GriefStages = _grief_stages_stack.peek()
-	var story_stage: StoryStage = _story.get_stage(_loop_count, grief_stage)
-	_memories_stack.load_story_stage(story_stage)
+	_load_stage_memories()
 	_add_spawn_room()
 	_add_spawn_room_gates()
 	_add_grief_rooms()
@@ -58,8 +56,8 @@ func _start_loop() -> void:
 
 func _add_spawn_room() -> void:
 	_spawn_room = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
-	_spawn_room.apply_fire_fixture_states(_fire_fixture_states.get_room_states(FireFixtureStates.Rooms.SPAWN))
 	_stage.add_child(_spawn_room)
+	_spawn_room.apply_fire_fixture_states(_fire_fixture_states.get_room_states(FireFixtureStates.Rooms.SPAWN))
 
 
 func _add_spawn_room_gates() -> void:
@@ -84,20 +82,20 @@ func _add_grief_rooms() -> void:
 
 func _add_grief_room_gates() -> void:
 	_anger_room_gate = _add_gate(VERTICAL_GATE_SCENE, "AngerRoomGate", STAGE_LAYOUT_PATH.anger_room_gate_transform)
-	_anger_room_gate.setup(true)
 	_denial_room_gate = _add_gate(VERTICAL_GATE_SCENE, "DenialRoomGate", STAGE_LAYOUT_PATH.denial_room_gate_transform)
-	_denial_room_gate.setup(true)
 	_bargaining_room_gate = _add_gate(HORIZONTAL_GATE_SCENE, "BargainingRoomGate", STAGE_LAYOUT_PATH.bargaining_room_gate_transform)
-	_bargaining_room_gate.setup(true)
 	_depression_room_gate = _add_gate(HORIZONTAL_GATE_SCENE, "DepressionRoomGate", STAGE_LAYOUT_PATH.depression_room_gate_transform)
-	_depression_room_gate.setup(true)
+	_anger_room_gate.setup(_grief_room_gate_starts_closed(GriefStagesStack.GriefStages.ANGER))
+	_denial_room_gate.setup(_grief_room_gate_starts_closed(GriefStagesStack.GriefStages.DENIAL))
+	_bargaining_room_gate.setup(_grief_room_gate_starts_closed(GriefStagesStack.GriefStages.BARGAINING))
+	_depression_room_gate.setup(_grief_room_gate_starts_closed(GriefStagesStack.GriefStages.DEPRESSION))
 
 
 func _add_grief_room(scene: PackedScene, room_transform: Transform3D, room_id: FireFixtureStates.Rooms) -> Room:
 	var room: Room = scene.instantiate() as Room
 	room.transform = room_transform
-	room.apply_fire_fixture_states(_fire_fixture_states.get_room_states(room_id))
 	_stage.add_child(room)
+	room.apply_fire_fixture_states(_fire_fixture_states.get_room_states(room_id))
 	return room
 
 
@@ -113,8 +111,9 @@ func _add_memory_room(index: int, room_transform: Transform3D) -> void:
 	room.name = room_id
 	room.transform = room_transform
 	room.setup_scene(_player, _memories_stack.memory_at(index))
-	room.apply_fire_fixture_states(_fire_fixture_states.get_room_states(FireFixtureStates.Rooms.MEMORY, room_id))
+	room.memory_collected.connect(_on_memory_collected)
 	_stage.add_child(room)
+	room.apply_fire_fixture_states(_fire_fixture_states.get_room_states(FireFixtureStates.Rooms.MEMORY, room_id))
 	_memory_rooms.append(room)
 
 
@@ -124,6 +123,43 @@ func _add_gate(scene: PackedScene, node_name: String, gate_transform: Transform3
 	gate.transform = gate_transform
 	_stage.add_child(gate)
 	return gate
+
+
+func _load_stage_memories() -> void:
+	if _memories_stack.memory_count() > 0:
+		return
+	var grief_stage: GriefStagesStack.GriefStages = _grief_stages_stack.peek()
+	var story_stage: StoryStage = _story.get_stage(_loop_count, grief_stage)
+	_memories_stack.load_story_stage(story_stage)
+
+
+func _grief_room_gate_starts_closed(grief_stage: GriefStagesStack.GriefStages) -> bool:
+	if grief_stage != _grief_stages_stack.peek():
+		return true
+	return not _memories_stack.all_memories_revealed()
+
+
+func _current_grief_room_gate() -> Gate:
+	match _grief_stages_stack.peek():
+		GriefStagesStack.GriefStages.ANGER:
+			return _anger_room_gate
+		GriefStagesStack.GriefStages.DENIAL:
+			return _denial_room_gate
+		GriefStagesStack.GriefStages.BARGAINING:
+			return _bargaining_room_gate
+		GriefStagesStack.GriefStages.DEPRESSION:
+			return _depression_room_gate
+	return null
+
+
+func _on_memory_collected() -> void:
+	update_save_data()
+	if not _memories_stack.all_memories_revealed():
+		return
+	var gate: Gate = _current_grief_room_gate()
+	if not is_instance_valid(gate):
+		return
+	gate.open()
 
 
 func _end_loop() -> void:

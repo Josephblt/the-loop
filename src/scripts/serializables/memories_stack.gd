@@ -31,6 +31,13 @@ func closing_memory() -> Memory:
 	return _closing_memory
 
 
+func all_memories_revealed() -> bool:
+	for memory: Memory in _maze_memories:
+		if not memory.revealed:
+			return false
+	return true
+
+
 func serialize() -> Dictionary:
 	var serialized_maze_memories: Array[Dictionary] = []
 	for memory: Memory in _maze_memories:

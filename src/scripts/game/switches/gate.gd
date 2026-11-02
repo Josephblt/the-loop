@@ -34,12 +34,18 @@ func setup(closed_state: bool) -> void:
 
 
 func _close_immediately() -> void:
+	animation_player.stop()
 	animation_player.play("close_immediately")
-	await animation_player.animation_finished
+	animation_player.advance(0.0)
+	animation_player.advance(animation_player.current_animation_length)
+	animation_player.stop(true)
 	_closed = true
 
 
 func _open_immediately() -> void:
+	animation_player.stop()
 	animation_player.play("open_immediately")
-	await animation_player.animation_finished
+	animation_player.advance(0.0)
+	animation_player.advance(animation_player.current_animation_length)
+	animation_player.stop(true)
 	_closed = false

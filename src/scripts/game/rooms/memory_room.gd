@@ -2,6 +2,9 @@ class_name MemoryRoom
 extends Room
 
 
+signal memory_collected()
+
+
 @onready var chest: Chest = %Chest
 @onready var memory_reveal: MemoryReveal = %MemoryReveal
 
@@ -27,7 +30,10 @@ func _setup_chest() -> void:
 
 
 func _on_chest_interaction_triggered() -> void:
+	var was_revealed: bool = _memory.revealed
 	memory_reveal.reveal(_memory.reveal())
+	if not was_revealed:
+		memory_collected.emit()
 
 
 func _on_memory_revealed() -> void:
