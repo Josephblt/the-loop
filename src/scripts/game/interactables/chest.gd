@@ -15,6 +15,5 @@ func _interact() -> void:
 func open_immediately() -> void:
 	_is_interactable = false
 	chest_animation_player.play("open")
-	chest_animation_player.seek(chest_animation_player.current_animation_length, true)
-	chest_animation_player.pause()
+	chest_animation_player.advance(chest_animation_player.current_animation_length)
 	audio_stream_player.stop()
