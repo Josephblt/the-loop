@@ -6,5 +6,6 @@
 
 [resource]
 script = ExtResource("1_kh0nl")
+maze_size = 31
 stories = Array[ExtResource("2_87tuf")]([ExtResource("3_l7kh6")])
 metadata/_custom_type_script = "uid://k8uld80d8eyg"

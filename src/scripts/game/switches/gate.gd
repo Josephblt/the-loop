@@ -7,10 +7,6 @@ extends Node3D
 var _closed: bool = false
 
 
-func _ready() -> void:
-	setup(_closed)
-
-
 func is_closed() -> bool:
 	return _closed
 
