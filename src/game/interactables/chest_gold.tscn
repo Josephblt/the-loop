@@ -285,5 +285,6 @@ root_node = NodePath("../../StaticBody3D")
 libraries/ = SubResource("AnimationLibrary_8tdhl")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=495398265]
+unique_name_in_owner = true
 stream = ExtResource("6_3j8aq")
 bus = &"SFX"

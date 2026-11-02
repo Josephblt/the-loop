@@ -163,14 +163,22 @@ text = "Enter Fullscreen"
 layout_mode = 2
 text = "Return to Main Menu"
 
-[node name="PauseHint" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=162852686]
+[node name="MouseModeButton" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=713400617]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
-text = "Press Enter to close"
-horizontal_alignment = 1
+toggle_mode = true
+text = "Mouse Lock"
+
+[node name="CloseButton" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=1748430989]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Resume"
 
 [connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/SettingsGrid/MouseSensitivityControl/MouseSensitivitySlider" to="." method="_on_mouse_sensitivity_slider_value_changed"]
 [connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/SettingsGrid/RunSpeedControl/RunSpeedSlider" to="." method="_on_run_speed_slider_value_changed"]
 [connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/SettingsGrid/WalkSpeedControl/WalkSpeedSlider" to="." method="_on_walk_speed_slider_value_changed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="toggled" from="Panel/MarginContainer/VBoxContainer/MouseModeButton" to="." method="_on_mouse_state_button_toggled"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

@@ -3,7 +3,7 @@ extends Interactable
 
 
 @onready var chest_animation_player: AnimationPlayer = %ChestAnimationPlayer
-@onready var audio_stream_player: AudioStreamPlayer3D = $AudioStreamPlayer3D
+@onready var audio_stream_player: AudioStreamPlayer3D = %AudioStreamPlayer3D
 
 
 func _interact() -> void:

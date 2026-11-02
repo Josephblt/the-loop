@@ -23,7 +23,7 @@ var _walk_speed: float = DEFAULT_WALK_SPEED
 
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED 
+	# Input.mouse_mode = Input.MOUSE_MODE_CAPTURED 
 	_look_y = rotation_degrees.y
 
 

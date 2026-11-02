@@ -14,6 +14,7 @@ const SPEED_SLIDER_SCALE: float = 10.0
 @onready var run_speed_value: Label = %RunSpeedValue
 @onready var walk_speed_value: Label = %WalkSpeedValue
 @onready var fullscreen_button: Button = %FullscreenButton
+@onready var mouse_mode_button: Button = %MouseModeButton
 
 
 func _ready() -> void:
@@ -39,6 +40,13 @@ func _toggle() -> void:
 func _open() -> void:
 	visible = true
 	get_tree().paused = true
+	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		mouse_mode_button.button_pressed = true
+		mouse_mode_button.text = "Mouse Captured"
+	else:
+		mouse_mode_button.button_pressed = false
+		mouse_mode_button.text = "Mouse Visible"
+
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_update_fullscreen_button()
 	mouse_sensitivity_slider.grab_focus()
@@ -47,7 +55,10 @@ func _open() -> void:
 func _close() -> void:
 	visible = false
 	get_tree().paused = false
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if mouse_mode_button.button_pressed:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
 func _on_mouse_sensitivity_slider_value_changed(value: float) -> void:
@@ -81,3 +92,14 @@ func _on_main_menu_button_pressed() -> void:
 	get_tree().paused = false
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE_PATH)
+
+
+func _on_mouse_state_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		mouse_mode_button.text = "Mouse Captured"
+	else:
+		mouse_mode_button.text = "Mouse Visible"
+
+
+func _on_close_button_pressed() -> void:
+	_close()

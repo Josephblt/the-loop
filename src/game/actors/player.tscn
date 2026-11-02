@@ -6,7 +6,7 @@
 [ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_canvas_item_material.tres" id="3_bfqtb"]
 [ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="4_btjqu"]
 [ext_resource type="Script" uid="uid://ckunku72jtdu0" path="res://scripts/game/ui/fps.gd" id="5_btjqu"]
-[ext_resource type="PackedScene" path="res://game/ui/settings_dialog.tscn" id="6_settings"]
+[ext_resource type="PackedScene" uid="uid://brnavor8rq6oj" path="res://game/ui/settings_dialog.tscn" id="6_settings"]
 [ext_resource type="Script" uid="uid://sgcqrhar3lfb" path="res://scripts/game/ui/build_number.gd" id="7_build_number"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vapkq"]
@@ -72,6 +72,7 @@ effect_rim_texture_rect = NodePath("../../../CanvasLayer/Effects/OutlineTextureR
 
 [node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=1594547787]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+doppler_tracking = 2
 current = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=335031780]
