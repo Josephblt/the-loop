@@ -30,13 +30,13 @@ var _memories_stack: MemoriesStack
 var _fire_fixture_states: FireFixtureStates
 var _loop_count: int = 0
 
-var _anger_room: AngerRoom
+var _anger_room: GriefStageRoom
 var _anger_room_gate: Gate
-var _bargaining_room: BargainingRoom
+var _bargaining_room: GriefStageRoom
 var _bargaining_room_gate: Gate
-var _denial_room: DenialRoom
+var _denial_room: GriefStageRoom
 var _denial_room_gate: Gate
-var _depression_room: DepressionRoom
+var _depression_room: GriefStageRoom
 var _depression_room_gate: Gate
 var _spawn_room: SpawnRoom
 var _spawn_room_gates: Array[Gate] = []
@@ -87,7 +87,7 @@ func _add_spawn_room_gates() -> void:
 	SceneRandomizer.randomize_scene(east_gate, _session_seed)
 	_spawn_room_gates.append(east_gate)
 
-	_spawn_room.setup_gates(_spawn_room_gates)
+	_spawn_room.setup_scene(_spawn_room_gates)
 
 
 func _add_memory_rooms() -> void:

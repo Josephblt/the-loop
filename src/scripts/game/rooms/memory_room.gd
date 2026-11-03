@@ -32,7 +32,8 @@ func _setup_message() -> void:
 
 
 func _on_chest_interaction_triggered() -> void:
-	_player.pause_controls()	
+	_player.pause_controls()
+	message.show_message()
 
 
 func _on_message_shown() -> void:

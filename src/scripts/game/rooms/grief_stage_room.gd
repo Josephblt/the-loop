@@ -10,6 +10,7 @@ signal grief_stage_completed()
 
 var _memory: Memory
 var _player: Player
+var _gate: Gate
 
 
 func _ready() -> void:
@@ -17,9 +18,10 @@ func _ready() -> void:
 	_setup_message()
 
 
-func setup_scene(player: Player, memory: Memory) -> void:
+func setup_scene(player: Player, memory: Memory, gate: Gate) -> void:
 	_player = player
 	_memory = memory
+	_gate = gate
 
 
 func _setup_chest() -> void:
@@ -42,3 +44,7 @@ func _on_message_shown() -> void:
 func _on_message_hidden() -> void:
 	_player.resume_controls()
 	grief_stage_completed.emit()
+
+
+func _on_activator_body_exited(_body: Node3D) -> void:
+	_gate.close()
