@@ -12,6 +12,7 @@ const EXTINGUISH_TEXT: String = "Extinguish"
 
 func _interact() -> void:
 	set_lit(!is_lit())
+	interaction_triggered.emit(self)
 
 
 func is_lit() -> bool:

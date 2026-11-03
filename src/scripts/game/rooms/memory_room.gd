@@ -15,11 +15,13 @@ var _player: Player
 func _ready() -> void:
 	_setup_chest()
 	_setup_message()
+	super._ready()
 
 
-func setup_scene(player: Player, memory: Memory) -> void:
+func setup_memory_room(player: Player, memory: Memory, fire_fixtures_states: Array[FireFixtureState]) -> void:
 	_player = player
 	_memory = memory
+	setup_room(fire_fixtures_states)
 
 
 func _setup_chest() -> void:
@@ -31,7 +33,7 @@ func _setup_message() -> void:
 	message.setup_message(_memory.get_description())
 
 
-func _on_chest_interaction_triggered() -> void:
+func _on_chest_interaction_triggered(_interactable: Interactable) -> void:
 	_player.pause_controls()
 	message.show_message()
 

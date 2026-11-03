@@ -2,11 +2,8 @@
 class_name Interactable
 extends Node3D
 
-
-signal interaction_enabled()
-signal interaction_disabled()
-signal interaction_triggered()
-signal _interaction_performed()
+@warning_ignore("unused_signal")
+signal interaction_triggered(interactable: Interactable)
 
 
 const OUTLINE_LAYER: int = 2
@@ -28,7 +25,7 @@ func _ready() -> void:
 
 @abstract
 func _interact() -> void
-
+	
 
 func _update_outline(enabled: bool) -> void:
 	for mesh in interactable_meshes:
@@ -49,7 +46,6 @@ func enable_interaction() -> void:
 		
 	_update_outline(true)
 	interaction_animation_player.play("enable_interaction")
-	interaction_enabled.emit()
 
 
 func disable_interaction() -> void:
@@ -58,10 +54,9 @@ func disable_interaction() -> void:
 	
 	_update_outline(false)
 	interaction_animation_player.play("disable_interaction")
-	interaction_disabled.emit()
 
 
-func trigger_interaction() -> void:
+func trigger_interaction(execute_interact: bool = true) -> void:
 	if !_is_interactable:
 		return
 
@@ -69,7 +64,6 @@ func trigger_interaction() -> void:
 		disable_interaction()
 		_is_interactable = false
 		_update_highlight(false)
-
-	_interact()
-	await _interaction_performed
-	interaction_triggered.emit()
+	
+	if execute_interact:
+		_interact()

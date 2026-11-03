@@ -67,10 +67,11 @@ func _load_stage_memories() -> void:
 
 
 func _add_spawn_room() -> void:
+	var fire_fixture_states: Array[FireFixtureState] = _fire_fixture_states.get_room_states(FireFixtureStates.Rooms.SPAWN)
 	_spawn_room = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
 	SceneRandomizer.randomize_scene(_spawn_room, _session_seed)
+	_spawn_room.setup_room(fire_fixture_states)
 	_stage.add_child(_spawn_room)
-	_spawn_room.apply_fire_fixture_states(_fire_fixture_states.get_room_states(FireFixtureStates.Rooms.SPAWN))
 
 
 func _add_spawn_room_gates() -> void:
@@ -97,15 +98,16 @@ func _add_memory_rooms() -> void:
 
 
 func _add_memory_room(index: int, room_transform: Transform3D) -> void:
-	var room_id: String = "MemoryRoom%d" % (index + 1)
 	var room: MemoryRoom = MEMORY_ROOM_SCENE.instantiate() as MemoryRoom
+	var memory: Memory = _memories_stack.memory_at(index)
+	var room_id: String = "MemoryRoom%d" % (index + 1)
+	var fire_fixture_states: Array[FireFixtureState] = _fire_fixture_states.get_room_states(FireFixtureStates.Rooms.MEMORY, room_id)
 	SceneRandomizer.randomize_scene(room, _session_seed)
 	room.name = room_id
 	room.transform = room_transform
-	room.setup_scene(_player, _memories_stack.memory_at(index))
+	room.setup_memory_room(_player, memory, fire_fixture_states)
 	_memory_rooms.append(room)
-	_stage.add_child(room)
-	room.apply_fire_fixture_states(_fire_fixture_states.get_room_states(FireFixtureStates.Rooms.MEMORY, room_id))
+	_stage.add_child(room)	
 	
 
 func _add_grief_rooms() -> void:
@@ -149,15 +151,6 @@ func _end_loop() -> void:
 
 
 func update_save_data() -> void:
-	print("Updating save data...")
-
-	var spawn_room_states: Array[FireFixtureState] = _spawn_room.capture_fire_fixture_states()
-	_fire_fixture_states.set_room_states(FireFixtureStates.Rooms.SPAWN, spawn_room_states)
-
-	for memory_room: MemoryRoom in _memory_rooms:
-		var memory_room_states: Array[FireFixtureState] = memory_room.capture_fire_fixture_states()
-		_fire_fixture_states.set_room_states(FireFixtureStates.Rooms.MEMORY, memory_room_states, memory_room.name)
-
 	var data: Dictionary = {}
 	data["session_seed"] = _session_seed
 	data["story_path"] = _story.resource_path

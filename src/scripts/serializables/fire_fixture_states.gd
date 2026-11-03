@@ -41,19 +41,6 @@ func get_room_states(room: Rooms, memory_room_id: String = "") -> Array[FireFixt
 	return states
 
 
-func set_room_states(room: Rooms, states: Array[FireFixtureState], memory_room_id: String = "") -> void:
-	var room_states: Array[FireFixtureState] = get_room_states(room, memory_room_id)
-	room_states.assign(states)
-
-
-func _get_memory_room_states(room_id: String) -> Array[FireFixtureState]:
-	assert(not room_id.is_empty(), "Memory room ID cannot be empty.")
-	if not _memory_rooms.has(room_id):
-		var states: Array[FireFixtureState] = []
-		_memory_rooms[room_id] = states
-	return _memory_rooms[room_id]
-
-
 func serialize() -> Dictionary:
 	return {
 		"spawn_room": _serialize_states(_spawn_room),
@@ -74,6 +61,14 @@ func deserialize(data: Dictionary) -> void:
 	_depression_room = _deserialize_states(data.get("depression_room", []))
 	_acceptance_room = _deserialize_states(data.get("acceptance_room", []))
 	_deserialize_memory_rooms(data.get("memory_rooms", {}))
+
+
+func _get_memory_room_states(room_id: String) -> Array[FireFixtureState]:
+	assert(not room_id.is_empty(), "Memory room ID cannot be empty.")
+	if not _memory_rooms.has(room_id):
+		var states: Array[FireFixtureState] = []
+		_memory_rooms[room_id] = states
+	return _memory_rooms[room_id]
 
 
 func _serialize_memory_rooms() -> Dictionary:

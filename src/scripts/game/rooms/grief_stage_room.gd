@@ -33,7 +33,7 @@ func _setup_message() -> void:
 	message.setup_message(_memory.get_description())
 
 
-func _on_chest_interaction_triggered() -> void:
+func _on_chest_interaction_triggered(_interactable: Interactable) -> void:
 	_player.pause_controls()	
 
 

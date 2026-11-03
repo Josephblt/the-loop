@@ -9,11 +9,10 @@ extends Interactable
 func _interact() -> void:
 	chest_animation_player.play("open")
 	await chest_animation_player.animation_finished
-	_interaction_performed.emit()
+	interaction_triggered.emit(self)
 
 
 func open_immediately() -> void:
-	_is_interactable = false
-	chest_animation_player.play("open")
-	chest_animation_player.advance(chest_animation_player.current_animation_length)
+	chest_animation_player.play("open_immediately")
 	audio_stream_player.stop()
+	trigger_interaction(false)

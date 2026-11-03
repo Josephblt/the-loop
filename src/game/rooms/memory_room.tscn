@@ -100,6 +100,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.7)
 [node name="Message" parent="." unique_id=1492686143 instance=ExtResource("12_f4h61")]
 unique_name_in_owner = true
 
+[connection signal="interaction_triggered" from="Interactables/Altars/AltarLeft" to="." method="_on_fire_fixture_interaction_triggered"]
+[connection signal="interaction_triggered" from="Interactables/Altars/AltarRight" to="." method="_on_fire_fixture_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Chest" to="." method="_on_chest_interaction_triggered"]
 [connection signal="message_hidden" from="Message" to="." method="_on_message_hidden"]
 [connection signal="message_shown" from="Message" to="." method="_on_message_shown"]
