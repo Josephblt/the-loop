@@ -2,7 +2,7 @@
 
 ## Borrowed Weather
 
-### Loop One: The House That Still Expected Morning
+### Loop One: The Days We Counted Carefully
 
 #### Denial
 
@@ -74,7 +74,7 @@ One afternoon you slept through the nurse, the medicine, the woman mopping aroun
 
 When your breathing changed, I stopped counting. I put my mouth near your ear and told you about the house, the cup, the shoes that still lit up. I wanted the last place you heard about to be home.
 
-### Loop Two: The House After Small Hands
+### Loop Two: Everything Left in Its Place
 
 #### Denial
 
@@ -146,7 +146,7 @@ There was a day I did nothing but sit beside your closed door. No crying. No pra
 
 I said your name out loud while washing a cup. Nothing answered. Nothing opened. But the name stayed warm in my mouth, and for the first time I did not use it to call you back. I used it because you had been here.
 
-### Loop Three: The Shape Time Leaves
+### Loop Three: The Age of Missing Things
 
 #### Denial
 
