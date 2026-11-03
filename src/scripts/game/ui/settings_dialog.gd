@@ -10,6 +10,8 @@ signal walk_speed_changed(value: float)
 const MAIN_MENU_SCENE_PATH: String = "uid://cfd01q26as6sx"
 const SPEED_SLIDER_SCALE: float = 10.0
 
+@onready var game_session: GameSession = get_node("/root/GameSession")
+
 @onready var mouse_sensitivity_slider: HSlider = %MouseSensitivitySlider
 @onready var mouse_sensitivity_value: Label = %MouseSensitivityValue
 @onready var run_speed_value: Label = %RunSpeedValue
@@ -104,3 +106,7 @@ func _on_mouse_state_button_toggled(toggled_on: bool) -> void:
 
 func _on_close_button_pressed() -> void:
 	_close()
+
+
+func _on_save_button_pressed() -> void:
+	game_session.update_save_data()

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://kv5lpflnmg7f"]
 
-[ext_resource type="Script" uid="uid://ubx4b3lm20i4" path="res://scripts/game/rooms/anger_room.gd" id="1_qc7yu"]
+[ext_resource type="Script" uid="uid://205s5ulf7oh4" path="res://scripts/game/rooms/grief_stage_room.gd" id="1_qc7yu"]
 [ext_resource type="PackedScene" uid="uid://cqrto67h33ydp" path="res://game/switches/activator.tscn" id="2_50ifw"]
 [ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="3_pbwdi"]
 [ext_resource type="PackedScene" uid="uid://coql64ga8pi0u" path="res://game/level/blocks/block_cracked_md.tscn" id="4_sps7d"]
@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cvnpe5drc4s7q" path="res://game/interactables/cresset.tscn" id="13_uhf8c"]
 [ext_resource type="PackedScene" uid="uid://dfwbglgsmyokl" path="res://game/level/walls/wall_normal_lg.tscn" id="14_pmra8"]
 [ext_resource type="PackedScene" uid="uid://b6fydse31tnyb" path="res://game/level/walls/wall_broken_md.tscn" id="15_r8esf"]
-[ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/memory_reveal.tscn" id="16_b608g"]
+[ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/message.tscn" id="16_b608g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3687x"]
 size = Vector3(40.2, 12.1, 51.4)
@@ -527,11 +527,11 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.
 [node name="WallNormalLG27" parent="Walls/Outter/Bottom" unique_id=2037666616 instance=ExtResource("14_pmra8")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.800003, 0, -16.8)
 
-[node name="MemoryReveal" parent="." unique_id=1991501411 instance=ExtResource("16_b608g")]
+[node name="Message" parent="." unique_id=1991501411 instance=ExtResource("16_b608g")]
 unique_name_in_owner = true
 
 [connection signal="interaction_triggered" from="Interactables/ChestGold" to="." method="_on_chest_interaction_triggered"]
-[connection signal="dismissed" from="MemoryReveal" to="." method="_on_memory_reveal_dismissed"]
-[connection signal="revealed" from="MemoryReveal" to="." method="_on_memory_reveal_revealed"]
+[connection signal="message_hidden" from="Message" to="." method="_on_message_hidden"]
+[connection signal="message_shown" from="Message" to="." method="_on_message_message_shown"]
 
 [editable path="Activator"]

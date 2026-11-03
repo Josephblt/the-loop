@@ -6,7 +6,7 @@ signal memory_collected()
 
 
 @onready var chest: Chest = %Chest
-@onready var memory_reveal: MemoryReveal = %MemoryReveal
+@onready var message: Message = %Message
 
 var _memory: Memory
 var _player: Player
@@ -14,6 +14,7 @@ var _player: Player
 
 func _ready() -> void:
 	_setup_chest()
+	_setup_message()
 
 
 func setup_scene(player: Player, memory: Memory) -> void:
@@ -22,23 +23,22 @@ func setup_scene(player: Player, memory: Memory) -> void:
 
 
 func _setup_chest() -> void:
-	if !_memory:
-		return
-	
-	if _memory.revealed:
+	if _memory.is_revealed():
 		chest.open_immediately()
 
 
+func _setup_message() -> void:
+	message.setup_message(_memory.get_description())
+
+
 func _on_chest_interaction_triggered() -> void:
-	var was_revealed: bool = _memory.revealed
-	memory_reveal.reveal(_memory.reveal())
-	if not was_revealed:
-		memory_collected.emit()
+	_player.pause_controls()	
 
 
-func _on_memory_revealed() -> void:
-	_player.pause_controls()
+func _on_message_shown() -> void:
+	_memory.reveal()
 
 
-func _on_memory_dismissed() -> void:
+func _on_message_hidden() -> void:
 	_player.resume_controls()
+	memory_collected.emit()

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://80qlq52742m8"]
 
-[ext_resource type="Script" uid="uid://75a75si3nfkr" path="res://scripts/game/rooms/denial_room.gd" id="1_5c8u3"]
+[ext_resource type="Script" uid="uid://205s5ulf7oh4" path="res://scripts/game/rooms/grief_stage_room.gd" id="1_22eb3"]
 [ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="1_eg3ab"]
 [ext_resource type="PackedScene" uid="uid://cqrto67h33ydp" path="res://game/switches/activator.tscn" id="2_le7qa"]
 [ext_resource type="PackedScene" uid="uid://coql64ga8pi0u" path="res://game/level/blocks/block_cracked_md.tscn" id="3_5c8u3"]
@@ -15,13 +15,13 @@
 [ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/interactables/altar.tscn" id="10_pbdpi"]
 [ext_resource type="PackedScene" uid="uid://cvnpe5drc4s7q" path="res://game/interactables/cresset.tscn" id="12_5c8u3"]
 [ext_resource type="PackedScene" uid="uid://b6fydse31tnyb" path="res://game/level/walls/wall_broken_md.tscn" id="15_6h2h2"]
-[ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/memory_reveal.tscn" id="15_22eb3"]
+[ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/message.tscn" id="15_22eb3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3687x"]
 size = Vector3(40.2, 12.1, 51.4)
 
 [node name="DenialRoom" type="Node3D" unique_id=496749782]
-script = ExtResource("1_5c8u3")
+script = ExtResource("1_22eb3")
 
 [node name="Activator" parent="." unique_id=452683808 instance=ExtResource("2_le7qa")]
 
@@ -544,11 +544,11 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.
 [node name="WallNormalLG27" parent="Walls/Outter/Bottom" unique_id=2037666616 instance=ExtResource("5_3npp4")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.800003, 0, -16.8)
 
-[node name="MemoryReveal" parent="." unique_id=1991501411 instance=ExtResource("15_22eb3")]
+[node name="Message" parent="." unique_id=1991501411 instance=ExtResource("15_22eb3")]
 unique_name_in_owner = true
 
 [connection signal="interaction_triggered" from="Interactables/ChestGold" to="." method="_on_chest_interaction_triggered"]
-[connection signal="dismissed" from="MemoryReveal" to="." method="_on_memory_reveal_dismissed"]
-[connection signal="revealed" from="MemoryReveal" to="." method="_on_memory_reveal_revealed"]
+[connection signal="message_hidden" from="Message" to="." method="_on_message_hidden"]
+[connection signal="message_shown" from="Message" to="." method="_on_message_shown"]
 
 [editable path="Activator"]

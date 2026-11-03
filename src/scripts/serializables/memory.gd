@@ -2,7 +2,7 @@ class_name Memory
 
 
 var _description: String
-var revealed: bool = false
+var _revealed: bool = false
 
 
 func _init(memory_description: String = "") -> void:
@@ -11,16 +11,23 @@ func _init(memory_description: String = "") -> void:
 		_description = "Unknown Memory..."
 
 
-func reveal() -> String:
-	revealed = true
+func get_description() -> String:
 	return _description
+
+
+func is_revealed() -> bool:
+	return _revealed
+
+
+func reveal() -> void:
+	_revealed = true
 
 
 func serialize() -> Dictionary:
 	return {
 		"memory": {
 			"description": _description,
-			"revealed": revealed,
+			"revealed": _revealed,
 		}
 	}
 
@@ -28,4 +35,4 @@ func serialize() -> Dictionary:
 func deserialize(data: Dictionary) -> void:
 	var memory_data: Dictionary = data.get("memory", {})
 	_description = memory_data.get("description", "")
-	revealed = memory_data.get("revealed", false)
+	_revealed = memory_data.get("revealed", false)

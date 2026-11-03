@@ -9,12 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/interactables/altar.tscn" id="5_w5kc3"]
 [ext_resource type="PackedScene" uid="uid://cvnpe5drc4s7q" path="res://game/interactables/cresset.tscn" id="6_o6wsi"]
 [ext_resource type="PackedScene" uid="uid://dfwbglgsmyokl" path="res://game/level/walls/wall_normal_lg.tscn" id="8_ebo7r"]
+[ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/message.tscn" id="10_o6wsi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2llnb"]
 size = Vector3(40.2, 12.1, 40.2)
 
-[node name="SpawnRoom" type="Node3D" unique_id=496749782]
+[node name="SpawnRoom" type="Node3D" unique_id=496749782 node_paths=PackedStringArray("message")]
 script = ExtResource("1_o6wsi")
+message = NodePath("Message")
 
 [node name="Activator" parent="." unique_id=452683808 instance=ExtResource("2_ebo7r")]
 
@@ -294,6 +296,11 @@ transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -11.
 [node name="WallNormalLG52" parent="Walls/Top" unique_id=2090122079 instance=ExtResource("8_ebo7r")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -5.600001, 5.6, -5.599999)
 
+[node name="Message" parent="." unique_id=1991501411 instance=ExtResource("10_o6wsi")]
+unique_name_in_owner = true
+
 [connection signal="body_exited" from="Activator" to="." method="_on_activator_body_exited"]
+[connection signal="message_hidden" from="Message" to="." method="_on_message_message_hidden"]
+[connection signal="message_shown" from="Message" to="." method="_on_message_message_shown"]
 
 [editable path="Activator"]

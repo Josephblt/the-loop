@@ -25,6 +25,14 @@ func _init(session_seed: int) -> void:
 	_available_grief_stage_stack = stages
 
 
+func total_stages_count() -> int:
+	return GriefStages.size()
+
+
+func available_stages_count() -> int:
+	return total_stages_count() - _available_grief_stage_stack.size()
+
+
 func peek():
 	return _available_grief_stage_stack.front()
 
