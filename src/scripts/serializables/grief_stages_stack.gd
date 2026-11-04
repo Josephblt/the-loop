@@ -30,7 +30,7 @@ func total_stages_count() -> int:
 
 
 func available_stages_count() -> int:
-	return total_stages_count() - _available_grief_stage_stack.size()
+	return _available_grief_stage_stack.size()
 
 
 func peek():
