@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://rmaydeqcych0"]
+
+[ext_resource type="PackedScene" uid="uid://dt4q24uysybli" path="res://game/lights/lights.tscn" id="1_1cqvc"]
+[ext_resource type="PackedScene" uid="uid://c84q21gidaa1a" path="res://game/actors/intro_player.tscn" id="2_7sgby"]
+[ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_canvas_item_material.tres" id="3_450la"]
+[ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="4_jns1a"]
+[ext_resource type="PackedScene" uid="uid://bdk87p5y3waoa" path="res://game/ui/fade.tscn" id="5_jns1a"]
+
+[node name="LoopIntro" type="Node3D" unique_id=938846757]
+
+[node name="Lights" parent="." unique_id=1637738480 instance=ExtResource("1_1cqvc")]
+
+[node name="Camera3D" parent="." unique_id=559748373 instance=ExtResource("2_7sgby")]
+
+[node name="StoryLoopInfo" type="CanvasLayer" parent="." unique_id=482317055]
+unique_name_in_owner = true
+
+[node name="MarginContainer" type="MarginContainer" parent="StoryLoopInfo" unique_id=8758215]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StoryLoopInfo/MarginContainer" unique_id=1009846678]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="StoryLabel" type="Label" parent="StoryLoopInfo/MarginContainer/VBoxContainer" unique_id=1079136813]
+unique_name_in_owner = true
+material = ExtResource("3_450la")
+custom_minimum_size = Vector2(952, 199)
+layout_mode = 2
+size_flags_horizontal = 19
+size_flags_vertical = 19
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_jns1a")
+theme_override_font_sizes/font_size = 80
+text = "Borrowed Weather"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="LoopLabel" type="Label" parent="StoryLoopInfo/MarginContainer/VBoxContainer" unique_id=1496014857]
+unique_name_in_owner = true
+material = ExtResource("3_450la")
+custom_minimum_size = Vector2(952, 199)
+layout_mode = 2
+size_flags_horizontal = 19
+size_flags_vertical = 19
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_jns1a")
+theme_override_font_sizes/font_size = 40
+text = "I - Loop Title"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Fade" parent="." unique_id=1912159015 instance=ExtResource("5_jns1a")]
+fade_duration = 5.0

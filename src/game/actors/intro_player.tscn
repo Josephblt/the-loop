@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c84q21gidaa1a"]
+
+[ext_resource type="Script" uid="uid://cql65m7kfacfd" path="res://scripts/game/actors/player/intro_player.gd" id="1_axoqh"]
+
+[node name="Camera3D" type="Camera3D" unique_id=559748373]
+cull_mask = 1047553
+script = ExtResource("1_axoqh")
