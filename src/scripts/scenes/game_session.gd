@@ -54,6 +54,8 @@ func _start_loop() -> void:
 
 
 func _load_stage_memories() -> void:
+	if _memories_stack.memory_count() > 0:
+		return
 	var grief_stage: GriefStagesStack.GriefStages = _grief_stages_stack.peek()
 	var story_stage: StoryStage = _story.get_stage(_loop_count, grief_stage)
 	_memories_stack.load_story_stage(story_stage)
