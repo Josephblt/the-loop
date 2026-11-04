@@ -1,10 +1,8 @@
-# Loops
+# Borrowed Weather
 
-## Borrowed Weather
+## Loop One: The Days We Counted Carefully
 
-### Loop One: The Days We Counted Carefully
-
-#### Denial
+### Denial
 
 **Maze Memories**
 
@@ -18,7 +16,7 @@
 
 I found one of your drawings folded in the pocket of my coat. A sun, a house, three people with stick arms. I remembered you giving it to me in the waiting room, and I remembered saying, "I'll look properly when we get home."
 
-#### Anger
+### Anger
 
 **Maze Memories**
 
@@ -32,7 +30,7 @@ I found one of your drawings folded in the pocket of my coat. A sun, a house, th
 
 I smiled at you while the doctor spoke because your eyes kept asking me what kind of room we were in. Afterward, in the hallway, I pressed my forehead to the vending machine and hated it for giving people exactly what they paid for.
 
-#### Bargaining
+### Bargaining
 
 **Maze Memories**
 
@@ -46,7 +44,7 @@ I smiled at you while the doctor spoke because your eyes kept asking me what kin
 
 I used to whisper trades into your hair while you slept. My years for yours. My breath for yours. Anything. Everything. In the morning, you would wake thirsty, and I would think the world had considered my offer.
 
-#### Depression
+### Depression
 
 **Maze Memories**
 
@@ -60,7 +58,7 @@ I used to whisper trades into your hair while you slept. My years for yours. My 
 
 One afternoon you slept through the nurse, the medicine, the woman mopping around the bed. I watched a square of sun move across the floor and understood I could not make even light stay where I needed it.
 
-#### Acceptance
+### Acceptance
 
 **Maze Memories**
 
@@ -74,9 +72,9 @@ One afternoon you slept through the nurse, the medicine, the woman mopping aroun
 
 When your breathing changed, I stopped counting. I put my mouth near your ear and told you about the house, the cup, the shoes that still lit up. I wanted the last place you heard about to be home.
 
-### Loop Two: Everything Left in Its Place
+## Loop Two: Everything Left in Its Place
 
-#### Denial
+### Denial
 
 **Maze Memories**
 
@@ -90,7 +88,7 @@ When your breathing changed, I stopped counting. I put my mouth near your ear an
 
 For weeks, I left your door open the exact width of a sleeping child's breath. Not open. Not closed. Just enough for a mother to pretend she was being practical.
 
-#### Anger
+### Anger
 
 **Maze Memories**
 
@@ -104,7 +102,7 @@ For weeks, I left your door open the exact width of a sleeping child's breath. N
 
 After the funeral, I broke a plate because it was the only thing in the kitchen that would admit it was breakable. Then I stood barefoot in the pieces, waiting to feel sorry. I only felt smaller.
 
-#### Bargaining
+### Bargaining
 
 **Maze Memories**
 
@@ -118,7 +116,7 @@ After the funeral, I broke a plate because it was the only thing in the kitchen 
 
 I wrote down the dates as if the right sequence could accuse the universe into returning you. First fever. First scan. First night I lied when you asked if you were better. The paper filled up. Nothing answered.
 
-#### Depression
+### Depression
 
 **Maze Memories**
 
@@ -132,7 +130,7 @@ I wrote down the dates as if the right sequence could accuse the universe into r
 
 There was a day I did nothing but sit beside your closed door. No crying. No praying. No memory sharp enough to cut me. Just the door, the carpet, the shape of my knees, and the terrible work of remaining.
 
-#### Acceptance
+### Acceptance
 
 **Maze Memories**
 
@@ -146,9 +144,9 @@ There was a day I did nothing but sit beside your closed door. No crying. No pra
 
 I said your name out loud while washing a cup. Nothing answered. Nothing opened. But the name stayed warm in my mouth, and for the first time I did not use it to call you back. I used it because you had been here.
 
-### Loop Three: The Age of Missing Things
+## Loop Three: The Age of Missing Things
 
-#### Denial
+### Denial
 
 **Maze Memories**
 
@@ -162,7 +160,7 @@ I said your name out loud while washing a cup. Nothing answered. Nothing opened.
 
 I saw a school uniform in a shop window and thought, for one clean second, that I should buy the larger size. My hand was already on the glass before the years came back.
 
-#### Anger
+### Anger
 
 **Maze Memories**
 
@@ -176,7 +174,7 @@ I saw a school uniform in a shop window and thought, for one clean second, that 
 
 I found myself laughing at a joke before I remembered to be ashamed. The sound left my mouth whole and ordinary. I hated it for proving I could still make anything that did not belong to you.
 
-#### Bargaining
+### Bargaining
 
 **Maze Memories**
 
@@ -190,7 +188,7 @@ I found myself laughing at a joke before I remembered to be ashamed. The sound l
 
 I paused the video on the half-second before your laugh and tried to live there. Your mouth open, your eyes almost closed, the sound not yet gone. I kept pressing play and losing you again.
 
-#### Depression
+### Depression
 
 **Maze Memories**
 
@@ -204,7 +202,7 @@ I paused the video on the half-second before your laugh and tried to live there.
 
 On her birthday, I tried to picture the candles and could not decide how many belonged on the cake. Seven was true. Everything after was true in a different, crueler way.
 
-#### Acceptance
+### Acceptance
 
 **Maze Memories**
 
