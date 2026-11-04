@@ -17,16 +17,16 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.65)
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=1878854247]
-custom_minimum_size = Vector2(520, 480)
+custom_minimum_size = Vector2(600, 560)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -260.0
-offset_top = -240.0
-offset_right = 260.0
-offset_bottom = 240.0
+offset_left = -300.0
+offset_top = -280.0
+offset_right = 300.0
+offset_bottom = 280.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -39,29 +39,98 @@ theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=72559123]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 16
 
-[node name="Title" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=737898335]
+[node name="Tabs" type="TabContainer" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
-text = "Settings"
-horizontal_alignment = 1
+size_flags_vertical = 3
+current_tab = 1
 
-[node name="SettingsGrid" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1185065004]
+[node name="Debug Info" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/Tabs"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Grid" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/Tabs/Debug Info"]
+layout_mode = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 24
+columns = 2
+
+[node name="StoryTitleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Debug Info/Grid"]
+layout_mode = 2
+text = "Story title"
+
+[node name="StoryTitleValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Debug Info/Grid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "—"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="LoopLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Debug Info/Grid"]
+layout_mode = 2
+text = "Loop"
+
+[node name="LoopValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Debug Info/Grid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "—"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="GriefStageLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Debug Info/Grid"]
+layout_mode = 2
+text = "Current grief stage"
+
+[node name="GriefStageValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Debug Info/Grid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "—"
+horizontal_alignment = 2
+
+[node name="CollectedMemoriesLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Debug Info/Grid"]
+layout_mode = 2
+text = "Collected memories"
+
+[node name="CollectedMemoriesValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Debug Info/Grid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0 / 0"
+horizontal_alignment = 2
+
+[node name="Settings" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/Tabs"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SettingsGrid" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer" unique_id=1185065004]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 24
-theme_override_constants/v_separation = 18
+theme_override_constants/v_separation = 14
 columns = 2
 
-[node name="MouseSensitivityLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid" unique_id=938588926]
+[node name="MouseSensitivityLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid" unique_id=938588926]
 layout_mode = 2
 text = "Mouse sensitivity"
 
-[node name="MouseSensitivityControl" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid" unique_id=1744499019]
+[node name="MouseSensitivityControl" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid" unique_id=1744499019]
 layout_mode = 2
 
-[node name="MouseSensitivitySlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid/MouseSensitivityControl" unique_id=2019950272]
+[node name="MouseSensitivitySlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/MouseSensitivityControl" unique_id=2019950272]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
@@ -69,107 +138,107 @@ max_value = 1.0
 step = 0.01
 value = 0.25
 
-[node name="Values" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid/MouseSensitivityControl" unique_id=1655097776]
+[node name="Values" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/MouseSensitivityControl" unique_id=1655097776]
 layout_mode = 2
 
-[node name="Minimum" type="Label" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid/MouseSensitivityControl/Values" unique_id=31729031]
+[node name="Minimum" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/MouseSensitivityControl/Values" unique_id=31729031]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 
-[node name="MouseSensitivityValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid/MouseSensitivityControl/Values" unique_id=1753108545]
+[node name="MouseSensitivityValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/MouseSensitivityControl/Values" unique_id=1753108545]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0.25"
 horizontal_alignment = 1
 
-[node name="Maximum" type="Label" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid/MouseSensitivityControl/Values" unique_id=1755651488]
+[node name="Maximum" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/MouseSensitivityControl/Values" unique_id=1755651488]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "1"
 horizontal_alignment = 2
 
-[node name="RunSpeedLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid" unique_id=700097937]
+[node name="RunSpeedLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid" unique_id=700097937]
 layout_mode = 2
 text = "Run speed"
 
-[node name="RunSpeedControl" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid" unique_id=1070750555]
+[node name="RunSpeedControl" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid" unique_id=1070750555]
 layout_mode = 2
 
-[node name="RunSpeedSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid/RunSpeedControl" unique_id=1021001886]
+[node name="RunSpeedSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/RunSpeedControl" unique_id=1021001886]
 layout_mode = 2
 value = 75.0
 
-[node name="Values" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid/RunSpeedControl" unique_id=1109091206]
+[node name="Values" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/RunSpeedControl" unique_id=1109091206]
 layout_mode = 2
 
-[node name="Minimum" type="Label" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid/RunSpeedControl/Values" unique_id=713848065]
+[node name="Minimum" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/RunSpeedControl/Values" unique_id=713848065]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 
-[node name="RunSpeedValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid/RunSpeedControl/Values" unique_id=2063368132]
+[node name="RunSpeedValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/RunSpeedControl/Values" unique_id=2063368132]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "75"
 horizontal_alignment = 1
 
-[node name="Maximum" type="Label" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid/RunSpeedControl/Values" unique_id=1885057967]
+[node name="Maximum" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/RunSpeedControl/Values" unique_id=1885057967]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "100"
 horizontal_alignment = 2
 
-[node name="WalkSpeedLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid" unique_id=1859049656]
+[node name="WalkSpeedLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid" unique_id=1859049656]
 layout_mode = 2
 text = "Walk speed"
 
-[node name="WalkSpeedControl" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid" unique_id=1800556367]
+[node name="WalkSpeedControl" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid" unique_id=1800556367]
 layout_mode = 2
 
-[node name="WalkSpeedSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid/WalkSpeedControl" unique_id=464011572]
+[node name="WalkSpeedSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/WalkSpeedControl" unique_id=464011572]
 layout_mode = 2
 value = 30.0
 
-[node name="Values" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid/WalkSpeedControl" unique_id=111118976]
+[node name="Values" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/WalkSpeedControl" unique_id=111118976]
 layout_mode = 2
 
-[node name="Minimum" type="Label" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid/WalkSpeedControl/Values" unique_id=947182138]
+[node name="Minimum" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/WalkSpeedControl/Values" unique_id=947182138]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 
-[node name="WalkSpeedValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid/WalkSpeedControl/Values" unique_id=1721131387]
+[node name="WalkSpeedValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/WalkSpeedControl/Values" unique_id=1721131387]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "30"
 horizontal_alignment = 1
 
-[node name="Maximum" type="Label" parent="Panel/MarginContainer/VBoxContainer/SettingsGrid/WalkSpeedControl/Values" unique_id=947383601]
+[node name="Maximum" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/WalkSpeedControl/Values" unique_id=947383601]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "100"
 horizontal_alignment = 2
 
-[node name="SaveButton" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=235174023]
+[node name="SaveButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer" unique_id=235174023]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
 text = "Save"
 
-[node name="FullscreenButton" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=1698924850]
+[node name="FullscreenButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer" unique_id=1698924850]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Enter Fullscreen"
 
-[node name="MainMenuButton" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=830898877]
+[node name="MainMenuButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer" unique_id=830898877]
 layout_mode = 2
 text = "Return to Main Menu"
 
-[node name="MouseModeButton" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=713400617]
+[node name="MouseModeButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer" unique_id=713400617]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
@@ -181,11 +250,11 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
 text = "Resume"
 
-[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/SettingsGrid/MouseSensitivityControl/MouseSensitivitySlider" to="." method="_on_mouse_sensitivity_slider_value_changed"]
-[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/SettingsGrid/RunSpeedControl/RunSpeedSlider" to="." method="_on_run_speed_slider_value_changed"]
-[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/SettingsGrid/WalkSpeedControl/WalkSpeedSlider" to="." method="_on_walk_speed_slider_value_changed"]
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
-[connection signal="toggled" from="Panel/MarginContainer/VBoxContainer/MouseModeButton" to="." method="_on_mouse_state_button_toggled"]
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/MouseSensitivityControl/MouseSensitivitySlider" to="." method="_on_mouse_sensitivity_slider_value_changed"]
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/RunSpeedControl/RunSpeedSlider" to="." method="_on_run_speed_slider_value_changed"]
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SettingsGrid/WalkSpeedControl/WalkSpeedSlider" to="." method="_on_walk_speed_slider_value_changed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="toggled" from="Panel/MarginContainer/VBoxContainer/Tabs/Settings/VBoxContainer/MouseModeButton" to="." method="_on_mouse_state_button_toggled"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

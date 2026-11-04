@@ -9,6 +9,7 @@ signal walk_speed_changed(value: float)
 
 const MAIN_MENU_SCENE_PATH: String = "uid://cfd01q26as6sx"
 const SPEED_SLIDER_SCALE: float = 10.0
+const ROMAN_LOOP_NUMBERS: Array[String] = ["I", "II", "III"]
 
 @onready var game_session: GameSession = get_node("/root/GameSession")
 
@@ -18,6 +19,10 @@ const SPEED_SLIDER_SCALE: float = 10.0
 @onready var walk_speed_value: Label = %WalkSpeedValue
 @onready var fullscreen_button: Button = %FullscreenButton
 @onready var mouse_mode_button: Button = %MouseModeButton
+@onready var story_title_value: Label = %StoryTitleValue
+@onready var loop_value: Label = %LoopValue
+@onready var grief_stage_value: Label = %GriefStageValue
+@onready var collected_memories_value: Label = %CollectedMemoriesValue
 
 
 func _ready() -> void:
@@ -51,6 +56,7 @@ func _open() -> void:
 		mouse_mode_button.text = "Mouse Visible"
 
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	_update_debug_info()
 	_update_fullscreen_button()
 	mouse_sensitivity_slider.grab_focus()
 
@@ -89,6 +95,20 @@ func _on_fullscreen_button_pressed() -> void:
 func _update_fullscreen_button() -> void:
 	var fullscreen: bool = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
 	fullscreen_button.text = "Exit Fullscreen" if fullscreen else "Enter Fullscreen"
+
+
+func _update_debug_info() -> void:
+	var loop_number: int = game_session.loop_number()
+	story_title_value.text = game_session.story_title()
+	loop_value.text = "%s - %s" % [_roman_loop_number(loop_number), game_session.loop_title()]
+	grief_stage_value.text = game_session.current_grief_stage_name()
+	collected_memories_value.text = "%d / %d" % [game_session.collected_memories_count(), game_session.total_memories_count()]
+
+
+func _roman_loop_number(loop_number: int) -> String:
+	if loop_number > 0 and loop_number <= ROMAN_LOOP_NUMBERS.size():
+		return ROMAN_LOOP_NUMBERS[loop_number - 1]
+	return str(loop_number)
 
 
 func _on_main_menu_button_pressed() -> void:

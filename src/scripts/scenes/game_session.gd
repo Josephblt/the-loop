@@ -198,6 +198,31 @@ func update_save_data() -> void:
 	file_readable.close()
 
 
+func story_title() -> String:
+	return _story.title
+
+
+func loop_number() -> int:
+	return _loop_count + 1
+
+
+func loop_title() -> String:
+	return _story.loops[_loop_count].title
+
+
+func current_grief_stage_name() -> String:
+	var grief_stage: GriefStagesStack.GriefStages = _grief_stages_stack.peek()
+	return GriefStagesStack.GriefStages.keys()[grief_stage].capitalize()
+
+
+func collected_memories_count() -> int:
+	return _memories_stack.revealed_memory_count()
+
+
+func total_memories_count() -> int:
+	return _memories_stack.memory_count()
+
+
 func load_save_data() -> void:
 	var file: FileAccess = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)
 	var data: Dictionary = file.get_var()
