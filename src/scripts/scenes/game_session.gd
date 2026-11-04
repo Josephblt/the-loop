@@ -38,9 +38,6 @@ var _denial_room: GriefStageRoom
 var _denial_room_gate: Gate
 var _depression_room: GriefStageRoom
 var _depression_room_gate: Gate
-var _spawn_room: SpawnRoom
-var _spawn_room_gates: Array[Gate] = []
-var _memory_rooms: Array[MemoryRoom] = []
 
 
 func _ready() -> void:
@@ -51,7 +48,6 @@ func _ready() -> void:
 func _start_loop() -> void:
 	_load_stage_memories()
 	_add_spawn_room()
-	_add_spawn_room_gates()
 	_add_grief_room_gates()
 	_add_grief_rooms()
 	_add_memory_rooms()
@@ -65,27 +61,27 @@ func _load_stage_memories() -> void:
 
 func _add_spawn_room() -> void:
 	var fire_fixture_states: Array[FireFixtureState] = _fire_fixture_states.get_room_states(FireFixtureStates.Rooms.SPAWN)
-	_spawn_room = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
-	SceneRandomizer.randomize_scene(_spawn_room, _session_seed)
-	_spawn_room.setup_room(fire_fixture_states)
-	_stage.add_child(_spawn_room)
+	var spawn_room = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
+	SceneRandomizer.randomize_scene(spawn_room, _session_seed)
+	spawn_room.setup_room(fire_fixture_states)	
+	
+	var spawn_room_gates: Array[Gate] = []
 
-
-func _add_spawn_room_gates() -> void:
 	var north_gate: Gate = _add_gate(VERTICAL_GATE_SCENE, "SpawnNorthGate", STAGE_LAYOUT_PATH.spawn_north_gate_transform)
 	SceneRandomizer.randomize_scene(north_gate, _session_seed)
-	_spawn_room_gates.append(north_gate)
+	spawn_room_gates.append(north_gate)
 	var south_gate: Gate = _add_gate(VERTICAL_GATE_SCENE, "SpawnSouthGate", STAGE_LAYOUT_PATH.spawn_south_gate_transform)
 	SceneRandomizer.randomize_scene(south_gate, _session_seed)
-	_spawn_room_gates.append(south_gate)
+	spawn_room_gates.append(south_gate)
 	var west_gate: Gate = _add_gate(HORIZONTAL_GATE_SCENE, "SpawnWestGate", STAGE_LAYOUT_PATH.spawn_west_gate_transform)
 	SceneRandomizer.randomize_scene(west_gate, _session_seed)
-	_spawn_room_gates.append(west_gate)
+	spawn_room_gates.append(west_gate)
 	var east_gate: Gate = _add_gate(HORIZONTAL_GATE_SCENE, "SpawnEastGate", STAGE_LAYOUT_PATH.spawn_east_gate_transform)
 	SceneRandomizer.randomize_scene(east_gate, _session_seed)
-	_spawn_room_gates.append(east_gate)
+	spawn_room_gates.append(east_gate)
 
-	_spawn_room.setup_scene(_spawn_room_gates)
+	spawn_room.setup_spawn_room(spawn_room_gates)
+	_stage.add_child(spawn_room)
 
 
 func _add_grief_rooms() -> void:
@@ -182,7 +178,6 @@ func _add_memory_room(index: int, room_transform: Transform3D) -> void:
 		# GriefStagesStack.GriefStages.ACCEPTANCE:
 		# 	room.memory_collected.connect(_acceptance_room._on_memory_collected)	
 
-	_memory_rooms.append(room)	
 	_stage.add_child(room)	
 
 

@@ -5,7 +5,7 @@ extends Room
 var _gates: Array[Gate] = []
 
 
-func setup_scene(gates: Array[Gate]) -> void:
+func setup_spawn_room(gates: Array[Gate]) -> void:
 	_gates.assign(gates)
 
 
