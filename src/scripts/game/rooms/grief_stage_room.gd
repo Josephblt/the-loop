@@ -8,9 +8,10 @@ signal grief_stage_completed()
 @onready var chest_gold: Chest = %ChestGold
 @onready var message: Message = %Message
 
-var _memory: Memory
-var _player: Player
+var _closing_memory: Memory
+var _collected_memories_counter: int = 0
 var _gate: Gate
+var _player: Player
 
 
 func _ready() -> void:
@@ -19,26 +20,27 @@ func _ready() -> void:
 	super._ready()
 
 
-func setup_grief_stage_room(player: Player, memory: Memory, gate: Gate, fire_fixtures_states: Array[FireFixtureState]) -> void:
+func setup_grief_stage_room(player: Player, closing_memory: Memory, collected_memories_counter: int, gate: Gate, fire_fixtures_states: Array[FireFixtureState]) -> void:
 	_player = player
-	_memory = memory
+	_closing_memory = closing_memory
 	_gate = gate
+	_collected_memories_counter = collected_memories_counter
 	setup_room(fire_fixtures_states)
 
 
 func _setup_chest() -> void:
-	if !_memory:
+	if !_closing_memory:
 		return
 
-	if _memory.is_revealed():
+	if _closing_memory.is_revealed():
 		chest_gold.open_immediately()
 
 
 func _setup_message() -> void:
-	if !_memory:
+	if !_closing_memory:
 		return
 	
-	message.setup_message(_memory.get_description())
+	message.setup_message(_closing_memory.get_description())
 
 
 func _on_chest_interaction_triggered(_interactable: Interactable) -> void:
@@ -47,13 +49,19 @@ func _on_chest_interaction_triggered(_interactable: Interactable) -> void:
 
 
 func _on_message_shown() -> void:
-	if _memory:
-		_memory.reveal()
+	if _closing_memory:
+		_closing_memory.reveal()
 
 
 func _on_message_hidden() -> void:
 	_player.resume_controls()
 	grief_stage_completed.emit()
+
+
+func _on_memory_collected() -> void:
+	_collected_memories_counter -= 1
+	if _collected_memories_counter == 0:
+		_gate.open()
 
 
 func _on_activator_body_entered(_body: Node3D) -> void:

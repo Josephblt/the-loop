@@ -52,14 +52,12 @@ func _start_loop() -> void:
 	_load_stage_memories()
 	_add_spawn_room()
 	_add_spawn_room_gates()
-	_add_memory_rooms()
 	_add_grief_room_gates()
 	_add_grief_rooms()
+	_add_memory_rooms()
 
 
 func _load_stage_memories() -> void:
-	if _memories_stack.memory_count() > 0:
-		return
 	var grief_stage: GriefStagesStack.GriefStages = _grief_stages_stack.peek()
 	var story_stage: StoryStage = _story.get_stage(_loop_count, grief_stage)
 	_memories_stack.load_story_stage(story_stage)
@@ -90,31 +88,13 @@ func _add_spawn_room_gates() -> void:
 	_spawn_room.setup_scene(_spawn_room_gates)
 
 
-func _add_memory_rooms() -> void:
-	var transforms: Array[Transform3D] = STAGE_LAYOUT_PATH.memory_room_transforms(_session_seed, _memories_stack.memory_count())
-	for index: int in transforms.size():
-		_add_memory_room(index, transforms[index])
-
-
-func _add_memory_room(index: int, room_transform: Transform3D) -> void:
-	var room: MemoryRoom = MEMORY_ROOM_SCENE.instantiate() as MemoryRoom
-	var room_id: String = "MemoryRoom%d" % (index + 1)
-	var memory: Memory = _memories_stack.memory_at(index)
-	var fire_fixture_states: Array[FireFixtureState] = _fire_fixture_states.get_room_states(FireFixtureStates.Rooms.MEMORY, room_id)
-	SceneRandomizer.randomize_scene(room, _session_seed)
-	room.name = room_id
-	room.transform = room_transform
-	room.setup_memory_room(_player, memory, fire_fixture_states)
-	_memory_rooms.append(room)
-	_stage.add_child(room)	
-	
-
 func _add_grief_rooms() -> void:
 	var current_grief_stage: GriefStagesStack.GriefStages = _grief_stages_stack.peek()
 	var anger_room_is_current: bool = false
 	var denial_room_is_current: bool = false
 	var bargaining_room_is_current: bool = false
 	var depression_room_is_current: bool = false
+	# var acceptance_room_is_current: bool = false
 	
 	match current_grief_stage:
 		GriefStagesStack.GriefStages.ANGER:
@@ -125,11 +105,14 @@ func _add_grief_rooms() -> void:
 			bargaining_room_is_current = true
 		GriefStagesStack.GriefStages.DEPRESSION:
 			depression_room_is_current = true
+		# GriefStagesStack.GriefStages.ACCEPTANCE:
+		# 	acceptance_room_is_current = true
 
 	_anger_room = _add_grief_room(ANGER_ROOM_SCENE, _anger_room_gate, STAGE_LAYOUT_PATH.anger_room_transform, FireFixtureStates.Rooms.ANGER, anger_room_is_current)
 	_denial_room = _add_grief_room(DENIAL_ROOM_SCENE, _denial_room_gate, STAGE_LAYOUT_PATH.denial_room_transform, FireFixtureStates.Rooms.DENIAL, denial_room_is_current)
 	_bargaining_room = _add_grief_room(BARGAINING_ROOM_SCENE, _bargaining_room_gate, STAGE_LAYOUT_PATH.bargaining_room_transform, FireFixtureStates.Rooms.BARGAINING, bargaining_room_is_current)
 	_depression_room = _add_grief_room(DEPRESSION_ROOM_SCENE, _depression_room_gate, STAGE_LAYOUT_PATH.depression_room_transform, FireFixtureStates.Rooms.DEPRESSION, depression_room_is_current)
+	# _acceptance_room = _add_grief_room(ACCEPTANCE_ROOM_SCENE, _acceptance_room_gate, STAGE_LAYOUT_PATH.acceptance_room_transform, FireFixtureStates.Rooms.ACCEPTANCE, acceptance_room_is_current)
 
 
 func _add_grief_room(scene: PackedScene, gate: Gate, room_transform: Transform3D, room_id: FireFixtureStates.Rooms, is_current_grief_stage_room: bool) -> Room:
@@ -138,11 +121,13 @@ func _add_grief_room(scene: PackedScene, gate: Gate, room_transform: Transform3D
 	SceneRandomizer.randomize_scene(grief_state_room, _session_seed)
 	grief_state_room.transform = room_transform
 
-	var memory: Memory = null
+	var closing_memory: Memory = null
+	var collected_memories_count: int = -1
 	if is_current_grief_stage_room:
-		memory = _memories_stack.closing_memory()
+		closing_memory = _memories_stack.closing_memory()
+		collected_memories_count = _memories_stack.memory_count()
 
-	grief_state_room.setup_grief_stage_room(_player, memory, gate, fire_fixture_states)
+	grief_state_room.setup_grief_stage_room(_player, closing_memory, collected_memories_count, gate, fire_fixture_states)
 	_stage.add_child(grief_state_room)
 	return grief_state_room
 
@@ -165,6 +150,40 @@ func _add_gate(scene: PackedScene, node_name: String, gate_transform: Transform3
 	gate.transform = gate_transform
 	_stage.add_child(gate)
 	return gate
+
+
+func _add_memory_rooms() -> void:
+	var transforms: Array[Transform3D] = STAGE_LAYOUT_PATH.memory_room_transforms(_session_seed, _memories_stack.memory_count())
+	for index: int in transforms.size():
+		_add_memory_room(index, transforms[index])
+
+
+func _add_memory_room(index: int, room_transform: Transform3D) -> void:
+	var room: MemoryRoom = MEMORY_ROOM_SCENE.instantiate() as MemoryRoom
+	var room_id: String = "MemoryRoom%d" % (index + 1)
+	var memory: Memory = _memories_stack.memory_at(index)
+	var fire_fixture_states: Array[FireFixtureState] = _fire_fixture_states.get_room_states(FireFixtureStates.Rooms.MEMORY, room_id)
+	SceneRandomizer.randomize_scene(room, _session_seed)
+	room.name = room_id
+	room.transform = room_transform
+	room.setup_memory_room(_player, memory, fire_fixture_states)
+
+	var current_grief_stage: GriefStagesStack.GriefStages = _grief_stages_stack.peek()
+	
+	match current_grief_stage:
+		GriefStagesStack.GriefStages.ANGER:
+			room.memory_collected.connect(_anger_room._on_memory_collected)
+		GriefStagesStack.GriefStages.DENIAL:
+			room.memory_collected.connect(_denial_room._on_memory_collected)
+		GriefStagesStack.GriefStages.BARGAINING:
+			room.memory_collected.connect(_bargaining_room._on_memory_collected)
+		GriefStagesStack.GriefStages.DEPRESSION:
+			room.memory_collected.connect(_depression_room._on_memory_collected)
+		# GriefStagesStack.GriefStages.ACCEPTANCE:
+		# 	room.memory_collected.connect(_acceptance_room._on_memory_collected)	
+
+	_memory_rooms.append(room)	
+	_stage.add_child(room)	
 
 
 func _end_loop() -> void:

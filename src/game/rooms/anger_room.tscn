@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/message.tscn" id="16_b608g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3687x"]
-size = Vector3(40.2, 12.1, 51.4)
+size = Vector3(40.2, 12.1, 48.5)
 
 [node name="AngerRoom" type="Node3D" unique_id=496749782]
 script = ExtResource("1_qc7yu")
@@ -26,7 +26,7 @@ script = ExtResource("1_qc7yu")
 [node name="Activator" parent="." unique_id=452683808 instance=ExtResource("2_50ifw")]
 
 [node name="CollisionShape3D" parent="Activator" index="0" unique_id=1593920821]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4305115e-06, 5.6500006, -5.6000013)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4305115e-06, 5.6500006, -4.1500006)
 shape = SubResource("BoxShape3D_3687x")
 
 [node name="Floor" type="Node3D" parent="." unique_id=489162263]
