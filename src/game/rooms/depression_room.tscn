@@ -550,7 +550,7 @@ transform = Transform3D(-1, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -1, -28,
 [node name="Message" parent="." unique_id=1991501411 instance=ExtResource("17_s6b74")]
 unique_name_in_owner = true
 
-[connection signal="body_exited" from="Activator" to="." method="_on_activator_body_exited"]
+[connection signal="body_entered" from="Activator" to="." method="_on_activator_body_entered"]
 [connection signal="interaction_triggered" from="Interactables/ChestGold" to="." method="_on_chest_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Altars/AltarLeft" to="." method="_on_fire_fixture_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Altars/AltarRight" to="." method="_on_fire_fixture_interaction_triggered"]

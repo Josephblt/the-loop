@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/message.tscn" id="15_22eb3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3687x"]
-size = Vector3(40.2, 12.1, 51.4)
+size = Vector3(40.2, 12.1, 48.8)
 
 [node name="DenialRoom" type="Node3D" unique_id=496749782]
 script = ExtResource("1_22eb3")
@@ -26,7 +26,7 @@ script = ExtResource("1_22eb3")
 [node name="Activator" parent="." unique_id=452683808 instance=ExtResource("2_le7qa")]
 
 [node name="CollisionShape3D" parent="Activator" index="0" unique_id=1593920821]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.536743e-07, 5.65, 5.600002)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.536743e-07, 5.65, 4.3000007)
 shape = SubResource("BoxShape3D_3687x")
 
 [node name="Floor" type="Node3D" parent="." unique_id=489162263]
@@ -547,7 +547,7 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.
 [node name="Message" parent="." unique_id=1991501411 instance=ExtResource("15_22eb3")]
 unique_name_in_owner = true
 
-[connection signal="body_exited" from="Activator" to="." method="_on_activator_body_exited"]
+[connection signal="body_entered" from="Activator" to="." method="_on_activator_body_entered"]
 [connection signal="interaction_triggered" from="Interactables/ChestGold" to="." method="_on_chest_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Altars/AltarLeft" to="." method="_on_fire_fixture_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Altars/AltarRight" to="." method="_on_fire_fixture_interaction_triggered"]

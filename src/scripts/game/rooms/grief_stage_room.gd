@@ -16,29 +16,39 @@ var _gate: Gate
 func _ready() -> void:
 	_setup_chest()
 	_setup_message()
+	super._ready()
 
 
-func setup_scene(player: Player, memory: Memory, gate: Gate) -> void:
+func setup_grief_stage_room(player: Player, memory: Memory, gate: Gate, fire_fixtures_states: Array[FireFixtureState]) -> void:
 	_player = player
 	_memory = memory
 	_gate = gate
+	setup_room(fire_fixtures_states)
 
 
 func _setup_chest() -> void:
+	if !_memory:
+		return
+
 	if _memory.is_revealed():
 		chest_gold.open_immediately()
 
 
 func _setup_message() -> void:
+	if !_memory:
+		return
+	
 	message.setup_message(_memory.get_description())
 
 
 func _on_chest_interaction_triggered(_interactable: Interactable) -> void:
-	_player.pause_controls()	
+	_player.pause_controls()
+	message.show_message()
 
 
 func _on_message_shown() -> void:
-	_memory.reveal()
+	if _memory:
+		_memory.reveal()
 
 
 func _on_message_hidden() -> void:
@@ -46,5 +56,5 @@ func _on_message_hidden() -> void:
 	grief_stage_completed.emit()
 
 
-func _on_activator_body_exited(_body: Node3D) -> void:
+func _on_activator_body_entered(_body: Node3D) -> void:
 	_gate.close()
