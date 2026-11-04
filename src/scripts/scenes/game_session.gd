@@ -175,7 +175,7 @@ func _on_grief_stage_completed() -> void:
 	else:
 		_grief_stages_stack.pop()
 	
-	_memories_stack = MemoriesStack.new(_session_seed)					
+	_memories_stack = MemoriesStack.new(_session_seed)
 	update_save_data()
 	get_tree().change_scene_to_packed(GAME_SESSION_SCENE)
 
