@@ -63,10 +63,9 @@ func _add_spawn_room() -> void:
 	var fire_fixture_states: Array[FireFixtureState] = _fire_fixture_states.get_room_states(FireFixtureStates.Rooms.SPAWN)
 	var spawn_room = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
 	SceneRandomizer.randomize_scene(spawn_room, _session_seed)
-	spawn_room.setup_room(fire_fixture_states)	
 	
 	var spawn_room_gates: Array[Gate] = []
-
+	
 	var north_gate: Gate = _add_gate(VERTICAL_GATE_SCENE, "SpawnNorthGate", STAGE_LAYOUT_PATH.spawn_north_gate_transform)
 	SceneRandomizer.randomize_scene(north_gate, _session_seed)
 	spawn_room_gates.append(north_gate)
@@ -80,7 +79,7 @@ func _add_spawn_room() -> void:
 	SceneRandomizer.randomize_scene(east_gate, _session_seed)
 	spawn_room_gates.append(east_gate)
 
-	spawn_room.setup_spawn_room(spawn_room_gates)
+	spawn_room.setup_spawn_room(spawn_room_gates, fire_fixture_states)
 	_stage.add_child(spawn_room)
 
 
