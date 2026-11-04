@@ -19,6 +19,7 @@ const ROMAN_LOOP_NUMBERS: Array[String] = ["I", "II", "III"]
 @onready var walk_speed_value: Label = %WalkSpeedValue
 @onready var fullscreen_button: Button = %FullscreenButton
 @onready var mouse_mode_button: Button = %MouseModeButton
+@onready var session_seed_value: Label = %SessionSeedValue
 @onready var story_title_value: Label = %StoryTitleValue
 @onready var loop_value: Label = %LoopValue
 @onready var grief_stage_value: Label = %GriefStageValue
@@ -99,6 +100,7 @@ func _update_fullscreen_button() -> void:
 
 func _update_debug_info() -> void:
 	var loop_number: int = game_session.loop_number()
+	session_seed_value.text = str(game_session.session_seed())
 	story_title_value.text = game_session.story_title()
 	loop_value.text = "%s - %s" % [_roman_loop_number(loop_number), game_session.loop_title()]
 	grief_stage_value.text = game_session.current_grief_stage_name()

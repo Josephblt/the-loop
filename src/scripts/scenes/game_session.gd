@@ -202,6 +202,10 @@ func story_title() -> String:
 	return _story.title
 
 
+func session_seed() -> int:
+	return _session_seed
+
+
 func loop_number() -> int:
 	return _loop_count + 1
 

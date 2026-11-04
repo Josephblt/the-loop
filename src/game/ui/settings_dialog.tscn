@@ -59,6 +59,17 @@ theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 24
 columns = 2
 
+[node name="SessionSeedLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Debug Info/Grid"]
+layout_mode = 2
+text = "Session seed"
+
+[node name="SessionSeedValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Debug Info/Grid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "—"
+horizontal_alignment = 2
+
 [node name="StoryTitleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Tabs/Debug Info/Grid"]
 layout_mode = 2
 text = "Story title"
