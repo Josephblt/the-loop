@@ -23,14 +23,6 @@ func memory_count() -> int:
 	return _maze_memories.size()
 
 
-func revealed_memory_count() -> int:
-	var revealed_count: int = 0
-	for memory: Memory in _maze_memories:
-		if memory != null and memory.is_revealed():
-			revealed_count += 1
-	return revealed_count
-
-
 func memory_at(index: int) -> Memory:
 	return _maze_memories[index]
 
