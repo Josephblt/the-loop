@@ -13,6 +13,14 @@ func setup_room(fire_fixtures_states: Array[FireFixtureState]) -> void:
 	_fire_fixtures_states = fire_fixtures_states
 
 
+func ignite_fire_fixtures() -> void:
+	pass
+
+
+func extinguish_fire_fixtures() -> void:
+	pass
+
+
 func _setup_fire_fixtures() -> void:
 	for state: FireFixtureState in _fire_fixtures_states:
 		var fixture: FireFixture = get_node(state.fixture_id) as FireFixture

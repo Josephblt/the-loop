@@ -8,6 +8,7 @@
 [ext_resource type="Material" uid="uid://e8uxyqrstxcu" path="res://assets/materials/switches/gate/dissolve_spatial_material.tres" id="5_4x01p"]
 [ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="8_ai4gf"]
 [ext_resource type="AudioStream" uid="uid://bvbsrv3v0iwrd" path="res://assets/sounds/sfx/portal/portal.tres" id="8_n47wt"]
+[ext_resource type="PackedScene" uid="uid://cvnpe5drc4s7q" path="res://game/interactables/cresset.tscn" id="9_7hvp7"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_b0de2"]
 _surfaces = [{
@@ -55,7 +56,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Barrier/DissolveSpatial:instance_shader_parameters/activation")
+tracks/0/path = NodePath("Walls/Barrier/DissolveSpatial:instance_shader_parameters/activation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -67,7 +68,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Barrier:collision_layer")
+tracks/1/path = NodePath("Walls/Barrier:collision_layer")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -79,7 +80,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Barrier:collision_mask")
+tracks/2/path = NodePath("Walls/Barrier:collision_mask")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -91,7 +92,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Barrier/Light:omni_range")
+tracks/3/path = NodePath("Walls/Barrier/Light:omni_range")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -124,27 +125,38 @@ tracks/5/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Walls/Barrier:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_n47wt"]
 resource_name = "close"
 step = 0.05
-capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Barrier/DissolveSpatial:instance_shader_parameters/activation")
+tracks/0/path = NodePath("Walls/Barrier/DissolveSpatial:instance_shader_parameters/activation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
-"update": 2,
+"update": 0,
 "values": [1.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Barrier:collision_layer")
+tracks/1/path = NodePath("Walls/Barrier:collision_layer")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -156,7 +168,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Barrier:collision_mask")
+tracks/2/path = NodePath("Walls/Barrier:collision_mask")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -168,61 +180,86 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Barrier/Light:omni_range")
+tracks/3/path = NodePath("Walls/Barrier:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"update": 2,
-"values": [15.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AudioStreamPlayer3D:volume_db")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-80.0, 0.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("AudioStreamPlayer3D:playing")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Cresset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"set_lit"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Walls/Barrier/Light:omni_range")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayer3D:volume_db")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_tlncs"]
 resource_name = "close_immediately"
 length = 0.001
 step = 0.05
-capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Barrier/DissolveSpatial:instance_shader_parameters/activation")
+tracks/0/path = NodePath("Walls/Barrier/DissolveSpatial:instance_shader_parameters/activation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 2,
+"update": 1,
 "values": [1.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Barrier:collision_layer")
+tracks/1/path = NodePath("Walls/Barrier:collision_layer")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -234,7 +271,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Barrier:collision_mask")
+tracks/2/path = NodePath("Walls/Barrier:collision_mask")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -246,60 +283,85 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Barrier/Light:omni_range")
+tracks/3/path = NodePath("Walls/Barrier:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 2,
-"values": [15.0]
+"update": 1,
+"values": [true]
 }
-tracks/4/type = "value"
+tracks/4/type = "method"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AudioStreamPlayer3D:volume_db")
+tracks/4/path = NodePath("Cresset")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"values": [{
+"args": [false],
+"method": &"set_lit"
+}]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/5/path = NodePath("Walls/Barrier/Light:omni_range")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
+"values": [15.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
 "values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayer3D:volume_db")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_8l05i"]
 resource_name = "open"
 step = 0.05
-capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Barrier/DissolveSpatial:instance_shader_parameters/activation")
+tracks/0/path = NodePath("Walls/Barrier/DissolveSpatial:instance_shader_parameters/activation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
-"update": 2,
+"update": 0,
 "values": [0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Barrier:collision_layer")
+tracks/1/path = NodePath("Walls/Barrier:collision_layer")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -311,7 +373,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Barrier:collision_mask")
+tracks/2/path = NodePath("Walls/Barrier:collision_mask")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -323,34 +385,60 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Barrier/Light:omni_range")
+tracks/3/path = NodePath("Walls/Barrier:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 2,
-"values": [0.0]
+"update": 1,
+"values": [true]
 }
-tracks/4/type = "value"
+tracks/4/type = "method"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/4/path = NodePath("Cresset")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"values": [{
+"args": [true],
+"method": &"set_lit"
+}]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AudioStreamPlayer3D:volume_db")
+tracks/5/path = NodePath("Walls/Barrier/Light:omni_range")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayer3D:volume_db")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -361,23 +449,22 @@ tracks/5/keys = {
 resource_name = "open_immediately"
 length = 0.001
 step = 0.05
-capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Barrier/DissolveSpatial:instance_shader_parameters/activation")
+tracks/0/path = NodePath("Walls/Barrier/DissolveSpatial:instance_shader_parameters/activation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 2,
+"update": 1,
 "values": [0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Barrier:collision_layer")
+tracks/1/path = NodePath("Walls/Barrier:collision_layer")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -389,7 +476,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Barrier:collision_mask")
+tracks/2/path = NodePath("Walls/Barrier:collision_mask")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -401,41 +488,67 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Barrier/Light:omni_range")
+tracks/3/path = NodePath("Walls/Barrier:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 2,
-"values": [0.0]
+"update": 1,
+"values": [true]
 }
-tracks/4/type = "value"
+tracks/4/type = "method"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/4/path = NodePath("Cresset")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"values": [{
+"args": [true],
+"method": &"set_lit"
+}]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AudioStreamPlayer3D:volume_db")
+tracks/5/path = NodePath("Walls/Barrier/Light:omni_range")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayer3D:volume_db")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
 "values": [-80.0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_n47wt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7hvp7"]
 _data = {
 &"RESET": SubResource("Animation_7hvp7"),
 &"close": SubResource("Animation_n47wt"),
@@ -447,29 +560,42 @@ _data = {
 [node name="GateVertical" type="Node3D" unique_id=1825569716]
 script = ExtResource("1_3bxv0")
 
-[node name="Gate" type="StaticBody3D" parent="." unique_id=1011791674]
+[node name="Cresset" parent="." unique_id=528922892 instance=ExtResource("9_7hvp7")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 5.6, -5.6)
+
+[node name="Floor" type="Node3D" parent="." unique_id=210020435]
+
+[node name="OutsideBlockCrackedSM" parent="Floor" unique_id=2041578037 instance=ExtResource("8_ai4gf")]
+
+[node name="InsideBlockCrackedSM2" parent="Floor" unique_id=740626616 instance=ExtResource("8_ai4gf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.6)
+
+[node name="Walls" type="Node3D" parent="." unique_id=1731400114]
+
+[node name="Gate" type="StaticBody3D" parent="Walls" unique_id=1011791674]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, -2.8)
 collision_mask = 2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Gate" unique_id=320320536]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Gate" unique_id=320320536]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, -3.25, -0.3)
 gi_mode = 2
 mesh = SubResource("ArrayMesh_nsrxx")
 
-[node name="OccluderInstance3D" type="OccluderInstance3D" parent="Gate/MeshInstance3D" unique_id=1121876501]
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="Walls/Gate/MeshInstance3D" unique_id=1121876501]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.3, 0, 0)
 occluder = SubResource("PolygonOccluder3D_ei8on")
 
-[node name="CollisionShape3D" type="CollisionPolygon3D" parent="Gate" unique_id=1100250817]
+[node name="CollisionShape3D" type="CollisionPolygon3D" parent="Walls/Gate" unique_id=1100250817]
 transform = Transform3D(-1, 0, -3.9331087e-05, 0, 1, 0, 3.9331087e-05, 0, -1, 0, -3.25, 0)
 depth = 0.8
 polygon = PackedVector2Array(-3.1999998, 0, -3.1999998, 6.3999996, 3.2, 6.4, 3.2, 0, 1.5, 0, 1.5, 0.8, 1.9, 2, 1.9, 4.5, 0.8, 5.9, -0.8, 5.9, -1.9, 4.5, -1.9, 2, -1.5, 0.8, -1.5, 0)
 
-[node name="Barrier" type="StaticBody3D" parent="." unique_id=339110726]
+[node name="Barrier" type="StaticBody3D" parent="Walls" unique_id=339110726]
+visible = false
 collision_layer = 0
 collision_mask = 0
 
-[node name="DissolveSpatial" type="MeshInstance3D" parent="Barrier" unique_id=2127747107]
+[node name="DissolveSpatial" type="MeshInstance3D" parent="Walls/Barrier" unique_id=2127747107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 2.6, -2.799)
 material_override = ExtResource("5_4x01p")
 material_overlay = ExtResource("4_vmqm7")
@@ -477,11 +603,11 @@ cast_shadow = 0
 instance_shader_parameters/activation = 0.0
 mesh = SubResource("QuadMesh_7c6s6")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrier" unique_id=399760843]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Barrier" unique_id=399760843]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, -2.8)
 shape = SubResource("BoxShape3D_tk26a")
 
-[node name="Light" type="OmniLight3D" parent="Barrier" unique_id=1776379673]
+[node name="Light" type="OmniLight3D" parent="Walls/Barrier" unique_id=1776379673]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, -2.8)
 light_color = Color(0.663, 0.545, 1, 1)
 light_energy = 1.5
@@ -492,20 +618,13 @@ shadow_caster_mask = 4294966273
 omni_range = 0.0
 omni_attenuation = 1.5
 script = ExtResource("3_random_light")
-minimum_energy = 0.5
-maximum_energy = 1.5
 
-[node name="OutsideBlockCrackedSM" parent="." unique_id=2041578037 instance=ExtResource("8_ai4gf")]
-
-[node name="InsideBlockCrackedSM2" parent="." unique_id=740626616 instance=ExtResource("8_ai4gf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.6)
-
-[node name="WallNormalLG" parent="." unique_id=910905716 instance=ExtResource("5_1j2kj")]
+[node name="WallNormalLG" parent="Walls" unique_id=910905716 instance=ExtResource("5_1j2kj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=98330471]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=75601943]
 unique_name_in_owner = true
-libraries/ = SubResource("AnimationLibrary_n47wt")
+libraries/ = SubResource("AnimationLibrary_7hvp7")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=579751390]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2.8)

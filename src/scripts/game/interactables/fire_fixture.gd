@@ -1,4 +1,3 @@
-@abstract
 class_name FireFixture
 extends Interactable
 

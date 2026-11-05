@@ -31,11 +31,5 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Continue"
 
-[node name="Tests" type="Button" parent="UI/MarginContainer/VBoxContainer" unique_id=646493029]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Tests"
-
 [connection signal="pressed" from="UI/MarginContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/Tests" to="." method="_on_tests_pressed"]

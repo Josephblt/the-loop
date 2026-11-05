@@ -215,6 +215,7 @@ Pause={
 3d_physics/layer_3="Interactables"
 3d_physics/layer_4="Activators"
 3d_physics/layer_5="Barriers"
+3d_physics/layer_6="Detectors"
 
 [rendering]
 
