@@ -8,26 +8,6 @@
 radius = 1.0
 height = 3.0
 
-[sub_resource type="Gradient" id="Gradient_fyoa2"]
-offsets = PackedFloat32Array(0, 0.75, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_3kwvn"]
-gradient = SubResource("Gradient_fyoa2")
-width = 10
-height = 10
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 0.5)
-
-[sub_resource type="Animation" id="Animation_fyoa2"]
-resource_name = "Enhance"
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3kwvn"]
-_data = {
-&"Enhance": SubResource("Animation_fyoa2")
-}
-
 [node name="Player" type="CharacterBody3D" unique_id=282310942]
 collision_layer = 2
 collision_mask = 17
@@ -69,31 +49,6 @@ doppler_tracking = 2
 current = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=335031780]
-
-[node name="UI" type="Node" parent="CanvasLayer" unique_id=347814494]
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UI" unique_id=703731344]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Recticle" type="TextureRect" parent="CanvasLayer/UI/MarginContainer" unique_id=14765991]
-unique_name_in_owner = true
-layout_mode = 2
-texture = SubResource("GradientTexture2D_3kwvn")
-stretch_mode = 3
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/UI/MarginContainer" unique_id=367058057]
-root_node = NodePath("../../..")
-libraries/ = SubResource("AnimationLibrary_3kwvn")
 
 [node name="Effects" type="Node" parent="CanvasLayer" unique_id=1726678418]
 

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b0lvfjr4ff8hl" path="res://game/actors/player.tscn" id="3_player"]
 [ext_resource type="PackedScene" path="res://game/ui/debug_overlay.tscn" id="4_debug_overlay"]
 [ext_resource type="PackedScene" uid="uid://brnavor8rq6oj" path="res://game/ui/settings_dialog.tscn" id="5_settings"]
+[ext_resource type="PackedScene" path="res://game/ui/reticle.tscn" id="6_reticle"]
 
 [node name="GameSession" type="Node3D" unique_id=202320514]
 
@@ -18,6 +19,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 [node name="UI" type="CanvasLayer" parent="." unique_id=988538414]
 
 [node name="DebugOverlay" parent="UI" instance=ExtResource("4_debug_overlay")]
+
+[node name="Reticle" parent="UI" instance=ExtResource("6_reticle")]
 
 [node name="SettingsDialog" parent="UI" instance=ExtResource("5_settings")]
 

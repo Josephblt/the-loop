@@ -9,7 +9,6 @@ const JUMP_VELOCITY: float = 10.0
 
 @onready var camera: Camera3D = %Camera3D
 @onready var raycast: RayCast3D = %RayCast3D
-@onready var recticle: Control = %Recticle
 
 var _active_interactable: Interactable
 var _controls_locked: bool = false
@@ -125,12 +124,10 @@ func _handle_interactables():
 
 func pause_controls():
 	_controls_locked = true
-	recticle.visible = false
 
 
 func resume_controls():
 	_controls_locked = false
-	recticle.visible = true
 
 
 func _on_settings_dialog_mouse_sensitivity_changed(value: float) -> void:
