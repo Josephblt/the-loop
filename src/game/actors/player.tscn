@@ -3,11 +3,6 @@
 [ext_resource type="Script" uid="uid://dwj8clsjj6iqy" path="res://scripts/game/actors/player/player.gd" id="1_8itsh"]
 [ext_resource type="Script" uid="uid://cjhaamx4882b7" path="res://scripts/game/actors/player/outline_camera.gd" id="2_fyoa2"]
 [ext_resource type="Material" uid="uid://0y0hhoo7hqlx" path="res://assets/materials/interactables/outline_material.tres" id="3_3kwvn"]
-[ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_canvas_item_material.tres" id="3_bfqtb"]
-[ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="4_btjqu"]
-[ext_resource type="Script" uid="uid://ckunku72jtdu0" path="res://scripts/game/ui/fps.gd" id="5_btjqu"]
-[ext_resource type="PackedScene" uid="uid://brnavor8rq6oj" path="res://game/ui/settings_dialog.tscn" id="6_settings"]
-[ext_resource type="Script" uid="uid://sgcqrhar3lfb" path="res://scripts/game/ui/build_number.gd" id="7_build_number"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vapkq"]
 radius = 1.0
@@ -37,8 +32,6 @@ _data = {
 collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_8itsh")
-
-[node name="SettingsDialog" parent="." unique_id=1438632254 instance=ExtResource("6_settings")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1346864791]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -92,35 +85,6 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="BuildNumber" type="Label" parent="CanvasLayer/UI/MarginContainer" unique_id=348642255]
-unique_name_in_owner = true
-material = ExtResource("3_bfqtb")
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("4_btjqu")
-theme_override_font_sizes/font_size = 30
-text = "Build Local"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-script = ExtResource("7_build_number")
-
-[node name="FPS" type="Label" parent="CanvasLayer/UI/MarginContainer" unique_id=1232174743]
-unique_name_in_owner = true
-material = ExtResource("3_bfqtb")
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("4_btjqu")
-theme_override_font_sizes/font_size = 30
-text = "0 FPS"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("5_btjqu")
-
 [node name="Recticle" type="TextureRect" parent="CanvasLayer/UI/MarginContainer" unique_id=14765991]
 unique_name_in_owner = true
 layout_mode = 2
@@ -142,7 +106,3 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 expand_mode = 1
-
-[connection signal="mouse_sensitivity_changed" from="SettingsDialog" to="." method="_on_settings_dialog_mouse_sensitivity_changed"]
-[connection signal="run_speed_changed" from="SettingsDialog" to="." method="_on_settings_dialog_run_speed_changed"]
-[connection signal="walk_speed_changed" from="SettingsDialog" to="." method="_on_settings_dialog_walk_speed_changed"]

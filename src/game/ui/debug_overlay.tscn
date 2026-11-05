@@ -1,0 +1,49 @@
+[gd_scene format=3]
+
+[ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_canvas_item_material.tres" id="1_material"]
+[ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="2_font"]
+[ext_resource type="Script" uid="uid://sgcqrhar3lfb" path="res://scripts/game/ui/build_number.gd" id="3_build_number"]
+[ext_resource type="Script" uid="uid://ckunku72jtdu0" path="res://scripts/game/ui/fps.gd" id="4_fps"]
+
+[node name="DebugOverlay" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="BuildNumber" type="Label" parent="."]
+unique_name_in_owner = true
+material = ExtResource("1_material")
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 30
+text = "Build Local"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+script = ExtResource("3_build_number")
+
+[node name="FPS" type="Label" parent="."]
+unique_name_in_owner = true
+material = ExtResource("1_material")
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 30
+text = "0 FPS"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_fps")

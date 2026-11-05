@@ -1,5 +1,5 @@
 class_name SettingsDialog
-extends CanvasLayer
+extends Control
 
 
 signal mouse_sensitivity_changed(value: float)
