@@ -12,6 +12,10 @@ func _ready() -> void:
 	light.visible = self.emitting
 
 
+func is_lit() -> bool:
+	return self.emitting
+
+
 func ignite() -> void:
 	self.emitting = true
 	light.visible = true

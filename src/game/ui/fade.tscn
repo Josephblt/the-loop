@@ -38,25 +38,20 @@ _data = {
 &"fade": SubResource("Animation_tsral")
 }
 
-[node name="Fade" type="CanvasLayer" unique_id=482317055]
-script = ExtResource("1_smnes")
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=2078346181]
-unique_name_in_owner = true
+[node name="ColorRect" type="ColorRect" unique_id=2078346181]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.09411765, 0.043137256, 0.16078432, 1)
-
-[node name="Timer" type="Timer" parent="." unique_id=2009367389]
-unique_name_in_owner = true
-one_shot = true
+script = ExtResource("1_smnes")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1921725101]
 unique_name_in_owner = true
 reset_on_save = false
+root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_jwwyr")
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Timer" type="Timer" parent="." unique_id=2009367389]
+unique_name_in_owner = true
+one_shot = true

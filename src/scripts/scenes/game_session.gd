@@ -8,7 +8,7 @@ const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn"
 
 const STAGE_LAYOUT_PATH: StageLayout = preload("res://assets/configs/stage_layout.tres")
 
-const SPAWN_ROOM_SCENE: PackedScene = preload("res://game/rooms/spawn_room.tscn")
+# const SPAWN_ROOM_SCENE: PackedScene = preload("res://game/rooms/spawn_room.tscn")
 const MEMORY_ROOM_SCENE: PackedScene = preload("res://game/rooms/memory_room.tscn")
 
 const ANGER_ROOM_SCENE: PackedScene = preload("res://game/rooms/anger_room.tscn")
@@ -58,7 +58,8 @@ func _load_stage_memories() -> void:
 
 func _add_spawn_room() -> void:
 	var fire_fixture_states: Array[FireFixtureState] = _fire_fixture_states.get_room_states(FireFixtureStates.Rooms.SPAWN)
-	var spawn_room = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
+	# var spawn_room = SPAWN_ROOM_SCENE.instantiate() as SpawnRoom
+	var spawn_room = null
 	SceneRandomizer.randomize_scene(spawn_room, _session_seed)
 	
 	var spawn_room_gates: Array[Gate] = []
@@ -142,7 +143,8 @@ func _add_grief_stage_room(scene: PackedScene, gate: Gate, room_transform: Trans
 
 	grief_stage_room.setup_grief_stage_room(_player, closing_memory, collected_memories_count, gate, fire_fixture_states)
 	_stage.add_child(grief_stage_room)
-	return grief_stage_room
+	# return grief_stage_room
+	return null
 
 
 func _add_gate(scene: PackedScene, node_name: String, gate_transform: Transform3D) -> Gate:

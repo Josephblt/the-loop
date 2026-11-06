@@ -10,10 +10,11 @@ height = 2000.0
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nwvoh"]
 sky_top_color = Color(0.02745098, 0.09411765, 0.14117648, 1)
 sky_horizon_color = Color(0.09411765, 0.043137256, 0.16078432, 1)
-sky_curve = 0.1
+sky_curve = 0.5
 ground_bottom_color = Color(0.15686275, 0.06666667, 0.023529412, 1)
 ground_horizon_color = Color(0.09411765, 0.043137256, 0.16078432, 1)
-ground_curve = 0.1
+ground_curve = 0.5
+sun_curve = 0.5
 energy_multiplier = 0.5
 
 [sub_resource type="Sky" id="Sky_d3u6q"]

@@ -76,6 +76,7 @@ draw_pass_1 = SubResource("BoxMesh_imi2h")
 script = ExtResource("1_gfcvc")
 
 [node name="Light" type="OmniLight3D" parent="." unique_id=1717417782]
+unique_name_in_owner = true
 light_color = Color(0.7882353, 0.40392157, 0.14117648, 1)
 light_specular = 5.0
 light_cull_mask = 4293918721
@@ -88,6 +89,7 @@ omni_attenuation = 2.0
 script = ExtResource("2_7vuj1")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=502506527]
+unique_name_in_owner = true
 stream = ExtResource("3_llhjr")
 pitch_scale = 0.5
 autoplay = true

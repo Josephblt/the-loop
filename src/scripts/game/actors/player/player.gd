@@ -1,6 +1,10 @@
 class_name Player
 extends CharacterBody3D
 
+signal interactable_detected(interactable: Interactable)
+signal interactable_lost(interactable: Interactable)
+signal paused
+signal resumed
 
 const DEFAULT_RUN_SPEED: float = 8.0
 const DEFAULT_WALK_SPEED: float = 20.0
@@ -104,11 +108,14 @@ func _handle_interactables():
 		if interactable != _active_interactable:
 			if _active_interactable:
 				_active_interactable.disable_interaction()
+				
 			_active_interactable = interactable	
 			_active_interactable.enable_interaction()
+			interactable_detected.emit(_active_interactable)
 	else:
 		if _active_interactable:
 			_active_interactable.disable_interaction()
+			interactable_lost.emit(_active_interactable)
 			_active_interactable = null
 
 	if Input.is_action_just_pressed("Interact") and _active_interactable:
@@ -122,12 +129,14 @@ func _handle_interactables():
 		_active_interactable.trigger_interaction()
 
 
-func pause_controls():
+func pause():
 	_controls_locked = true
+	paused.emit()
 
 
-func resume_controls():
+func resume():
 	_controls_locked = false
+	resumed.emit()
 
 
 func _on_settings_dialog_mouse_sensitivity_changed(value: float) -> void:
