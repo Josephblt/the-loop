@@ -10,10 +10,10 @@ const OUTLINE_LAYER: int = 2
 const HIGHLIGHT_MATERIAL: ShaderMaterial = preload("uid://dehlmi65vnf1q")
 
 @export var interactable_meshes: Array[GeometryInstance3D] = []
+@export var interaction_1: String = ""
+@export var interaction_2: String = ""
 @export var one_shot: bool = false
 @export var interaction_distance: float = 5.0
-
-@onready var interaction_animation_player: AnimationPlayer = %InteractionAnimationPlayer
 
 var _is_interactable: bool = true
 
@@ -45,7 +45,6 @@ func enable_interaction() -> void:
 		return
 		
 	_update_outline(true)
-	interaction_animation_player.play("enable_interaction")
 
 
 func disable_interaction() -> void:
@@ -53,7 +52,14 @@ func disable_interaction() -> void:
 		return
 	
 	_update_outline(false)
-	interaction_animation_player.play("disable_interaction")
+
+
+func interaction_text() -> String:
+	return interaction_1
+
+
+func is_interactable() -> bool:
+	return _is_interactable
 
 
 func trigger_interaction(execute_interact: bool = true) -> void:

@@ -40,7 +40,7 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if _controls_locked:
 		return
 
@@ -52,7 +52,7 @@ func _input(event):
 	_handle_interactables()
 
 
-func _handle_gravity(delta: float):
+func _handle_gravity(delta: float) -> void:
 	velocity += get_gravity() * 4.0 * delta
 
 
@@ -68,7 +68,7 @@ func _handle_speed() -> void:
 		_speed = _run_speed
 
 
-func _handle_movement():
+func _handle_movement() -> void:
 	if is_on_floor() or !is_on_floor():
 		var input_dir: Vector2 = Input.get_vector("Left", "Right", "Forward", "Back")
 	
@@ -89,11 +89,13 @@ func _handle_look(motion: Vector2) -> void:
 	camera.rotation_degrees.x = _look_x	
 
 
-func _handle_interactables():
-	var interactable = null
+func _handle_interactables() -> void:
+	var interactable: Interactable = null
 	if raycast.is_colliding():
-		var collider = raycast.get_collider()
+		var collider: Node = raycast.get_collider() as Node
 		interactable = collider.get_parent() as Interactable
+		if interactable and !interactable.is_interactable():
+			interactable = null
 		if interactable:
 			var origin: Vector3 = raycast.to_global(Vector3.ZERO)
 			var collision_point: Vector3 = raycast.get_collision_point()
@@ -126,7 +128,11 @@ func _handle_interactables():
 		
 	if _interacting and _active_interactable:
 		_interacting = false
-		_active_interactable.trigger_interaction()
+		var triggered_interactable: Interactable = _active_interactable
+		triggered_interactable.trigger_interaction()
+		if !triggered_interactable.is_interactable():
+			interactable_lost.emit(triggered_interactable)
+			_active_interactable = null
 
 
 func pause():

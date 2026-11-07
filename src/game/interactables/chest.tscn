@@ -4,8 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://b170hc6sp5x33" path="res://assets/textures/interactables/chest/chest_cover.png" id="1_c1jlw"]
 [ext_resource type="Texture2D" uid="uid://bin2gxhatwvu2" path="res://assets/textures/interactables/chest/chest_base.png" id="2_ca5m2"]
 [ext_resource type="AudioStream" uid="uid://df1ghudtvy2jb" path="res://assets/sounds/sfx/chest/chest_open.tres" id="3_ca5m2"]
-[ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_canvas_item_material.tres" id="6_3hjkb"]
-[ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="6_bk6g0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nro11"]
 resource_name = "ChestCover_1_Material"
@@ -93,64 +91,6 @@ data = PackedVector3Array(0.59999996, 1.1999999, -0.7, 0.59999996, 1.3, -0.59999
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3hjkb"]
 size = Vector3(2.8, 2.2, 2)
-
-[sub_resource type="Animation" id="Animation_s5tll"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/LabelInteraction:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_42xya"]
-resource_name = "disable_interaction"
-length = 0.25
-step = 0.01
-capture_included = true
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/LabelInteraction:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.25),
-"transitions": PackedFloat32Array(1),
-"update": 2,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_4iafc"]
-resource_name = "enable_interaction"
-length = 0.25
-step = 0.01
-capture_included = true
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/LabelInteraction:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.25),
-"transitions": PackedFloat32Array(1),
-"update": 2,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3hjkb"]
-_data = {
-&"RESET": SubResource("Animation_s5tll"),
-&"disable_interaction": SubResource("Animation_42xya"),
-&"enable_interaction": SubResource("Animation_4iafc")
-}
 
 [sub_resource type="Animation" id="Animation_68fva"]
 length = 0.001
@@ -247,6 +187,7 @@ _data = {
 [node name="Chest" type="Node3D" unique_id=146892367 node_paths=PackedStringArray("interactable_meshes")]
 script = ExtResource("1_68fva")
 interactable_meshes = [NodePath("StaticBody3D/MeshInstance3DCover"), NodePath("StaticBody3D/MeshInstance3DBase")]
+interaction_1 = "Open Chest"
 one_shot = true
 interaction_distance = 2.0
 
@@ -283,39 +224,7 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1920929e-07, 0.049999952, -5.9604645e-08)
 shape = SubResource("BoxShape3D_3hjkb")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=730004740]
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=69559045]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1, 0.9988355)
-theme_override_constants/margin_left = 150
-theme_override_constants/margin_top = 150
-theme_override_constants/margin_right = 150
-theme_override_constants/margin_bottom = 150
-
-[node name="LabelInteraction" type="Label" parent="CanvasLayer/MarginContainer" unique_id=568475111]
-self_modulate = Color(1, 1, 1, 0)
-material = ExtResource("6_3hjkb")
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("6_bk6g0")
-theme_override_font_sizes/font_size = 60
-text = "Open Chest"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Animations" type="Node" parent="." unique_id=461717727]
-
-[node name="InteractionAnimationPlayer" type="AnimationPlayer" parent="Animations" unique_id=743616824]
-unique_name_in_owner = true
-root_node = NodePath("../../CanvasLayer")
-libraries/ = SubResource("AnimationLibrary_3hjkb")
 
 [node name="ChestAnimationPlayer" type="AnimationPlayer" parent="Animations" unique_id=1505478726]
 unique_name_in_owner = true

@@ -3,8 +3,6 @@
 [ext_resource type="Material" uid="uid://0sp8exud2fvb" path="res://assets/materials/interactables/altar.tres" id="1_qa4jq"]
 [ext_resource type="Script" uid="uid://bcxn012mvmomu" path="res://scripts/game/interactables/fire_fixture.gd" id="1_rsld6"]
 [ext_resource type="PackedScene" uid="uid://ci5ayfo0lm6xc" path="res://game/switches/fire.tscn" id="2_52cqr"]
-[ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="4_nuqr6"]
-[ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_canvas_item_material.tres" id="4_rsld6"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_j5kvm"]
 _surfaces = [{
@@ -44,67 +42,11 @@ data = PackedVector3Array(0, 0.099999994, 0.29999998, 0, 0.19999999, 0.19999999,
 [sub_resource type="BoxShape3D" id="BoxShape3D_jxl8w"]
 size = Vector3(0.9, 4.8, 0.9)
 
-[sub_resource type="Animation" id="Animation_s5tll"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/LabelInteraction:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_42xya"]
-resource_name = "disable_interaction"
-length = 0.25
-step = 0.01
-capture_included = true
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/LabelInteraction:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.25),
-"transitions": PackedFloat32Array(1),
-"update": 2,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_4iafc"]
-resource_name = "enable_interaction"
-length = 0.25
-step = 0.01
-capture_included = true
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/LabelInteraction:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.25),
-"transitions": PackedFloat32Array(1),
-"update": 2,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rsld6"]
-_data = {
-&"RESET": SubResource("Animation_s5tll"),
-&"disable_interaction": SubResource("Animation_42xya"),
-&"enable_interaction": SubResource("Animation_4iafc")
-}
-
 [node name="Altar" type="Node3D" unique_id=132565479 node_paths=PackedStringArray("interactable_meshes")]
 script = ExtResource("1_rsld6")
 interactable_meshes = [NodePath("StaticBody3D/MeshInstance3D")]
+interaction_1 = "Ignite"
+interaction_2 = "Extinguish"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1654990680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
@@ -131,38 +73,3 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/Barrier" unique_id=1743945998]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
 shape = SubResource("BoxShape3D_jxl8w")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1679140222]
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1981930047]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1, 0.9988355)
-theme_override_constants/margin_left = 150
-theme_override_constants/margin_top = 150
-theme_override_constants/margin_right = 150
-theme_override_constants/margin_bottom = 150
-
-[node name="LabelInteraction" type="Label" parent="CanvasLayer/MarginContainer" unique_id=1160741246]
-unique_name_in_owner = true
-self_modulate = Color(1, 1, 1, 0)
-material = ExtResource("4_rsld6")
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("4_nuqr6")
-theme_override_font_sizes/font_size = 60
-text = "Extinguish"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Animations" type="Node" parent="." unique_id=1316571038]
-
-[node name="InteractionAnimationPlayer" type="AnimationPlayer" parent="Animations" unique_id=512808538]
-unique_name_in_owner = true
-root_node = NodePath("../../CanvasLayer")
-libraries/ = SubResource("AnimationLibrary_rsld6")

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://game/ui/debug_overlay.tscn" id="4_debug_overlay"]
 [ext_resource type="PackedScene" path="res://game/ui/reticle.tscn" id="6_reticle"]
 [ext_resource type="PackedScene" path="res://game/ui/outline.tscn" id="7_outline"]
+[ext_resource type="PackedScene" path="res://game/ui/interactable.tscn" id="8_interactable"]
 
 [node name="GameSession" type="Node3D" unique_id=202320514]
 
@@ -25,10 +26,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="DebugOverlay" parent="UI" unique_id=1270191168 instance=ExtResource("4_debug_overlay")]
 
+[node name="Interactable" parent="UI" instance=ExtResource("8_interactable")]
+
 [node name="Reticle" parent="UI" unique_id=1979906632 instance=ExtResource("6_reticle")]
 color = Color(0.88235295, 0.8, 1, 1)
 
 [connection signal="interactable_detected" from="Player" to="UI/Reticle" method="_on_interactable_detected"]
+[connection signal="interactable_detected" from="Player" to="UI/Interactable" method="_on_interactable_detected"]
 [connection signal="interactable_lost" from="Player" to="UI/Reticle" method="_on_interactable_lost"]
+[connection signal="interactable_lost" from="Player" to="UI/Interactable" method="_on_interactable_lost"]
 [connection signal="paused" from="Player" to="UI/Reticle" method="_on_player_paused"]
 [connection signal="resumed" from="Player" to="UI/Reticle" method="_on_player_resumed"]
