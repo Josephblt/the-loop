@@ -26,14 +26,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="DebugOverlay" parent="UI" unique_id=1270191168 instance=ExtResource("4_debug_overlay")]
 
-[node name="InteractionUI" parent="UI" instance=ExtResource("8_interaction_ui")]
+[node name="FireFixtureInteractionUI" parent="UI" instance=ExtResource("8_interaction_ui")]
+interaction_1 = "Ignite"
+interaction_2 = "Extinguish"
+
+[node name="ChestInteractionUI" parent="UI" instance=ExtResource("8_interaction_ui")]
+interactable_type = 1
+interaction_1 = "Open Chest"
 
 [node name="Reticle" parent="UI" unique_id=1979906632 instance=ExtResource("6_reticle")]
 color = Color(0.88235295, 0.8, 1, 1)
 
 [connection signal="interactable_detected" from="Player" to="UI/Reticle" method="_on_interactable_detected"]
-[connection signal="interactable_detected" from="Player" to="UI/InteractionUI" method="_on_interactable_detected"]
+[connection signal="interactable_detected" from="Player" to="UI/FireFixtureInteractionUI" method="_on_interactable_detected"]
+[connection signal="interactable_detected" from="Player" to="UI/ChestInteractionUI" method="_on_interactable_detected"]
 [connection signal="interactable_lost" from="Player" to="UI/Reticle" method="_on_interactable_lost"]
-[connection signal="interactable_lost" from="Player" to="UI/InteractionUI" method="_on_interactable_lost"]
+[connection signal="interactable_lost" from="Player" to="UI/FireFixtureInteractionUI" method="_on_interactable_lost"]
+[connection signal="interactable_lost" from="Player" to="UI/ChestInteractionUI" method="_on_interactable_lost"]
 [connection signal="paused" from="Player" to="UI/Reticle" method="_on_player_paused"]
 [connection signal="resumed" from="Player" to="UI/Reticle" method="_on_player_resumed"]

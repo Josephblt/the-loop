@@ -1,11 +1,13 @@
 extends MarginContainer
 
-@export_group("Fire Fixture")
-@export var fire_fixture_interaction_1: String = "Ignite"
-@export var fire_fixture_interaction_2: String = "Extinguish"
+enum InteractableType {
+	FIRE_FIXTURE,
+	CHEST,
+}
 
-@export_group("Chest")
-@export var chest_interaction_1: String = "Open Chest"
+@export var interactable_type: InteractableType = InteractableType.FIRE_FIXTURE
+@export var interaction_1: String = ""
+@export var interaction_2: String = ""
 
 @onready var _animation_player: AnimationPlayer = %AnimationPlayer
 @onready var _interaction_label: Label = %LabelInteraction
@@ -14,6 +16,9 @@ var _active_interactable: Interactable
 
 
 func _on_interactable_detected(interactable: Interactable) -> void:
+	if !_supports(interactable):
+		_hide_active_interaction()
+		return
 	_disconnect_active_interactable()
 	_active_interactable = interactable
 	_active_interactable.interaction_triggered.connect(_on_interaction_triggered)
@@ -39,14 +44,24 @@ func _update_interaction_text() -> void:
 
 
 func _interaction_text(interactable: Interactable) -> String:
-	if interactable is FireFixture:
+	if interactable_type == InteractableType.FIRE_FIXTURE:
 		var fire_fixture: FireFixture = interactable as FireFixture
 		if fire_fixture.is_lit():
-			return fire_fixture_interaction_2
-		return fire_fixture_interaction_1
-	if interactable is Chest:
-		return chest_interaction_1
-	return ""
+			return interaction_2
+	return interaction_1
+
+
+func _supports(interactable: Interactable) -> bool:
+	if interactable_type == InteractableType.FIRE_FIXTURE:
+		return interactable is FireFixture
+	return interactable is Chest
+
+
+func _hide_active_interaction() -> void:
+	if _active_interactable == null:
+		return
+	_disconnect_active_interactable()
+	_animation_player.play("disable_interaction")
 
 
 func _disconnect_active_interactable() -> void:
