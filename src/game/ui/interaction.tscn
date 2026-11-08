@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" uid="uid://cqdpfxfwbo8ch" path="res://scripts/game/ui/interaction_ui.gd" id="1_interaction_ui"]
+[ext_resource type="Script" uid="uid://cqdpfxfwbo8ch" path="res://scripts/game/ui/interaction.gd" id="1_interaction"]
 [ext_resource type="Material" uid="uid://cdtwaue1fnyls" path="res://assets/materials/ui/dissolve_canvas_item_material.tres" id="2_material"]
 [ext_resource type="FontFile" uid="uid://cyerm0c5sb0ox" path="res://assets/fonts/IbarraRealNova-BoldItalic.ttf" id="3_font"]
 
@@ -54,14 +54,14 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_interaction_ui"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_interaction"]
 _data = {
 &"RESET": SubResource("Animation_reset"),
 &"disable_interaction": SubResource("Animation_disable"),
 &"enable_interaction": SubResource("Animation_enable")
 }
 
-[node name="InteractionUI" type="MarginContainer"]
+[node name="Interaction" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -72,7 +72,7 @@ theme_override_constants/margin_left = 150
 theme_override_constants/margin_top = 150
 theme_override_constants/margin_right = 150
 theme_override_constants/margin_bottom = 150
-script = ExtResource("1_interaction_ui")
+script = ExtResource("1_interaction")
 
 [node name="LabelInteraction" type="Label" parent="."]
 unique_name_in_owner = true
@@ -90,5 +90,5 @@ vertical_alignment = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-&"": SubResource("AnimationLibrary_interaction_ui")
+&"": SubResource("AnimationLibrary_interaction")
 }

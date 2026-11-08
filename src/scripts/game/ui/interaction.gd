@@ -1,6 +1,6 @@
-class_name InteractionUI
-extends MarginContainer
+extends CanvasItem
 
+@export var supported_type: Script
 @export var interaction_1: String = ""
 @export var interaction_2: String = ""
 
@@ -11,10 +11,10 @@ var _active_interactable: Interactable
 
 
 func _on_interactable_detected(interactable: Interactable) -> void:
-	if !_supports(interactable):
-		_hide_active_interaction()
+	if supported_type == null or !supported_type.instance_has(interactable):
 		return
-	_disconnect_active_interactable()
+	if _active_interactable != null and _active_interactable.interaction_triggered.is_connected(_on_interaction_triggered):
+		_active_interactable.interaction_triggered.disconnect(_on_interaction_triggered)
 	_active_interactable = interactable
 	_active_interactable.interaction_triggered.connect(_on_interaction_triggered)
 	_update_interaction_text()
@@ -24,7 +24,9 @@ func _on_interactable_detected(interactable: Interactable) -> void:
 func _on_interactable_lost(interactable: Interactable) -> void:
 	if interactable != _active_interactable:
 		return
-	_disconnect_active_interactable()
+	if _active_interactable.interaction_triggered.is_connected(_on_interaction_triggered):
+		_active_interactable.interaction_triggered.disconnect(_on_interaction_triggered)
+	_active_interactable = null
 	_animation_player.play("disable_interaction")
 
 
@@ -35,27 +37,9 @@ func _on_interaction_triggered(interactable: Interactable) -> void:
 
 
 func _update_interaction_text() -> void:
-	_interaction_label.text = _interaction_text(_active_interactable)
-
-
-func _interaction_text(_interactable: Interactable) -> String:
-	return interaction_1
-
-
-func _supports(_interactable: Interactable) -> bool:
-	return false
-
-
-func _hide_active_interaction() -> void:
-	if _active_interactable == null:
-		return
-	_disconnect_active_interactable()
-	_animation_player.play("disable_interaction")
-
-
-func _disconnect_active_interactable() -> void:
-	if _active_interactable == null:
-		return
-	if _active_interactable.interaction_triggered.is_connected(_on_interaction_triggered):
-		_active_interactable.interaction_triggered.disconnect(_on_interaction_triggered)
-	_active_interactable = null
+	if _active_interactable is FireFixture:
+		var fire_fixture: FireFixture = _active_interactable as FireFixture
+		if fire_fixture.is_lit():
+			_interaction_label.text = interaction_2
+			return
+	_interaction_label.text = interaction_1

@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3]
-
-[ext_resource type="PackedScene" path="res://game/ui/interaction_ui.tscn" id="1_interaction_ui"]
-[ext_resource type="Script" path="res://scripts/game/ui/fire_fixture_interaction_ui.gd" id="2_script"]
-
-[node name="FireFixtureInteractionUI" instance=ExtResource("1_interaction_ui")]
-script = ExtResource("2_script")
-interaction_1 = "Ignite"
-interaction_2 = "Extinguish"
