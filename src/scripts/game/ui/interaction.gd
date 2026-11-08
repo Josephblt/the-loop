@@ -1,8 +1,8 @@
 extends CanvasItem
 
 @export var supported_type: Script
-@export var interaction_1: String = ""
-@export var interaction_2: String = ""
+@export var interaction_on: String = ""
+@export var interaction_off: String = ""
 
 @onready var _animation_player: AnimationPlayer = %AnimationPlayer
 @onready var _interaction_label: Label = %LabelInteraction
@@ -38,8 +38,7 @@ func _on_interaction_triggered(interactable: Interactable) -> void:
 
 func _update_interaction_text() -> void:
 	if _active_interactable is FireFixture:
-		var fire_fixture: FireFixture = _active_interactable as FireFixture
-		if fire_fixture.is_lit():
-			_interaction_label.text = interaction_2
-			return
-	_interaction_label.text = interaction_1
+		if _active_interactable.interaction_toggle_state():
+			_interaction_label.text = interaction_on
+		else:
+			_interaction_label.text = interaction_off

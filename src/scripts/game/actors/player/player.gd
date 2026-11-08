@@ -128,10 +128,9 @@ func _handle_interactables() -> void:
 		
 	if _interacting and _active_interactable:
 		_interacting = false
-		var triggered_interactable: Interactable = _active_interactable
-		triggered_interactable.trigger_interaction()
-		if !triggered_interactable.is_interactable():
-			interactable_lost.emit(triggered_interactable)
+		_active_interactable.trigger_interaction()
+		if !_active_interactable.is_interactable():
+			interactable_lost.emit(_active_interactable)
 			_active_interactable = null
 
 

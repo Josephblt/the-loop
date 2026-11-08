@@ -14,6 +14,7 @@ const HIGHLIGHT_MATERIAL: ShaderMaterial = preload("uid://dehlmi65vnf1q")
 @export var interaction_distance: float = 5.0
 
 var _is_interactable: bool = true
+var _interaction_toggle_state: bool = false
 
 
 func _ready() -> void:
@@ -56,6 +57,10 @@ func is_interactable() -> bool:
 	return _is_interactable
 
 
+func interaction_toggle_state() -> bool:
+	return _interaction_toggle_state
+
+
 func trigger_interaction(execute_interact: bool = true) -> void:
 	if !_is_interactable:
 		return
@@ -64,6 +69,7 @@ func trigger_interaction(execute_interact: bool = true) -> void:
 		disable_interaction()
 		_is_interactable = false
 		_update_highlight(false)
+	
 	
 	if execute_interact:
 		_interact()
