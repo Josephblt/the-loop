@@ -50,8 +50,6 @@ data = PackedVector3Array(0.29999998, 0.19999999, -0.099999994, 0.29999998, 0.29
 [node name="Cresset" type="Node3D" unique_id=528922892 node_paths=PackedStringArray("interactable_meshes")]
 script = ExtResource("1_xip04")
 interactable_meshes = [NodePath("StaticBody3D/MeshInstance3D")]
-interaction_1 = "Ignite"
-interaction_2 = "Extinguish"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=865238]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 4, -1.9)

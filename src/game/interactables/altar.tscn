@@ -45,8 +45,6 @@ size = Vector3(0.9, 4.8, 0.9)
 [node name="Altar" type="Node3D" unique_id=132565479 node_paths=PackedStringArray("interactable_meshes")]
 script = ExtResource("1_rsld6")
 interactable_meshes = [NodePath("StaticBody3D/MeshInstance3D")]
-interaction_1 = "Ignite"
-interaction_2 = "Extinguish"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1654990680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

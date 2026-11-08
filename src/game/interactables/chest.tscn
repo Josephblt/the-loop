@@ -187,7 +187,6 @@ _data = {
 [node name="Chest" type="Node3D" unique_id=146892367 node_paths=PackedStringArray("interactable_meshes")]
 script = ExtResource("1_68fva")
 interactable_meshes = [NodePath("StaticBody3D/MeshInstance3DCover"), NodePath("StaticBody3D/MeshInstance3DBase")]
-interaction_1 = "Open Chest"
 one_shot = true
 interaction_distance = 2.0
 

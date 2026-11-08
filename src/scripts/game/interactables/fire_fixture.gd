@@ -13,12 +13,6 @@ func is_lit() -> bool:
 	return fire.is_lit()
 
 
-func interaction_text() -> String:
-	if is_lit():
-		return interaction_2
-	return interaction_1
-
-
 func set_lit(lit: bool) -> void:
 	if lit:
 		fire.ignite()

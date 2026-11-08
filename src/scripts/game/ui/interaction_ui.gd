@@ -1,5 +1,12 @@
 extends MarginContainer
 
+@export_group("Fire Fixture")
+@export var fire_fixture_interaction_1: String = "Ignite"
+@export var fire_fixture_interaction_2: String = "Extinguish"
+
+@export_group("Chest")
+@export var chest_interaction_1: String = "Open Chest"
+
 @onready var _animation_player: AnimationPlayer = %AnimationPlayer
 @onready var _interaction_label: Label = %LabelInteraction
 
@@ -28,7 +35,18 @@ func _on_interaction_triggered(interactable: Interactable) -> void:
 
 
 func _update_interaction_text() -> void:
-	_interaction_label.text = _active_interactable.interaction_text()
+	_interaction_label.text = _interaction_text(_active_interactable)
+
+
+func _interaction_text(interactable: Interactable) -> String:
+	if interactable is FireFixture:
+		var fire_fixture: FireFixture = interactable as FireFixture
+		if fire_fixture.is_lit():
+			return fire_fixture_interaction_2
+		return fire_fixture_interaction_1
+	if interactable is Chest:
+		return chest_interaction_1
+	return ""
 
 
 func _disconnect_active_interactable() -> void:
