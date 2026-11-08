@@ -1,11 +1,6 @@
+class_name InteractionUI
 extends MarginContainer
 
-enum InteractableType {
-	FIRE_FIXTURE,
-	CHEST,
-}
-
-@export var interactable_type: InteractableType = InteractableType.FIRE_FIXTURE
 @export var interaction_1: String = ""
 @export var interaction_2: String = ""
 
@@ -43,18 +38,12 @@ func _update_interaction_text() -> void:
 	_interaction_label.text = _interaction_text(_active_interactable)
 
 
-func _interaction_text(interactable: Interactable) -> String:
-	if interactable_type == InteractableType.FIRE_FIXTURE:
-		var fire_fixture: FireFixture = interactable as FireFixture
-		if fire_fixture.is_lit():
-			return interaction_2
+func _interaction_text(_interactable: Interactable) -> String:
 	return interaction_1
 
 
-func _supports(interactable: Interactable) -> bool:
-	if interactable_type == InteractableType.FIRE_FIXTURE:
-		return interactable is FireFixture
-	return interactable is Chest
+func _supports(_interactable: Interactable) -> bool:
+	return false
 
 
 func _hide_active_interaction() -> void:
