@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://kv5lpflnmg7f"]
 
-[ext_resource type="Script" uid="uid://205s5ulf7oh4" path="res://scripts/game/rooms/grief_stage_room.gd" id="1_qc7yu"]
 [ext_resource type="PackedScene" uid="uid://cqrto67h33ydp" path="res://game/switches/activator.tscn" id="2_50ifw"]
+[ext_resource type="PackedScene" uid="uid://on4lpk0uhb0f" path="res://game/actors/enemy.tscn" id="2_pbwdi"]
 [ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="3_pbwdi"]
 [ext_resource type="PackedScene" uid="uid://coql64ga8pi0u" path="res://game/level/blocks/block_cracked_md.tscn" id="4_sps7d"]
 [ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="5_eq614"]
@@ -11,23 +11,49 @@
 [ext_resource type="PackedScene" uid="uid://dsodgs8nmbiir" path="res://game/level/fences/post_fence_middle_1.tscn" id="9_7wweu"]
 [ext_resource type="PackedScene" uid="uid://rdh1pb10cdnw" path="res://game/level/fences/post_corner.tscn" id="10_oxwlc"]
 [ext_resource type="PackedScene" uid="uid://esslh7fta828" path="res://game/interactables/chest_gold.tscn" id="11_ir22q"]
+[ext_resource type="PackedScene" uid="uid://v8j2a1egqxgo" path="res://game/switches/gate_vertical.tscn" id="11_qc7yu"]
 [ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/interactables/altar.tscn" id="12_hq241"]
 [ext_resource type="PackedScene" uid="uid://cvnpe5drc4s7q" path="res://game/interactables/cresset.tscn" id="13_uhf8c"]
 [ext_resource type="PackedScene" uid="uid://dfwbglgsmyokl" path="res://game/level/walls/wall_normal_lg.tscn" id="14_pmra8"]
 [ext_resource type="PackedScene" uid="uid://b6fydse31tnyb" path="res://game/level/walls/wall_broken_md.tscn" id="15_r8esf"]
-[ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/message.tscn" id="16_b608g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3687x"]
-size = Vector3(40.2, 12.1, 48.5)
+size = Vector3(40, 12.1, 56.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qc7yu"]
+size = Vector3(40, 12.1, 51.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_50ifw"]
+size = Vector3(40, 12.1, 48.4)
 
 [node name="AngerRoom" type="Node3D" unique_id=496749782]
-script = ExtResource("1_qc7yu")
+
+[node name="Enemy" parent="." unique_id=1458459918 instance=ExtResource("2_pbwdi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, -5.6)
 
 [node name="Activator" parent="." unique_id=452683808 instance=ExtResource("2_50ifw")]
 
 [node name="CollisionShape3D" parent="Activator" index="0" unique_id=1593920821]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4305115e-06, 5.6500006, -4.1500006)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.33786e-06, 5.6500006, -8.4000025)
 shape = SubResource("BoxShape3D_3687x")
+
+[node name="Player Exit" type="Area3D" parent="." unique_id=980017587]
+collision_layer = 32
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player Exit" unique_id=1166091229]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 5.65, -5.5999985)
+shape = SubResource("BoxShape3D_qc7yu")
+
+[node name="Player Enter" type="Area3D" parent="." unique_id=1621798987]
+collision_layer = 32
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player Enter" unique_id=1279778862]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 5.65, -4.199999)
+shape = SubResource("BoxShape3D_50ifw")
 
 [node name="Floor" type="Node3D" parent="." unique_id=489162263]
 
@@ -206,6 +232,11 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1
 
 [node name="SlopeCornerLeft" parent="Fences" unique_id=60700772 instance=ExtResource("10_oxwlc")]
 transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0, 1.6, 5.599999)
+
+[node name="Gates" type="Node3D" parent="." unique_id=937391821]
+
+[node name="GateVertical" parent="Gates" unique_id=1825569716 instance=ExtResource("11_qc7yu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -28)
 
 [node name="Interactables" type="Node3D" parent="." unique_id=519993567]
 
@@ -527,9 +558,6 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.
 [node name="WallNormalLG27" parent="Walls/Outter/Bottom" unique_id=2037666616 instance=ExtResource("14_pmra8")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.800003, 0, -16.8)
 
-[node name="Message" parent="." unique_id=1991501411 instance=ExtResource("16_b608g")]
-unique_name_in_owner = true
-
 [connection signal="body_entered" from="Activator" to="." method="_on_activator_body_entered"]
 [connection signal="interaction_triggered" from="Interactables/ChestGold" to="." method="_on_chest_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Altars/AltarLeft" to="." method="_on_fire_fixture_interaction_triggered"]
@@ -545,7 +573,5 @@ unique_name_in_owner = true
 [connection signal="interaction_triggered" from="Interactables/Cressets/CressetLeftBottom" to="." method="_on_fire_fixture_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Cressets/CressetLeft" to="." method="_on_fire_fixture_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Cressets/CressetLeftTop" to="." method="_on_fire_fixture_interaction_triggered"]
-[connection signal="message_hidden" from="Message" to="." method="_on_message_hidden"]
-[connection signal="message_shown" from="Message" to="." method="_on_message_message_shown"]
 
 [editable path="Activator"]

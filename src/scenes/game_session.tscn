@@ -24,27 +24,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=988538414]
 
-[node name="Outline" parent="UI" instance=ExtResource("7_outline")]
+[node name="Outline" parent="UI" unique_id=286513358 instance=ExtResource("7_outline")]
 
 [node name="DebugOverlay" parent="UI" unique_id=1270191168 instance=ExtResource("4_debug_overlay")]
 
-[node name="FireFixtureInteraction" parent="UI" instance=ExtResource("8_interaction")]
+[node name="FireFixtureInteraction" parent="UI" unique_id=1596810998 instance=ExtResource("8_interaction")]
 supported_type = ExtResource("9_fire_fixture")
-interaction_1 = "Ignite"
-interaction_2 = "Extinguish"
+interaction_on = "Ignite"
+interaction_off = "Extinguish"
 
-[node name="ChestInteraction" parent="UI" instance=ExtResource("8_interaction")]
+[node name="ChestInteraction" parent="UI" unique_id=311473804 instance=ExtResource("8_interaction")]
 supported_type = ExtResource("10_chest")
-interaction_1 = "Open Chest"
+interaction_on = "Open Chest"
+interaction_off = "Open Chest"
 
 [node name="Reticle" parent="UI" unique_id=1979906632 instance=ExtResource("6_reticle")]
 color = Color(0.88235295, 0.8, 1, 1)
 
-[connection signal="interactable_detected" from="Player" to="UI/Reticle" method="_on_interactable_detected"]
 [connection signal="interactable_detected" from="Player" to="UI/FireFixtureInteraction" method="_on_interactable_detected"]
 [connection signal="interactable_detected" from="Player" to="UI/ChestInteraction" method="_on_interactable_detected"]
-[connection signal="interactable_lost" from="Player" to="UI/Reticle" method="_on_interactable_lost"]
+[connection signal="interactable_detected" from="Player" to="UI/Reticle" method="_on_interactable_detected"]
 [connection signal="interactable_lost" from="Player" to="UI/FireFixtureInteraction" method="_on_interactable_lost"]
 [connection signal="interactable_lost" from="Player" to="UI/ChestInteraction" method="_on_interactable_lost"]
+[connection signal="interactable_lost" from="Player" to="UI/Reticle" method="_on_interactable_lost"]
 [connection signal="paused" from="Player" to="UI/Reticle" method="_on_player_paused"]
 [connection signal="resumed" from="Player" to="UI/Reticle" method="_on_player_resumed"]

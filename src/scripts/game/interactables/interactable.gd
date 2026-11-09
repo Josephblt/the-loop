@@ -69,7 +69,8 @@ func trigger_interaction(execute_interact: bool = true) -> void:
 		disable_interaction()
 		_is_interactable = false
 		_update_highlight(false)
-	
+	else:
+		_interaction_toggle_state = !_interaction_toggle_state
 	
 	if execute_interact:
 		_interact()

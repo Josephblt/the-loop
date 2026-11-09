@@ -4,9 +4,11 @@
 [ext_resource type="Script" uid="uid://205s5ulf7oh4" path="res://scripts/game/rooms/grief_stage_room.gd" id="1_twdn2"]
 [ext_resource type="PackedScene" uid="uid://coql64ga8pi0u" path="res://game/level/blocks/block_cracked_md.tscn" id="2_cm6mr"]
 [ext_resource type="PackedScene" uid="uid://cqrto67h33ydp" path="res://game/switches/activator.tscn" id="2_ebo7r"]
+[ext_resource type="PackedScene" uid="uid://on4lpk0uhb0f" path="res://game/actors/enemy.tscn" id="2_natsh"]
 [ext_resource type="PackedScene" uid="uid://rdh1pb10cdnw" path="res://game/level/fences/post_corner.tscn" id="3_nq5t1"]
 [ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="4_52c2p"]
 [ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/interactables/altar.tscn" id="5_w5kc3"]
+[ext_resource type="PackedScene" uid="uid://esslh7fta828" path="res://game/interactables/chest_gold.tscn" id="6_exjoq"]
 [ext_resource type="PackedScene" uid="uid://cvnpe5drc4s7q" path="res://game/interactables/cresset.tscn" id="6_o6wsi"]
 [ext_resource type="PackedScene" uid="uid://dfwbglgsmyokl" path="res://game/level/walls/wall_normal_lg.tscn" id="8_ebo7r"]
 [ext_resource type="PackedScene" uid="uid://c7cgej25gpi0h" path="res://game/switches/gate_horizontal.tscn" id="10_d2bb8"]
@@ -23,6 +25,10 @@ size = Vector3(34.4, 12.1, 34.4)
 
 [node name="AcceptanceRoom" type="Node3D" unique_id=496749782]
 script = ExtResource("1_twdn2")
+
+[node name="Enemy" parent="." unique_id=1458459918 instance=ExtResource("2_natsh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.2, 0)
+visible = false
 
 [node name="Activator" parent="." unique_id=452683808 instance=ExtResource("2_ebo7r")]
 monitorable = false
@@ -104,6 +110,10 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 1.6, 0)
 
 [node name="Interactables" type="Node3D" parent="." unique_id=1525573364]
+
+[node name="Chest" parent="Interactables" unique_id=146892367 instance=ExtResource("6_exjoq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+visible = false
 
 [node name="Altars" type="Node3D" parent="Interactables" unique_id=957300393]
 
