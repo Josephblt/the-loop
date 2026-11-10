@@ -45,10 +45,6 @@ func extinguish_fire_fixtures() -> void:
 		fixture.extinguish()
 
 
-func _setup_chest() -> void:
-	pass
-
-
 func _setup_fire_fixtures() -> void:
 	pass	
 
@@ -56,14 +52,6 @@ func _setup_fire_fixtures() -> void:
 func _on_chest_interaction_triggered(_interactable: Interactable) -> void:
 	chest_opened.emit()
 
-
-func _on_activator_body_entered(_body: Node3D) -> void:
-	player_entered.emit()
-
-
-func _on_activator_body_exited(_body: Node3D) -> void:
-	player_exited.emit()
-		
 
 func _on_player_entered(_body: Node3D) -> void:
 	player_entered.emit()

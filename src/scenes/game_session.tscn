@@ -4,7 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://b0lvfjr4ff8hl" path="res://game/actors/player.tscn" id="3_player"]
 [ext_resource type="PackedScene" uid="uid://i64r11soytmg" path="res://game/rooms/acceptance_room.tscn" id="3_wvuqc"]
 [ext_resource type="PackedScene" path="res://game/ui/debug_overlay.tscn" id="4_debug_overlay"]
+[ext_resource type="PackedScene" uid="uid://kv5lpflnmg7f" path="res://game/rooms/anger_room.tscn" id="4_lksnb"]
+[ext_resource type="PackedScene" uid="uid://dgafbd3el72i3" path="res://game/rooms/bargaining_room.tscn" id="5_2e5gs"]
+[ext_resource type="PackedScene" uid="uid://80qlq52742m8" path="res://game/rooms/denial_room.tscn" id="6_05k43"]
 [ext_resource type="PackedScene" path="res://game/ui/reticle.tscn" id="6_reticle"]
+[ext_resource type="PackedScene" uid="uid://bxx66w6ljq3po" path="res://game/rooms/depression_room.tscn" id="7_e1pmw"]
 [ext_resource type="PackedScene" path="res://game/ui/outline.tscn" id="7_outline"]
 [ext_resource type="PackedScene" path="res://game/ui/interaction.tscn" id="8_interaction"]
 [ext_resource type="Script" uid="uid://bcxn012mvmomu" path="res://scripts/game/interactables/fire_fixture.gd" id="9_fire_fixture"]
@@ -21,6 +25,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 [node name="Lights" parent="Stage" unique_id=1084979360 instance=ExtResource("2_lights")]
 
 [node name="AcceptanceRoom" parent="Stage" unique_id=496749782 instance=ExtResource("3_wvuqc")]
+
+[node name="AngerRoom" parent="Stage" unique_id=1532200784 instance=ExtResource("4_lksnb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 61.600002)
+
+[node name="BargainingRoom" parent="Stage" unique_id=1670544133 instance=ExtResource("5_2e5gs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.6, 0, 0)
+
+[node name="DenialRoom" parent="Stage" unique_id=1330336872 instance=ExtResource("6_05k43")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -61.6)
+
+[node name="DepressionRoom" parent="Stage" unique_id=941196815 instance=ExtResource("7_e1pmw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.6, 0, 0)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=988538414]
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://80qlq52742m8"]
 
-[ext_resource type="Script" uid="uid://205s5ulf7oh4" path="res://scripts/game/rooms/grief_stage_room.gd" id="1_22eb3"]
+[ext_resource type="Script" uid="uid://d4ddxwsg6odkq" path="res://scripts/game/rooms/grief_stage_room.gd" id="1_22eb3"]
 [ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="1_eg3ab"]
 [ext_resource type="PackedScene" uid="uid://on4lpk0uhb0f" path="res://game/actors/enemy.tscn" id="2_6h2h2"]
 [ext_resource type="PackedScene" uid="uid://cqrto67h33ydp" path="res://game/switches/activator.tscn" id="2_le7qa"]
@@ -577,7 +577,8 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.
 [node name="WallNormalLG27" parent="Walls/Outter/Bottom" unique_id=2037666616 instance=ExtResource("5_3npp4")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.800003, 0, -16.8)
 
-[connection signal="body_entered" from="Activator" to="." method="_on_activator_body_entered"]
+[connection signal="body_exited" from="Player Exit" to="." method="_on_player_exited"]
+[connection signal="body_entered" from="Player Enter" to="." method="_on_player_entered"]
 [connection signal="interaction_triggered" from="Interactables/ChestGold" to="." method="_on_chest_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Altars/AltarLeft" to="." method="_on_fire_fixture_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Altars/AltarRight" to="." method="_on_fire_fixture_interaction_triggered"]

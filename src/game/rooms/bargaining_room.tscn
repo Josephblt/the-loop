@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dgafbd3el72i3"]
 
+[ext_resource type="Script" uid="uid://d4ddxwsg6odkq" path="res://scripts/game/rooms/grief_stage_room.gd" id="1_kotn8"]
 [ext_resource type="PackedScene" uid="uid://on4lpk0uhb0f" path="res://game/actors/enemy.tscn" id="1_lafly"]
 [ext_resource type="PackedScene" uid="uid://cqrto67h33ydp" path="res://game/switches/activator.tscn" id="2_kotn8"]
 [ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="3_uylxg"]
@@ -27,6 +28,7 @@ size = Vector3(51.2, 12.1, 40)
 size = Vector3(48.4, 12.1, 40)
 
 [node name="BargainingRoom" type="Node3D" unique_id=1670544133]
+script = ExtResource("1_kotn8")
 
 [node name="Enemy" parent="." unique_id=1458459918 instance=ExtResource("1_lafly")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 2.6, 0)
@@ -569,7 +571,8 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 [node name="WallBrokenMD12" parent="Walls" unique_id=1566428119 instance=ExtResource("14_4f4wq")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.6, 0, 5.6)
 
-[connection signal="body_entered" from="Activator" to="." method="_on_activator_body_entered"]
+[connection signal="body_exited" from="Player Exit" to="." method="_on_player_exited"]
+[connection signal="body_entered" from="Player Enter" to="." method="_on_player_entered"]
 [connection signal="interaction_triggered" from="Interactables/ChestGold" to="." method="_on_chest_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Altars/AltarLeft" to="." method="_on_fire_fixture_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Altars/AltarRight" to="." method="_on_fire_fixture_interaction_triggered"]

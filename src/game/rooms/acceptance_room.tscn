@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://i64r11soytmg"]
 
+[ext_resource type="Script" uid="uid://205s5ulf7oh4" path="res://scripts/game/rooms/acceptance_room.gd" id="1_natsh"]
 [ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="1_oo88v"]
-[ext_resource type="Script" uid="uid://205s5ulf7oh4" path="res://scripts/game/rooms/grief_stage_room.gd" id="1_twdn2"]
 [ext_resource type="PackedScene" uid="uid://coql64ga8pi0u" path="res://game/level/blocks/block_cracked_md.tscn" id="2_cm6mr"]
 [ext_resource type="PackedScene" uid="uid://cqrto67h33ydp" path="res://game/switches/activator.tscn" id="2_ebo7r"]
 [ext_resource type="PackedScene" uid="uid://on4lpk0uhb0f" path="res://game/actors/enemy.tscn" id="2_natsh"]
@@ -24,7 +24,7 @@ size = Vector3(40, 12.1, 40)
 size = Vector3(34.4, 12.1, 34.4)
 
 [node name="AcceptanceRoom" type="Node3D" unique_id=496749782]
-script = ExtResource("1_twdn2")
+script = ExtResource("1_natsh")
 
 [node name="Enemy" parent="." unique_id=1458459918 instance=ExtResource("2_natsh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.2, 0)
@@ -345,6 +345,8 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0
 [node name="GateWest" parent="Gates" unique_id=1351620342 instance=ExtResource("10_d2bb8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8, 0, 0)
 
+[connection signal="body_exited" from="Player Exit" to="." method="_on_player_exited"]
+[connection signal="body_entered" from="Player Enter" to="." method="_on_player_entered"]
 [connection signal="interaction_triggered" from="Interactables/Altars/AltarTopLeft" to="." method="_on_fire_fixture_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Altars/AltarTopRight" to="." method="_on_fire_fixture_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Altars/AltarLeftBottom" to="." method="_on_fire_fixture_interaction_triggered"]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bxx66w6ljq3po"]
 
 [ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="1_8c36o"]
-[ext_resource type="Script" uid="uid://205s5ulf7oh4" path="res://scripts/game/rooms/grief_stage_room.gd" id="1_tkjqx"]
+[ext_resource type="Script" uid="uid://d4ddxwsg6odkq" path="res://scripts/game/rooms/grief_stage_room.gd" id="1_tkjqx"]
 [ext_resource type="PackedScene" uid="uid://cqrto67h33ydp" path="res://game/switches/activator.tscn" id="2_pm5dm"]
 [ext_resource type="PackedScene" uid="uid://on4lpk0uhb0f" path="res://game/actors/enemy.tscn" id="2_s6b74"]
 [ext_resource type="PackedScene" uid="uid://b6fydse31tnyb" path="res://game/level/walls/wall_broken_md.tscn" id="4_avbcp"]
@@ -235,6 +235,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 1.6, 0)
 
 [node name="Gates" type="Node3D" parent="." unique_id=1610004070]
+
+[node name="GateHorizontal" parent="Gates" unique_id=1825569716 instance=ExtResource("16_tkjqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, 0)
 
 [node name="Interactables" type="Node3D" parent="." unique_id=761738820]
 
@@ -577,10 +580,8 @@ transform = Transform3D(-1, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -1, -22.
 [node name="WallNormalLG31" parent="Walls/Outter/Bottom" unique_id=904830992 instance=ExtResource("6_ci3gg")]
 transform = Transform3D(-1, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -1, -28, 0, 9.536743e-07)
 
-[node name="GateHorizontal" parent="." unique_id=1825569716 instance=ExtResource("16_tkjqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, 0)
-
-[connection signal="body_entered" from="Activator" to="." method="_on_activator_body_entered"]
+[connection signal="body_exited" from="Player Exit" to="." method="_on_player_exited"]
+[connection signal="body_entered" from="Player Enter" to="." method="_on_player_entered"]
 [connection signal="interaction_triggered" from="Interactables/ChestGold" to="." method="_on_chest_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Altars/AltarLeft" to="." method="_on_fire_fixture_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Altars/AltarRight" to="." method="_on_fire_fixture_interaction_triggered"]
