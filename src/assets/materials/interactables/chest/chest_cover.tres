@@ -1,9 +1,23 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://dqkswpb147hep"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dqkswpb147hep"]
 
 [ext_resource type="Texture2D" uid="uid://b170hc6sp5x33" path="res://assets/textures/interactables/chest/chest_cover.png" id="1_5j3yk"]
+[ext_resource type="Shader" uid="uid://dg8c2lpvqxsgg" path="res://shaders/dissolve_with_glowing_edge.gdshader" id="1_phm02"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ltjwo"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_phm02"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_ltjwo")
+seamless = true
+seamless_blend_skirt = 1.0
 
 [resource]
 resource_name = "ChestCover_1_Material"
-albedo_texture = ExtResource("1_5j3yk")
-metallic_specular = 0.0
-texture_filter = 2
+render_priority = 0
+shader = ExtResource("1_phm02")
+shader_parameter/albedo_texture = ExtResource("1_5j3yk")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_phm02")
+shader_parameter/dissolve = 0.0
+shader_parameter/edge_width = 0.1
+shader_parameter/edge_color = Color(0.45, 0.32, 0.61, 1)

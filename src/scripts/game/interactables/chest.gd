@@ -7,6 +7,10 @@ extends Interactable
 
 
 func _interact() -> void:
+	open()
+
+
+func open() -> void:
 	chest_animation_player.play("open")
 	await chest_animation_player.animation_finished
 	interaction_triggered.emit(self)
@@ -14,5 +18,4 @@ func _interact() -> void:
 
 func open_immediately() -> void:
 	chest_animation_player.play("open_immediately")
-	audio_stream_player.stop()
 	trigger_interaction(false)

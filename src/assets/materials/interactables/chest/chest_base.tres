@@ -1,16 +1,23 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://dr273ka7s5f3r"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dr273ka7s5f3r"]
 
 [ext_resource type="Texture2D" uid="uid://bin2gxhatwvu2" path="res://assets/textures/interactables/chest/chest_base.png" id="1_2dnrq"]
-[ext_resource type="Shader" uid="uid://boda5jt8raj6w" path="res://shaders/outline.gdshader" id="2_6iiuo"]
+[ext_resource type="Shader" uid="uid://dg8c2lpvqxsgg" path="res://shaders/dissolve_with_glowing_edge.gdshader" id="1_s17uc"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3hjkb"]
-shader = ExtResource("2_6iiuo")
-shader_parameter/color = Color(1, 0, 0, 1)
-shader_parameter/width = 3.0
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ltjwo"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i0s25"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_ltjwo")
+seamless = true
+seamless_blend_skirt = 1.0
 
 [resource]
 resource_name = "ChestBaseGold_2_Material"
-next_pass = SubResource("ShaderMaterial_3hjkb")
-albedo_texture = ExtResource("1_2dnrq")
-metallic_specular = 0.0
-texture_filter = 2
+render_priority = 0
+shader = ExtResource("1_s17uc")
+shader_parameter/albedo_texture = ExtResource("1_2dnrq")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_i0s25")
+shader_parameter/dissolve = 0.0
+shader_parameter/edge_width = 0.1
+shader_parameter/edge_color = Color(0.45, 0.32, 0.61, 1)
