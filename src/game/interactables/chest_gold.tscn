@@ -1,12 +1,12 @@
 [gd_scene format=4 uid="uid://esslh7fta828"]
 
-[ext_resource type="Script" uid="uid://bxw8n4e25palv" path="res://scripts/game/interactables/chest.gd" id="1_78xc1"]
+[ext_resource type="Script" uid="uid://5o7ah3vvghmm" path="res://scripts/game/interactables/chest_gold.gd" id="1_yxmji"]
 [ext_resource type="Texture2D" uid="uid://b170hc6sp5x33" path="res://assets/textures/interactables/chest/chest_cover.png" id="2_yxmji"]
 [ext_resource type="Shader" uid="uid://dg8c2lpvqxsgg" path="res://shaders/dissolve_with_glowing_edge.gdshader" id="3_f3cv6"]
 [ext_resource type="Texture2D" uid="uid://d1htv1poctbcb" path="res://assets/textures/interactables/chest/chest_base_gold.png" id="4_78xc1"]
-[ext_resource type="AudioStream" uid="uid://dk2je5u80xpa6" path="res://assets/sounds/sfx/chest/dissolve.wav" id="5_yxmji"]
+[ext_resource type="AudioStream" uid="uid://b4wrknkhwltt8" path="res://assets/sounds/sfx/chest/chest_dissolve.tres" id="5_yxmji"]
 [ext_resource type="AudioStream" uid="uid://df1ghudtvy2jb" path="res://assets/sounds/sfx/chest/chest_open.tres" id="6_3j8aq"]
-[ext_resource type="AudioStream" uid="uid://dm8cbxc37va11" path="res://assets/sounds/sfx/chest/chest_materialize.wav" id="6_h8u4u"]
+[ext_resource type="AudioStream" uid="uid://dalo5w8flb3ha" path="res://assets/sounds/sfx/chest/chest_materialize.tres" id="6_h8u4u"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ltjwo"]
 
@@ -146,31 +146,31 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeshInstance3DCover:rotation")
+tracks/2/path = NodePath("Barrier:collision_layer")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -1.5707964, 0)]
+"update": 1,
+"values": [0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("%MeshInstance3DCover:mesh:surface_0/material:shader_parameter/dissolve")
+tracks/3/path = NodePath("MeshInstance3DCover:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.0]
+"values": [Vector3(0, -1.5707964, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("%MeshInstance3DBase:mesh:surface_0/material:shader_parameter/dissolve")
+tracks/4/path = NodePath("MeshInstance3DCover:mesh:surface_0/material:shader_parameter/dissolve")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -182,22 +182,34 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../AudioStreamPlayer3D:playing")
+tracks/5/path = NodePath("MeshInstance3DBase:mesh:surface_0/material:shader_parameter/dissolve")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [1.0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("%AudioStreamPlayer3D:stream")
+tracks/6/path = NodePath("../AudioStreamPlayer3D:playing")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../AudioStreamPlayer3D:stream")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -211,74 +223,86 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:collision_layer")
+tracks/0/path = NodePath("..:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:collision_layer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(5),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeshInstance3DCover:mesh:surface_0/material:shader_parameter/dissolve")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.70000005, 1, 5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 0.50000002375, 1.0]
-}
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeshInstance3DBase:mesh:surface_0/material:shader_parameter/dissolve")
+tracks/2/path = NodePath("Barrier:collision_layer")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.70000005, 1, 5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 0.50000002375, 1.0]
+"times": PackedFloat32Array(5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../AudioStreamPlayer3D:stream")
+tracks/3/path = NodePath("MeshInstance3DCover:mesh:surface_0/material:shader_parameter/dissolve")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0, 4.1, 4.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.50000002375, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MeshInstance3DBase:mesh:surface_0/material:shader_parameter/dissolve")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 4.1, 4.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.50000002375, 1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../AudioStreamPlayer3D:stream")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("5_yxmji")]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../AudioStreamPlayer3D:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../AudioStreamPlayer3D:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("..:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_78xc1"]
@@ -307,28 +331,28 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [5]
+"values": [4]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("%MeshInstance3DCover:mesh:surface_0/material:shader_parameter/dissolve")
+tracks/2/path = NodePath("Barrier:collision_layer")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 4, 4.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [1.0, 0.50000002375, 0.0]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("%MeshInstance3DBase:mesh:surface_0/material:shader_parameter/dissolve")
+tracks/3/path = NodePath("MeshInstance3DCover:mesh:surface_0/material:shader_parameter/dissolve")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 4, 4.3),
+"times": PackedFloat32Array(0.6, 0.9, 5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [1.0, 0.50000002375, 0.0]
@@ -336,22 +360,34 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("%AudioStreamPlayer3D:stream")
+tracks/4/path = NodePath("MeshInstance3DBase:mesh:surface_0/material:shader_parameter/dissolve")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
+"times": PackedFloat32Array(0.6, 0.9, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.50000002375, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../AudioStreamPlayer3D:stream")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("6_h8u4u")]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("%AudioStreamPlayer3D:playing")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../AudioStreamPlayer3D:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -377,7 +413,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("%AudioStreamPlayer3D:stream")
+tracks/1/path = NodePath("../AudioStreamPlayer3D:stream")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -407,12 +443,9 @@ _data = {
 &"open": SubResource("Animation_1u115")
 }
 
-[node name="Chest" type="Node3D" unique_id=146892367 node_paths=PackedStringArray("interactable_meshes")]
+[node name="ChestGold" type="Node3D" unique_id=146892367]
 visible = false
-script = ExtResource("1_78xc1")
-interactable_meshes = [NodePath("StaticBody3D/MeshInstance3DCover"), NodePath("StaticBody3D/MeshInstance3DBase")]
-one_shot = true
-interaction_distance = 2.0
+script = ExtResource("1_yxmji")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=469060]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0500001, 0)
@@ -441,6 +474,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, -
 shape = SubResource("ConcavePolygonShape3D_bk6g0")
 
 [node name="Barrier" type="StaticBody3D" parent="StaticBody3D" unique_id=769812675]
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/Barrier" unique_id=1356368746]

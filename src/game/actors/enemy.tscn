@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://on4lpk0uhb0f"]
 
+[ext_resource type="Script" uid="uid://ciaynxvaikchq" path="res://scripts/game/actors/enemy/enemy.gd" id="1_72hdy"]
+
 [sub_resource type="Curve" id="Curve_wjsg1"]
 _data = [Vector2(0.5136364, 0.38345867), 0.0, 0.0, 0, 0]
 point_count = 1
@@ -59,7 +61,6 @@ size = Vector3(0.25, 0.25, 0.25)
 
 [node name="Enemy" type="GPUParticles3D" unique_id=1458459918]
 layers = 8
-emitting = false
 amount = 2500
 lifetime = 0.5
 speed_scale = 0.25
@@ -70,3 +71,4 @@ visibility_aabb = AABB(-500, -500, -500, 1000, 1000, 1000)
 draw_order = 2
 process_material = SubResource("ParticleProcessMaterial_jawpm")
 draw_pass_1 = SubResource("BoxMesh_imi2h")
+script = ExtResource("1_72hdy")

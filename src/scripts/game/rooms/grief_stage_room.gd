@@ -1,27 +1,35 @@
 class_name GriefStageRoom
 extends Node3D
 
-
+signal player_died()
 signal player_entered()
 signal player_exited()
 signal chest_opened()
 
 
-@export var player: Player
 @export var gates: Array[Gate] = []
 @export var fire_fixtures: Array[FireFixture] = []
 @export var chest_gold: Chest
+@export var enemy: Node3D
 
 
 func _ready() -> void:
 	pass
 
 
-func hide_chest() -> void:
+func materialize_chest() -> void:
+	chest_gold.materialize()
+
+
+func dissolve_chest() -> void:
+	chest_gold.dissolve()
+
+
+func hide_enemy() -> void:
 	pass
 
 
-func show_chest() -> void:
+func show_enemy() -> void:
 	pass
 
 
@@ -53,9 +61,9 @@ func _on_chest_interaction_triggered(_interactable: Interactable) -> void:
 	chest_opened.emit()
 
 
-func _on_player_entered(_body: Node3D) -> void:
-	player_entered.emit()
-
-
 func _on_player_exited(_body: Node3D) -> void:
 	player_exited.emit()
+
+
+func _on_player_entered(_body: Node3D) -> void:
+	player_entered.emit()
