@@ -7,10 +7,10 @@ signal player_exited()
 signal chest_opened()
 
 
-@export var gates: Array[Gate] = []
-@export var fire_fixtures: Array[FireFixture] = []
 @export var chest_gold: Chest
-@export var enemy: Node3D
+@export var enemy: Enemy
+@export var fire_fixtures: Array[FireFixture] = []
+@export var gates: Array[Gate] = []
 
 
 func _ready() -> void:
@@ -26,11 +26,11 @@ func dissolve_chest() -> void:
 
 
 func hide_enemy() -> void:
-	pass
+	enemy.hide()
 
 
 func show_enemy() -> void:
-	pass
+	enemy.show()
 
 
 func open_gates() -> void:

@@ -61,6 +61,7 @@ size = Vector3(0.25, 0.25, 0.25)
 
 [node name="Enemy" type="GPUParticles3D" unique_id=1458459918]
 layers = 8
+emitting = false
 amount = 2500
 lifetime = 0.5
 speed_scale = 0.25

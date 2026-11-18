@@ -7,9 +7,10 @@ extends GeometryInstance3D
 
 
 func _ready() -> void:
-	if !Engine.is_editor_hint():
-		self.emitting = true
-	light.visible = self.emitting
+	# if !Engine.is_editor_hint():
+	# 	self.emitting = true
+	# light.visible = self.emitting
+	pass
 
 
 func is_lit() -> bool:

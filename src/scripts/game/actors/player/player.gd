@@ -94,7 +94,7 @@ func _handle_interactables() -> void:
 	if raycast.is_colliding():
 		var collider: Node = raycast.get_collider() as Node
 		interactable = collider.get_parent() as Interactable
-		if interactable and !interactable.is_interactable():
+		if interactable and !interactable.is_interactable:
 			interactable = null
 		if interactable:
 			var origin: Vector3 = raycast.to_global(Vector3.ZERO)
@@ -129,7 +129,7 @@ func _handle_interactables() -> void:
 	if _interacting and _active_interactable:
 		_interacting = false
 		_active_interactable.trigger_interaction()
-		if !_active_interactable.is_interactable():
+		if !_active_interactable.is_interactable:
 			interactable_lost.emit(_active_interactable)
 			_active_interactable = null
 

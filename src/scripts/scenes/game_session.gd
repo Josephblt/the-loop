@@ -9,7 +9,6 @@ const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn"
 const STAGE_LAYOUT_PATH: StageLayout = preload("res://assets/configs/stage_layout.tres")
 
 @onready var _player: Player = %Player
-@onready var _stage: Node3D = %Stage
 @onready var _acceptance_room: GriefStageRoom = %AcceptanceRoom
 @onready var _anger_room: GriefStageRoom = %AngerRoom
 @onready var _bargaining_room: GriefStageRoom = %BargainingRoom
