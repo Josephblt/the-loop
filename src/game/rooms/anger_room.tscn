@@ -29,6 +29,7 @@ size = Vector3(40, 12.1, 48.4)
 
 [node name="AngerRoom" type="Node3D" unique_id=496749782]
 script = ExtResource("1_50ifw")
+grief_stage = 1
 
 [node name="Enemy" parent="." unique_id=1458459918 instance=ExtResource("2_pbwdi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, -5.6)

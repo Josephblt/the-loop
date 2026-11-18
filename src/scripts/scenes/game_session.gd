@@ -15,13 +15,11 @@ const STAGE_LAYOUT_PATH: StageLayout = preload("res://assets/configs/stage_layou
 @onready var _denial_room: GriefStageRoom = %DenialRoom
 @onready var _depression_room: GriefStageRoom = %DepressionRoom
 
-
-var _session_seed: int
-
-var _story: Story
 var _grief_stages_stack: GriefStagesStack
-var _memories_stack: MemoriesStack
 var _loop_count: int = 0
+var _memories_stack: MemoriesStack
+var _session_seed: int
+var _story: Story
 
 
 func _ready() -> void:
@@ -31,6 +29,11 @@ func _ready() -> void:
 
 func _start_loop() -> void:
 	_load_stage_memories()
+	_acceptance_room.setup_room(_session_seed)
+	_anger_room.setup_room(_session_seed)
+	_bargaining_room.setup_room(_session_seed)
+	_denial_room.setup_room(_session_seed)
+	_depression_room.setup_room(_session_seed)
 
 
 func _load_stage_memories() -> void:

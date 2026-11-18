@@ -29,6 +29,7 @@ size = Vector3(48.4, 12.1, 40)
 
 [node name="DepressionRoom" type="Node3D" unique_id=1670544133]
 script = ExtResource("1_tkjqx")
+grief_stage = 3
 
 [node name="Enemy" parent="." unique_id=1458459918 instance=ExtResource("2_s6b74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8, 0, 16.8)
