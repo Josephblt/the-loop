@@ -26,13 +26,15 @@ var _story: Story
 
 func _ready() -> void:
 	load_save_data()
-	STAGE_LAYOUT.seed = _session_seed
-	STAGE_LAYOUT.story = _story
 	_start_loop()
 
 
 func _start_loop() -> void:
-	_load_stage_memories()
+	STAGE_LAYOUT.seed = _session_seed
+	STAGE_LAYOUT.story = _story
+	
+	_load_stage_memories()	
+
 	_acceptance_room.setup_room(_session_seed)
 	_anger_room.setup_room(_session_seed)
 	_bargaining_room.setup_room(_session_seed)
