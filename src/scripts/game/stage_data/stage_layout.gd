@@ -33,17 +33,7 @@ var depression_room_transform: Transform3D:
 
 var memory_room_transforms: Array[Transform3D]:
 	get:
-		if story == null or story.loops.is_empty() or story.loops[0].stages.is_empty():
-			return []
-		var room_count: int = story.loops[0].stages[0].maze_memories.size()
-		return MemoryRoomsLayout.calculate_transforms(
-			seed,
-			room_count,
-			cell_size,
-			maze_size,
-			spawn_room_size,
-			memory_room_size
-		)
+		return MemoryRoomsLayout.new(self).transforms
 
 
 func _grief_room_transform(direction: Vector3) -> Transform3D:
