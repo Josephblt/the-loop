@@ -5,7 +5,7 @@ extends Resource
 @export var maze_size: int = 31
 @export var grief_room_size: int = 7
 @export var grief_room_entrance_offset: int = 2
-@export var spawn_room_size: int = 7
+@export var spawn_room_size: int = 3
 @export var spawn_room_entrance_offset: int = 2
 @export var memory_room_size: int = 3
 
@@ -26,7 +26,7 @@ var bargaining_room_transform: Transform3D:
 var depression_room_transform: Transform3D:
 	get:
 		return _grief_room_transform(Vector3.RIGHT)
-
+	
 
 func memory_room_transforms(random_seed: int, room_count: int) -> Array[Transform3D]:
 	var randomizer: RandomNumberGenerator = RandomNumberGenerator.new()
