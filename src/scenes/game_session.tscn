@@ -23,6 +23,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="Stage" type="Node3D" parent="." unique_id=2090277585]
+unique_name_in_owner = true
 
 [node name="Lights" parent="Stage" unique_id=1084979360 instance=ExtResource("2_lights")]
 

@@ -14,6 +14,7 @@ const STAGE_LAYOUT_PATH: StageLayout = preload("res://assets/configs/stage_layou
 @onready var _bargaining_room: GriefStageRoom = %BargainingRoom
 @onready var _denial_room: GriefStageRoom = %DenialRoom
 @onready var _depression_room: GriefStageRoom = %DepressionRoom
+@onready var _stage: Node3D = %Stage
 
 var _grief_stages_stack: GriefStagesStack
 var _loop_count: int = 0
@@ -34,6 +35,8 @@ func _start_loop() -> void:
 	_bargaining_room.setup_room(_session_seed)
 	_denial_room.setup_room(_session_seed)
 	_depression_room.setup_room(_session_seed)
+	var room_transforms: Array[Transform3D] = STAGE_LAYOUT_PATH.memory_room_transforms(_session_seed, _memories_stack.memory_count())
+	MemoryRoom.create_rooms(_stage, room_transforms, _session_seed)
 
 
 func _load_stage_memories() -> void:
