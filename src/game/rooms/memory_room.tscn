@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://rdh1pb10cdnw" path="res://game/level/fences/post_corner.tscn" id="9_n1g6i"]
 [ext_resource type="PackedScene" uid="uid://d2muudxk2q5r1" path="res://game/interactables/altar.tscn" id="10_hqoex"]
 [ext_resource type="PackedScene" uid="uid://dk3ahea1354r8" path="res://game/interactables/chest.tscn" id="11_r0t1e"]
-[ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/message.tscn" id="12_f4h61"]
 [ext_resource type="PackedScene" uid="uid://cqrto67h33ydp" path="res://game/switches/activator.tscn" id="13_n4fvx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jxl8w"]
@@ -27,7 +26,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1000001, 0)
 shape = SubResource("BoxShape3D_jxl8w")
 
 [node name="Floor" type="Node3D" parent="." unique_id=368624510]
-unique_name_in_owner = true
 
 [node name="BlockCrackedSM" parent="Floor" unique_id=1701017205 instance=ExtResource("2_n4fvx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 0, -5.6)
@@ -59,7 +57,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 0, 5.6)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.6)
 
 [node name="Fences" type="Node3D" parent="." unique_id=938368283]
-unique_name_in_owner = true
 
 [node name="CornerRight" parent="Fences" unique_id=2103190392 instance=ExtResource("5_2ejra")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 1.6, 0)
@@ -83,7 +80,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.6, 0)
 
 [node name="Interactables" type="Node3D" parent="." unique_id=1783042822]
-unique_name_in_owner = true
 
 [node name="Altars" type="Node3D" parent="Interactables" unique_id=1207596977]
 
@@ -94,16 +90,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, 4.2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 4.2)
 
 [node name="Chest" parent="Interactables" unique_id=469060 instance=ExtResource("11_r0t1e")]
-unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.7)
-
-[node name="Message" parent="." unique_id=1492686143 instance=ExtResource("12_f4h61")]
-unique_name_in_owner = true
 
 [connection signal="interaction_triggered" from="Interactables/Altars/AltarLeft" to="." method="_on_fire_fixture_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Altars/AltarRight" to="." method="_on_fire_fixture_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Chest" to="." method="_on_chest_interaction_triggered"]
-[connection signal="message_hidden" from="Message" to="." method="_on_message_hidden"]
-[connection signal="message_shown" from="Message" to="." method="_on_message_shown"]
 
 [editable path="Activator"]
