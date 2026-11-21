@@ -14,15 +14,17 @@
 [ext_resource type="PackedScene" uid="uid://cqrto67h33ydp" path="res://game/switches/activator.tscn" id="13_n4fvx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jxl8w"]
-size = Vector3(17.8, 7, 17.8)
+size = Vector3(17.6, 6.4, 17.6)
 
-[node name="MemoryRoom" type="Node3D" unique_id=880386851]
+[node name="MemoryRoom" type="Node3D" unique_id=880386851 node_paths=PackedStringArray("chest", "fire_fixtures")]
 script = ExtResource("1_n6nv3")
+chest = NodePath("Interactables/Chest")
+fire_fixtures = [NodePath("Interactables/Altars/AltarLeft"), NodePath("Interactables/Altars/AltarRight")]
 
 [node name="Activator" parent="." unique_id=452683808 instance=ExtResource("13_n4fvx")]
 
 [node name="CollisionShape3D" parent="Activator" index="0" unique_id=1593920821]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1000001, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.536743e-07, 2.8000002, 9.536743e-07)
 shape = SubResource("BoxShape3D_jxl8w")
 
 [node name="Floor" type="Node3D" parent="." unique_id=368624510]
@@ -92,8 +94,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 4.2)
 [node name="Chest" parent="Interactables" unique_id=469060 instance=ExtResource("11_r0t1e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.7)
 
-[connection signal="interaction_triggered" from="Interactables/Altars/AltarLeft" to="." method="_on_fire_fixture_interaction_triggered"]
-[connection signal="interaction_triggered" from="Interactables/Altars/AltarRight" to="." method="_on_fire_fixture_interaction_triggered"]
 [connection signal="interaction_triggered" from="Interactables/Chest" to="." method="_on_chest_interaction_triggered"]
 
 [editable path="Activator"]

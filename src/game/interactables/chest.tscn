@@ -74,7 +74,7 @@ render_priority = 0
 shader = ExtResource("5_3hjkb")
 shader_parameter/albedo_texture = ExtResource("2_ca5m2")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_i0s25")
-shader_parameter/dissolve = 1.0
+shader_parameter/dissolve = 0.0
 shader_parameter/edge_width = 0.1
 shader_parameter/edge_color = Color(0.45, 0.32, 0.61, 1)
 
@@ -223,8 +223,8 @@ _data = {
 [node name="Chest" type="Node3D" unique_id=146892367 node_paths=PackedStringArray("interactable_meshes")]
 script = ExtResource("1_68fva")
 interactable_meshes = [NodePath("StaticBody3D/MeshInstance3DCover"), NodePath("StaticBody3D/MeshInstance3DBase")]
-one_shot = true
 interaction_distance = 2.0
+one_shot = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=469060]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0500001, 0)
@@ -267,4 +267,5 @@ libraries/ = SubResource("AnimationLibrary_r3qdl")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=495398265]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3000001, 0)
 bus = &"SFX"

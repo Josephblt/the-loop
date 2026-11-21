@@ -19,13 +19,13 @@
 [ext_resource type="PackedScene" uid="uid://c7cgej25gpi0h" path="res://game/switches/gate_horizontal.tscn" id="16_lafly"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3687x"]
-size = Vector3(56.8, 12.1, 40)
+size = Vector3(56.8, 12, 40)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kotn8"]
-size = Vector3(51.2, 12.1, 40)
+size = Vector3(51.2, 12, 40)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uylxg"]
-size = Vector3(48.4, 12.1, 40)
+size = Vector3(48.4, 12, 40)
 
 [node name="BargainingRoom" type="Node3D" unique_id=1670544133]
 script = ExtResource("1_kotn8")
@@ -37,7 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 2.6, 0)
 [node name="Activator" parent="." unique_id=452683808 instance=ExtResource("2_kotn8")]
 
 [node name="CollisionShape3D" parent="Activator" index="0" unique_id=1593920821]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.4, 5.650001, -9.536743e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.4, 5.600001, -9.536743e-07)
 shape = SubResource("BoxShape3D_3687x")
 
 [node name="Player Exit" type="Area3D" parent="." unique_id=2064322791]
@@ -46,7 +46,7 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player Exit" unique_id=1158690718]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5999985, 5.65, 1.9073486e-06)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5999985, 5.6, 1.9073486e-06)
 shape = SubResource("BoxShape3D_kotn8")
 
 [node name="Player Enter" type="Area3D" parent="." unique_id=1119148254]
@@ -55,7 +55,7 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player Enter" unique_id=208589963]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.199999, 5.65, 1.9073486e-06)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.199999, 5.6, 1.9073486e-06)
 shape = SubResource("BoxShape3D_uylxg")
 
 [node name="Floor" type="Node3D" parent="." unique_id=1738241915]

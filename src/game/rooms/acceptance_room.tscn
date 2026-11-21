@@ -15,13 +15,13 @@
 [ext_resource type="PackedScene" uid="uid://v8j2a1egqxgo" path="res://game/switches/gate_vertical.tscn" id="11_exjoq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2llnb"]
-size = Vector3(51.2, 12.1, 51.2)
+size = Vector3(51.2, 12, 51.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_natsh"]
-size = Vector3(40, 12.1, 40)
+size = Vector3(40, 12, 40)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f21jr"]
-size = Vector3(34.4, 12.1, 34.4)
+size = Vector3(34.4, 12, 34.4)
 
 [node name="AcceptanceRoom" type="Node3D" unique_id=496749782]
 script = ExtResource("1_natsh")
@@ -35,7 +35,7 @@ visible = false
 monitorable = false
 
 [node name="CollisionShape3D" parent="Activator" index="0" unique_id=1593920821]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.65, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 0)
 shape = SubResource("BoxShape3D_2llnb")
 
 [node name="Player Exit" type="Area3D" parent="." unique_id=1349068632]
@@ -44,7 +44,7 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player Exit" unique_id=1954114786]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 5.65, 1.9073486e-06)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 5.6, 1.9073486e-06)
 shape = SubResource("BoxShape3D_natsh")
 
 [node name="Player Enter" type="Area3D" parent="." unique_id=1543056963]
@@ -53,7 +53,7 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player Enter" unique_id=1081835580]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 5.65, 1.9073486e-06)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 5.6, 1.9073486e-06)
 shape = SubResource("BoxShape3D_f21jr")
 
 [node name="Floor" type="Node3D" parent="." unique_id=1881721258]

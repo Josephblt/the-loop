@@ -19,13 +19,13 @@
 [ext_resource type="PackedScene" uid="uid://b6fydse31tnyb" path="res://game/level/walls/wall_broken_md.tscn" id="15_r8esf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3687x"]
-size = Vector3(40, 12.1, 56.8)
+size = Vector3(40, 12, 56.8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qc7yu"]
-size = Vector3(40, 12.1, 51.2)
+size = Vector3(40, 12, 51.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_50ifw"]
-size = Vector3(40, 12.1, 48.4)
+size = Vector3(40, 12, 48.4)
 
 [node name="AngerRoom" type="Node3D" unique_id=496749782]
 script = ExtResource("1_50ifw")
@@ -37,7 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, -5.6)
 [node name="Activator" parent="." unique_id=452683808 instance=ExtResource("2_50ifw")]
 
 [node name="CollisionShape3D" parent="Activator" index="0" unique_id=1593920821]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.33786e-06, 5.6500006, -8.4000025)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.33786e-06, 5.6000004, -8.4000025)
 shape = SubResource("BoxShape3D_3687x")
 
 [node name="Player Exit" type="Area3D" parent="." unique_id=980017587]
@@ -46,7 +46,7 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player Exit" unique_id=1166091229]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 5.65, -5.5999985)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 5.6, -5.5999985)
 shape = SubResource("BoxShape3D_qc7yu")
 
 [node name="Player Enter" type="Area3D" parent="." unique_id=1621798987]
@@ -55,7 +55,7 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player Enter" unique_id=1279778862]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 5.65, -4.199999)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 5.6, -4.199999)
 shape = SubResource("BoxShape3D_50ifw")
 
 [node name="Floor" type="Node3D" parent="." unique_id=489162263]
