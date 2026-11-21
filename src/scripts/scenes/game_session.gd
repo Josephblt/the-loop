@@ -6,8 +6,9 @@ const SAVE_FILE_READABLE_PATH: String = "user://the_loop_save_game_readable.json
 
 const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn")
 
-const STAGE_LAYOUT_PATH: StageLayout = preload("res://assets/configs/stage_layout.tres")
+static var STAGE_LAYOUT: StageLayout = preload("res://assets/configs/stage_layout.tres")
 
+@warning_ignore("unused_private_class_variable")
 @onready var _player: Player = %Player
 @onready var _acceptance_room: GriefStageRoom = %AcceptanceRoom
 @onready var _anger_room: GriefStageRoom = %AngerRoom
@@ -25,6 +26,8 @@ var _story: Story
 
 func _ready() -> void:
 	load_save_data()
+	STAGE_LAYOUT.seed = _session_seed
+	STAGE_LAYOUT.story = _story
 	_start_loop()
 
 
@@ -35,8 +38,7 @@ func _start_loop() -> void:
 	_bargaining_room.setup_room(_session_seed)
 	_denial_room.setup_room(_session_seed)
 	_depression_room.setup_room(_session_seed)
-	var room_transforms: Array[Transform3D] = STAGE_LAYOUT_PATH.memory_room_transforms(_session_seed, _memories_stack.memory_count())
-	MemoryRoom.create_rooms(_stage, room_transforms, _session_seed)
+	MemoryRoom.create_rooms(_stage, STAGE_LAYOUT.memory_room_transforms, _session_seed)
 
 
 func _load_stage_memories() -> void:
@@ -82,7 +84,7 @@ func load_save_data() -> void:
 
 static func create_save_data() -> void:
 	var session_seed: int = randi()
-	var story: Story = STAGE_LAYOUT_PATH.stories[randi() % STAGE_LAYOUT_PATH.stories.size()]
+	var story: Story = STAGE_LAYOUT.stories[randi() % STAGE_LAYOUT.stories.size()]
 	var fire_fixture_states: FireFixtureStates = FireFixtureStates.new()
 	var grief_stages_stack: GriefStagesStack = GriefStagesStack.new(session_seed)
 	var memories_stack: MemoriesStack = MemoriesStack.new(session_seed)
