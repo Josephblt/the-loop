@@ -1,2 +1,2 @@
 class_name MazeRoom
-extends Room
+extends Node3D

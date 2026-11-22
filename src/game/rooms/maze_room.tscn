@@ -1,12 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://d0ffaawdq4ms5"]
 
-[ext_resource type="Script" path="res://scripts/game/rooms/maze_room.gd" id="1_maze_room"]
+[ext_resource type="Script" uid="uid://cgkoqd4eyuy8k" path="res://scripts/game/rooms/maze_room.gd" id="1_maze_room"]
 
-[node name="MazeRoom" type="Node3D"]
+[node name="MazeRoom" type="Node3D" unique_id=1279004019]
 script = ExtResource("1_maze_room")
-
-[node name="Blocks" type="Node3D" parent="."]
-unique_name_in_owner = true
-
-[node name="Walls" type="Node3D" parent="."]
-unique_name_in_owner = true
