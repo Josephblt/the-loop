@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="Stories" load_steps=3 format=3]
-
-[ext_resource type="Script" path="res://scripts/game/story_data/stories.gd" id="1_stories"]
-[ext_resource type="Resource" uid="uid://b50sfsrr16usc" path="res://assets/stories/borrowed_weather.tres" id="2_borrowed_weather"]
-
-[resource]
-script = ExtResource("1_stories")
-stories = Array[Story]([ExtResource("2_borrowed_weather")])
