@@ -13,6 +13,7 @@ const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn"
 @onready var _bargaining_room: GriefStageRoom = %BargainingRoom
 @onready var _denial_room: GriefStageRoom = %DenialRoom
 @onready var _depression_room: GriefStageRoom = %DepressionRoom
+@onready var _maze_room: MazeRoom = %MazeRoom
 @onready var _memory_rooms: MemoryRooms = %MemoryRooms
 
 
@@ -38,6 +39,7 @@ func _start_loop() -> void:
 	_bargaining_room.setup_room(_stage_layout)
 	_denial_room.setup_room(_stage_layout)
 	_depression_room.setup_room(_stage_layout)
+	_maze_room.setup_room(_stage_layout)
 	_memory_rooms.setup_rooms(_stage_layout)
 
 

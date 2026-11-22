@@ -52,8 +52,10 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.6, 0, 0)
 
 [node name="MazeRoom" parent="Stage" unique_id=1279004019 instance=ExtResource("11_itwev")]
+unique_name_in_owner = true
 
 [node name="MemoryRooms" parent="Stage" unique_id=854210392 instance=ExtResource("11_memory_rooms")]
+unique_name_in_owner = true
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=988538414]
 

@@ -45,6 +45,16 @@ var memory_room_transforms: Array[Transform3D]:
 	get:
 		return _memory_room_transforms
 
+var _maze_floor_transforms: Array[Transform3D]
+var maze_floor_transforms: Array[Transform3D]:
+	get:
+		return _maze_floor_transforms
+
+var _maze_walls: Array[MazeWall]
+var maze_walls: Array[MazeWall]:
+	get:
+		return _maze_walls
+
 
 func initialize(new_session_seed: int, memories_per_stage: int) -> void:
 	_session_seed = new_session_seed
@@ -54,6 +64,7 @@ func initialize(new_session_seed: int, memories_per_stage: int) -> void:
 	_bargaining_room_transform = _calculate_grief_room_transform(Vector3.LEFT)
 	_depression_room_transform = _calculate_grief_room_transform(Vector3.RIGHT)
 	_memory_room_transforms = _calculate_memory_rooms_transforms()
+	_calculate_maze_room_layout()
 
 
 func _calculate_grief_room_transform(direction: Vector3) -> Transform3D:
@@ -65,3 +76,9 @@ func _calculate_grief_room_transform(direction: Vector3) -> Transform3D:
 
 func _calculate_memory_rooms_transforms() -> Array[Transform3D]:
 	return MemoryRoomsLayout.new(self).calculate_transforms()
+
+
+func _calculate_maze_room_layout() -> void:
+	var maze_room_layout: MazeRoomLayout = MazeRoomLayout.new(self)
+	_maze_floor_transforms = maze_room_layout.floor_transforms
+	_maze_walls = maze_room_layout.walls
