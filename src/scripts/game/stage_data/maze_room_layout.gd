@@ -90,15 +90,15 @@ func _add_wall(cell: Vector2i, direction: Vector2i) -> void:
 func _wall_transform(cell: Vector2i, direction: Vector2i) -> Transform3D:
 	var half_cell_size: float = _stage_layout.cell_size / 2.0
 	var position: Vector3 = _cell_world_position(cell)
-	var rotation: float = 0.0
+	var rotation: float = PI / 2.0
 	if direction == Vector2i.UP:
 		position += Vector3(half_cell_size, 0.0, -half_cell_size)
-		rotation = PI / 2.0
+		rotation = 0.0
 	elif direction == Vector2i.RIGHT:
 		position += Vector3(half_cell_size, 0.0, half_cell_size)
 	elif direction == Vector2i.DOWN:
 		position += Vector3(half_cell_size, 0.0, half_cell_size)
-		rotation = PI / 2.0
+		rotation = 0.0
 	else:
 		position += Vector3(-half_cell_size, 0.0, half_cell_size)
 	return Transform3D(Basis(Vector3.UP, rotation), position)
