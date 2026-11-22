@@ -50,7 +50,7 @@ func _room_candidates() -> Array[Vector2i]:
 
 func _room_is_available(position: Vector2i) -> bool:
 	var bounds: Rect2i = _room_bounds(position)
-	if bounds.intersects(_spawn_room_border()):
+	if bounds.intersects(_acceptance_room_border()):
 		return false
 	for approach: Rect2i in _gate_approaches():
 		if bounds.intersects(approach):
@@ -97,20 +97,20 @@ func _room_bounds(position: Vector2i) -> Rect2i:
 	return Rect2i(position - offset, Vector2i(_stage_layout.memory_room_size, _stage_layout.memory_room_size))
 
 
-func _spawn_room_border() -> Rect2i:
+func _acceptance_room_border() -> Rect2i:
 	var maze_center: int = int(_stage_layout.maze_size / 2.0)
-	var room_half_size: int = int(_stage_layout.spawn_room_size / 2.0)
+	var room_half_size: int = int(_stage_layout.acceptance_room_size / 2.0)
 	var start: Vector2i = Vector2i(maze_center - room_half_size - 1, maze_center - room_half_size - 1)
-	return Rect2i(start, Vector2i(_stage_layout.spawn_room_size + 2, _stage_layout.spawn_room_size + 2))
+	return Rect2i(start, Vector2i(_stage_layout.acceptance_room_size + 2, _stage_layout.acceptance_room_size + 2))
 
 
 func _gate_approaches() -> Array[Rect2i]:
 	var maze_center: int = int(_stage_layout.maze_size / 2.0)
 	var memory_room_half_size: int = int(_stage_layout.memory_room_size / 2.0)
-	var spawn_room_half_size: int = int(_stage_layout.spawn_room_size / 2.0)
+	var acceptance_room_half_size: int = int(_stage_layout.acceptance_room_size / 2.0)
 	var approach_offset: int = maze_center - memory_room_half_size
-	var approach_length: int = maze_center - spawn_room_half_size
-	var far_approach_start: int = maze_center + spawn_room_half_size + 1
+	var approach_length: int = maze_center - acceptance_room_half_size
+	var far_approach_start: int = maze_center + acceptance_room_half_size + 1
 	return [
 		Rect2i(approach_offset, 0, _stage_layout.memory_room_size, approach_length),
 		Rect2i(approach_offset, far_approach_start, _stage_layout.memory_room_size, approach_length),

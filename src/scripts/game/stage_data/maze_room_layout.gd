@@ -24,11 +24,20 @@ func _init(stage_layout: StageLayout) -> void:
 
 
 func _reserve_room_cells() -> void:
-	var center: int = int(_stage_layout.maze_size / 2.0)
-	_reserve_area(Vector2i(center, center), _stage_layout.grief_room_size)
+	_reserve_acceptance_room_cells()
 	for room_transform: Transform3D in _stage_layout.memory_room_transforms:
 		var room_center: Vector2i = _world_to_cell(room_transform.origin)
 		_reserve_area(room_center, _stage_layout.memory_room_size)
+
+
+func _reserve_acceptance_room_cells() -> void:
+	var center: int = int(_stage_layout.maze_size / 2.0)
+	var center_cell: Vector2i = Vector2i(center, center)
+	var room_half_size: int = int(_stage_layout.acceptance_room_size / 2.0)
+	_reserve_area(center_cell, _stage_layout.acceptance_room_size)
+	for direction: Vector2i in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
+		for distance: int in range(room_half_size + 1, room_half_size + _stage_layout.spawn_room_entrance_offset + 1):
+			_reserved_cells[center_cell + direction * distance] = true
 
 
 func _reserve_area(center: Vector2i, size: int) -> void:
@@ -41,7 +50,7 @@ func _reserve_area(center: Vector2i, size: int) -> void:
 func _reserve_gate_outside_cells() -> void:
 	var center: int = int(_stage_layout.maze_size / 2.0)
 	var last_cell: int = _stage_layout.maze_size - 1
-	var inner_offset: int = int(_stage_layout.grief_room_size / 2.0) + 1
+	var inner_offset: int = int(_stage_layout.acceptance_room_size / 2.0) + _stage_layout.spawn_room_entrance_offset + 1
 	var positions: Array[Vector2i] = [
 		Vector2i(center, 0),
 		Vector2i(center, last_cell),
