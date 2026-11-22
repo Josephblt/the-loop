@@ -63,7 +63,6 @@ size = Vector3(0.1, 0.1, 0.1)
 [node name="Fire" type="GPUParticles3D" unique_id=1458459918]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 layers = 4
-emitting = false
 amount = 1000
 lifetime = 0.25
 speed_scale = 0.25
