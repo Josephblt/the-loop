@@ -55,7 +55,6 @@ func _load_stage_memories() -> void:
 func update_save_data() -> void:
 	var data: Dictionary = {}
 	data["session_seed"] = _session_seed
-	data["story_path"] = _story.resource_path
 	data["grief_stages_stack"] = _grief_stages_stack.serialize()
 	data["memories_stack"] = _memories_stack.serialize()
 	data["loop_count"] = _loop_count
@@ -75,7 +74,7 @@ func load_save_data() -> void:
 	file.close()	
 
 	_session_seed = data["session_seed"]
-	_story = load(data["story_path"]) as Story
+	_story = _stories.get_story(_session_seed)
 
 	_grief_stages_stack = GriefStagesStack.new(0)
 	_grief_stages_stack.deserialize(data["grief_stages_stack"])
@@ -87,14 +86,12 @@ func load_save_data() -> void:
 
 static func create_save_data() -> void:
 	var session_seed: int = randi()
-	var story: Story = _stories.get_story(session_seed)
 	var fire_fixture_states: FireFixtureStates = FireFixtureStates.new()
 	var grief_stages_stack: GriefStagesStack = GriefStagesStack.new(session_seed)
 	var memories_stack: MemoriesStack = MemoriesStack.new(session_seed)
 
 	var data: Dictionary = {}
 	data["session_seed"] = session_seed
-	data["story_path"] = story.resource_path
 	data["fire_fixture_states"] = fire_fixture_states.serialize()
 	data["grief_stages_stack"] = grief_stages_stack.serialize()
 	data["memories_stack"] = memories_stack.serialize()
