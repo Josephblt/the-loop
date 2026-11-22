@@ -1,7 +1,6 @@
 class_name GriefStageRoom
 extends Node3D
 
-signal player_died()
 signal player_entered()
 signal player_exited()
 signal chest_opened()
