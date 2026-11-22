@@ -4,6 +4,4 @@
 
 [resource]
 script = ExtResource("1_kh0nl")
-spawn_room_size = 3
-maze_size = 31
 metadata/_custom_type_script = "uid://k8uld80d8eyg"

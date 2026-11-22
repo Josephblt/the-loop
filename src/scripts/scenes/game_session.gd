@@ -3,13 +3,11 @@ extends Node
 
 const SAVE_FILE_PATH: String = "user://the_loop_save_game.dat"
 const SAVE_FILE_READABLE_PATH: String = "user://the_loop_save_game_readable.json"
-
 const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn")
 
-static var _stories: Stories = preload("res://assets/stories/stories.tres")
+@export var _stories: Stories
+@export var _stage_layout: StageLayout
 
-@warning_ignore("unused_private_class_variable")
-@onready var _player: Player = %Player
 @onready var _acceptance_room: GriefStageRoom = %AcceptanceRoom
 @onready var _anger_room: GriefStageRoom = %AngerRoom
 @onready var _bargaining_room: GriefStageRoom = %BargainingRoom
@@ -17,11 +15,11 @@ static var _stories: Stories = preload("res://assets/stories/stories.tres")
 @onready var _depression_room: GriefStageRoom = %DepressionRoom
 @onready var _memory_rooms: MemoryRooms = %MemoryRooms
 
+
 var _grief_stages_stack: GriefStagesStack
 var _loop_count: int = 0
 var _memories_stack: MemoriesStack
 var _session_seed: int
-static var _stage_layout: StageLayout = preload("res://assets/configs/stage_layout.tres")
 var _story: Story
 
 
