@@ -7,8 +7,6 @@ signal player_exited()
 signal chest_opened()
 
 
-const STAGE_LAYOUT_PATH: StageLayout = preload("res://assets/configs/stage_layout.tres")
-
 @export var chest_gold: Chest
 @export var enemy: Enemy
 @export var fire_fixtures: Array[FireFixture] = []
@@ -16,18 +14,18 @@ const STAGE_LAYOUT_PATH: StageLayout = preload("res://assets/configs/stage_layou
 @export var grief_stage: GriefStagesStack.GriefStages
 
 
-func setup_room(session_seed: int) -> void:
+func setup_room(stage_layout: StageLayout) -> void:
 	match(grief_stage):
 		GriefStagesStack.GriefStages.ANGER:
-			transform = STAGE_LAYOUT_PATH.anger_room_transform
+			transform = stage_layout.anger_room_transform
 		GriefStagesStack.GriefStages.DENIAL:
-			transform = STAGE_LAYOUT_PATH.denial_room_transform
+			transform = stage_layout.denial_room_transform
 		GriefStagesStack.GriefStages.BARGAINING:
-			transform = STAGE_LAYOUT_PATH.bargaining_room_transform
+			transform = stage_layout.bargaining_room_transform
 		GriefStagesStack.GriefStages.DEPRESSION:
-			transform = STAGE_LAYOUT_PATH.depression_room_transform
+			transform = stage_layout.depression_room_transform
 		
-	SceneRandomizer.randomize_scene(self, session_seed)
+	SceneRandomizer.randomize_scene(self, stage_layout.session_seed)
 
 
 func materialize_chest() -> void:

@@ -1,10 +1,6 @@
 class_name MemoryRoomsLayout
 
 
-var transforms: Array[Transform3D]:
-	get:
-		return _calculate_transforms()
-
 var _randomizer: RandomNumberGenerator
 var _stage_layout: StageLayout
 
@@ -12,19 +8,21 @@ var _stage_layout: StageLayout
 func _init(stage_layout: StageLayout) -> void:
 	_stage_layout = stage_layout
 	_randomizer = RandomNumberGenerator.new()
-	_randomizer.seed = stage_layout.seed
+	_randomizer.seed = stage_layout.session_seed
 
 
-func _calculate_transforms() -> Array[Transform3D]:
-	var room_count: int = _stage_layout.story.loops[0].stages[0].maze_memories.size()
+func calculate_transforms() -> Array[Transform3D]:
+	var room_count: int = 5
 	var positions: Array[Vector2i] = _room_positions(room_count)
 	var room_transforms: Array[Transform3D] = []
 	var maze_center: int = int(_stage_layout.maze_size / 2.0)
+	
 	for position: Vector2i in positions:
 		var rotation: float = float(_randomizer.randi_range(0, 3)) * PI / 2.0
 		var offset: Vector2i = position - Vector2i(maze_center, maze_center)
 		var world_position: Vector3 = Vector3(float(offset.x), 0.0, float(offset.y)) * _stage_layout.cell_size
 		room_transforms.append(Transform3D(Basis(Vector3.UP, rotation), world_position))
+		
 	return room_transforms
 
 
