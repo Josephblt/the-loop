@@ -566,10 +566,10 @@ interaction_distance = 0.0
 
 [node name="Floor" type="Node3D" parent="." unique_id=636743254]
 
-[node name="InsideBlockCrackedSM" parent="Floor" unique_id=2041578037 instance=ExtResource("8_ydell")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 0, 0)
+[node name="InsideBlockCrackedSM" parent="Floor" unique_id=160174487 instance=ExtResource("8_ydell")]
 
-[node name="OutsideBlockCrackedSM" parent="Floor" unique_id=160174487 instance=ExtResource("8_ydell")]
+[node name="OutsideBlockCrackedSM" parent="Floor" unique_id=2041578037 instance=ExtResource("8_ydell")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 0, 0)
 
 [node name="Walls" type="Node3D" parent="." unique_id=803968314]
 
