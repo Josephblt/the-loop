@@ -10,6 +10,7 @@ extends Resource
 @export var memory_room_size: int = 3
 
 var session_seed: int
+var memory_room_count: int
 
 var anger_room_transform: Transform3D:
 	get:

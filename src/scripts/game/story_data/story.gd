@@ -3,6 +3,7 @@ extends Resource
 
 
 @export var title: String
+@export var memories_per_stage: int
 @export var loops: Array[StoryLoop] = []
 @export_multiline var reveal: String
 

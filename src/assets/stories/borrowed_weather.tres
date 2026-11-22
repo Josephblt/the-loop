@@ -109,6 +109,7 @@ stages = Array[ExtResource("3_stage")]([SubResource("LoopThree_denial"), SubReso
 [resource]
 script = ExtResource("1_story")
 title = "Borrowed Weather"
+memories_per_stage = 5
 loops = Array[ExtResource("2_loop")]([SubResource("LoopOne"), SubResource("LoopTwo"), SubResource("LoopThree")])
 reveal = "I thought I was losing her when the machines got louder than her voice. I thought if I watched closely enough, counted carefully enough, loved fiercely enough, I could keep some door from closing. But children do not become less children because they are dying. She still wanted apple juice. She still asked about playgrounds. She still thanked God for pudding while I sat beside her inventing bargains no heaven accepted.
 

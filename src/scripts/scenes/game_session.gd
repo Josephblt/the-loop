@@ -6,6 +6,7 @@ const SAVE_FILE_READABLE_PATH: String = "user://the_loop_save_game_readable.json
 
 const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn")
 
+static var _stories: Stories = preload("res://assets/stories/stories.tres")
 
 @warning_ignore("unused_private_class_variable")
 @onready var _player: Player = %Player
@@ -31,6 +32,7 @@ func _ready() -> void:
 
 func _start_loop() -> void:
 	_stage_layout.session_seed = _session_seed
+	_stage_layout.memory_room_count = _story.memories_per_stage
 	
 	_load_stage_memories()	
 
@@ -85,7 +87,7 @@ func load_save_data() -> void:
 
 static func create_save_data() -> void:
 	var session_seed: int = randi()
-	var story: Story = _stage_layout.stories[randi() % _stage_layout.stories.size()]
+	var story: Story = _stories.get_story(session_seed)
 	var fire_fixture_states: FireFixtureStates = FireFixtureStates.new()
 	var grief_stages_stack: GriefStagesStack = GriefStagesStack.new(session_seed)
 	var memories_stack: MemoriesStack = MemoriesStack.new(session_seed)

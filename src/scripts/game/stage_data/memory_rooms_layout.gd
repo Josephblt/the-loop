@@ -12,8 +12,7 @@ func _init(stage_layout: StageLayout) -> void:
 
 
 func calculate_transforms() -> Array[Transform3D]:
-	var room_count: int = 5
-	var positions: Array[Vector2i] = _room_positions(room_count)
+	var positions: Array[Vector2i] = _room_positions(_stage_layout.memory_room_count)
 	var room_transforms: Array[Transform3D] = []
 	var maze_center: int = int(_stage_layout.maze_size / 2.0)
 	
