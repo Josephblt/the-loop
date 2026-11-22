@@ -75,15 +75,12 @@ func _calculate_floor_transforms() -> void:
 
 
 func _calculate_walls() -> void:
-	for x: int in _stage_layout.maze_size:
-		for y: int in _stage_layout.maze_size:
-			var cell: Vector2i = Vector2i(x, y)
-			if cell.y == 0:
-				_add_wall(cell, Vector2i.UP)
-			if cell.x == 0:
-				_add_wall(cell, Vector2i.LEFT)
-			_add_wall(cell, Vector2i.RIGHT)
-			_add_wall(cell, Vector2i.DOWN)
+	var last_cell: int = _stage_layout.maze_size - 1
+	for index: int in _stage_layout.maze_size:
+		_add_wall(Vector2i(index, 0), Vector2i.UP)
+		_add_wall(Vector2i(index, last_cell), Vector2i.DOWN)
+		_add_wall(Vector2i(0, index), Vector2i.LEFT)
+		_add_wall(Vector2i(last_cell, index), Vector2i.RIGHT)
 
 
 func _add_wall(cell: Vector2i, direction: Vector2i) -> void:
