@@ -70,7 +70,6 @@ func _farthest_room_candidate(candidates: Array[Vector2i], selected: Array[Vecto
 			continue
 		farthest_distance = distance
 		farthest_index = index
-	assert(farthest_index >= 0, "Unable to place all memory rooms")
 	return farthest_index
 
 
