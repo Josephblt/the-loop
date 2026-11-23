@@ -15,12 +15,12 @@ var _reserved_cells: Dictionary = {}
 var _stage_layout: StageLayout
 
 
-func _init(stage_layout: StageLayout) -> void:
+func _init(stage_layout: StageLayout, with_walls: bool = false) -> void:
 	_stage_layout = stage_layout
 	_reserve_room_cells()
 	_reserve_gate_outside_cells()
 	_calculate_floor_transforms()
-	_calculate_walls()
+	_calculate_walls(with_walls)
 
 
 func _reserve_room_cells() -> void:
@@ -74,13 +74,24 @@ func _calculate_floor_transforms() -> void:
 			_floor_transforms.append(Transform3D(Basis.IDENTITY, _cell_world_position(cell)))
 
 
-func _calculate_walls() -> void:
-	var last_cell: int = _stage_layout.maze_size - 1
-	for index: int in _stage_layout.maze_size:
-		_add_wall(Vector2i(index, 0), Vector2i.UP)
-		_add_wall(Vector2i(index, last_cell), Vector2i.DOWN)
-		_add_wall(Vector2i(0, index), Vector2i.LEFT)
-		_add_wall(Vector2i(last_cell, index), Vector2i.RIGHT)
+func _calculate_walls(with_walls: bool = false) -> void:
+	if with_walls:
+		for x: int in _stage_layout.maze_size:
+			for y: int in _stage_layout.maze_size:
+				var cell: Vector2i = Vector2i(x, y)
+				if cell.y == 0:
+					_add_wall(cell, Vector2i.UP)
+				if cell.x == 0:
+					_add_wall(cell, Vector2i.LEFT)
+				_add_wall(cell, Vector2i.RIGHT)
+				_add_wall(cell, Vector2i.DOWN)
+	else:
+		var last_cell: int = _stage_layout.maze_size - 1
+		for index: int in _stage_layout.maze_size:
+			_add_wall(Vector2i(index, 0), Vector2i.UP)
+			_add_wall(Vector2i(index, last_cell), Vector2i.DOWN)
+			_add_wall(Vector2i(0, index), Vector2i.LEFT)
+			_add_wall(Vector2i(last_cell, index), Vector2i.RIGHT)
 
 
 func _add_wall(cell: Vector2i, direction: Vector2i) -> void:
