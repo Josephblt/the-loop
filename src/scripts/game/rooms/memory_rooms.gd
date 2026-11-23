@@ -9,20 +9,21 @@ const MEMORY_ROOM_VERTICAL_SCENE: PackedScene = preload("res://game/rooms/memory
 func setup_rooms(stage_layout: StageLayout) -> void:
 	var room_transforms: Array[Transform3D] = stage_layout.memory_room_transforms
 	for index: int in room_transforms.size():
+		var angle = fposmod(room_transforms[index].basis.get_euler().y, TAU)
 		var room: MemoryRoom = null
 		var inverted: bool = false
-					
-		if is_equal_approx(abs(room_transforms[index].basis.get_euler().y), 0):
-			room = MEMORY_ROOM_VERTICAL_SCENE.instantiate() as MemoryRoom			
 		
-		if is_equal_approx(abs(room_transforms[index].basis.get_euler().y), deg_to_rad(90)):
+		if is_equal_approx(angle, fposmod(0, TAU)):
+			room = MEMORY_ROOM_VERTICAL_SCENE.instantiate() as MemoryRoom
+		
+		if is_equal_approx(angle, fposmod(deg_to_rad(90), TAU)):
 			room = MEMORY_ROOM_HORIZONTAL_SCENE.instantiate() as MemoryRoom
 		
-		if is_equal_approx(abs(room_transforms[index].basis.get_euler().y), deg_to_rad(180)):
+		if is_equal_approx(angle, fposmod(deg_to_rad(180), TAU)):
 			room = MEMORY_ROOM_VERTICAL_SCENE.instantiate() as MemoryRoom
 			inverted = true
 		
-		if is_equal_approx(abs(room_transforms[index].basis.get_euler().y), deg_to_rad(270)):
+		if is_equal_approx(angle, fposmod(deg_to_rad(270), TAU)):
 			room = MEMORY_ROOM_HORIZONTAL_SCENE.instantiate() as MemoryRoom
 			inverted = true
 		

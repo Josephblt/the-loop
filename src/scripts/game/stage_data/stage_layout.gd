@@ -79,6 +79,6 @@ func _calculate_memory_rooms_transforms() -> Array[Transform3D]:
 
 
 func _calculate_maze_room_layout() -> void:
-	var maze_room_layout: MazeRoomLayout = MazeRoomLayout.new(self, true)
+	var maze_room_layout: MazeRoomLayout = MazeRoomLayout.new(self, false)
 	_maze_floor_transforms = maze_room_layout.floor_transforms
 	_maze_walls = maze_room_layout.walls
