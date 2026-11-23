@@ -84,9 +84,9 @@ func _overlaps_room(candidate: Vector2i, selected: Array[Vector2i]) -> bool:
 func _minimum_squared_distance(candidate: Vector2i, positions: Array[Vector2i]) -> int:
 	if positions.is_empty():
 		return 0
-	var minimum_distance: int = 2_147_483_647
-	for position: Vector2i in positions:
-		minimum_distance = mini(minimum_distance, (candidate - position).length_squared())
+	var minimum_distance: int = (candidate - positions[0]).length_squared()
+	for index: int in range(1, positions.size()):
+		minimum_distance = mini(minimum_distance, (candidate - positions[index]).length_squared())
 	return minimum_distance
 
 
