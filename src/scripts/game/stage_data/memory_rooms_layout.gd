@@ -29,9 +29,12 @@ func _room_positions(room_count: int) -> Array[Vector2i]:
 	var candidates: Array[Vector2i] = _room_candidates()
 	ArrayRandomizer.shuffle(candidates, _randomizer)
 	var selected: Array[Vector2i] = []
-	while selected.size() < room_count:
-		var candidate_index: int = _farthest_room_candidate(candidates, selected)
-		selected.append(candidates.pop_at(candidate_index))
+	for candidate: Vector2i in candidates:
+		if _overlaps_room(candidate, selected):
+			continue
+		selected.append(candidate)
+		if selected.size() == room_count:
+			break
 	return selected
 
 
@@ -58,36 +61,12 @@ func _room_is_available(position: Vector2i) -> bool:
 	return true
 
 
-func _farthest_room_candidate(candidates: Array[Vector2i], selected: Array[Vector2i]) -> int:
-	var farthest_index: int = -1
-	var farthest_distance: int = -1
-	for index: int in candidates.size():
-		var candidate: Vector2i = candidates[index]
-		if _overlaps_room(candidate, selected):
-			continue
-		var distance: int = _minimum_squared_distance(candidate, selected)
-		if distance <= farthest_distance:
-			continue
-		farthest_distance = distance
-		farthest_index = index
-	return farthest_index
-
-
 func _overlaps_room(candidate: Vector2i, selected: Array[Vector2i]) -> bool:
 	var bounds: Rect2i = _room_bounds(candidate)
 	for position: Vector2i in selected:
 		if bounds.intersects(_room_bounds(position)):
 			return true
 	return false
-
-
-func _minimum_squared_distance(candidate: Vector2i, positions: Array[Vector2i]) -> int:
-	if positions.is_empty():
-		return 0
-	var minimum_distance: int = (candidate - positions[0]).length_squared()
-	for index: int in range(1, positions.size()):
-		minimum_distance = mini(minimum_distance, (candidate - positions[index]).length_squared())
-	return minimum_distance
 
 
 func _room_bounds(position: Vector2i) -> Rect2i:
