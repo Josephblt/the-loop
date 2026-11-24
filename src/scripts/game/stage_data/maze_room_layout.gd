@@ -12,15 +12,21 @@ var walls: Array[MazeWall]:
 		return _walls
 
 var _reserved_cells: Dictionary = {}
+var _floor_cells: Array[Vector2i] = []
 var _stage_layout: StageLayout
+var _carver: DenialMazeCarver
+var _randomizer: RandomNumberGenerator = RandomNumberGenerator.new()
 
 
-func _init(stage_layout: StageLayout, with_walls: bool = false) -> void:
+func _init(stage_layout: StageLayout, maze_seed: int, grief_stage: GriefStagesStack.GriefStages) -> void:
 	_stage_layout = stage_layout
+	_randomizer.seed = maze_seed
 	_reserve_room_cells()
 	_reserve_gate_outside_cells()
 	_calculate_floor_transforms()
-	_calculate_walls(with_walls)
+	if grief_stage == GriefStagesStack.GriefStages.DENIAL:
+		_carver = DenialMazeCarver.new(_floor_cells, maze_seed)
+	_calculate_walls()
 
 
 func _reserve_room_cells() -> void:
@@ -71,37 +77,35 @@ func _calculate_floor_transforms() -> void:
 			var cell: Vector2i = Vector2i(x, y)
 			if _is_reserved(cell):
 				continue
+			_floor_cells.append(cell)
 			_floor_transforms.append(Transform3D(Basis.IDENTITY, _cell_world_position(cell)))
 
 
-func _calculate_walls(with_walls: bool = false) -> void:
-	if with_walls:
-		for x: int in _stage_layout.maze_size:
-			for y: int in _stage_layout.maze_size:
-				var cell: Vector2i = Vector2i(x, y)
-				if cell.y == 0:
-					_add_wall(cell, Vector2i.UP)
-				if cell.x == 0:
-					_add_wall(cell, Vector2i.LEFT)
-				_add_wall(cell, Vector2i.RIGHT)
-				_add_wall(cell, Vector2i.DOWN)
-	else:
-		var last_cell: int = _stage_layout.maze_size - 1
-		for index: int in _stage_layout.maze_size:
-			_add_wall(Vector2i(index, 0), Vector2i.UP)
-			_add_wall(Vector2i(index, last_cell), Vector2i.DOWN)
-			_add_wall(Vector2i(0, index), Vector2i.LEFT)
-			_add_wall(Vector2i(last_cell, index), Vector2i.RIGHT)
+func _calculate_walls() -> void:
+	for cell: Vector2i in _floor_cells:
+		if cell.y == 0:
+			_add_wall(cell, Vector2i.UP)
+		if cell.x == 0:
+			_add_wall(cell, Vector2i.LEFT)
+		if _carver != null or cell.x == _stage_layout.maze_size - 1:
+			_add_wall(cell, Vector2i.RIGHT)
+		if _carver != null or cell.y == _stage_layout.maze_size - 1:
+			_add_wall(cell, Vector2i.DOWN)
 
 
 func _add_wall(cell: Vector2i, direction: Vector2i) -> void:
 	var neighbour: Vector2i = cell + direction
 	if _is_reserved(cell) or (_is_inside(neighbour) and _is_reserved(neighbour)):
 		return
+	if _carver != null and _is_inside(neighbour) and _carver.has_passage(cell, neighbour):
+		return
 	var stack_count: int = 1
+	var wall_size: MazeWall.WallSize = MazeWall.WallSize.LARGE
 	if not _is_inside(neighbour):
 		stack_count = 2
-	_walls.append(MazeWall.new(_wall_transform(cell, direction), MazeWall.WallType.NORMAL, MazeWall.WallSize.LARGE, stack_count))
+	elif _carver != null and _randomizer.randf() < 0.12:
+		wall_size = MazeWall.WallSize.SMALL
+	_walls.append(MazeWall.new(_wall_transform(cell, direction), MazeWall.WallType.NORMAL, wall_size, stack_count))
 
 
 func _wall_transform(cell: Vector2i, direction: Vector2i) -> Transform3D:

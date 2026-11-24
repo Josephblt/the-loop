@@ -56,7 +56,7 @@ var maze_walls: Array[MazeWall]:
 		return _maze_walls
 
 
-func initialize(new_session_seed: int, memories_per_stage: int) -> void:
+func initialize(new_session_seed: int, memories_per_stage: int, loop_count: int, grief_stage: GriefStagesStack.GriefStages) -> void:
 	_session_seed = new_session_seed
 	_memory_room_count = memories_per_stage
 	_anger_room_transform = _calculate_grief_room_transform(Vector3.BACK)
@@ -64,7 +64,7 @@ func initialize(new_session_seed: int, memories_per_stage: int) -> void:
 	_bargaining_room_transform = _calculate_grief_room_transform(Vector3.LEFT)
 	_depression_room_transform = _calculate_grief_room_transform(Vector3.RIGHT)
 	_memory_room_transforms = _calculate_memory_rooms_transforms()
-	_calculate_maze_room_layout()
+	_calculate_maze_room_layout(new_session_seed + loop_count * GriefStagesStack.GriefStages.size() + int(grief_stage), grief_stage)
 
 
 func _calculate_grief_room_transform(direction: Vector3) -> Transform3D:
@@ -78,7 +78,7 @@ func _calculate_memory_rooms_transforms() -> Array[Transform3D]:
 	return MemoryRoomsLayout.new(self).calculate_transforms()
 
 
-func _calculate_maze_room_layout() -> void:
-	var maze_room_layout: MazeRoomLayout = MazeRoomLayout.new(self, false)
+func _calculate_maze_room_layout(maze_seed: int, grief_stage: GriefStagesStack.GriefStages) -> void:
+	var maze_room_layout: MazeRoomLayout = MazeRoomLayout.new(self, maze_seed, grief_stage)
 	_maze_floor_transforms = maze_room_layout.floor_transforms
 	_maze_walls = maze_room_layout.walls

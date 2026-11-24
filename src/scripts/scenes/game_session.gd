@@ -30,7 +30,7 @@ func _ready() -> void:
 
 
 func _start_loop() -> void:
-	_stage_layout.initialize(_session_seed, _story.memories_per_stage)
+	_stage_layout.initialize(_session_seed, _story.memories_per_stage, _loop_count, _grief_stages_stack.peek())
 	
 	_load_stage_memories()	
 
