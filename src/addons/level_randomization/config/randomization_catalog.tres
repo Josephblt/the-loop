@@ -251,6 +251,30 @@ source_scene = ExtResource("13_bch3r")
 targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_qyxw7")])
 metadata/_custom_type_script = "uid://ctpnaaog7r632"
 
+[sub_resource type="Resource" id="Resource_5jqmw"]
+script = ExtResource("4_yxs3g")
+randomize_position = true
+position_variation = Vector3(0.01, 0.01, 0.01)
+randomize_rotation = true
+rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
+randomize_inversion = true
+inversion_rotation_degrees = Vector3(0, 180, 0)
+metadata/_custom_type_script = "uid://lovaxrlm1xea"
+
+[sub_resource type="Resource" id="Resource_dvgwf"]
+resource_name = "StaticBody3D"
+script = ExtResource("2_eshgl")
+target_path = NodePath("StaticBody3D")
+profile = SubResource("Resource_5jqmw")
+metadata/_custom_type_script = "uid://2nfpsw4nlq34"
+
+[sub_resource type="Resource" id="Resource_c3udo"]
+resource_name = "wall_broken_lg.tscn"
+script = ExtResource("2_binding")
+source_scene = ExtResource("17_dwnuq")
+targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_dvgwf")])
+metadata/_custom_type_script = "uid://ctpnaaog7r632"
+
 [sub_resource type="Resource" id="Resource_cukfe"]
 script = ExtResource("4_yxs3g")
 randomize_position = true
@@ -323,30 +347,6 @@ source_scene = ExtResource("14_injm3")
 targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_v7bav")])
 metadata/_custom_type_script = "uid://ctpnaaog7r632"
 
-[sub_resource type="Resource" id="Resource_5jqmw"]
-script = ExtResource("4_yxs3g")
-randomize_position = true
-position_variation = Vector3(0.01, 0.01, 0.01)
-randomize_rotation = true
-rotation_variation_degrees = Vector3(0.1, 0.1, 0.1)
-randomize_inversion = true
-inversion_rotation_degrees = Vector3(0, 180, 0)
-metadata/_custom_type_script = "uid://lovaxrlm1xea"
-
-[sub_resource type="Resource" id="Resource_dvgwf"]
-resource_name = "StaticBody3D"
-script = ExtResource("2_eshgl")
-target_path = NodePath("StaticBody3D")
-profile = SubResource("Resource_5jqmw")
-metadata/_custom_type_script = "uid://2nfpsw4nlq34"
-
-[sub_resource type="Resource" id="Resource_c3udo"]
-resource_name = "wall_broken_lg.tscn"
-script = ExtResource("2_binding")
-source_scene = ExtResource("17_dwnuq")
-targets = Array[ExtResource("2_eshgl")]([SubResource("Resource_dvgwf")])
-metadata/_custom_type_script = "uid://ctpnaaog7r632"
-
 [resource]
 script = ExtResource("3_catalog")
-bindings = Array[ExtResource("2_binding")]([SubResource("Resource_2vw7l"), SubResource("Resource_yxs3g"), SubResource("Resource_aplif"), SubResource("Resource_cy3lc"), SubResource("Resource_injm3"), SubResource("Resource_bnpqw"), SubResource("Resource_ek3qr"), SubResource("Resource_3uinr"), SubResource("Resource_nm8ve"), SubResource("Resource_atqq1"), SubResource("Resource_6tptm"), SubResource("Resource_pdsjw"), SubResource("Resource_kjtgv"), SubResource("Resource_c3udo")])
+bindings = Array[ExtResource("2_binding")]([SubResource("Resource_2vw7l"), SubResource("Resource_yxs3g"), SubResource("Resource_aplif"), SubResource("Resource_cy3lc"), SubResource("Resource_injm3"), SubResource("Resource_bnpqw"), SubResource("Resource_ek3qr"), SubResource("Resource_3uinr"), SubResource("Resource_nm8ve"), SubResource("Resource_atqq1"), SubResource("Resource_c3udo"), SubResource("Resource_6tptm"), SubResource("Resource_pdsjw"), SubResource("Resource_kjtgv")])
