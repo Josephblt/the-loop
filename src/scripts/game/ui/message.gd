@@ -1,5 +1,5 @@
 class_name Message
-extends CanvasLayer
+extends CanvasItem
 
 
 signal message_shown()

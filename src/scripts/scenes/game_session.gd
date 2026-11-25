@@ -1,12 +1,15 @@
 class_name GameSession
 extends Node
 
+const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn")
+const MESSAGE_TIP: String = "Interact to close..."
 const SAVE_FILE_PATH: String = "user://the_loop_save_game.dat"
 const SAVE_FILE_READABLE_PATH: String = "user://the_loop_save_game_readable.json"
-const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn")
 
 @export var _stories: Stories
 @export var _stage_layout: StageLayout
+
+@onready var _player: Player = %Player
 
 @onready var _acceptance_room: GriefStageRoom = %AcceptanceRoom
 @onready var _anger_room: GriefStageRoom = %AngerRoom
@@ -16,12 +19,15 @@ const GAME_SESSION_SCENE: PackedScene = preload("res://scenes/game_session.tscn"
 @onready var _maze_room: MazeRoom = %MazeRoom
 @onready var _memory_rooms: MemoryRooms = %MemoryRooms
 
+@onready var _message: Message = %Message
+
 
 var _grief_stages_stack: GriefStagesStack
 var _loop_count: int = 0
 var _memories_stack: MemoriesStack
 var _session_seed: int
 var _story: Story
+
 
 
 func _ready() -> void:
@@ -106,3 +112,18 @@ static func erase_save_data() -> void:
 		return
 
 	DirAccess.remove_absolute(SAVE_FILE_PATH)
+
+
+func _on_memory_rooms_chest_opened(chest_index: int) -> void:
+	var memory: Memory = _memories_stack.memory_at(chest_index)
+	_message.setup_message(memory.get_description())
+	_message.setup_tip(MESSAGE_TIP)
+	_message.show_message()
+
+
+func _on_message_message_shown() -> void:
+	_player.pause()
+
+
+func _on_message_message_hidden() -> void:
+	_player.resume()

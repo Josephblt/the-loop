@@ -10,9 +10,8 @@ func _interact() -> void:
 
 
 func open() -> void:
-	chest_animation_player.play("open")
-	await chest_animation_player.animation_finished
 	interaction_triggered.emit(self)
+	chest_animation_player.play("open")
 
 
 func dissolve() -> void:

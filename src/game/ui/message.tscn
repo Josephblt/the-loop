@@ -10,7 +10,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DreamVeil:material:shader_parameter/intensity")
+tracks/0/path = NodePath("Message:material:shader_parameter/intensity")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -22,7 +22,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MarginContainer/VBoxContainer/MessageLabel:modulate:a")
+tracks/1/path = NodePath("Message/MarginContainer/VBoxContainer/MessageLabel:modulate:a")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -34,7 +34,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MarginContainer/VBoxContainer/TipLabel:modulate:a")
+tracks/2/path = NodePath("Message/MarginContainer/VBoxContainer/TipLabel:modulate:a")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -46,7 +46,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:visible")
+tracks/3/path = NodePath("Message:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -61,7 +61,7 @@ resource_name = "hide"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DreamVeil:material:shader_parameter/intensity")
+tracks/0/path = NodePath("Message:material:shader_parameter/intensity")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -73,7 +73,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MarginContainer/VBoxContainer/MessageLabel:modulate:a")
+tracks/1/path = NodePath("Message/MarginContainer/VBoxContainer/MessageLabel:modulate:a")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -85,7 +85,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MarginContainer/VBoxContainer/TipLabel:modulate:a")
+tracks/2/path = NodePath("Message/MarginContainer/VBoxContainer/TipLabel:modulate:a")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -97,11 +97,11 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:visible")
+tracks/3/path = NodePath("Message:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.9666667),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -112,7 +112,7 @@ resource_name = "show"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DreamVeil:material:shader_parameter/intensity")
+tracks/0/path = NodePath("Message:material:shader_parameter/intensity")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -124,7 +124,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MarginContainer/VBoxContainer/MessageLabel:modulate:a")
+tracks/1/path = NodePath("Message/MarginContainer/VBoxContainer/MessageLabel:modulate:a")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -136,7 +136,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MarginContainer/VBoxContainer/TipLabel:modulate:a")
+tracks/2/path = NodePath("Message/MarginContainer/VBoxContainer/TipLabel:modulate:a")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -148,7 +148,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:visible")
+tracks/3/path = NodePath("Message:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -165,12 +165,8 @@ _data = {
 &"show": SubResource("Animation_show")
 }
 
-[node name="Message" type="CanvasLayer" unique_id=1991501411]
+[node name="Message" type="ColorRect" unique_id=1346875019]
 visible = false
-script = ExtResource("1_ghhar")
-
-[node name="DreamVeil" type="ColorRect" parent="." unique_id=1346875019]
-unique_name_in_owner = true
 material = ExtResource("2_d8x4p")
 anchors_preset = 15
 anchor_right = 1.0
@@ -178,8 +174,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("1_ghhar")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1915900496]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -227,4 +225,5 @@ vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=605660109]
 unique_name_in_owner = true
+root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_memory_reveal")
