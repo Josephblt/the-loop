@@ -2,7 +2,7 @@
 class_name Interactable
 extends Node3D
 
-@warning_ignore("unused_signal")
+
 signal interaction_triggered(interactable: Interactable)
 
 
@@ -22,9 +22,9 @@ func _ready() -> void:
 	_update_highlight(is_interactable)
 
 
-@abstract
-func _interact() -> void
-	
+func _interact() -> void:
+	interaction_triggered.emit(self)
+
 
 func _update_outline(enabled: bool) -> void:
 	for mesh in interactable_meshes:

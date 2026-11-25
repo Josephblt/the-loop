@@ -6,11 +6,11 @@ extends Interactable
 
 
 func _interact() -> void:
+	super._interact()
 	open()
 
 
 func open() -> void:
-	interaction_triggered.emit(self)
 	chest_animation_player.play("open")
 
 
