@@ -9,7 +9,7 @@ signal resumed
 
 
 const DEFAULT_RUN_SPEED: float = 8.0
-const DEFAULT_WALK_SPEED: float = 20.0
+const DEFAULT_WALK_SPEED: float = 2.0
 const DEFAULT_MOUSE_SENSITIVITY: float = 0.25
 const JUMP_VELOCITY: float = 10.0
 
