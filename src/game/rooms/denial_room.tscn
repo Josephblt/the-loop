@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d4ddxwsg6odkq" path="res://scripts/game/rooms/grief_stage_room.gd" id="1_22eb3"]
 [ext_resource type="PackedScene" uid="uid://dxu0clh036kem" path="res://game/level/blocks/block_cracked_sm.tscn" id="1_eg3ab"]
 [ext_resource type="PackedScene" uid="uid://on4lpk0uhb0f" path="res://game/actors/enemy.tscn" id="2_6h2h2"]
+[ext_resource type="Script" uid="uid://phfgrh2flmgy" path="res://scripts/game/actors/enemy/denial_enemy.gd" id="2_denial_ai"]
 [ext_resource type="PackedScene" uid="uid://cqrto67h33ydp" path="res://game/switches/activator.tscn" id="2_le7qa"]
 [ext_resource type="PackedScene" uid="uid://coql64ga8pi0u" path="res://game/level/blocks/block_cracked_md.tscn" id="3_5c8u3"]
 [ext_resource type="PackedScene" uid="uid://bt3wy3vtdllmr" path="res://game/level/stairs/stairs_md.tscn" id="4_5f034"]
@@ -36,6 +37,7 @@ gates = [NodePath("Gates/GateVertical")]
 
 [node name="Enemy" parent="." unique_id=1458459918 instance=ExtResource("2_6h2h2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, -5.5999994)
+script = ExtResource("2_denial_ai")
 
 [node name="Activator" parent="." unique_id=452683808 instance=ExtResource("2_le7qa")]
 
