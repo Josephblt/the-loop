@@ -59,7 +59,10 @@ func _handle_gravity(delta: float) -> void:
 
 
 func _handle_jump() -> void:
-	if Input.is_action_just_pressed("Jump"):
+	# Fly: allow another jump while airborne.
+	# if Input.is_action_just_pressed("Jump"):
+	# 	velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 
