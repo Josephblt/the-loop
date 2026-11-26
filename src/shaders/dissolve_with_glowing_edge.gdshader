@@ -20,4 +20,5 @@ void fragment() {
 	edge *= 1.0 - step(0.9999, remaining);
 
 	ALBEDO = mix(base_color, edge_color.rgb, edge * edge_color.a);
+	EMISSION = edge_color.rgb * edge * edge_color.a * 2.0;
 }

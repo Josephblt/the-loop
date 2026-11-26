@@ -23,6 +23,7 @@ sky_material = SubResource("ProceduralSkyMaterial_nwvoh")
 [sub_resource type="Environment" id="Environment_2gavq"]
 background_mode = 2
 sky = SubResource("Sky_d3u6q")
+glow_enabled = true
 
 [node name="Lights" type="Node" unique_id=1637738480]
 
