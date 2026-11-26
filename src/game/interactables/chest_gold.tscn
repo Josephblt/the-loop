@@ -466,7 +466,7 @@ shape = SubResource("ConcavePolygonShape3D_all7c")
 
 [node name="MeshInstance3DBase" type="MeshInstance3D" parent="StaticBody3D" unique_id=287492577]
 unique_name_in_owner = true
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, -1.05, -0.2)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, -1.05, -0.1)
 gi_mode = 2
 mesh = SubResource("ArrayMesh_uowbc")
 
