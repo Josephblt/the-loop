@@ -27,10 +27,10 @@ func setup_tip(tip_text: String) -> void:
 
 
 func show_message() -> void:
+	message_shown.emit()
 	animation_player.play("show")
 	await animation_player.animation_finished
 	_message_visible = true
-	message_shown.emit()
 
 
 func _hide_message() -> void:

@@ -561,7 +561,7 @@ _data = {
 script = ExtResource("1_3bxv0")
 
 [node name="Cresset" parent="." unique_id=528922892 instance=ExtResource("9_7hvp7")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 5.6, -5.6)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 11.2, -5.6)
 is_interactable = false
 
 [node name="Floor" type="Node3D" parent="." unique_id=210020435]
@@ -622,6 +622,9 @@ script = ExtResource("3_random_light")
 
 [node name="WallNormalLG" parent="Walls" unique_id=910905716 instance=ExtResource("5_1j2kj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 0)
+
+[node name="WallNormalLG2" parent="Walls" unique_id=1746107621 instance=ExtResource("5_1j2kj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.2, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=75601943]
 unique_name_in_owner = true

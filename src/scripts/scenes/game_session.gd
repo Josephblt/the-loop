@@ -123,7 +123,12 @@ func _on_acceptance_room_player_exited(_grief_stage_room: GriefStageRoom) -> voi
 
 
 func _on_grief_stage_room_chest_opened() -> void:
-	print("END THIS STAGE")
+	var story_stage: StoryStage = _story.get_stage(_loop_count, _grief_stages_stack.peek())
+	var memory: String = story_stage.closing_memory
+
+	_message.setup_message(memory)
+	_message.setup_tip(MESSAGE_TIP)
+	_message.show_message()	
 
 
 func _on_grief_stage_room_player_entered(grief_stage_room: GriefStageRoom) -> void:
