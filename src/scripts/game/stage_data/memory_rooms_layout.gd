@@ -64,7 +64,7 @@ func _room_is_available(position: Vector2i) -> bool:
 func _overlaps_room(candidate: Vector2i, selected: Array[Vector2i]) -> bool:
 	var bounds: Rect2i = _room_bounds(candidate)
 	for position: Vector2i in selected:
-		if bounds.intersects(_room_bounds(position)):
+		if bounds.intersects(_room_bounds(position).grow(1)):
 			return true
 	return false
 

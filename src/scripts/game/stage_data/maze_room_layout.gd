@@ -12,6 +12,8 @@ var walls: Array[MazeWall]:
 		return _walls
 
 var _reserved_cells: Dictionary = {}
+var _memory_room_cells: Dictionary = {}
+var _memory_room_passages: Dictionary = {}
 var _floor_cells: Array[Vector2i] = []
 var _stage_layout: StageLayout
 var _carver: DenialMazeCarver
@@ -23,6 +25,7 @@ func _init(stage_layout: StageLayout, maze_seed: int, grief_stage: GriefStagesSt
 	_randomizer.seed = maze_seed
 	_reserve_room_cells()
 	_reserve_gate_outside_cells()
+	_reserve_memory_room_passages()
 	_calculate_floor_transforms()
 	if grief_stage == GriefStagesStack.GriefStages.DENIAL:
 		_carver = DenialMazeCarver.new(_floor_cells, maze_seed)
@@ -34,6 +37,10 @@ func _reserve_room_cells() -> void:
 	for room_transform: Transform3D in _stage_layout.memory_room_transforms:
 		var room_center: Vector2i = _world_to_cell(room_transform.origin)
 		_reserve_area(room_center, _stage_layout.memory_room_size)
+		var half_size: int = int(_stage_layout.memory_room_size / 2.0)
+		for x: int in range(room_center.x - half_size, room_center.x + half_size + 1):
+			for y: int in range(room_center.y - half_size, room_center.y + half_size + 1):
+				_memory_room_cells[Vector2i(x, y)] = true
 
 
 func _reserve_acceptance_room_cells() -> void:
@@ -71,6 +78,19 @@ func _reserve_gate_outside_cells() -> void:
 		_reserved_cells[position] = true
 
 
+func _reserve_memory_room_passages() -> void:
+	var half_size: int = int(_stage_layout.memory_room_size / 2.0)
+	for room_transform: Transform3D in _stage_layout.memory_room_transforms:
+		var center: Vector2i = _world_to_cell(room_transform.origin)
+		var entrances: Array[Vector2i] = []
+		for direction: Vector2i in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
+			var outside_cell: Vector2i = center + direction * (half_size + 1)
+			if _is_inside(outside_cell) and not _is_reserved(outside_cell):
+				entrances.append(direction)
+		var direction: Vector2i = entrances[_randomizer.randi_range(0, entrances.size() - 1)]
+		_memory_room_passages[center + direction * half_size] = center + direction * (half_size + 1)
+
+
 func _calculate_floor_transforms() -> void:
 	for x: int in _stage_layout.maze_size:
 		for y: int in _stage_layout.maze_size:
@@ -83,19 +103,23 @@ func _calculate_floor_transforms() -> void:
 
 func _calculate_walls() -> void:
 	for cell: Vector2i in _floor_cells:
-		if cell.y == 0:
+		if cell.y == 0 or _memory_room_cells.has(cell + Vector2i.UP):
 			_add_wall(cell, Vector2i.UP)
-		if cell.x == 0:
+		if cell.x == 0 or _memory_room_cells.has(cell + Vector2i.LEFT):
 			_add_wall(cell, Vector2i.LEFT)
-		if _carver != null or cell.x == _stage_layout.maze_size - 1:
+		if _carver != null or cell.x == _stage_layout.maze_size - 1 or _memory_room_cells.has(cell + Vector2i.RIGHT):
 			_add_wall(cell, Vector2i.RIGHT)
-		if _carver != null or cell.y == _stage_layout.maze_size - 1:
+		if _carver != null or cell.y == _stage_layout.maze_size - 1 or _memory_room_cells.has(cell + Vector2i.DOWN):
 			_add_wall(cell, Vector2i.DOWN)
 
 
 func _add_wall(cell: Vector2i, direction: Vector2i) -> void:
 	var neighbour: Vector2i = cell + direction
-	if _is_reserved(cell) or (_is_inside(neighbour) and _is_reserved(neighbour)):
+	if _is_reserved(cell):
+		return
+	if _memory_room_cells.has(neighbour) and _memory_room_passages.get(neighbour) == cell:
+		return
+	if _is_inside(neighbour) and _is_reserved(neighbour) and not _memory_room_cells.has(neighbour):
 		return
 	if _carver != null and _is_inside(neighbour) and _carver.has_passage(cell, neighbour):
 		return
