@@ -15,10 +15,10 @@ func open() -> void:
 
 
 func dissolve() -> void:
-	chest_animation_player.play("dissolve")
-	trigger_interaction(false)
+	chest_animation_player.play("dissolve")	
 
 
 func materialize() -> void:
 	chest_animation_player.play("materialize")
-	trigger_interaction(false)
+	_update_outline(false)
+	_update_highlight(is_interactable)

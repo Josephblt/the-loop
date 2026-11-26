@@ -43,12 +43,9 @@ func pop():
 
 func serialize() -> Dictionary:
 	return {
-		"grief_stages_stack": {
-			"available_grief_stage_stack": _available_grief_stage_stack,
-		}	
+		"available_grief_stage_stack": _available_grief_stage_stack,
 	}
 
 
 func deserialize(data: Dictionary) -> void:
-	var grief_stages_stack_data = data.get("grief_stages_stack", {})
-	_available_grief_stage_stack = grief_stages_stack_data.get("available_grief_stage_stack", [])
+	_available_grief_stage_stack = data.get("available_grief_stage_stack", [])

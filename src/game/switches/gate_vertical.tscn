@@ -199,8 +199,8 @@ tracks/4/keys = {
 "times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [false],
-"method": &"set_lit"
+"args": [],
+"method": &"extinguish"
 }]
 }
 tracks/5/type = "value"
@@ -302,8 +302,8 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [false],
-"method": &"set_lit"
+"args": [],
+"method": &"extinguish"
 }]
 }
 tracks/5/type = "value"
@@ -404,8 +404,8 @@ tracks/4/keys = {
 "times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [true],
-"method": &"set_lit"
+"args": [],
+"method": &"ignite"
 }]
 }
 tracks/5/type = "value"
@@ -507,8 +507,8 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [true],
-"method": &"set_lit"
+"args": [],
+"method": &"ignite"
 }]
 }
 tracks/5/type = "value"

@@ -3,14 +3,17 @@ extends Node3D
 
 
 signal chest_opened(chest_index: int)
-
+signal all_chests_opened()
 
 const MEMORY_ROOM_HORIZONTAL_SCENE: PackedScene = preload("res://game/rooms/memory_room_horizontal.tscn")
 const MEMORY_ROOM_VERTICAL_SCENE: PackedScene = preload("res://game/rooms/memory_room_vertical.tscn")
 
+var _rooms_count: int = 0
+
 
 func setup_rooms(stage_layout: StageLayout) -> void:
 	var room_transforms: Array[Transform3D] = stage_layout.memory_room_transforms
+	_rooms_count = room_transforms.size()
 	for index: int in room_transforms.size():
 		var angle = fposmod(room_transforms[index].basis.get_euler().y, TAU)
 		var room: MemoryRoom = null
@@ -42,3 +45,6 @@ func setup_rooms(stage_layout: StageLayout) -> void:
 
 func _on_chest_opened(chest_index: int) -> void:
 	chest_opened.emit(chest_index)
+	_rooms_count -= 1
+	if _rooms_count == 0:
+		all_chests_opened.emit()

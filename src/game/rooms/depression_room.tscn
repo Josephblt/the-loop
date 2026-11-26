@@ -27,8 +27,12 @@ size = Vector3(51.2, 12, 40)
 [sub_resource type="BoxShape3D" id="BoxShape3D_7xlsk"]
 size = Vector3(48.4, 12, 40)
 
-[node name="DepressionRoom" type="Node3D" unique_id=1670544133]
+[node name="DepressionRoom" type="Node3D" unique_id=1670544133 node_paths=PackedStringArray("chest_gold", "enemy", "fire_fixtures", "gates")]
 script = ExtResource("1_tkjqx")
+chest_gold = NodePath("Interactables/ChestGold")
+enemy = NodePath("Enemy")
+fire_fixtures = [NodePath("Interactables/Altars/AltarLeft"), NodePath("Interactables/Altars/AltarRight"), NodePath("Interactables/Cressets/CressetLeftTop"), NodePath("Interactables/Cressets/CressetTopLeft"), NodePath("Interactables/Cressets/CressetTop"), NodePath("Interactables/Cressets/CressetTopRight"), NodePath("Interactables/Cressets/CressetRightTop"), NodePath("Interactables/Cressets/CressetRight"), NodePath("Interactables/Cressets/CressetRightBottom"), NodePath("Interactables/Cressets/CressetBottomRight"), NodePath("Interactables/Cressets/CressetBottom"), NodePath("Interactables/Cressets/CressetBottomLeft"), NodePath("Interactables/Cressets/CressetLeftBottom")]
+gates = [NodePath("Gates/GateHorizontal")]
 grief_stage = 3
 
 [node name="Enemy" parent="." unique_id=1458459918 instance=ExtResource("2_s6b74")]
@@ -239,12 +243,14 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 1
 
 [node name="GateHorizontal" parent="Gates" unique_id=1825569716 instance=ExtResource("16_tkjqx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, 0)
+closed = true
 
 [node name="Interactables" type="Node3D" parent="." unique_id=761738820]
 
 [node name="ChestGold" parent="Interactables" unique_id=146892367 instance=ExtResource("11_s6b74")]
 unique_name_in_owner = true
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 1.6, 0)
+one_shot = true
 
 [node name="Altars" type="Node3D" parent="Interactables" unique_id=501502116]
 

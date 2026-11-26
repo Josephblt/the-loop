@@ -1,20 +1,25 @@
 class_name FireFixture
 extends Interactable
 
+
 @onready var fire: Fire = %Fire
+
+var is_lit: bool:
+	get:
+		return fire.is_lit()
 
 
 func _interact() -> void:
-	set_lit(!is_lit())
+	if is_lit:
+		extinguish()
+	else:
+		ignite()
 	interaction_triggered.emit(self)
 
 
-func is_lit() -> bool:
-	return fire.is_lit()
+func ignite() -> void:
+	fire.ignite()
 
 
-func set_lit(lit: bool) -> void:
-	if lit:
-		fire.ignite()
-	else:
-		fire.extinguish()
+func extinguish() -> void:
+	fire.extinguish()

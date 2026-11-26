@@ -1,9 +1,14 @@
 class_name Enemy
-extends Node
+extends GPUParticles3D
 
 
-func hide() -> void:
-	pass
+func appear() -> void:
+	print("Enemy appearing:" + str(emitting))
+	emitting = true
+	print("Enemy appeared:" + str(emitting))
 
-func show() -> void:
-	pass
+
+func disappear() -> void:
+	print("Enemy disappearing:" + str(emitting))
+	emitting = false
+	print("Enemy disappeared:" + str(emitting))

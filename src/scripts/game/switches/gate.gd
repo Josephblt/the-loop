@@ -2,13 +2,20 @@ class_name Gate
 extends Node3D
 
 
+@export var closed: bool = false
+
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
-var _closed: bool = false
+
+func _ready() -> void:
+	if closed:
+		animation_player.play("close_immediately")
+	else:
+		animation_player.play("open_immediately")
 
 
 func close(immediately: bool) -> void:
-	if _closed:
+	if closed:
 		return
 
 	if immediately:
@@ -16,11 +23,11 @@ func close(immediately: bool) -> void:
 	else:
 		animation_player.play("close")
 		await animation_player.animation_finished
-	_closed = true
+	closed = true
 
 
 func open(immediately: bool) -> void:
-	if not _closed:
+	if not closed:
 		return
 
 	if immediately:
@@ -28,4 +35,4 @@ func open(immediately: bool) -> void:
 	else:
 		animation_player.play("open")
 		await animation_player.animation_finished
-	_closed = false
+	closed = false

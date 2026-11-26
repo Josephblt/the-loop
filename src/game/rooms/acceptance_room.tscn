@@ -118,6 +118,7 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 1
 
 [node name="ChestGold" parent="Interactables" unique_id=146892367 instance=ExtResource("6_exjoq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+one_shot = true
 
 [node name="Altars" type="Node3D" parent="Interactables" unique_id=957300393]
 

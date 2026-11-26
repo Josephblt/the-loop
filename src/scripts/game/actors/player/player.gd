@@ -1,10 +1,12 @@
 class_name Player
 extends CharacterBody3D
 
+
 signal interactable_detected(interactable: Interactable)
 signal interactable_lost(interactable: Interactable)
 signal paused
 signal resumed
+
 
 const DEFAULT_RUN_SPEED: float = 8.0
 const DEFAULT_WALK_SPEED: float = 20.0
