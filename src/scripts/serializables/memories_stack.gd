@@ -23,8 +23,10 @@ func memory_count() -> int:
 	return _maze_memories.size()
 
 
-func memory_at(index: int) -> Memory:
-	return _maze_memories[index]
+func reveal_memory(index: int) -> Memory:
+	var memory = _maze_memories[index]
+	_maze_memories.remove_at(index)
+	return memory
 
 
 func closing_memory() -> Memory:

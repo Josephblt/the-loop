@@ -7,16 +7,25 @@ extends Node3D
 var _closed: bool = false
 
 
-func close() -> void:
+func close(immediately: bool) -> void:
 	if _closed:
 		return
 
-	animation_player.play("close")
-	await animation_player.animation_finished
+	if immediately:
+		animation_player.play("close_immediately")
+	else:
+		animation_player.play("close")
+		await animation_player.animation_finished
 	_closed = true
 
 
-func open() -> void:
-	animation_player.play("open")
-	await animation_player.animation_finished
+func open(immediately: bool) -> void:
+	if not _closed:
+		return
+
+	if immediately:
+		animation_player.play("open_immediately")
+	else:
+		animation_player.play("open")
+		await animation_player.animation_finished
 	_closed = false

@@ -29,7 +29,6 @@ var _session_seed: int
 var _story: Story
 
 
-
 func _ready() -> void:
 	load_save_data()
 	_start_loop()
@@ -38,13 +37,13 @@ func _ready() -> void:
 func _start_loop() -> void:
 	_stage_layout.initialize(_session_seed, _story.memories_per_stage, _loop_count, _grief_stages_stack.peek())
 	
-	_load_stage_memories()	
+	_load_stage_memories()
 
-	_acceptance_room.setup_room(_stage_layout)
-	_anger_room.setup_room(_stage_layout)
-	_bargaining_room.setup_room(_stage_layout)
-	_denial_room.setup_room(_stage_layout)
-	_depression_room.setup_room(_stage_layout)
+	_acceptance_room.setup_room(_stage_layout, 0)
+	_anger_room.setup_room(_stage_layout, 0)
+	_bargaining_room.setup_room(_stage_layout, 0)
+	_denial_room.setup_room(_stage_layout, 0)
+	_depression_room.setup_room(_stage_layout, 0)
 	_maze_room.setup_room(_stage_layout)
 	_memory_rooms.setup_rooms(_stage_layout)
 
@@ -60,9 +59,9 @@ func _load_stage_memories() -> void:
 func update_save_data() -> void:
 	var data: Dictionary = {}
 	data["session_seed"] = _session_seed
+	data["loop_count"] = _loop_count
 	data["grief_stages_stack"] = _grief_stages_stack.serialize()
 	data["memories_stack"] = _memories_stack.serialize()
-	data["loop_count"] = _loop_count
 
 	var file: FileAccess = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
 	file.store_var(data)
@@ -86,6 +85,7 @@ func load_save_data() -> void:
 
 	_memories_stack = MemoriesStack.new(0)
 	_memories_stack.deserialize(data["memories_stack"])
+
 	_loop_count = data["loop_count"]
 
 
@@ -100,7 +100,7 @@ static func create_save_data() -> void:
 	data["fire_fixture_states"] = fire_fixture_states.serialize()
 	data["grief_stages_stack"] = grief_stages_stack.serialize()
 	data["memories_stack"] = memories_stack.serialize()
-	data["loop_count"] = 0
+	data["loop_count"] = 0	
 
 	var file: FileAccess = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
 	file.store_var(data)
@@ -115,10 +115,25 @@ static func erase_save_data() -> void:
 
 
 func _on_memory_rooms_chest_opened(chest_index: int) -> void:
-	var memory: Memory = _memories_stack.memory_at(chest_index)
+	var memory: Memory = _memories_stack.reveal_memory(chest_index)
 	_message.setup_message(memory.get_description())
 	_message.setup_tip(MESSAGE_TIP)
 	_message.show_message()
+
+	if _memories_stack.memory_count() == 0:
+		var grief_stage: GriefStagesStack.GriefStages = _grief_stages_stack.peek()
+		match grief_stage:
+			GriefStagesStack.GriefStages.ACCEPTANCE:
+				_acceptance_room.open_gates(false)
+				_acceptance_room.materialize_chest()
+			GriefStagesStack.GriefStages.ANGER:
+				_anger_room.open_gates(false)
+			GriefStagesStack.GriefStages.BARGAINING:
+				_bargaining_room.open_gates(false)
+			GriefStagesStack.GriefStages.DEPRESSION:
+				_depression_room.open_gates(false)
+			GriefStagesStack.GriefStages.DENIAL:
+				_denial_room.open_gates(false)
 
 
 func _on_message_message_shown() -> void:
