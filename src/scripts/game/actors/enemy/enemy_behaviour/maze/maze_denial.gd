@@ -2,7 +2,7 @@ class_name MazeDenial
 extends EnemyBehaviour
 
 
-const SPEED: float = 4.0
+const ORBIT_SPEED_MULTIPLIER: float = 3.0
 const TARGET_UPDATE_INTERVAL: float = 0.2
 
 var _target_update_time: float = 0.0
@@ -24,8 +24,8 @@ func _physics_process(delta: float) -> void:
 
 		_target_update_time = TARGET_UPDATE_INTERVAL
 	_was_in_view = in_view
-	
-	_enemy.move_along_path(delta, SPEED)
+	var speed: float = _player.movement_speed if in_view else _player.movement_speed * ORBIT_SPEED_MULTIPLIER
+	_enemy.move_along_path(delta, speed)
 
 
 func _is_in_player_view() -> bool:

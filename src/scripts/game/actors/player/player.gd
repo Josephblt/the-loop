@@ -25,6 +25,9 @@ var _mouse_sensitivity: float = DEFAULT_MOUSE_SENSITIVITY
 var _run_speed: float = DEFAULT_RUN_SPEED
 var _speed: float = DEFAULT_RUN_SPEED
 var _walk_speed: float = DEFAULT_WALK_SPEED
+var movement_speed: float:
+	get:
+		return _speed
 
 
 func _ready() -> void:
