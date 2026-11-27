@@ -13,6 +13,7 @@ const WALL_NORMAL_MD_SCENE: PackedScene = preload("res://game/level/walls/wall_n
 @onready var _border_walls: Node3D = %Border
 @onready var _medium_walls: Node3D = %Medium
 @onready var _small_walls: Node3D = %Small
+@onready var _enemy: Enemy = %Enemy
 
 
 func setup_room(stage_layout: StageLayout) -> void:
@@ -38,6 +39,10 @@ func setup_room(stage_layout: StageLayout) -> void:
 			wall_parent.add_child(wall_instance)
 
 	SceneRandomizer.randomize_scene(self, stage_layout.session_seed)
+	if stage_layout.has_maze_enemy_spawn:
+		var enemy_transform: Transform3D = stage_layout.maze_enemy_transform
+		enemy_transform.origin.y = _enemy.position.y
+		_enemy.transform = enemy_transform
 	_navigation_region.bake_navigation_mesh(false)
 
 

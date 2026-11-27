@@ -55,6 +55,16 @@ var maze_walls: Array[MazeWall]:
 	get:
 		return _maze_walls
 
+var _maze_enemy_transform: Transform3D
+var maze_enemy_transform: Transform3D:
+	get:
+		return _maze_enemy_transform
+
+var _has_maze_enemy_spawn: bool
+var has_maze_enemy_spawn: bool:
+	get:
+		return _has_maze_enemy_spawn
+
 
 func initialize(new_session_seed: int, memories_per_stage: int, loop_count: int, grief_stage: GriefStagesStack.GriefStages) -> void:
 	_session_seed = new_session_seed
@@ -63,6 +73,8 @@ func initialize(new_session_seed: int, memories_per_stage: int, loop_count: int,
 	_denial_room_transform = _calculate_grief_room_transform(Vector3.FORWARD)
 	_bargaining_room_transform = _calculate_grief_room_transform(Vector3.LEFT)
 	_depression_room_transform = _calculate_grief_room_transform(Vector3.RIGHT)
+	_has_maze_enemy_spawn = grief_stage != GriefStagesStack.GriefStages.ACCEPTANCE
+	_maze_enemy_transform = _calculate_maze_enemy_transform(grief_stage) if _has_maze_enemy_spawn else Transform3D.IDENTITY
 	_memory_room_transforms = _calculate_memory_rooms_transforms()
 	_calculate_maze_room_layout(new_session_seed + loop_count * GriefStagesStack.GriefStages.size() + int(grief_stage), grief_stage)
 
@@ -72,6 +84,22 @@ func _calculate_grief_room_transform(direction: Vector3) -> Transform3D:
 	var room_half_size: int = int(grief_room_size / 2.0)
 	var room_distance: float = float(maze_half_size + 1 + grief_room_entrance_offset + room_half_size) * cell_size
 	return Transform3D(Basis.IDENTITY, direction * room_distance)
+
+
+func _calculate_maze_enemy_transform(grief_stage: GriefStagesStack.GriefStages) -> Transform3D:
+	var room_origin: Vector3 = Vector3.ZERO
+	match grief_stage:
+		GriefStagesStack.GriefStages.ANGER:
+			room_origin = _anger_room_transform.origin
+		GriefStagesStack.GriefStages.DENIAL:
+			room_origin = _denial_room_transform.origin
+		GriefStagesStack.GriefStages.BARGAINING:
+			room_origin = _bargaining_room_transform.origin
+		GriefStagesStack.GriefStages.DEPRESSION:
+			room_origin = _depression_room_transform.origin
+	var maze_half_size: int = int(maze_size / 2.0)
+	var gate_cell_distance: float = float(maze_half_size) * cell_size
+	return Transform3D(Basis.IDENTITY, room_origin.normalized() * gate_cell_distance)
 
 
 func _calculate_memory_rooms_transforms() -> Array[Transform3D]:
