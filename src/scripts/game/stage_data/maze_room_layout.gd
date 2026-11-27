@@ -82,12 +82,8 @@ func _reserve_memory_room_passages() -> void:
 	var half_size: int = int(_stage_layout.memory_room_size / 2.0)
 	for room_transform: Transform3D in _stage_layout.memory_room_transforms:
 		var center: Vector2i = _world_to_cell(room_transform.origin)
-		var entrances: Array[Vector2i] = []
-		for direction: Vector2i in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
-			var outside_cell: Vector2i = center + direction * (half_size + 1)
-			if _is_inside(outside_cell) and not _is_reserved(outside_cell):
-				entrances.append(direction)
-		var direction: Vector2i = entrances[_randomizer.randi_range(0, entrances.size() - 1)]
+		var stair_direction: Vector3 = room_transform.basis.inverse() * Vector3.BACK
+		var direction: Vector2i = Vector2i(roundi(stair_direction.x), roundi(stair_direction.z))
 		_memory_room_passages[center + direction * half_size] = center + direction * (half_size + 1)
 
 
