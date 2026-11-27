@@ -130,6 +130,8 @@ func _add_wall(cell: Vector2i, direction: Vector2i) -> void:
 	var wall_type: MazeWall.WallType = MazeWall.WallType.NORMAL
 	if _is_inside(neighbour):
 		wall_type = MazeWall.WallType.BROKEN
+		if _carver != null and _randomizer.randf() < 0.5:
+			wall_type = MazeWall.WallType.NORMAL
 	_walls.append(MazeWall.new(_wall_transform(cell, direction), wall_type, wall_size, stack_count))
 
 

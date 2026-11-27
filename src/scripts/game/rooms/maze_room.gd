@@ -7,6 +7,8 @@ const WALL_BROKEN_LG_SCENE: PackedScene = preload("res://game/level/walls/wall_b
 const WALL_BROKEN_MD_SCENE: PackedScene = preload("res://game/level/walls/wall_broken_md.tscn")
 const WALL_BROKEN_SM_SCENE: PackedScene = preload("res://game/level/walls/wall_broken_sm.tscn")
 const WALL_NORMAL_LG_SCENE: PackedScene = preload("res://game/level/walls/wall_normal_lg.tscn")
+const WALL_NORMAL_MD_SCENE: PackedScene = preload("res://game/level/walls/wall_normal_md.tscn")
+const WALL_NORMAL_SM_SCENE: PackedScene = preload("res://game/level/walls/wall_normal_sm.tscn")
 
 @onready var _blocks: Node3D = %Blocks
 @onready var _walls: Node3D = %Walls
@@ -40,4 +42,8 @@ func _wall_scene(wall: MazeWall) -> PackedScene:
 				return WALL_BROKEN_MD_SCENE
 			MazeWall.WallSize.LARGE:
 				return WALL_BROKEN_LG_SCENE
+	if wall.wall_size == MazeWall.WallSize.SMALL:
+		return WALL_NORMAL_SM_SCENE
+	if wall.wall_size == MazeWall.WallSize.MEDIUM:
+		return WALL_NORMAL_MD_SCENE
 	return WALL_NORMAL_LG_SCENE
