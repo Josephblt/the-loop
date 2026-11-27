@@ -46,8 +46,12 @@ func _orbit_target() -> Vector3:
 
 	var forward: Vector2 = _camera_forward()
 	var half_fov: float = _half_horizontal_fov()
-	var left: Vector2 = player_position + forward.rotated(-half_fov) * distance
-	var right: Vector2 = player_position + forward.rotated(half_fov) * distance
+	var half_cell_diagonal: float = StageLayout.CELL_SIZE / sqrt(2.0)
+	var clearance: float = half_cell_diagonal + StageLayout.CELL_SIZE
+	var target_distance: float = maxf(distance, clearance / sin(half_fov))
+	var target_angle: float = half_fov - asin(clearance / target_distance)
+	var left: Vector2 = player_position + forward.rotated(-target_angle) * target_distance
+	var right: Vector2 = player_position + forward.rotated(target_angle) * target_distance
 	
 	var target: Vector2 = left if left.distance_squared_to(enemy_position) < right.distance_squared_to(enemy_position) else right
 	
