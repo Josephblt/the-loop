@@ -5,6 +5,7 @@ extends Enemy
 const DENIAL_CHASE_SPEED: float = 7.0
 const DENIAL_FLANK_SPEED_MULTIPLIER: float = 4.0
 const DENIAL_REPATH_INTERVAL: float = 0.2
+const DENIAL_WANDER_SPEED: float = 2.0
 
 var _player: Player
 var _layout: StageLayout
@@ -17,6 +18,9 @@ var _path_index: int = 0
 var _target: Vector2i = Vector2i(-1, -1)
 var _repath_time: float = 0.0
 var _paused: bool = false
+var _wandering: bool = false
+var _flank_path: PackedVector2Array = PackedVector2Array()
+var _was_visible: bool = false
 
 
 func setup_ai(player: Player, stage_layout: StageLayout, gate: Gate) -> void:
@@ -35,9 +39,11 @@ func _physics_process(delta: float) -> void:
 	if _player == null or _paused or not emitting:
 		return
 	_repath_time -= delta
-	if _repath_time <= 0.0:
+	var visible: bool = _in_player_view(global_position)
+	if _repath_time <= 0.0 or visible != _was_visible or _wandering == _player_in_maze():
 		_repath_time = DENIAL_REPATH_INTERVAL
 		_update_path()
+	_was_visible = visible
 	_move_enemy(delta)
 
 
@@ -65,34 +71,84 @@ func _build_paths() -> void:
 
 
 func _update_path() -> void:
-	var player_cell: Vector2i = _nearest_cell(_player.global_position)
-	var target: Vector2i = player_cell
-	if not _in_player_view(global_position):
-		target = _flank_cell(player_cell)
+	var was_wandering: bool = _wandering
+	_wandering = not _player_in_maze()
+	if was_wandering != _wandering:
+		_target = Vector2i(-1, -1)
+		_path.clear()
+	var target: Vector2i = _nearest_cell(_player.global_position)
+	if _wandering:
+		if _path_index >= _path.size():
+			target = _cells[randi_range(0, _cells.size() - 1)]
+		else:
+			target = _target
+	elif not _in_player_view(global_position):
+		target = _flank_cell()
 	if target == _target and _path_index < _path.size():
 		return
 	_target = target
 	var start: Vector2i = _nearest_cell(global_position)
-	_path = _paths.get_point_path(_cell_id(start), _cell_id(target))
+	_path = _flank_path if not _wandering and not _in_player_view(global_position) else _paths.get_point_path(_cell_id(start), _cell_id(target))
 	_path_index = 0
 
 
-func _flank_cell(player_cell: Vector2i) -> Vector2i:
-	var best: Vector2i = player_cell
-	var best_score: float = INF
-	var player_position: Vector3 = _player.global_position
-	var camera: Camera3D = _player.camera
-	for cell: Vector2i in _cells:
-		var candidate_position: Vector3 = _world_position(cell)
-		var distance: float = candidate_position.distance_to(player_position)
-		if distance > _layout.cell_size * 3.0 or not _in_player_view(candidate_position):
-			continue
-		var side: float = abs((candidate_position - player_position).normalized().dot(camera.global_basis.x))
-		var score: float = candidate_position.distance_to(global_position) + distance - side * _layout.cell_size
-		if score < best_score:
-			best_score = score
-			best = cell
-	return best
+func _flank_cell() -> Vector2i:
+	var start: Vector2i = _nearest_cell(global_position)
+	var minimum_distance: float = Vector2(global_position.x, global_position.z).distance_to(Vector2(_player.global_position.x, _player.global_position.z))
+	var queue: Array[Vector2i] = [start]
+	var visited: Dictionary = {start: true}
+	var previous: Dictionary = {}
+	var fallback: Vector2i = start
+	var best_angle: float = -1.0
+	var start_direction: Vector3 = global_position - _player.global_position
+	var index: int = 0
+	while index < queue.size():
+		var cell: Vector2i = queue[index]
+		index += 1
+		var position: Vector3 = _world_position(cell)
+		if cell != start and _in_player_view(position):
+			fallback = cell
+			break
+		var angle: float = start_direction.angle_to(position - _player.global_position)
+		if angle > best_angle:
+			best_angle = angle
+			fallback = cell
+		for neighbour_id: int in _paths.get_point_connections(_cell_id(cell)):
+			var neighbour: Vector2i = Vector2i(int(neighbour_id / _layout.maze_size), neighbour_id % _layout.maze_size)
+			if visited.has(neighbour) or _segment_closes_distance(position, _world_position(neighbour), minimum_distance):
+				continue
+			visited[neighbour] = true
+			previous[neighbour] = cell
+			queue.append(neighbour)
+	_flank_path.clear()
+	var step: Vector2i = fallback
+	while step != start:
+		_flank_path.insert(0, Vector2(step))
+		step = previous[step]
+	_flank_path.insert(0, Vector2(start))
+	return fallback
+
+
+func _segment_closes_distance(from: Vector3, to: Vector3, minimum_distance: float) -> bool:
+	var player_position: Vector2 = Vector2(_player.global_position.x, _player.global_position.z)
+	var start: Vector2 = Vector2(from.x, from.z)
+	var end: Vector2 = Vector2(to.x, to.z)
+	var closest: Vector2 = Geometry2D.get_closest_point_to_segment(player_position, start, end)
+	return closest.distance_to(player_position) < minimum_distance - 0.01
+
+
+func _player_in_maze() -> bool:
+	var player_cell: Vector2i = _world_to_cell(_player.global_position)
+	if player_cell.x < 0 or player_cell.y < 0 or player_cell.x >= _layout.maze_size or player_cell.y >= _layout.maze_size:
+		return false
+	var room_half_size: int = int(_layout.memory_room_size / 2.0)
+	for room: Transform3D in _layout.memory_room_transforms:
+		var center: Vector2i = _world_to_cell(room.origin)
+		if abs(player_cell.x - center.x) <= room_half_size and abs(player_cell.y - center.y) <= room_half_size:
+			return false
+	var center: int = int(_layout.maze_size / 2.0)
+	var acceptance_half_size: int = int(_layout.acceptance_room_size / 2.0)
+	return abs(player_cell.x - center) > acceptance_half_size or abs(player_cell.y - center) > acceptance_half_size
 
 
 func _in_player_view(world_position: Vector3) -> bool:
@@ -109,7 +165,7 @@ func _in_player_view(world_position: Vector3) -> bool:
 
 
 func _move_enemy(delta: float) -> void:
-	var speed: float = DENIAL_CHASE_SPEED if _in_player_view(global_position) else _player.run_speed * DENIAL_FLANK_SPEED_MULTIPLIER
+	var speed: float = DENIAL_WANDER_SPEED if _wandering else DENIAL_CHASE_SPEED if _in_player_view(global_position) else _player.run_speed * DENIAL_FLANK_SPEED_MULTIPLIER
 	var travel: float = speed * delta
 	while _path_index < _path.size():
 		var cell: Vector2 = _path[_path_index]
