@@ -60,23 +60,18 @@ var maze_enemy_transform: Transform3D:
 	get:
 		return _maze_enemy_transform
 
-var _has_maze_enemy_spawn: bool
-var has_maze_enemy_spawn: bool:
-	get:
-		return _has_maze_enemy_spawn
-
 
 func initialize(new_session_seed: int, memories_per_stage: int, loop_count: int, grief_stage: GriefStagesStack.GriefStages) -> void:
 	_session_seed = new_session_seed
 	_memory_room_count = memories_per_stage
+	var stage_seed: int = new_session_seed + loop_count * GriefStagesStack.GriefStages.size() + int(grief_stage)
 	_anger_room_transform = _calculate_grief_room_transform(Vector3.BACK)
 	_denial_room_transform = _calculate_grief_room_transform(Vector3.FORWARD)
 	_bargaining_room_transform = _calculate_grief_room_transform(Vector3.LEFT)
 	_depression_room_transform = _calculate_grief_room_transform(Vector3.RIGHT)
-	_has_maze_enemy_spawn = grief_stage != GriefStagesStack.GriefStages.ACCEPTANCE
-	_maze_enemy_transform = _calculate_maze_enemy_transform(grief_stage) if _has_maze_enemy_spawn else Transform3D.IDENTITY
+	_maze_enemy_transform = _calculate_maze_enemy_transform(grief_stage, stage_seed)
 	_memory_room_transforms = _calculate_memory_rooms_transforms()
-	_calculate_maze_room_layout(new_session_seed + loop_count * GriefStagesStack.GriefStages.size() + int(grief_stage), grief_stage)
+	_calculate_maze_room_layout(stage_seed, grief_stage)
 
 
 func _calculate_grief_room_transform(direction: Vector3) -> Transform3D:
@@ -86,7 +81,9 @@ func _calculate_grief_room_transform(direction: Vector3) -> Transform3D:
 	return Transform3D(Basis.IDENTITY, direction * room_distance)
 
 
-func _calculate_maze_enemy_transform(grief_stage: GriefStagesStack.GriefStages) -> Transform3D:
+func _calculate_maze_enemy_transform(grief_stage: GriefStagesStack.GriefStages, stage_seed: int) -> Transform3D:
+	if grief_stage == GriefStagesStack.GriefStages.ACCEPTANCE:
+		return _calculate_acceptance_maze_enemy_transform(stage_seed)
 	var room_origin: Vector3 = Vector3.ZERO
 	match grief_stage:
 		GriefStagesStack.GriefStages.ANGER:
@@ -100,6 +97,16 @@ func _calculate_maze_enemy_transform(grief_stage: GriefStagesStack.GriefStages) 
 	var maze_half_size: int = int(maze_size / 2.0)
 	var gate_cell_distance: float = float(maze_half_size) * cell_size
 	return Transform3D(Basis.IDENTITY, room_origin.normalized() * gate_cell_distance)
+
+
+func _calculate_acceptance_maze_enemy_transform(stage_seed: int) -> Transform3D:
+	var randomizer: RandomNumberGenerator = RandomNumberGenerator.new()
+	randomizer.seed = stage_seed
+	var directions: Array[Vector3] = [Vector3.FORWARD, Vector3.RIGHT, Vector3.BACK, Vector3.LEFT]
+	var direction: Vector3 = directions[randomizer.randi_range(0, directions.size() - 1)]
+	var room_half_size: int = int(acceptance_room_size / 2.0)
+	var gate_cell_distance: float = float(room_half_size + spawn_room_entrance_offset + 1) * cell_size
+	return Transform3D(Basis.IDENTITY, direction * gate_cell_distance)
 
 
 func _calculate_memory_rooms_transforms() -> Array[Transform3D]:
