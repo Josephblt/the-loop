@@ -148,10 +148,10 @@ tracks/0/path = NodePath("Walls/Barrier/DissolveSpatial:instance_shader_paramete
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [1.0]
+"values": [0.0, 1.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -210,10 +210,10 @@ tracks/5/path = NodePath("Walls/Barrier/Light:omni_range")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [15.0]
+"values": [0.0, 15.0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -353,10 +353,10 @@ tracks/0/path = NodePath("Walls/Barrier/DissolveSpatial:instance_shader_paramete
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0]
+"values": [1.0, 0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -415,10 +415,10 @@ tracks/5/path = NodePath("Walls/Barrier/Light:omni_range")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0]
+"values": [15.0, 0.0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -623,10 +623,7 @@ script = ExtResource("3_random_light")
 [node name="WallNormalLG" parent="Walls" unique_id=910905716 instance=ExtResource("5_1j2kj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 0)
 
-[node name="WallNormalLG2" parent="Walls" unique_id=1746107621 instance=ExtResource("5_1j2kj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 0)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=75601943]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1113754885]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_7hvp7")
 
