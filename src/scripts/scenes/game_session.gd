@@ -53,7 +53,7 @@ func _ready() -> void:
 	_memory_rooms.setup_rooms(_stage_layout)
 	if _grief_stages_stack.peek() == GriefStagesStack.GriefStages.DENIAL:
 		var denial_enemy: DenialEnemy = _denial_room.enemy as DenialEnemy
-		denial_enemy.setup_ai(_player, _stage_layout)
+		denial_enemy.setup_ai(_player, _stage_layout, _denial_room.gates[0])
 
 
 func update_save_data() -> void:

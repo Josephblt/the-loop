@@ -2,8 +2,9 @@ class_name DenialEnemy
 extends Enemy
 
 
-const DENIAL_SPEED: float = 7.0
-const DENIAL_REPATH_INTERVAL: float = 0.5
+const DENIAL_CHASE_SPEED: float = 7.0
+const DENIAL_FLANK_SPEED_MULTIPLIER: float = 4.0
+const DENIAL_REPATH_INTERVAL: float = 0.2
 
 var _player: Player
 var _layout: StageLayout
@@ -18,11 +19,12 @@ var _repath_time: float = 0.0
 var _paused: bool = false
 
 
-func setup_ai(player: Player, stage_layout: StageLayout) -> void:
+func setup_ai(player: Player, stage_layout: StageLayout, gate: Gate) -> void:
 	_player = player
 	_layout = stage_layout
 	_build_paths()
-	var start_cell: Vector2i = _nearest_cell(global_position)
+	var gate_approach: Vector3 = gate.global_position + gate.global_position.direction_to(Vector3.ZERO) * _layout.cell_size
+	var start_cell: Vector2i = _nearest_cell(gate_approach)
 	global_position = _world_position(start_cell)
 	player.paused.connect(_on_player_paused)
 	player.resumed.connect(_on_player_resumed)
@@ -80,18 +82,13 @@ func _flank_cell(player_cell: Vector2i) -> Vector2i:
 	var best_score: float = INF
 	var player_position: Vector3 = _player.global_position
 	var camera: Camera3D = _player.camera
-	var current_distance: float = global_position.distance_to(player_position)
 	for cell: Vector2i in _cells:
 		var candidate_position: Vector3 = _world_position(cell)
-		if candidate_position.distance_to(global_position) < _layout.cell_size * 0.5:
-			continue
 		var distance: float = candidate_position.distance_to(player_position)
-		if distance < current_distance or distance > current_distance + _layout.cell_size * 4.0:
+		if distance > _layout.cell_size * 3.0 or not _in_player_view(candidate_position):
 			continue
 		var side: float = abs((candidate_position - player_position).normalized().dot(camera.global_basis.x))
-		var score: float = candidate_position.distance_to(global_position) + abs(distance - current_distance) - side * _layout.cell_size
-		if not _in_player_view(candidate_position):
-			score += _layout.cell_size * 8.0
+		var score: float = candidate_position.distance_to(global_position) + distance - side * _layout.cell_size
 		if score < best_score:
 			best_score = score
 			best = cell
@@ -112,17 +109,19 @@ func _in_player_view(world_position: Vector3) -> bool:
 
 
 func _move_enemy(delta: float) -> void:
+	var speed: float = DENIAL_CHASE_SPEED if _in_player_view(global_position) else _player.run_speed * DENIAL_FLANK_SPEED_MULTIPLIER
+	var travel: float = speed * delta
 	while _path_index < _path.size():
 		var cell: Vector2 = _path[_path_index]
 		var destination: Vector3 = _world_position(Vector2i(roundi(cell.x), roundi(cell.y)))
-		if global_position.distance_to(destination) <= 0.01:
-			_path_index += 1
-			continue
-		var next_position: Vector3 = global_position.move_toward(destination, DENIAL_SPEED * delta)
-		if not _in_player_view(global_position) and next_position.distance_to(_player.global_position) < global_position.distance_to(_player.global_position):
+		var distance: float = global_position.distance_to(destination)
+		global_position = global_position.move_toward(destination, travel)
+		if distance > travel:
 			return
-		global_position = next_position
-		return
+		travel -= distance
+		_path_index += 1
+		if travel <= 0.0:
+			return
 
 
 func _nearest_cell(world_position: Vector3) -> Vector2i:
