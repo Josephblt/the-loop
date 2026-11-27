@@ -2,7 +2,7 @@ class_name StageLayout
 extends Resource
 
 @export var cell_size: float = 5.6
-@export var maze_size: int = 31
+@export var maze_size: int = 71
 @export var grief_room_size: int = 7
 @export var grief_room_entrance_offset: int = 2
 @export var acceptance_room_size: int = 3

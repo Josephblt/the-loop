@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://bcxn012mvmomu" path="res://scripts/game/interactables/fire_fixture.gd" id="9_fire_fixture"]
 [ext_resource type="Script" uid="uid://bxw8n4e25palv" path="res://scripts/game/interactables/chest.gd" id="10_chest"]
 [ext_resource type="PackedScene" uid="uid://d0ffaawdq4ms5" path="res://game/rooms/maze_room.tscn" id="11_itwev"]
-[ext_resource type="PackedScene" path="res://game/rooms/memory_rooms.tscn" id="11_memory_rooms"]
+[ext_resource type="PackedScene" path="res://game/rooms/memory_rooms/memory_rooms.tscn" id="11_memory_rooms"]
 [ext_resource type="PackedScene" uid="uid://cot8vcnllarr3" path="res://game/ui/message.tscn" id="17_m2kmq"]
 
 [node name="GameSession" type="Node3D" unique_id=202320514]

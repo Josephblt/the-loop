@@ -119,19 +119,22 @@ func _add_wall(cell: Vector2i, direction: Vector2i) -> void:
 		return
 	if _carver != null and _is_inside(neighbour) and _carver.has_passage(cell, neighbour):
 		return
+
 	var stack_count: int = 1
 	var wall_size: MazeWall.WallSize = MazeWall.WallSize.LARGE
 	if not _is_inside(neighbour):
 		stack_count = 2
-	elif _carver != null:
+	else:
 		wall_size = MazeWall.WallSize.MEDIUM
-		if not _memory_room_cells.has(neighbour) and _randomizer.randf() < 0.12:
+		if _carver != null and not _memory_room_cells.has(neighbour) and _randomizer.randf() < 0.12:
 			wall_size = MazeWall.WallSize.SMALL
+
 	var wall_type: MazeWall.WallType = MazeWall.WallType.NORMAL
 	if _is_inside(neighbour):
 		wall_type = MazeWall.WallType.BROKEN
-		if _carver != null and _randomizer.randf() < 0.5:
+		if wall_size == MazeWall.WallSize.MEDIUM and _carver != null and _randomizer.randf() < 0.5:
 			wall_type = MazeWall.WallType.NORMAL
+
 	_walls.append(MazeWall.new(_wall_transform(cell, direction), wall_type, wall_size, stack_count))
 
 

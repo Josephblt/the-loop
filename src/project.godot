@@ -33,6 +33,10 @@ import/use_multiple_threads=false
 
 enabled=PackedStringArray("res://addons/level_randomization/plugin.cfg")
 
+[global_group]
+
+maze_navigation_source=""
+
 [input]
 
 Left={

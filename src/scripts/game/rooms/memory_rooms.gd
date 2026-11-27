@@ -5,8 +5,8 @@ extends Node3D
 signal chest_opened(chest_index: int)
 signal all_chests_opened()
 
-const MEMORY_ROOM_HORIZONTAL_SCENE: PackedScene = preload("res://game/rooms/memory_room_horizontal.tscn")
-const MEMORY_ROOM_VERTICAL_SCENE: PackedScene = preload("res://game/rooms/memory_room_vertical.tscn")
+const MEMORY_ROOM_HORIZONTAL_SCENE: PackedScene = preload("res://game/rooms/memory_rooms/memory_room_horizontal.tscn")
+const MEMORY_ROOM_VERTICAL_SCENE: PackedScene = preload("res://game/rooms/memory_rooms/memory_room_vertical.tscn")
 
 var _rooms_count: int = 0
 
