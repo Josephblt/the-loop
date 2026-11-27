@@ -49,7 +49,7 @@ func _ready() -> void:
 	_bargaining_room.setup_room(_stage_layout, data["bargaining_room"])
 	_denial_room.setup_room(_stage_layout, data["denial_room"])
 	_depression_room.setup_room(_stage_layout, data["depression_room"])
-	_maze_room.setup_room(_stage_layout)
+	_maze_room.setup_room(_stage_layout, _player, _grief_stages_stack.peek())
 	_memory_rooms.setup_rooms(_stage_layout)
 
 

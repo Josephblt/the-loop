@@ -2,6 +2,8 @@ class_name Enemy
 extends GPUParticles3D
 
 
+@export var ai_behaviour: EnemyBehaviour
+
 @onready var _navigation_agent: NavigationAgent3D = %NavigationAgent3D
 
 

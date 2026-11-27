@@ -7,6 +7,7 @@ const WALL_BROKEN_MD_SCENE: PackedScene = preload("res://game/level/walls/wall_b
 const WALL_BROKEN_SM_SCENE: PackedScene = preload("res://game/level/walls/wall_broken_sm.tscn")
 const WALL_NORMAL_LG_SCENE: PackedScene = preload("res://game/level/walls/wall_normal_lg.tscn")
 const WALL_NORMAL_MD_SCENE: PackedScene = preload("res://game/level/walls/wall_normal_md.tscn")
+const MAZE_DENIAL_SCENE: PackedScene = preload("res://game/actors/enemy/enemy_behaviour/maze/maze_denial.tscn")
 
 @onready var _navigation_region: NavigationRegion3D = %NavigationRegion3D
 @onready var _blocks: Node3D = %Blocks
@@ -16,7 +17,7 @@ const WALL_NORMAL_MD_SCENE: PackedScene = preload("res://game/level/walls/wall_n
 @onready var _enemy: Enemy = %Enemy
 
 
-func setup_room(stage_layout: StageLayout) -> void:
+func setup_room(stage_layout: StageLayout, player: Player, grief_stage: GriefStagesStack.GriefStages) -> void:
 	for index: int in stage_layout.maze_floor_transforms.size():
 		var block: Node3D = FLOOR_SCENE.instantiate() as Node3D
 		block.name = "Floor%d" % (index + 1)
@@ -40,6 +41,11 @@ func setup_room(stage_layout: StageLayout) -> void:
 
 	_enemy.position = stage_layout.maze_enemy_transform.origin
 	_navigation_region.bake_navigation_mesh(false)
+	if grief_stage == GriefStagesStack.GriefStages.DENIAL:
+		var behaviour: EnemyBehaviour = MAZE_DENIAL_SCENE.instantiate() as EnemyBehaviour
+		_enemy.add_child(behaviour)
+		_enemy.ai_behaviour = behaviour
+		behaviour.setup(_enemy, player, stage_layout)
 	SceneRandomizer.randomize_scene(self, stage_layout.session_seed)
 
 
