@@ -36,7 +36,7 @@ func setup_room(stage_layout: StageLayout, player: Player, grief_stage: GriefSta
 			var wall_instance: Node3D = _wall_scene(wall).instantiate() as Node3D
 			wall_instance.name = "Wall%d_%d" % [index + 1, stack_index + 1]
 			wall_instance.transform = wall.transform
-			wall_instance.position.y += float(stack_index) * stage_layout.cell_size
+			wall_instance.position.y += float(stack_index) * stage_layout.CELL_SIZE
 			wall_parent.add_child(wall_instance)
 
 	_enemy.position = stage_layout.maze_enemy_transform.origin
@@ -45,7 +45,7 @@ func setup_room(stage_layout: StageLayout, player: Player, grief_stage: GriefSta
 		var behaviour: EnemyBehaviour = MAZE_DENIAL_SCENE.instantiate() as EnemyBehaviour
 		_enemy.add_child(behaviour)
 		_enemy.ai_behaviour = behaviour
-		behaviour.setup(_enemy, player, stage_layout)
+		behaviour.setup(_enemy, player)
 	SceneRandomizer.randomize_scene(self, stage_layout.session_seed)
 
 

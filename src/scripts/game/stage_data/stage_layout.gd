@@ -1,14 +1,15 @@
 class_name StageLayout
 extends Resource
 
-@export var cell_size: float = 5.6
+const CELL_SIZE: float = 5.6
+const ENEMY_HEIGHT: float = 2.6
+
 @export var maze_size: int = 71
 @export var grief_room_size: int = 7
 @export var grief_room_entrance_offset: int = 2
 @export var acceptance_room_size: int = 3
 @export var spawn_room_entrance_offset: int = 2
 @export var memory_room_size: int = 3
-@export var maze_enemy_height: float = 2.6
 
 
 var _session_seed: int
@@ -78,14 +79,14 @@ func initialize(new_session_seed: int, memories_per_stage: int, loop_count: int,
 func _calculate_grief_room_transform(direction: Vector3) -> Transform3D:
 	var maze_half_size: int = int(maze_size / 2.0)
 	var room_half_size: int = int(grief_room_size / 2.0)
-	var room_distance: float = float(maze_half_size + 1 + grief_room_entrance_offset + room_half_size) * cell_size
+	var room_distance: float = float(maze_half_size + 1 + grief_room_entrance_offset + room_half_size) * CELL_SIZE
 	return Transform3D(Basis.IDENTITY, direction * room_distance)
 
 
 func _calculate_maze_enemy_transform(grief_stage: GriefStagesStack.GriefStages, stage_seed: int) -> Transform3D:
 	if grief_stage == GriefStagesStack.GriefStages.ACCEPTANCE:
 		var acceptance_transform: Transform3D = _calculate_acceptance_maze_enemy_transform(stage_seed)
-		acceptance_transform.origin.y = maze_enemy_height
+		acceptance_transform.origin.y = ENEMY_HEIGHT
 		return acceptance_transform
 	var room_origin: Vector3 = Vector3.ZERO
 	match grief_stage:
@@ -98,9 +99,9 @@ func _calculate_maze_enemy_transform(grief_stage: GriefStagesStack.GriefStages, 
 		GriefStagesStack.GriefStages.DEPRESSION:
 			room_origin = _depression_room_transform.origin
 	var maze_half_size: int = int(maze_size / 2.0)
-	var gate_cell_distance: float = float(maze_half_size) * cell_size
+	var gate_cell_distance: float = float(maze_half_size) * CELL_SIZE
 	var enemy_position: Vector3 = room_origin.normalized() * gate_cell_distance
-	enemy_position.y = maze_enemy_height
+	enemy_position.y = ENEMY_HEIGHT
 	return Transform3D(Basis.IDENTITY, enemy_position)
 
 
@@ -110,7 +111,7 @@ func _calculate_acceptance_maze_enemy_transform(stage_seed: int) -> Transform3D:
 	var directions: Array[Vector3] = [Vector3.FORWARD, Vector3.RIGHT, Vector3.BACK, Vector3.LEFT]
 	var direction: Vector3 = directions[randomizer.randi_range(0, directions.size() - 1)]
 	var room_half_size: int = int(acceptance_room_size / 2.0)
-	var gate_cell_distance: float = float(room_half_size + spawn_room_entrance_offset + 1) * cell_size
+	var gate_cell_distance: float = float(room_half_size + spawn_room_entrance_offset + 1) * CELL_SIZE
 	return Transform3D(Basis.IDENTITY, direction * gate_cell_distance)
 
 

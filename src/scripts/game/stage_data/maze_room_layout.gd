@@ -151,12 +151,12 @@ func _wall_transform(cell: Vector2i, direction: Vector2i) -> Transform3D:
 
 func _world_to_cell(position: Vector3) -> Vector2i:
 	var center: int = int(_stage_layout.maze_size / 2.0)
-	return Vector2i(roundi(position.x / _stage_layout.cell_size) + center, roundi(position.z / _stage_layout.cell_size) + center)
+	return Vector2i(roundi(position.x / _stage_layout.CELL_SIZE) + center, roundi(position.z / _stage_layout.CELL_SIZE) + center)
 
 
 func _cell_world_position(cell: Vector2i) -> Vector3:
 	var center: int = int(_stage_layout.maze_size / 2.0)
-	return Vector3(float(cell.x - center) * _stage_layout.cell_size, 0.0, float(cell.y - center) * _stage_layout.cell_size)
+	return Vector3(float(cell.x - center) * _stage_layout.CELL_SIZE, 0.0, float(cell.y - center) * _stage_layout.CELL_SIZE)
 
 
 func _is_inside(cell: Vector2i) -> bool:

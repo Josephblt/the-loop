@@ -19,7 +19,7 @@ func calculate_transforms() -> Array[Transform3D]:
 	for position: Vector2i in positions:
 		var rotation: float = float(_randomizer.randi_range(0, 3)) * (PI / 2.0)
 		var offset: Vector2i = position - Vector2i(maze_center, maze_center)
-		var world_position: Vector3 = Vector3(float(offset.x), 0.0, float(offset.y)) * _stage_layout.cell_size
+		var world_position: Vector3 = Vector3(float(offset.x), 0.0, float(offset.y)) * _stage_layout.CELL_SIZE
 		room_transforms.append(Transform3D(Basis(Vector3.UP, rotation), world_position))
 		
 	return room_transforms

@@ -2,5 +2,10 @@ class_name EnemyBehaviour
 extends Node
 
 
-func setup(_enemy: Enemy, _player: Player, _stage_layout: StageLayout) -> void:
-	pass
+var _enemy: Enemy
+var _player: Player
+
+
+func setup(enemy: Enemy, player: Player) -> void:
+	_enemy = enemy
+	_player = player
