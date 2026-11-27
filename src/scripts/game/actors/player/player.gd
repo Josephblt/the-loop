@@ -23,9 +23,6 @@ var _look_x: float = 0.0
 var _look_y: float = 0.0
 var _mouse_sensitivity: float = DEFAULT_MOUSE_SENSITIVITY
 var _run_speed: float = DEFAULT_RUN_SPEED
-var run_speed: float:
-	get:
-		return _run_speed
 var _speed: float = DEFAULT_RUN_SPEED
 var _walk_speed: float = DEFAULT_WALK_SPEED
 
