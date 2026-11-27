@@ -8,6 +8,7 @@ extends Resource
 @export var acceptance_room_size: int = 3
 @export var spawn_room_entrance_offset: int = 2
 @export var memory_room_size: int = 3
+@export var maze_enemy_height: float = 2.6
 
 
 var _session_seed: int
@@ -83,7 +84,9 @@ func _calculate_grief_room_transform(direction: Vector3) -> Transform3D:
 
 func _calculate_maze_enemy_transform(grief_stage: GriefStagesStack.GriefStages, stage_seed: int) -> Transform3D:
 	if grief_stage == GriefStagesStack.GriefStages.ACCEPTANCE:
-		return _calculate_acceptance_maze_enemy_transform(stage_seed)
+		var acceptance_transform: Transform3D = _calculate_acceptance_maze_enemy_transform(stage_seed)
+		acceptance_transform.origin.y = maze_enemy_height
+		return acceptance_transform
 	var room_origin: Vector3 = Vector3.ZERO
 	match grief_stage:
 		GriefStagesStack.GriefStages.ANGER:
@@ -96,7 +99,9 @@ func _calculate_maze_enemy_transform(grief_stage: GriefStagesStack.GriefStages, 
 			room_origin = _depression_room_transform.origin
 	var maze_half_size: int = int(maze_size / 2.0)
 	var gate_cell_distance: float = float(maze_half_size) * cell_size
-	return Transform3D(Basis.IDENTITY, room_origin.normalized() * gate_cell_distance)
+	var enemy_position: Vector3 = room_origin.normalized() * gate_cell_distance
+	enemy_position.y = maze_enemy_height
+	return Transform3D(Basis.IDENTITY, enemy_position)
 
 
 func _calculate_acceptance_maze_enemy_transform(stage_seed: int) -> Transform3D:

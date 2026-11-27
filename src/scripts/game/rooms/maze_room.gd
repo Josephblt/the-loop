@@ -38,9 +38,7 @@ func setup_room(stage_layout: StageLayout) -> void:
 			wall_instance.position.y += float(stack_index) * stage_layout.cell_size
 			wall_parent.add_child(wall_instance)
 
-	var enemy_position: Vector3 = stage_layout.maze_enemy_transform.origin
-	_enemy.position.x = enemy_position.x
-	_enemy.position.z = enemy_position.z
+	_enemy.position = stage_layout.maze_enemy_transform.origin
 	_navigation_region.bake_navigation_mesh(false)
 	SceneRandomizer.randomize_scene(self, stage_layout.session_seed)
 
