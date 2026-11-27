@@ -21,6 +21,8 @@ var _paused: bool = false
 var _wandering: bool = false
 var _flank_path: PackedVector2Array = PackedVector2Array()
 var _was_visible: bool = false
+var _flank_player_position: Vector3
+var _flank_camera_forward: Vector3
 
 
 func setup_ai(player: Player, stage_layout: StageLayout, gate: Gate) -> void:
@@ -39,11 +41,13 @@ func _physics_process(delta: float) -> void:
 	if _player == null or _paused or not emitting:
 		return
 	_repath_time -= delta
-	var visible: bool = _in_player_view(global_position)
-	if _repath_time <= 0.0 or visible != _was_visible or _wandering == _player_in_maze():
+	var in_view: bool = _in_player_view(global_position)
+	if in_view != _was_visible:
+		_path.clear()
+	if _repath_time <= 0.0 or in_view != _was_visible or _wandering == _player_in_maze():
 		_repath_time = DENIAL_REPATH_INTERVAL
 		_update_path()
-	_was_visible = visible
+	_was_visible = in_view
 	_move_enemy(delta)
 
 
@@ -83,6 +87,13 @@ func _update_path() -> void:
 		else:
 			target = _target
 	elif not _in_player_view(global_position):
+		var camera_forward: Vector3 = -_player.camera.global_basis.z
+		var player_near: bool = _player.global_position.distance_to(_flank_player_position) < _layout.cell_size
+		var view_unchanged: bool = camera_forward.dot(_flank_camera_forward) > 0.866
+		if _path_index < _path.size() and player_near and view_unchanged:
+			return
+		_flank_player_position = _player.global_position
+		_flank_camera_forward = camera_forward
 		target = _flank_cell()
 	if target == _target and _path_index < _path.size():
 		return
@@ -99,27 +110,41 @@ func _flank_cell() -> Vector2i:
 	var visited: Dictionary = {start: true}
 	var previous: Dictionary = {}
 	var fallback: Vector2i = start
-	var best_angle: float = -1.0
-	var start_direction: Vector3 = global_position - _player.global_position
+	var visible_fallback: Vector2i = start
+	var recovered_visible: bool = false
+	var best_score: float = -INF
+	var camera: Camera3D = _player.camera
+	var steps: Dictionary = {start: 0}
 	var index: int = 0
 	while index < queue.size():
 		var cell: Vector2i = queue[index]
 		index += 1
-		var position: Vector3 = _world_position(cell)
-		if cell != start and _in_player_view(position):
-			fallback = cell
-			break
-		var angle: float = start_direction.angle_to(position - _player.global_position)
-		if angle > best_angle:
-			best_angle = angle
-			fallback = cell
+		var cell_position: Vector3 = _world_position(cell)
+		if cell != start and _in_player_view(cell_position):
+			if cell_position.distance_to(_player.global_position) >= minimum_distance:
+				fallback = cell
+				recovered_visible = true
+				break
+			if visible_fallback == start:
+				visible_fallback = cell
+		if steps[cell] >= 4 and steps[cell] <= 8 and cell_position.distance_to(_player.global_position) >= minimum_distance - _layout.cell_size:
+			var direction: Vector3 = (cell_position - camera.global_position).normalized()
+			var score: float = -camera.global_basis.z.dot(direction) - float(steps[cell]) * 0.05
+			if _has_line_of_sight(cell_position):
+				score += 2.0
+			if score > best_score:
+				best_score = score
+				fallback = cell
 		for neighbour_id: int in _paths.get_point_connections(_cell_id(cell)):
-			var neighbour: Vector2i = Vector2i(int(neighbour_id / _layout.maze_size), neighbour_id % _layout.maze_size)
-			if visited.has(neighbour) or _segment_closes_distance(position, _world_position(neighbour), minimum_distance):
+			var neighbour: Vector2i = Vector2i(int(float(neighbour_id) / _layout.maze_size), neighbour_id % _layout.maze_size)
+			if visited.has(neighbour) or _segment_closes_distance(cell_position, _world_position(neighbour), minimum_distance):
 				continue
 			visited[neighbour] = true
 			previous[neighbour] = cell
+			steps[neighbour] = steps[cell] + 1
 			queue.append(neighbour)
+	if not recovered_visible and visible_fallback != start:
+		fallback = visible_fallback
 	_flank_path.clear()
 	var step: Vector2i = fallback
 	while step != start:
@@ -134,7 +159,7 @@ func _segment_closes_distance(from: Vector3, to: Vector3, minimum_distance: floa
 	var start: Vector2 = Vector2(from.x, from.z)
 	var end: Vector2 = Vector2(to.x, to.z)
 	var closest: Vector2 = Geometry2D.get_closest_point_to_segment(player_position, start, end)
-	return closest.distance_to(player_position) < minimum_distance - 0.01
+	return closest.distance_to(player_position) < minimum_distance - _layout.cell_size
 
 
 func _player_in_maze() -> bool:
@@ -143,8 +168,8 @@ func _player_in_maze() -> bool:
 		return false
 	var room_half_size: int = int(_layout.memory_room_size / 2.0)
 	for room: Transform3D in _layout.memory_room_transforms:
-		var center: Vector2i = _world_to_cell(room.origin)
-		if abs(player_cell.x - center.x) <= room_half_size and abs(player_cell.y - center.y) <= room_half_size:
+		var room_center: Vector2i = _world_to_cell(room.origin)
+		if abs(player_cell.x - room_center.x) <= room_half_size and abs(player_cell.y - room_center.y) <= room_half_size:
 			return false
 	var center: int = int(_layout.maze_size / 2.0)
 	var acceptance_half_size: int = int(_layout.acceptance_room_size / 2.0)
@@ -160,7 +185,11 @@ func _in_player_view(world_position: Vector3) -> bool:
 	var half_height: float = -view_position.z * tan(deg_to_rad(camera.fov * 0.5))
 	if abs(view_position.y) > half_height or abs(view_position.x) > half_height * screen_size.aspect():
 		return false
-	var ray: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(camera.global_position, world_position, 1)
+	return _has_line_of_sight(world_position)
+
+
+func _has_line_of_sight(world_position: Vector3) -> bool:
+	var ray: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(_player.camera.global_position, world_position, 1)
 	return get_world_3d().direct_space_state.intersect_ray(ray).is_empty()
 
 
