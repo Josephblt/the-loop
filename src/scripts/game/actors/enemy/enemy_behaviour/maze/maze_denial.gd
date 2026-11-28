@@ -6,17 +6,12 @@ const ORBIT_SPEED_MULTIPLIER: float = 3.0
 const TARGET_UPDATE_INTERVAL: float = 0.2
 
 var _target_update_time: float = 0.0
-var _was_in_view: bool = true
+var _was_in_view: bool = false
 
 
 func _physics_process(delta: float) -> void:
-	_enemy.set_avoidance_center(_player.global_position)
 	var in_view: bool = _is_in_player_view()
 	print("In view: ", in_view)
-	if in_view:
-		_enemy.set_avoidance_radius(_flat(_enemy.global_position).distance_to(_flat(_player.global_position)))
-	if in_view != _was_in_view:
-		_enemy.set_avoidance_enabled(not in_view)
 
 	_target_update_time -= delta
 	
