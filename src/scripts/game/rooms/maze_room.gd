@@ -9,7 +9,6 @@ const WALL_NORMAL_LG_SCENE: PackedScene = preload("res://game/level/walls/wall_n
 const WALL_NORMAL_MD_SCENE: PackedScene = preload("res://game/level/walls/wall_normal_md.tscn")
 const MAZE_DENIAL_SCENE: PackedScene = preload("res://game/actors/enemy/enemy_behaviour/maze/maze_denial.tscn")
 
-@onready var _navigation_region: NavigationRegion3D = %NavigationRegion3D
 @onready var _blocks: Node3D = %Blocks
 @onready var _border_walls: Node3D = %Border
 @onready var _medium_walls: Node3D = %Medium
@@ -40,13 +39,21 @@ func setup_room(stage_layout: StageLayout, player: Player, grief_stage: GriefSta
 			wall_parent.add_child(wall_instance)
 
 	_enemy.position = stage_layout.maze_enemy_transform.origin
-	_navigation_region.bake_navigation_mesh(false)
 	if grief_stage == GriefStagesStack.GriefStages.DENIAL:
-		var behaviour: EnemyBehaviour = MAZE_DENIAL_SCENE.instantiate() as EnemyBehaviour
+		var graph: MazePathGraph = MazePathGraph.new(stage_layout)
+		var behaviour: MazeDenial = MAZE_DENIAL_SCENE.instantiate() as MazeDenial
 		_enemy.add_child(behaviour)
 		_enemy.ai_behaviour = behaviour
-		behaviour.setup(_enemy, player)
+		behaviour.setup_maze(_enemy, player, graph)
+		behaviour.set_physics_process(false)
+
 	SceneRandomizer.randomize_scene(self, stage_layout.session_seed)
+
+
+func enable_enemy_ai() -> void:
+	if _enemy.ai_behaviour == null:
+		return
+	_enemy.ai_behaviour.set_physics_process(true)
 
 
 func _wall_scene(wall: MazeWall) -> PackedScene:

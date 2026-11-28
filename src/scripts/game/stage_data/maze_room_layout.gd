@@ -135,7 +135,10 @@ func _add_wall(cell: Vector2i, direction: Vector2i) -> void:
 		if wall_size == MazeWall.WallSize.MEDIUM and _carver != null and _randomizer.randf() < 0.5:
 			wall_type = MazeWall.WallType.NORMAL
 
-	_walls.append(MazeWall.new(_wall_transform(cell, direction), wall_type, wall_size, stack_count))
+	var wall: MazeWall = MazeWall.new(_wall_transform(cell, direction), wall_type, wall_size, stack_count)
+	wall.cell = cell
+	wall.neighbour = neighbour
+	_walls.append(wall)
 
 
 func _wall_transform(cell: Vector2i, direction: Vector2i) -> Transform3D:

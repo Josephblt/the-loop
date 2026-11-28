@@ -17,6 +17,8 @@ var transform: Transform3D
 var wall_type: WallType
 var wall_size: WallSize
 var stack_count: int
+var cell: Vector2i
+var neighbour: Vector2i
 
 
 func _init(initial_transform: Transform3D, initial_type: WallType, initial_size: WallSize, initial_stack_count: int) -> void:

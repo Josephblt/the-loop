@@ -3,12 +3,6 @@
 [ext_resource type="Script" uid="uid://cgkoqd4eyuy8k" path="res://scripts/game/rooms/maze_room.gd" id="1_maze_room"]
 [ext_resource type="PackedScene" uid="uid://on4lpk0uhb0f" path="res://game/actors/enemy.tscn" id="2_nya0e"]
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_nya0e"]
-geometry_parsed_geometry_type = 1
-geometry_source_geometry_mode = 1
-geometry_source_group_name = &"maze_navigation_source"
-filter_ledge_spans = true
-
 [node name="MazeRoom" type="Node3D" unique_id=1279004019]
 script = ExtResource("1_maze_room")
 
@@ -16,20 +10,16 @@ script = ExtResource("1_maze_room")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1987911312]
-unique_name_in_owner = true
-navigation_mesh = SubResource("NavigationMesh_nya0e")
-
-[node name="Blocks" type="Node3D" parent="NavigationRegion3D" unique_id=450379509 groups=["maze_navigation_source"]]
+[node name="Blocks" type="Node3D" parent="." unique_id=450379509]
 unique_name_in_owner = true
 
-[node name="Walls" type="Node3D" parent="NavigationRegion3D" unique_id=174792511]
+[node name="Walls" type="Node3D" parent="." unique_id=174792511]
 
-[node name="Border" type="Node3D" parent="NavigationRegion3D/Walls" unique_id=973533675]
+[node name="Border" type="Node3D" parent="Walls" unique_id=973533675]
 unique_name_in_owner = true
 
-[node name="Medium" type="Node3D" parent="NavigationRegion3D/Walls" unique_id=1778662895 groups=["maze_navigation_source"]]
+[node name="Medium" type="Node3D" parent="Walls" unique_id=1778662895]
 unique_name_in_owner = true
 
-[node name="Small" type="Node3D" parent="NavigationRegion3D/Walls" unique_id=997595202]
+[node name="Small" type="Node3D" parent="Walls" unique_id=997595202]
 unique_name_in_owner = true

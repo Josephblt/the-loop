@@ -115,11 +115,12 @@ func _on_acceptance_room_chest_opened() -> void:
 
 
 func _on_acceptance_room_player_entered(_grief_stage_room: GriefStageRoom) -> void:
-	pass	
+	pass
 
 
 func _on_acceptance_room_player_exited(_grief_stage_room: GriefStageRoom) -> void:
 	_acceptance_room.close_gates(false)
+	_maze_room.enable_enemy_ai()
 
 
 func _on_grief_stage_room_chest_opened() -> void:
@@ -128,7 +129,7 @@ func _on_grief_stage_room_chest_opened() -> void:
 
 	_message.setup_message(memory)
 	_message.setup_tip(MESSAGE_TIP)
-	_message.show_message()	
+	_message.show_message()
 
 
 func _on_grief_stage_room_player_entered(grief_stage_room: GriefStageRoom) -> void:
@@ -158,7 +159,7 @@ func _on_memory_rooms_chest_opened(chest_index: int) -> void:
 
 	_message.setup_message(memory)
 	_message.setup_tip(MESSAGE_TIP)
-	_message.show_message()	
+	_message.show_message()
 
 
 func _on_message_message_shown() -> void:

@@ -568,7 +568,7 @@ is_interactable = false
 
 [node name="InsideBlockCrackedSM" parent="Floor" unique_id=2041578037 instance=ExtResource("8_ai4gf")]
 
-[node name="OutsideBlockCrackedSM" parent="Floor" unique_id=740626616 groups=["maze_navigation_source"] instance=ExtResource("8_ai4gf")]
+[node name="OutsideBlockCrackedSM" parent="Floor" unique_id=740626616 instance=ExtResource("8_ai4gf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.6)
 
 [node name="Walls" type="Node3D" parent="." unique_id=1731400114]
