@@ -3,6 +3,7 @@ extends EnemyBehaviour
 
 
 const ORBIT_SPEED_MULTIPLIER: float = 5.0
+const ATTACK_SPEED_MULTIPLIER: float = 2.0
 
 var _graph: MazePathGraph
 var _entry_distance_captured: bool = false
@@ -69,7 +70,7 @@ func _attack(delta: float) -> void:
 		_last_player_cell = player_cell
 
 	_was_in_view = true
-	_enemy.move_along_path(delta, _player.movement_speed)
+	_enemy.move_along_path(delta, _player.movement_speed * ATTACK_SPEED_MULTIPLIER)
 
 
 func _orbit_route_stale() -> bool:
