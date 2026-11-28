@@ -22,6 +22,10 @@ func clear_path() -> void:
 		_debug_path_line.mesh = null
 
 
+func has_path() -> bool:
+	return _path_index < _path.size()
+
+
 func move_along_path(delta: float, speed: float) -> void:
 	if _path_index >= _path.size():
 		return

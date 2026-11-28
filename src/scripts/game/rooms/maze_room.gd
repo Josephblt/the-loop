@@ -56,6 +56,10 @@ func enable_enemy_ai() -> void:
 	_enemy.ai_behaviour.set_physics_process(true)
 
 
+func get_enemy_behaviour() -> EnemyBehaviour:
+	return _enemy.ai_behaviour
+
+
 func _wall_scene(wall: MazeWall) -> PackedScene:
 	if wall.wall_size == MazeWall.WallSize.SMALL:
 		return WALL_BROKEN_SM_SCENE

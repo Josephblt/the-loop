@@ -20,6 +20,7 @@ const SAVE_FILE_READABLE_PATH: String = "user://the_loop_save_game_readable.json
 @onready var _memory_rooms: MemoryRooms = %MemoryRooms
 
 @onready var _message: Message = %Message
+@onready var _debug_overlay: DebugOverlay = $UI/DebugOverlay
 
 
 var _grief_stages_stack: GriefStagesStack
@@ -51,6 +52,10 @@ func _ready() -> void:
 	_depression_room.setup_room(_stage_layout, data["depression_room"])
 	_maze_room.setup_room(_stage_layout, _player, _grief_stages_stack.peek())
 	_memory_rooms.setup_rooms(_stage_layout)
+	var enemy_behaviour: EnemyBehaviour = _maze_room.get_enemy_behaviour()
+	if enemy_behaviour != null:
+		enemy_behaviour.state_changed.connect(_debug_overlay.set_enemy_state)
+		_debug_overlay.set_enemy_state(enemy_behaviour.state)
 
 
 func update_save_data() -> void:

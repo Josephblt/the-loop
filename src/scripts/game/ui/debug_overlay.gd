@@ -6,14 +6,20 @@ const LOCAL_BUILD_NUMBER: String = "Local"
 
 @onready var _build_number_label: Label = %BuildNumber
 @onready var _fps_label: Label = %FPS
+@onready var _enemy_state_label: Label = %EnemyState
 
 
 func _ready() -> void:
 	_build_number_label.text = "Build " + _get_build_number()
+	set_enemy_state("Wander")
 
 
 func _process(_delta: float) -> void:
 	_fps_label.text = str(Engine.get_frames_per_second()) + " FPS"
+
+
+func set_enemy_state(state: String) -> void:
+	_enemy_state_label.text = "Enemy State: " + state
 
 
 func _get_build_number() -> String:

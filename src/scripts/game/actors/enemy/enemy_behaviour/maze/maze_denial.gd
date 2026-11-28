@@ -43,6 +43,7 @@ func _physics_process(delta: float) -> void:
 
 	if _is_in_player_view():
 		_attack(delta)
+		_set_state_from_path("Attack")
 		return
 
 	_was_in_view = false
@@ -50,6 +51,11 @@ func _physics_process(delta: float) -> void:
 		_plan_orbit()
 	if _orbit_has_goal:
 		_enemy.move_along_path(delta, _player.movement_speed * ORBIT_SPEED_MULTIPLIER)
+	_set_state_from_path("Orbit")
+
+
+func _set_state_from_path(active_state: String) -> void:
+	set_state(active_state if _enemy.has_path() else "Wander")
 
 
 func _attack(delta: float) -> void:
