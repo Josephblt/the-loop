@@ -28,7 +28,7 @@ curve = SubResource("Curve_7qf2r")
 lifetime_randomness = 1.0
 particle_flag_rotate_y = true
 emission_shape = 1
-emission_sphere_radius = 2.0
+emission_sphere_radius = 3.0
 angle_min = -44.99999
 angle_max = 45.00001
 direction = Vector3(0, 0, 0)
@@ -62,7 +62,7 @@ size = Vector3(0.25, 0.25, 0.25)
 [node name="Enemy" type="GPUParticles3D" unique_id=1458459918]
 layers = 8
 amount = 2500
-lifetime = 0.5
+lifetime = 0.25
 speed_scale = 0.25
 explosiveness = 0.1
 randomness = 1.0

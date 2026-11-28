@@ -39,6 +39,7 @@ func setup_room(stage_layout: StageLayout, player: Player, grief_stage: GriefSta
 			wall_parent.add_child(wall_instance)
 
 	_enemy.position = stage_layout.maze_enemy_transform.origin
+	
 	if grief_stage == GriefStagesStack.GriefStages.DENIAL:
 		var graph: MazePathGraph = MazePathGraph.new(stage_layout)
 		var behaviour: MazeDenial = MAZE_DENIAL_SCENE.instantiate() as MazeDenial

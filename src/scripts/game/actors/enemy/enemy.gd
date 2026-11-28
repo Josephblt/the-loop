@@ -12,7 +12,7 @@ var _debug_path_line: MeshInstance3D
 func set_path(path: PackedVector2Array, color: Color) -> void:
 	_path = path
 	_path_index = 0
-	# _draw_debug_path(color)
+	_draw_debug_path(color)
 
 
 func clear_path() -> void:

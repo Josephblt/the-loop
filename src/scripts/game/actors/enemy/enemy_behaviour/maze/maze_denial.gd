@@ -2,7 +2,7 @@ class_name MazeDenial
 extends EnemyBehaviour
 
 
-const ORBIT_SPEED_MULTIPLIER: float = 3.0
+const ORBIT_SPEED_MULTIPLIER: float = 5.0
 
 var _graph: MazePathGraph
 var _entry_distance_captured: bool = false
@@ -10,11 +10,12 @@ var _was_in_view: bool = false
 var _orbit_planned: bool = false
 var _orbit_has_goal: bool = false
 var _orbit_radius: float = 0.0
-var _fov_line_distance: float = 0.0
 var _orbit_goal: Vector2 = Vector2.ZERO
 var _planned_forward: Vector2 = Vector2.ZERO
 var _planned_player_position: Vector2 = Vector2.ZERO
 var _last_player_cell: Vector2i
+
+var _fov_line_distance: float = 0.0
 var _fov_line: MeshInstance3D
 var _fov_mesh: ImmediateMesh = ImmediateMesh.new()
 var _fov_material: StandardMaterial3D = StandardMaterial3D.new()
@@ -39,7 +40,7 @@ func _physics_process(delta: float) -> void:
 		_orbit_radius = _flat(_enemy.global_position).distance_to(_flat(_player.global_position))
 		_entry_distance_captured = true
 
-	# _draw_fov_lines()
+	_draw_fov_lines()
 
 	if _is_in_player_view():
 		_attack(delta)
@@ -178,7 +179,7 @@ func _half_horizontal_fov() -> float:
 		var viewport_size: Vector2 = camera.get_viewport().get_visible_rect().size
 		if is_finite(viewport_size.y) and viewport_size.y > 0.0:
 			horizontal_fov = 2.0 * atan(tan(horizontal_fov * 0.5) * viewport_size.x / viewport_size.y)
-	return horizontal_fov / 20.0
+	return horizontal_fov / 3.5
 
 
 func _camera_forward() -> Vector2:
